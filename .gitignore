@@ -1,0 +1,8 @@
+.build
+ffmpeg-*/
+*.exe
+*.pdb
+*.dll
+*.h
+*.lib
+test_image.png
