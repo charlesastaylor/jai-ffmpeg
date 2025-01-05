@@ -1,6 +1,6 @@
 # FFmpeg module for jai
 
-FFmpeg bindings for jai and some examples decoding and play videos.
+FFmpeg bindings for jai and some examples decoding and play videos. Last tested with beta 0.2.006.
 
 ## Setup
 

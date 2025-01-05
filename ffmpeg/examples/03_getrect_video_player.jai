@@ -72,7 +72,7 @@ main :: () {
 
     quit := false;
     while !quit {
-        current_time = get_time();
+        current_time = seconds_since_init();
         Input.update_window_events();
 
         for Input.get_window_resizes() {
@@ -156,11 +156,10 @@ draw_one_frame :: () {
     
     if video_image.width > 1 {
         
-        v2 :: make_vector2;
-        p0 := v2(pad, pad);
-        p1 := v2(window_width - pad, pad);
-        p2 := v2(window_width - pad, window_height - pad);
-        p3 := v2(pad, window_height - pad);
+        p0 := Vector2.{pad, pad};
+        p1 := Vector2.{window_width - pad, pad};
+        p2 := Vector2.{window_width - pad, window_height - pad};
+        p3 := Vector2.{pad, window_height - pad};
 
         // Lol. This is dumb!
         current_width  := window_width  - 2 * pad;
@@ -168,14 +167,14 @@ draw_one_frame :: () {
         current_aspect := current_width / current_height;
         if current_aspect > aspect_ratio {
             desired_width := current_height * aspect_ratio;
-            delta := v2((current_width - desired_width) / 2., 0.);
+            delta := Vector2.{(current_width - desired_width) / 2., 0.};
             p0 += delta;
             p1 -= delta;
             p2 -= delta;
             p3 += delta;
         } else {
             desired_height := current_width / aspect_ratio;
-            delta := v2(0., (current_height - desired_height) / 2.);
+            delta := Vector2.{0., (current_height - desired_height) / 2.};
             p0 += delta;
             p1 += delta;
             p2 -= delta;
@@ -184,10 +183,10 @@ draw_one_frame :: () {
 
         // This is not the smartest either.
         border_thickness := metric * 0.01;
-        bp0 := p0 + v2(-border_thickness, -border_thickness);
-        bp1 := p1 + v2(+border_thickness, -border_thickness);
-        bp2 := p2 + v2(+border_thickness, +border_thickness);
-        bp3 := p3 + v2(-border_thickness, +border_thickness);
+        bp0 := p0 + Vector2.{-border_thickness, -border_thickness};
+        bp1 := p1 + Vector2.{+border_thickness, -border_thickness};
+        bp2 := p2 + Vector2.{+border_thickness, +border_thickness};
+        bp3 := p3 + Vector2.{-border_thickness, +border_thickness};
         Simp.set_shader_for_color();
         Simp.immediate_quad(bp0, bp1, bp2, bp3, bg_color * 4.);
 
@@ -326,8 +325,8 @@ load_video_2 :: (filename: string) {
     // Get stuff needed to convert decoded frames to rgba.
     sws_context := sws_getContext(decode_context.width, decode_context.height, decode_context.pix_fmt, decode_context.width,
                              decode_context.height, .RGBA, SWS_BILINEAR, null, null, null);
-    defer sws_freeContext(sws_context);
     assert(sws_context != null, "Could not create swscale context");
+    defer sws_freeContext(sws_context);
 
     rgba_frame := av_frame_alloc();
     assert(rgba_frame != null);

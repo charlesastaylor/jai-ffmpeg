@@ -69,11 +69,10 @@ main :: () {
             pad := metric * 0.08;
 
             // This doesn't constrain to aspect ratio, later example does.
-            v2 :: make_vector2;
-            p0 := v2(pad, pad);
-            p1 := v2(window_width - pad, pad);
-            p2 := v2(window_width - pad, window_height - pad);
-            p3 := v2(pad, window_height - pad);
+            p0 := Vector2.{pad, pad};
+            p1 := Vector2.{window_width - pad, pad};
+            p2 := Vector2.{window_width - pad, window_height - pad};
+            p3 := Vector2.{pad, window_height - pad};
 
             Simp.immediate_quad(p0, p1, p2, p3);
             Simp.immediate_flush();
