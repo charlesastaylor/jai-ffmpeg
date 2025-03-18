@@ -8,6 +8,8 @@
 //   be able to print % structs out nicely).
 //
 
+// @Incomplete: E* error codes, eg EAGAIN, for one thing these aren't defined on windows, on posix they will be, but there is also some weirdness with themsometimes being negated?
+
 AT_COMPILE_TIME :: true;
 
 #if AT_COMPILE_TIME {

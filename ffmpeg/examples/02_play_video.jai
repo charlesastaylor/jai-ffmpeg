@@ -125,8 +125,8 @@ load_video :: () {
     // Get stuff needed to convert decoded frames to rgba.
     sws_context := sws_getContext(decode_context.width, decode_context.height, decode_context.pix_fmt, decode_context.width,
                              decode_context.height, .RGBA, SWS_BILINEAR, null, null, null);
-    defer sws_freeContext(sws_context);
     assert(sws_context != null, "Could not create swscale context");
+    defer sws_freeContext(sws_context);
 
     rgba_frame := av_frame_alloc();
     assert(rgba_frame != null);
