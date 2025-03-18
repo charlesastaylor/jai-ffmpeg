@@ -1069,7 +1069,7 @@ av_log2_16bit :: (v: u32) -> s32 #foreign avutil_58;
 *         be allocated
 * @see av_mallocz()
 */
-av_malloc :: (size: size_t) -> *void #foreign avutil_58;
+av_malloc :: (size: u64) -> *void #foreign avutil_58;
 
 /**
 * Allocate a memory block with alignment suitable for all memory accesses
@@ -1080,7 +1080,7 @@ av_malloc :: (size: size_t) -> *void #foreign avutil_58;
 * @return Pointer to the allocated block, or `NULL` if it cannot be allocated
 * @see av_malloc()
 */
-av_mallocz :: (size: size_t) -> *void #foreign avutil_58;
+av_mallocz :: (size: u64) -> *void #foreign avutil_58;
 
 /**
 * Allocate a memory block for an array with av_malloc().
@@ -1093,7 +1093,7 @@ av_mallocz :: (size: size_t) -> *void #foreign avutil_58;
 *         be allocated
 * @see av_malloc()
 */
-av_malloc_array :: (nmemb: size_t, size: size_t) -> *void #foreign avutil_58;
+av_malloc_array :: (nmemb: u64, size: u64) -> *void #foreign avutil_58;
 
 /**
 * Allocate a memory block for an array with av_mallocz().
@@ -1108,7 +1108,7 @@ av_malloc_array :: (nmemb: size_t, size: size_t) -> *void #foreign avutil_58;
 * @see av_mallocz()
 * @see av_malloc_array()
 */
-av_calloc :: (nmemb: size_t, size: size_t) -> *void #foreign avutil_58;
+av_calloc :: (nmemb: u64, size: u64) -> *void #foreign avutil_58;
 
 /**
 * Allocate, reallocate, or free a block of memory.
@@ -1130,7 +1130,7 @@ av_calloc :: (nmemb: size_t, size: size_t) -> *void #foreign avutil_58;
 * @see av_fast_realloc()
 * @see av_reallocp()
 */
-av_realloc :: (ptr: *void, size: size_t) -> *void #foreign avutil_58;
+av_realloc :: (ptr: *void, size: u64) -> *void #foreign avutil_58;
 
 /**
 * Allocate, reallocate, or free a block of memory through a pointer to a
@@ -1151,7 +1151,7 @@ av_realloc :: (ptr: *void, size: size_t) -> *void #foreign avutil_58;
 * @warning Unlike av_malloc(), the allocated memory is not guaranteed to be
 *          correctly aligned.
 */
-av_reallocp :: (ptr: *void, size: size_t) -> s32 #foreign avutil_58;
+av_reallocp :: (ptr: *void, size: u64) -> s32 #foreign avutil_58;
 
 /**
 * Allocate, reallocate, or free a block of memory.
@@ -1168,7 +1168,7 @@ av_reallocp :: (ptr: *void, size: size_t) -> s32 #foreign avutil_58;
 *   @endcode
 *   pattern.
 */
-av_realloc_f :: (ptr: *void, nelem: size_t, elsize: size_t) -> *void #foreign avutil_58;
+av_realloc_f :: (ptr: *void, nelem: u64, elsize: u64) -> *void #foreign avutil_58;
 
 /**
 * Allocate, reallocate, or free an array.
@@ -1188,7 +1188,7 @@ av_realloc_f :: (ptr: *void, nelem: size_t, elsize: size_t) -> *void #foreign av
 *          nmemb is zero.
 * @see av_reallocp_array()
 */
-av_realloc_array :: (ptr: *void, nmemb: size_t, size: size_t) -> *void #foreign avutil_58;
+av_realloc_array :: (ptr: *void, nmemb: u64, size: u64) -> *void #foreign avutil_58;
 
 /**
 * Allocate, reallocate an array through a pointer to a pointer.
@@ -1206,7 +1206,7 @@ av_realloc_array :: (ptr: *void, nmemb: size_t, size: size_t) -> *void #foreign 
 * @warning Unlike av_malloc(), the allocated memory is not guaranteed to be
 *          correctly aligned. *ptr must be freed after even if nmemb is zero.
 */
-av_reallocp_array :: (ptr: *void, nmemb: size_t, size: size_t) -> s32 #foreign avutil_58;
+av_reallocp_array :: (ptr: *void, nmemb: u64, size: u64) -> s32 #foreign avutil_58;
 
 /**
 * Reallocate the given buffer if it is not large enough, otherwise do nothing.
@@ -1240,7 +1240,7 @@ av_reallocp_array :: (ptr: *void, nmemb: size_t, size: size_t) -> s32 #foreign a
 * @see av_realloc()
 * @see av_fast_malloc()
 */
-av_fast_realloc :: (ptr: *void, size: *u32, min_size: size_t) -> *void #foreign avutil_58;
+av_fast_realloc :: (ptr: *void, size: *u32, min_size: u64) -> *void #foreign avutil_58;
 
 /**
 * Allocate a buffer, reusing the given one if large enough.
@@ -1271,7 +1271,7 @@ av_fast_realloc :: (ptr: *void, size: *u32, min_size: size_t) -> *void #foreign 
 * @see av_realloc()
 * @see av_fast_mallocz()
 */
-av_fast_malloc :: (ptr: *void, size: *u32, min_size: size_t) -> void #foreign avutil_58;
+av_fast_malloc :: (ptr: *void, size: *u32, min_size: u64) -> void #foreign avutil_58;
 
 /**
 * Allocate and clear a buffer, reusing the given one if large enough.
@@ -1291,7 +1291,7 @@ av_fast_malloc :: (ptr: *void, size: *u32, min_size: size_t) -> void #foreign av
 * @param[in]     min_size Desired minimal size of buffer `*ptr`
 * @see av_fast_malloc()
 */
-av_fast_mallocz :: (ptr: *void, size: *u32, min_size: size_t) -> void #foreign avutil_58;
+av_fast_mallocz :: (ptr: *void, size: *u32, min_size: u64) -> void #foreign avutil_58;
 
 /**
 * Free a memory block which has been allocated with a function of av_malloc()
@@ -1348,7 +1348,7 @@ av_strdup :: (s: *u8) -> *u8 #foreign avutil_58;
 * @return Pointer to a newly-allocated string containing a
 *         substring of `s` or `NULL` if the string cannot be allocated
 */
-av_strndup :: (s: *u8, len: size_t) -> *u8 #foreign avutil_58;
+av_strndup :: (s: *u8, len: u64) -> *u8 #foreign avutil_58;
 
 /**
 * Duplicate a buffer with av_malloc().
@@ -1358,7 +1358,7 @@ av_strndup :: (s: *u8, len: size_t) -> *u8 #foreign avutil_58;
 * @return Pointer to a newly allocated buffer containing a
 *         copy of `p` or `NULL` if the buffer cannot be allocated
 */
-av_memdup :: (p: *void, size: size_t) -> *void #foreign avutil_58;
+av_memdup :: (p: *void, size: u64) -> *void #foreign avutil_58;
 
 /**
 * Overlapping memcpy() implementation.
@@ -1431,7 +1431,7 @@ av_dynarray_add_nofree :: (tab_ptr: *void, nb_ptr: *s32, elem: *void) -> s32 #fo
 *         space
 * @see av_dynarray_add(), av_dynarray_add_nofree()
 */
-av_dynarray2_add :: (tab_ptr: **void, nb_ptr: *s32, elem_size: size_t, elem_data: *u8) -> *void #foreign avutil_58;
+av_dynarray2_add :: (tab_ptr: **void, nb_ptr: *s32, elem_size: u64, elem_data: *u8) -> *void #foreign avutil_58;
 
 /**
 * Multiply two `size_t` values checking for overflow.
@@ -1441,7 +1441,7 @@ av_dynarray2_add :: (tab_ptr: **void, nb_ptr: *s32, elem_size: size_t, elem_data
 * @param[out] r   Pointer to the result of the operation
 * @return 0 on success, AVERROR(EINVAL) on overflow
 */
-av_size_mult :: (a: size_t, b: size_t, r: *size_t) -> s32 #foreign avutil_58;
+av_size_mult :: (a: u64, b: u64, r: *u64) -> s32 #foreign avutil_58;
 
 /**
 * Set the maximum size that may be allocated in one block.
@@ -1456,7 +1456,7 @@ av_size_mult :: (a: size_t, b: size_t, r: *size_t) -> s32 #foreign avutil_58;
 * @warning Exercise extreme caution when using this function. Don't touch
 *          this if you do not understand the full consequence of doing so.
 */
-av_max_alloc :: (max: size_t) -> void #foreign avutil_58;
+av_max_alloc :: (max: u64) -> void #foreign avutil_58;
 
 /**
 * Put a description of the AVERROR code errnum in errbuf.
@@ -1470,7 +1470,7 @@ av_max_alloc :: (max: size_t) -> void #foreign avutil_58;
 * @return 0 on success, a negative value if a description for errnum
 * cannot be found
 */
-av_strerror :: (errnum: s32, errbuf: *u8, errbuf_size: size_t) -> s32 #foreign avutil_58;
+av_strerror :: (errnum: s32, errbuf: *u8, errbuf_size: u64) -> s32 #foreign avutil_58;
 
 /**
 * Rational number (pair of numerator and denominator).
@@ -2808,7 +2808,7 @@ AVBufferRef :: struct {
     /**
     * Size of data in bytes.
     */
-    size:   size_t;
+    size:   u64;
 }
 
 /**
@@ -2816,13 +2816,13 @@ AVBufferRef :: struct {
 *
 * @return an AVBufferRef of given size or NULL when out of memory
 */
-av_buffer_alloc :: (size: size_t) -> *AVBufferRef #foreign avutil_58;
+av_buffer_alloc :: (size: u64) -> *AVBufferRef #foreign avutil_58;
 
 /**
 * Same as av_buffer_alloc(), except the returned buffer will be initialized
 * to zero.
 */
-av_buffer_allocz :: (size: size_t) -> *AVBufferRef #foreign avutil_58;
+av_buffer_allocz :: (size: u64) -> *AVBufferRef #foreign avutil_58;
 
 /**
 * Create an AVBuffer from an existing array.
@@ -2839,7 +2839,7 @@ av_buffer_allocz :: (size: size_t) -> *AVBufferRef #foreign avutil_58;
 *
 * @return an AVBufferRef referring to data on success, NULL on failure.
 */
-av_buffer_create :: (data: *u8, size: size_t, free: #type (opaque: *void, data: *u8) -> void #c_call, opaque: *void, flags: s32) -> *AVBufferRef #foreign avutil_58;
+av_buffer_create :: (data: *u8, size: u64, free: #type (opaque: *void, data: *u8) -> void #c_call, opaque: *void, flags: s32) -> *AVBufferRef #foreign avutil_58;
 
 /**
 * Default free callback, which calls av_free() on the buffer data.
@@ -2905,7 +2905,7 @@ av_buffer_make_writable :: (buf: **AVBufferRef) -> s32 #foreign avutil_58;
 * reference to it (i.e. the one passed to this function). In all other cases
 * a new buffer is allocated and the data is copied.
 */
-av_buffer_realloc :: (buf: **AVBufferRef, size: size_t) -> s32 #foreign avutil_58;
+av_buffer_realloc :: (buf: **AVBufferRef, size: u64) -> s32 #foreign avutil_58;
 
 /**
 * Ensure dst refers to the same data as src.
@@ -2934,7 +2934,7 @@ AVBufferPool :: struct {}
 * (av_buffer_alloc()).
 * @return newly created buffer pool on success, NULL on error.
 */
-av_buffer_pool_init :: (size: size_t, alloc: #type (size: size_t) -> *AVBufferRef #c_call) -> *AVBufferPool #foreign avutil_58;
+av_buffer_pool_init :: (size: u64, alloc: #type (size: u64) -> *AVBufferRef #c_call) -> *AVBufferPool #foreign avutil_58;
 
 /**
 * Allocate and initialize a buffer pool with a more complex allocator.
@@ -2951,7 +2951,7 @@ av_buffer_pool_init :: (size: size_t, alloc: #type (size: size_t) -> *AVBufferRe
 *                  data. May be NULL.
 * @return newly created buffer pool on success, NULL on error.
 */
-av_buffer_pool_init2 :: (size: size_t, opaque: *void, alloc: #type (opaque: *void, size: size_t) -> *AVBufferRef #c_call, pool_free: #type (opaque: *void) -> void #c_call) -> *AVBufferPool #foreign avutil_58;
+av_buffer_pool_init2 :: (size: u64, opaque: *void, alloc: #type (opaque: *void, size: u64) -> *AVBufferRef #c_call, pool_free: #type (opaque: *void) -> void #c_call) -> *AVBufferPool #foreign avutil_58;
 
 /**
 * Mark the pool as being available for freeing. It will actually be freed only
@@ -3493,7 +3493,7 @@ av_get_standard_channel_layout :: (index: u32, layout: *u64, name: **u8) -> s32 
 *         on failure. If the returned value is bigger than buf_size, then the
 *         string was truncated.
 */
-av_channel_name :: (buf: *u8, buf_size: size_t, channel: AVChannel) -> s32 #foreign avutil_58;
+av_channel_name :: (buf: *u8, buf_size: u64, channel: AVChannel) -> s32 #foreign avutil_58;
 
 /**
 * bprint variant of av_channel_name().
@@ -3512,7 +3512,7 @@ av_channel_name_bprint :: (bp: *AVBPrint, channel_id: AVChannel) -> void #foreig
 *         on failure. If the returned value is bigger than buf_size, then the
 *         string was truncated.
 */
-av_channel_description :: (buf: *u8, buf_size: size_t, channel: AVChannel) -> s32 #foreign avutil_58;
+av_channel_description :: (buf: *u8, buf_size: u64, channel: AVChannel) -> s32 #foreign avutil_58;
 
 /**
 * bprint variant of av_channel_description().
@@ -3612,7 +3612,7 @@ av_channel_layout_copy :: (dst: *AVChannelLayout, src: *AVChannelLayout) -> s32 
 *         on failure. If the returned value is bigger than buf_size, then the
 *         string was truncated.
 */
-av_channel_layout_describe :: (channel_layout: *AVChannelLayout, buf: *u8, buf_size: size_t) -> s32 #foreign avutil_58;
+av_channel_layout_describe :: (channel_layout: *AVChannelLayout, buf: *u8, buf_size: u64) -> s32 #foreign avutil_58;
 
 /**
 * bprint variant of av_channel_layout_describe().
@@ -3851,7 +3851,7 @@ AVActiveFormatDescription :: enum s32 {
 AVFrameSideData :: struct {
     type:     AVFrameSideDataType;
     data:     *u8;
-    size:     size_t;
+    size:     u64;
     metadata: *AVDictionary;
     buf:      *AVBufferRef;
 }
@@ -4281,10 +4281,10 @@ AVFrame :: struct {
     * the frame intended for presentation.
     * @{
     */
-    crop_top:               size_t;
-    crop_bottom:            size_t;
-    crop_left:              size_t;
-    crop_right:             size_t;
+    crop_top:               u64;
+    crop_bottom:            u64;
+    crop_left:              u64;
+    crop_right:             u64;
 
     /**
     * AVBufferRef for internal use by a single libav* library.
@@ -4467,7 +4467,7 @@ av_frame_get_plane_buffer :: (frame: *AVFrame, plane: s32) -> *AVBufferRef #fore
 *
 * @return newly added side data on success, NULL on error
 */
-av_frame_new_side_data :: (frame: *AVFrame, type: AVFrameSideDataType, size: size_t) -> *AVFrameSideData #foreign avutil_58;
+av_frame_new_side_data :: (frame: *AVFrame, type: AVFrameSideDataType, size: u64) -> *AVFrameSideData #foreign avutil_58;
 
 /**
 * Add a new side data to a frame from an existing AVBufferRef
@@ -6831,7 +6831,7 @@ AVCPBProperties :: struct {
 *
 * @return the newly allocated struct or NULL on failure
 */
-av_cpb_properties_alloc :: (size: *size_t) -> *AVCPBProperties #foreign avcodec_60;
+av_cpb_properties_alloc :: (size: *u64) -> *AVCPBProperties #foreign avcodec_60;
 
 /**
 * This structure supplies correlation between a packet timestamp and a wall clock
@@ -6997,7 +6997,7 @@ AVPacketSideDataType :: enum s32 {
 
 AVPacketSideData :: struct {
     data: *u8;
-    size: size_t;
+    size: u64;
     type: AVPacketSideDataType;
 }
 
@@ -7223,7 +7223,7 @@ av_packet_from_data :: (pkt: *AVPacket, data: *u8, size: s32) -> s32 #foreign av
 * @param size side information size
 * @return pointer to fresh allocated data or NULL otherwise
 */
-av_packet_new_side_data :: (pkt: *AVPacket, type: AVPacketSideDataType, size: size_t) -> *u8 #foreign avcodec_60;
+av_packet_new_side_data :: (pkt: *AVPacket, type: AVPacketSideDataType, size: u64) -> *u8 #foreign avcodec_60;
 
 /**
 * Wrap an existing array as a packet side data.
@@ -7238,7 +7238,7 @@ av_packet_new_side_data :: (pkt: *AVPacket, type: AVPacketSideDataType, size: si
 *         failure. On failure, the packet is unchanged and the data remains
 *         owned by the caller.
 */
-av_packet_add_side_data :: (pkt: *AVPacket, type: AVPacketSideDataType, data: *u8, size: size_t) -> s32 #foreign avcodec_60;
+av_packet_add_side_data :: (pkt: *AVPacket, type: AVPacketSideDataType, data: *u8, size: u64) -> s32 #foreign avcodec_60;
 
 /**
 * Shrink the already allocated side data buffer
@@ -7248,7 +7248,7 @@ av_packet_add_side_data :: (pkt: *AVPacket, type: AVPacketSideDataType, data: *u
 * @param size new side information size
 * @return 0 on success, < 0 on failure
 */
-av_packet_shrink_side_data :: (pkt: *AVPacket, type: AVPacketSideDataType, size: size_t) -> s32 #foreign avcodec_60;
+av_packet_shrink_side_data :: (pkt: *AVPacket, type: AVPacketSideDataType, size: u64) -> s32 #foreign avcodec_60;
 
 /**
 * Get side information from packet.
@@ -7259,7 +7259,7 @@ av_packet_shrink_side_data :: (pkt: *AVPacket, type: AVPacketSideDataType, size:
 *             or to zero if the desired side data is not present.
 * @return pointer to data if present or NULL otherwise
 */
-av_packet_get_side_data :: (pkt: *AVPacket, type: AVPacketSideDataType, size: *size_t) -> *u8 #foreign avcodec_60;
+av_packet_get_side_data :: (pkt: *AVPacket, type: AVPacketSideDataType, size: *u64) -> *u8 #foreign avcodec_60;
 
 av_packet_side_data_name :: (type: AVPacketSideDataType) -> *u8 #foreign avcodec_60;
 
@@ -7270,7 +7270,7 @@ av_packet_side_data_name :: (type: AVPacketSideDataType) -> *u8 #foreign avcodec
 * @param size pointer to store the size of the returned data
 * @return pointer to data if successful, NULL otherwise
 */
-av_packet_pack_dictionary :: (dict: *AVDictionary, size: *size_t) -> *u8 #foreign avcodec_60;
+av_packet_pack_dictionary :: (dict: *AVDictionary, size: *u64) -> *u8 #foreign avcodec_60;
 
 /**
 * Unpack a dictionary from side_data.
@@ -7280,7 +7280,7 @@ av_packet_pack_dictionary :: (dict: *AVDictionary, size: *size_t) -> *u8 #foreig
 * @param dict the metadata storage dictionary
 * @return 0 on success, < 0 on failure
 */
-av_packet_unpack_dictionary :: (data: *u8, size: size_t, dict: **AVDictionary) -> s32 #foreign avcodec_60;
+av_packet_unpack_dictionary :: (data: *u8, size: u64, dict: **AVDictionary) -> s32 #foreign avcodec_60;
 
 /**
 * Convenience function to free all the side data stored.
@@ -9823,13 +9823,13 @@ av_get_audio_frame_duration :: (avctx: *AVCodecContext, frame_bytes: s32) -> s32
 * In addition the whole buffer will initially and after resizes
 * be 0-initialized so that no uninitialized data will ever appear.
 */
-av_fast_padded_malloc :: (ptr: *void, size: *u32, min_size: size_t) -> void #foreign avcodec_60;
+av_fast_padded_malloc :: (ptr: *void, size: *u32, min_size: u64) -> void #foreign avcodec_60;
 
 /**
 * Same behaviour av_fast_padded_malloc except that buffer will always
 * be 0-initialized after call.
 */
-av_fast_padded_mallocz :: (ptr: *void, size: *u32, min_size: size_t) -> void #foreign avcodec_60;
+av_fast_padded_mallocz :: (ptr: *void, size: *u32, min_size: u64) -> void #foreign avcodec_60;
 
 /**
 * @return a positive value if s is open (i.e. avcodec_open2() was called on it
@@ -10474,7 +10474,7 @@ avio_seek_time :: (h: *AVIOContext, stream_index: s32, timestamp: s64, flags: s3
 * @return 0 for success (max_size bytes read or EOF reached), negative error
 * code otherwise
 */
-avio_read_to_bprint :: (h: *AVIOContext, pb: *AVBPrint, max_size: size_t) -> s32 #foreign avformat_60;
+avio_read_to_bprint :: (h: *AVIOContext, pb: *AVBPrint, max_size: u64) -> s32 #foreign avformat_60;
 
 /**
 * Accept and allocate a client context on a server context.
@@ -10753,11 +10753,15 @@ AVIndexEntry :: struct {
     */
     timestamp:    s64;
 
-    /**
-    * Flag is used to indicate which frame should be discarded after decoding.
+    __bitfield:   s32;
+    /* 
+        /**
+        * Flag is used to indicate which frame should be discarded after decoding.
+        */
+        flags: s32; /* 2 bits */
+        size: s32; /* 30 bits */ //Yeah, trying to keep the size of this small to reduce memory requirements (it is 24 vs. 32 bytes due to possible 8-byte alignment).;
     */
-    flags:        s32;
-    #place flags; /*bitfield 2*/ size:         s32; //Yeah, trying to keep the size of this small to reduce memory requirements (it is 24 vs. 32 bytes due to possible 8-byte alignment).
+
     min_distance: s32; /**< Minimum distance between this and the previous keyframe, used to avoid unneeded searching. */
 }
 
@@ -10994,7 +10998,7 @@ AVChapter :: struct {
 /**
 * Callback used by devices to communicate with application.
 */
-av_format_control_message :: #type (s: *AVFormatContext, type: s32, data: *void, data_size: size_t) -> s32 #c_call;
+av_format_control_message :: #type (s: *AVFormatContext, type: s32, data: *void, data_size: u64) -> s32 #c_call;
 
 AVOpenCallback :: #type (s: *AVFormatContext, pb: **AVIOContext, url: *u8, flags: s32, int_cb: *AVIOInterruptCB, options: **AVDictionary) -> s32 #c_call;
 
@@ -11735,7 +11739,7 @@ avformat_new_stream :: (s: *AVFormatContext, c: *AVCodec) -> *AVStream #foreign 
 * @return zero on success, a negative AVERROR code on failure. On failure,
 *         the stream is unchanged and the data remains owned by the caller.
 */
-av_stream_add_side_data :: (st: *AVStream, type: AVPacketSideDataType, data: *u8, size: size_t) -> s32 #foreign avformat_60;
+av_stream_add_side_data :: (st: *AVStream, type: AVPacketSideDataType, data: *u8, size: u64) -> s32 #foreign avformat_60;
 
 /**
 * Allocate new information from stream.
@@ -11746,7 +11750,7 @@ av_stream_add_side_data :: (st: *AVStream, type: AVPacketSideDataType, data: *u8
 *
 * @return pointer to fresh allocated data or NULL otherwise
 */
-av_stream_new_side_data :: (stream: *AVStream, type: AVPacketSideDataType, size: size_t) -> *u8 #foreign avformat_60;
+av_stream_new_side_data :: (stream: *AVStream, type: AVPacketSideDataType, size: u64) -> *u8 #foreign avformat_60;
 
 /**
 * Get side information from stream.
@@ -11758,7 +11762,7 @@ av_stream_new_side_data :: (stream: *AVStream, type: AVPacketSideDataType, size:
 *
 * @return pointer to data if present or NULL otherwise
 */
-av_stream_get_side_data :: (stream: *AVStream, type: AVPacketSideDataType, size: *size_t) -> *u8 #foreign avformat_60;
+av_stream_get_side_data :: (stream: *AVStream, type: AVPacketSideDataType, size: *u64) -> *u8 #foreign avformat_60;
 
 av_new_program :: (s: *AVFormatContext, id: s32) -> *AVProgram #foreign avformat_60;
 
@@ -12921,20 +12925,14 @@ sws_get_class :: () -> *AVClass #foreign swscale_7;
 
 #scope_file
 
-avcodec_60 :: #library,no_dll "windows/avcodec-60";
-avdevice_60 :: #library,no_dll "windows/avdevice-60";
-avfilter_9 :: #library,no_dll "windows/avfilter-9";
-avformat_60 :: #library,no_dll "windows/avformat-60";
+#import "Basic"; // For push_context
+
 avutil_58 :: #library "windows/avutil-58";
+avutil_57 :: #library "windows/avutil-57";
 postproc_57 :: #library "windows/postproc-57";
-swresample_4 :: #library,no_dll "windows/swresample-4";
+swresample_4 :: #library "windows/swresample-4";
 swscale_7 :: #library "windows/swscale-7";
-
-// Bindings generator stopped generating this for some reason?
-// Looks like it only adds the Basic import if you have the struct checks on, but it is also
-// needed for print like functions.
-// @TODO: Test and report if so.
-//
-// Needed to compile print like log functions (although not sure you'll ever really want the av log functions?).
-#import "Basic"; 
-
+avcodec_60 :: #library "windows/avcodec-60";
+avformat_60 :: #library "windows/avformat-60";
+avfilter_9 :: #library "windows/avfilter-9";
+avdevice_60 :: #library "windows/avdevice-60";

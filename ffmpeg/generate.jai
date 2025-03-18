@@ -8,7 +8,15 @@
 //   be able to print % structs out nicely).
 //
 
+// @Incomplete: Not all headers have bindings generated. Currently it's only the ones I needed.
 // @Incomplete: E* error codes, eg EAGAIN, for one thing these aren't defined on windows, on posix they will be, but there is also some weirdness with themsometimes being negated?
+
+// NOTE(Charles): The version of ffmpeg binaries I downloaded seem to have an issue where swresample-4 depends upon
+// avutil-57.dll instead of avutil-58.dll like all the other dlls do. I just hackily worked around this by copying
+// avutil-58.dll and renaming to -57. I am currently attempting to compile from source so this issue will be resolved
+// naturall if I am succesful at that... :FfmpegAvutilHack
+
+
 
 AT_COMPILE_TIME :: true;
 
@@ -37,18 +45,6 @@ AV_NOPTS_VALUE :: 0x8000000000000000;
 
 DONE
 
-FOOTER :: #string DONE
-
-// Bindings generator stopped generating this for some reason?
-// Looks like it only adds the Basic import if you have the struct checks on, but it is also
-// needed for print like functions.
-// @TODO: Test and report if so.
-//
-// Needed to compile print like log functions (although not sure you'll ever really want the av log functions?).
-#import "Basic"; 
-
-DONE
-
 INCLUDE_PATH :: "src";
 
 generate_bindings :: () -> bool {
@@ -72,15 +68,17 @@ generate_bindings :: () -> bool {
 
         array_add(*libpaths, "windows");
 
+        // The comments are the listed libraries dependencies. Make sure we load the librares in the correct order.
         libraries := string.[
-            "avcodec-60",
-            "avdevice-60",
-            "avfilter-9",
-            "avformat-60",
             "avutil-58",
-            "postproc-57",
-            "swresample-4",
-            "swscale-7",
+            "avutil-57",    // :FfmpegAvutilHack
+            "postproc-57",  // avutil-58.dll
+            "swresample-4", // avutil-57.dll - WTF, why is this 57... :FfmpegAvutilHack
+            "swscale-7",    // avutil-58.dll
+            "avcodec-60",   // avutil-58.dll, swresample-4.dll
+            "avformat-60",  // avutil-58.dll, avcodec-60.dll
+            "avfilter-9",   // avutil-58.dll, avcodec-60.dll, avformat-60.dll, postproc-57.dll, swresample-4.dll, swscale-7.dll
+            "avdevice-60",  // avutil-58.dll, avcodec-60.dll, avformat-60.dll, avfilter-9.dll
         ];
         for libraries array_add(*libnames, it);
 
@@ -124,14 +122,10 @@ generate_bindings :: () -> bool {
         array_add(*source_files, tprint("%/libavformat/avformat.h", INCLUDE_PATH));
         array_add(*source_files, tprint("%/libswscale/swscale.h", INCLUDE_PATH));
 
-        array_add(*system_include_paths, GENERATOR_DEFAULT_SYSTEM_INCLUDE_PATH);
-
         builder: String_Builder;
         append(*builder, HEADER);
         generate_error_codes(*builder);
         header = builder_to_string(*builder);
-
-        footer = FOOTER;
     }
 
     print("Generating ffmpeg bindings...\n");
