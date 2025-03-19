@@ -1,16 +1,15 @@
-// Generate bindings for ffmpeg.
 //
-// @TODO:
-// - Get rid of the dlls having version number in their name, it's annoying. Probably need to compile ffmpeg
-//   myself to do that...
-// - Fix warning about generating type info for large ffmpeg struct. Probably just don't generate type info
-//   for any ffmpeg types? (Hmm, type info is probably useful for the smaller types, I think it's needed to 
-//   be able to print % structs out nicely).
+// Generate bindings for ffmpeg.
 //
 
 // @Incomplete: Not all headers have bindings generated. Currently it's only the ones I needed.
 // @Incomplete: E* error codes, eg EAGAIN, for one thing these aren't defined on windows, on posix they will be, but there is also some weirdness with themsometimes being negated?
 // @Incomplete? There are a number of static functions defined in headers that we don't have bindings for, if any of them are actually useful, we'd need to define jai versions of them. Enable log_stripped_declarations to see them.
+
+// NOTE(Charles): It would be nice to be able to compile from source instead of relying on binary distributions. I am not
+// pursuing it for now, but if we did then we could:
+// - Compile for Android
+// - Maybe remove the version suffixes on dlls (would probably require modifying the build process which maybe not worth...)
 
 // NOTE(Charles): The version of ffmpeg binaries I downloaded seem to have an issue where swresample-4 depends upon
 // avutil-57.dll instead of avutil-58.dll like all the other dlls do. I just hackily worked around this by copying
@@ -146,8 +145,10 @@ TYPE_REPLACEMENTS_TO_MAKE :: Pair.[
     Pair.{"__some_type", "some_cooler_type"},
 ];
 
-// This one warns about being large. Probably can also get rid of others?
 TYPES_WITHOUT_TYPE_INFO :: string.[
+    // NOTE(Charles): This used to cause a warning about type info being large. It no longer does so maybe it's fine
+    // to reenable. But also, do we actually care about type info on generated bindings at all? It might be better to
+    // go the other way and disable type info on other large structs in the bindings.
     "AVCodecContext",
 ];
 
