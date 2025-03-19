@@ -749,6 +749,28 @@ AVFILTER_THREAD_SLICE :: 1 << 0;
 AVFILTER_CMD_FLAG_ONE :: 1;
 AVFILTER_CMD_FLAG_FAST :: 2;
 
+LIBPOSTPROC_VERSION_MAJOR :: 57;
+
+LIBPOSTPROC_VERSION_MINOR :: 1;
+LIBPOSTPROC_VERSION_MICRO :: 100;
+
+PP_QUALITY_MAX :: 6;
+
+PP_CPU_CAPS_MMX :: 0x80000000;
+PP_CPU_CAPS_MMX2 :: 0x20000000;
+PP_CPU_CAPS_3DNOW :: 0x40000000;
+PP_CPU_CAPS_ALTIVEC :: 0x10000000;
+PP_CPU_CAPS_AUTO :: 0x00080000;
+
+PP_FORMAT :: 0x00000008;
+PP_FORMAT_420 :: 0x00000011|PP_FORMAT;
+PP_FORMAT_422 :: 0x00000001|PP_FORMAT;
+PP_FORMAT_411 :: 0x00000002|PP_FORMAT;
+PP_FORMAT_444 :: 0x00000000|PP_FORMAT;
+PP_FORMAT_440 :: 0x00000010|PP_FORMAT;
+
+PP_PICT_TYPE_QP2 :: 0x00000010;
+
 LIBSWRESAMPLE_VERSION_MAJOR :: 4;
 
 LIBSWRESAMPLE_VERSION_MINOR :: 10;
@@ -14992,6 +15014,40 @@ avfilter_graph_dump :: (graph: *AVFilterGraph, options: *u8) -> *u8 #foreign lib
 *          or AVERROR_EOF if all links returned AVERROR_EOF
 */
 avfilter_graph_request_oldest :: (graph: *AVFilterGraph) -> s32 #foreign libavfilter;
+
+/**
+* Return the LIBPOSTPROC_VERSION_INT constant.
+*/
+postproc_version :: () -> u32 #foreign libpostproc;
+
+/**
+* Return the libpostproc build-time configuration.
+*/
+postproc_configuration :: () -> *u8 #foreign libpostproc;
+
+/**
+* Return the libpostproc license.
+*/
+postproc_license :: () -> *u8 #foreign libpostproc;
+
+pp_context :: void;
+pp_mode :: void;
+
+pp_help: *u8 #elsewhere libpostproc; ///< a simple help text
+
+pp_postprocess :: (src: *[3] *u8, srcStride: *[3] s32, dst: *[3] *u8, dstStride: *[3] s32, horizontalSize: s32, verticalSize: s32, QP_store: *s8, QP_stride: s32, mode: *pp_mode, ppContext: *pp_context, pict_type: s32) -> void #foreign libpostproc;
+
+/**
+* Return a pp_mode or NULL if an error occurred.
+*
+* @param name    the string after "-pp" on the command line
+* @param quality a number from 0 to PP_QUALITY_MAX
+*/
+pp_get_mode_by_name_and_quality :: (name: *u8, quality: s32) -> *pp_mode #foreign libpostproc;
+pp_free_mode :: (mode: *pp_mode) -> void #foreign libpostproc;
+
+pp_get_context :: (width: s32, height: s32, flags: s32) -> *pp_context #foreign libpostproc;
+pp_free_context :: (ppContext: *pp_context) -> void #foreign libpostproc;
 
 /** Dithering algorithms */
 SwrDitherType :: enum s32 {

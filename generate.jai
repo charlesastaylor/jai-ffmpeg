@@ -82,6 +82,7 @@ generate_bindings :: () -> bool {
         array_add(*source_files, tprint("%/libavfilter/avfilter.h", include_path));
         array_add(*source_files, tprint("%/libavformat/avformat.h", include_path));
         array_add(*source_files, tprint("%/libavutil/avutil.h", include_path));
+        array_add(*source_files, tprint("%/libpostproc/postprocess.h", include_path));
         array_add(*source_files, tprint("%/libswresample/swresample.h", include_path));
         array_add(*source_files, tprint("%/libswscale/swscale.h", include_path));
 
