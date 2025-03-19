@@ -39,12 +39,12 @@ AT_COMPILE_TIME :: true;
 
 HEADER :: #string DONE
 
-// Hey biiiiiiiiiiiiitch.
 AV_NOPTS_VALUE :: 0x8000000000000000;
 
 DONE
 
 SOURCE_PATH :: "src/ffmpeg-6.0-full_build-shared";
+// SOURCE_PATH :: "src/ffmpeg-7.1.1-full_build-shared";
 
 generate_bindings :: () -> bool {
     output_filename := "windows.jai";
@@ -52,18 +52,9 @@ generate_bindings :: () -> bool {
     opts: Generate_Bindings_Options;
     {
         using opts;
-        try_to_preserve_comments = true; // @Tmp
+        try_to_preserve_comments = true; // This means the binidngs are ~3x as long. It is kinda useful to have the comments when looking up procedures, so leaving for now.
         generate_compile_time_struct_checks = false;
-        // generate_printf_wrappers = true;
-        // c_enum_emulation = true;
-        // auto_detect_enum_prefixes = false;
-        // strip_enum_prefixes = false;
-        // alias_original_enum_names = true;
         visitor = my_visitor;
-
-        // Can't load all the libraries for some reason, just disable stripping thingz. Nevermind, this 
-        // doesn't work, just get a load of __UnknownLib dont you :roll:.
-        // strip_flags &= ~.SYMBOLS_WITH_UNKNOWN_FOREIGN_LIBS;
 
         array_add(*libpaths, "windows");
 
@@ -88,10 +79,25 @@ generate_bindings :: () -> bool {
         array_add(*source_files, tprint("%/libavformat/avformat.h", include_path));
         array_add(*source_files, tprint("%/libswscale/swscale.h", include_path));
 
+        // array_add(*source_files, tprint("%/libavutil/avutil.h", include_path));
+        // array_add(*source_files, tprint("%/libswresample/swresample.h", include_path));
+        // array_add(*source_files, tprint("%/libavfilter/avfilter.h", include_path));
+        // array_add(*source_files, tprint("%/libavdevice/avdevice.h", include_path));
+
         builder: String_Builder;
         append(*builder, HEADER);
         generate_error_codes(*builder);
         header = builder_to_string(*builder);
+
+       will_print_bindings = () {
+            for context.generator.libraries {
+                // Rename the lib identifier to not be versioned.
+
+                found, basename := split_from_left(it.name, #char "_");
+                assert(found);
+                it.name = tprint("lib%", basename);
+            }
+        };
     }
 
     print("Generating ffmpeg bindings...\n");

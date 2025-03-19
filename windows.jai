@@ -4,7 +4,6 @@
 // jai generate.jai
 //
 
-// Hey biiiiiiiiiiiiitch.
 AV_NOPTS_VALUE :: 0x8000000000000000;
 
 AVERROR_BSF_NOT_FOUND      :: 0xb9acbd08; // -1179861752
@@ -799,13 +798,13 @@ AVSampleFormat :: enum s32 {
 * Return the name of sample_fmt, or NULL if sample_fmt is not
 * recognized.
 */
-av_get_sample_fmt_name :: (sample_fmt: AVSampleFormat) -> *u8 #foreign avutil_58;
+av_get_sample_fmt_name :: (sample_fmt: AVSampleFormat) -> *u8 #foreign libavutil;
 
 /**
 * Return a sample format corresponding to name, or AV_SAMPLE_FMT_NONE
 * on error.
 */
-av_get_sample_fmt :: (name: *u8) -> AVSampleFormat #foreign avutil_58;
+av_get_sample_fmt :: (name: *u8) -> AVSampleFormat #foreign libavutil;
 
 /**
 * Return the planar<->packed alternative form of the given sample format, or
@@ -813,7 +812,7 @@ av_get_sample_fmt :: (name: *u8) -> AVSampleFormat #foreign avutil_58;
 * requested planar/packed format, the format returned is the same as the
 * input.
 */
-av_get_alt_sample_fmt :: (sample_fmt: AVSampleFormat, planar: s32) -> AVSampleFormat #foreign avutil_58;
+av_get_alt_sample_fmt :: (sample_fmt: AVSampleFormat, planar: s32) -> AVSampleFormat #foreign libavutil;
 
 /**
 * Get the packed alternative form of the given sample format.
@@ -824,7 +823,7 @@ av_get_alt_sample_fmt :: (sample_fmt: AVSampleFormat, planar: s32) -> AVSampleFo
 * @return  the packed alternative form of the given sample format or
 AV_SAMPLE_FMT_NONE on error.
 */
-av_get_packed_sample_fmt :: (sample_fmt: AVSampleFormat) -> AVSampleFormat #foreign avutil_58;
+av_get_packed_sample_fmt :: (sample_fmt: AVSampleFormat) -> AVSampleFormat #foreign libavutil;
 
 /**
 * Get the planar alternative form of the given sample format.
@@ -835,7 +834,7 @@ av_get_packed_sample_fmt :: (sample_fmt: AVSampleFormat) -> AVSampleFormat #fore
 * @return  the planar alternative form of the given sample format or
 AV_SAMPLE_FMT_NONE on error.
 */
-av_get_planar_sample_fmt :: (sample_fmt: AVSampleFormat) -> AVSampleFormat #foreign avutil_58;
+av_get_planar_sample_fmt :: (sample_fmt: AVSampleFormat) -> AVSampleFormat #foreign libavutil;
 
 /**
 * Generate a string corresponding to the sample format with
@@ -849,7 +848,7 @@ av_get_planar_sample_fmt :: (sample_fmt: AVSampleFormat) -> AVSampleFormat #fore
 * @return the pointer to the filled buffer or NULL if sample_fmt is
 * unknown or in case of other errors
 */
-av_get_sample_fmt_string :: (buf: *u8, buf_size: s32, sample_fmt: AVSampleFormat) -> *u8 #foreign avutil_58;
+av_get_sample_fmt_string :: (buf: *u8, buf_size: s32, sample_fmt: AVSampleFormat) -> *u8 #foreign libavutil;
 
 /**
 * Return number of bytes per sample.
@@ -858,7 +857,7 @@ av_get_sample_fmt_string :: (buf: *u8, buf_size: s32, sample_fmt: AVSampleFormat
 * @return number of bytes per sample or zero if unknown for the given
 * sample format
 */
-av_get_bytes_per_sample :: (sample_fmt: AVSampleFormat) -> s32 #foreign avutil_58;
+av_get_bytes_per_sample :: (sample_fmt: AVSampleFormat) -> s32 #foreign libavutil;
 
 /**
 * Check if the sample format is planar.
@@ -866,7 +865,7 @@ av_get_bytes_per_sample :: (sample_fmt: AVSampleFormat) -> s32 #foreign avutil_5
 * @param sample_fmt the sample format to inspect
 * @return 1 if the sample format is planar, 0 if it is interleaved
 */
-av_sample_fmt_is_planar :: (sample_fmt: AVSampleFormat) -> s32 #foreign avutil_58;
+av_sample_fmt_is_planar :: (sample_fmt: AVSampleFormat) -> s32 #foreign libavutil;
 
 /**
 * Get the required buffer size for the given audio parameters.
@@ -878,7 +877,7 @@ av_sample_fmt_is_planar :: (sample_fmt: AVSampleFormat) -> s32 #foreign avutil_5
 * @param align         buffer size alignment (0 = default, 1 = no alignment)
 * @return              required buffer size, or negative error code on failure
 */
-av_samples_get_buffer_size :: (linesize: *s32, nb_channels: s32, nb_samples: s32, sample_fmt: AVSampleFormat, align: s32) -> s32 #foreign avutil_58;
+av_samples_get_buffer_size :: (linesize: *s32, nb_channels: s32, nb_samples: s32, sample_fmt: AVSampleFormat, align: s32) -> s32 #foreign libavutil;
 
 /**
 * Fill plane data pointers and linesize for samples with sample
@@ -909,7 +908,7 @@ av_samples_get_buffer_size :: (linesize: *s32, nb_channels: s32, nb_samples: s32
 * @return                 minimum size in bytes required for the buffer on success,
 *                         or a negative error code on failure
 */
-av_samples_fill_arrays :: (audio_data: **u8, linesize: *s32, buf: *u8, nb_channels: s32, nb_samples: s32, sample_fmt: AVSampleFormat, align: s32) -> s32 #foreign avutil_58;
+av_samples_fill_arrays :: (audio_data: **u8, linesize: *s32, buf: *u8, nb_channels: s32, nb_samples: s32, sample_fmt: AVSampleFormat, align: s32) -> s32 #foreign libavutil;
 
 /**
 * Allocate a samples buffer for nb_samples samples, and fill data pointers and
@@ -931,7 +930,7 @@ av_samples_fill_arrays :: (audio_data: **u8, linesize: *s32, buf: *u8, nb_channe
 * @see av_samples_fill_arrays()
 * @see av_samples_alloc_array_and_samples()
 */
-av_samples_alloc :: (audio_data: **u8, linesize: *s32, nb_channels: s32, nb_samples: s32, sample_fmt: AVSampleFormat, align: s32) -> s32 #foreign avutil_58;
+av_samples_alloc :: (audio_data: **u8, linesize: *s32, nb_channels: s32, nb_samples: s32, sample_fmt: AVSampleFormat, align: s32) -> s32 #foreign libavutil;
 
 /**
 * Allocate a data pointers array, samples buffer for nb_samples
@@ -942,7 +941,7 @@ av_samples_alloc :: (audio_data: **u8, linesize: *s32, nb_channels: s32, nb_samp
 *
 * @see av_samples_alloc()
 */
-av_samples_alloc_array_and_samples :: (audio_data: ***u8, linesize: *s32, nb_channels: s32, nb_samples: s32, sample_fmt: AVSampleFormat, align: s32) -> s32 #foreign avutil_58;
+av_samples_alloc_array_and_samples :: (audio_data: ***u8, linesize: *s32, nb_channels: s32, nb_samples: s32, sample_fmt: AVSampleFormat, align: s32) -> s32 #foreign libavutil;
 
 /**
 * Copy samples from src to dst.
@@ -955,7 +954,7 @@ av_samples_alloc_array_and_samples :: (audio_data: ***u8, linesize: *s32, nb_cha
 * @param nb_channels number of audio channels
 * @param sample_fmt audio sample format
 */
-av_samples_copy :: (dst: **u8, src: **u8, dst_offset: s32, src_offset: s32, nb_samples: s32, nb_channels: s32, sample_fmt: AVSampleFormat) -> s32 #foreign avutil_58;
+av_samples_copy :: (dst: **u8, src: **u8, dst_offset: s32, src_offset: s32, nb_samples: s32, nb_channels: s32, sample_fmt: AVSampleFormat) -> s32 #foreign libavutil;
 
 /**
 * Fill an audio buffer with silence.
@@ -966,29 +965,29 @@ av_samples_copy :: (dst: **u8, src: **u8, dst_offset: s32, src_offset: s32, nb_s
 * @param nb_channels number of audio channels
 * @param sample_fmt  audio sample format
 */
-av_samples_set_silence :: (audio_data: **u8, offset: s32, nb_samples: s32, nb_channels: s32, sample_fmt: AVSampleFormat) -> s32 #foreign avutil_58;
+av_samples_set_silence :: (audio_data: **u8, offset: s32, nb_samples: s32, nb_channels: s32, sample_fmt: AVSampleFormat) -> s32 #foreign libavutil;
 
 /**
 * Return the LIBAVUTIL_VERSION_INT constant.
 */
-avutil_version :: () -> u32 #foreign avutil_58;
+avutil_version :: () -> u32 #foreign libavutil;
 
 /**
 * Return an informative version string. This usually is the actual release
 * version number or a git commit description. This string has no fixed format
 * and can change any time. It should never be parsed by code.
 */
-av_version_info :: () -> *u8 #foreign avutil_58;
+av_version_info :: () -> *u8 #foreign libavutil;
 
 /**
 * Return the libavutil build-time configuration.
 */
-avutil_configuration :: () -> *u8 #foreign avutil_58;
+avutil_configuration :: () -> *u8 #foreign libavutil;
 
 /**
 * Return the libavutil license.
 */
-avutil_license :: () -> *u8 #foreign avutil_58;
+avutil_license :: () -> *u8 #foreign libavutil;
 
 /**
 * @addtogroup lavu_media Media Type
@@ -1016,7 +1015,7 @@ AVMediaType :: enum s32 {
 * Return a string describing the media_type enum, NULL if media_type
 * is unknown.
 */
-av_get_media_type_string :: (media_type: AVMediaType) -> *u8 #foreign avutil_58;
+av_get_media_type_string :: (media_type: AVMediaType) -> *u8 #foreign libavutil;
 
 /**
 * @}
@@ -1054,11 +1053,11 @@ AVPictureType :: enum s32 {
 * @param[in] pict_type the picture type @return a single character
 * representing the picture type, '?' if pict_type is unknown
 */
-av_get_picture_type_char :: (pict_type: AVPictureType) -> u8 #foreign avutil_58;
+av_get_picture_type_char :: (pict_type: AVPictureType) -> u8 #foreign libavutil;
 
-av_log2 :: (v: u32) -> s32 #foreign avutil_58;
+av_log2 :: (v: u32) -> s32 #foreign libavutil;
 
-av_log2_16bit :: (v: u32) -> s32 #foreign avutil_58;
+av_log2_16bit :: (v: u32) -> s32 #foreign libavutil;
 
 /**
 * Allocate a memory block with alignment suitable for all memory accesses
@@ -1069,7 +1068,7 @@ av_log2_16bit :: (v: u32) -> s32 #foreign avutil_58;
 *         be allocated
 * @see av_mallocz()
 */
-av_malloc :: (size: u64) -> *void #foreign avutil_58;
+av_malloc :: (size: u64) -> *void #foreign libavutil;
 
 /**
 * Allocate a memory block with alignment suitable for all memory accesses
@@ -1080,7 +1079,7 @@ av_malloc :: (size: u64) -> *void #foreign avutil_58;
 * @return Pointer to the allocated block, or `NULL` if it cannot be allocated
 * @see av_malloc()
 */
-av_mallocz :: (size: u64) -> *void #foreign avutil_58;
+av_mallocz :: (size: u64) -> *void #foreign libavutil;
 
 /**
 * Allocate a memory block for an array with av_malloc().
@@ -1093,7 +1092,7 @@ av_mallocz :: (size: u64) -> *void #foreign avutil_58;
 *         be allocated
 * @see av_malloc()
 */
-av_malloc_array :: (nmemb: u64, size: u64) -> *void #foreign avutil_58;
+av_malloc_array :: (nmemb: u64, size: u64) -> *void #foreign libavutil;
 
 /**
 * Allocate a memory block for an array with av_mallocz().
@@ -1108,7 +1107,7 @@ av_malloc_array :: (nmemb: u64, size: u64) -> *void #foreign avutil_58;
 * @see av_mallocz()
 * @see av_malloc_array()
 */
-av_calloc :: (nmemb: u64, size: u64) -> *void #foreign avutil_58;
+av_calloc :: (nmemb: u64, size: u64) -> *void #foreign libavutil;
 
 /**
 * Allocate, reallocate, or free a block of memory.
@@ -1130,7 +1129,7 @@ av_calloc :: (nmemb: u64, size: u64) -> *void #foreign avutil_58;
 * @see av_fast_realloc()
 * @see av_reallocp()
 */
-av_realloc :: (ptr: *void, size: u64) -> *void #foreign avutil_58;
+av_realloc :: (ptr: *void, size: u64) -> *void #foreign libavutil;
 
 /**
 * Allocate, reallocate, or free a block of memory through a pointer to a
@@ -1151,7 +1150,7 @@ av_realloc :: (ptr: *void, size: u64) -> *void #foreign avutil_58;
 * @warning Unlike av_malloc(), the allocated memory is not guaranteed to be
 *          correctly aligned.
 */
-av_reallocp :: (ptr: *void, size: u64) -> s32 #foreign avutil_58;
+av_reallocp :: (ptr: *void, size: u64) -> s32 #foreign libavutil;
 
 /**
 * Allocate, reallocate, or free a block of memory.
@@ -1168,7 +1167,7 @@ av_reallocp :: (ptr: *void, size: u64) -> s32 #foreign avutil_58;
 *   @endcode
 *   pattern.
 */
-av_realloc_f :: (ptr: *void, nelem: u64, elsize: u64) -> *void #foreign avutil_58;
+av_realloc_f :: (ptr: *void, nelem: u64, elsize: u64) -> *void #foreign libavutil;
 
 /**
 * Allocate, reallocate, or free an array.
@@ -1188,7 +1187,7 @@ av_realloc_f :: (ptr: *void, nelem: u64, elsize: u64) -> *void #foreign avutil_5
 *          nmemb is zero.
 * @see av_reallocp_array()
 */
-av_realloc_array :: (ptr: *void, nmemb: u64, size: u64) -> *void #foreign avutil_58;
+av_realloc_array :: (ptr: *void, nmemb: u64, size: u64) -> *void #foreign libavutil;
 
 /**
 * Allocate, reallocate an array through a pointer to a pointer.
@@ -1206,7 +1205,7 @@ av_realloc_array :: (ptr: *void, nmemb: u64, size: u64) -> *void #foreign avutil
 * @warning Unlike av_malloc(), the allocated memory is not guaranteed to be
 *          correctly aligned. *ptr must be freed after even if nmemb is zero.
 */
-av_reallocp_array :: (ptr: *void, nmemb: u64, size: u64) -> s32 #foreign avutil_58;
+av_reallocp_array :: (ptr: *void, nmemb: u64, size: u64) -> s32 #foreign libavutil;
 
 /**
 * Reallocate the given buffer if it is not large enough, otherwise do nothing.
@@ -1240,7 +1239,7 @@ av_reallocp_array :: (ptr: *void, nmemb: u64, size: u64) -> s32 #foreign avutil_
 * @see av_realloc()
 * @see av_fast_malloc()
 */
-av_fast_realloc :: (ptr: *void, size: *u32, min_size: u64) -> *void #foreign avutil_58;
+av_fast_realloc :: (ptr: *void, size: *u32, min_size: u64) -> *void #foreign libavutil;
 
 /**
 * Allocate a buffer, reusing the given one if large enough.
@@ -1271,7 +1270,7 @@ av_fast_realloc :: (ptr: *void, size: *u32, min_size: u64) -> *void #foreign avu
 * @see av_realloc()
 * @see av_fast_mallocz()
 */
-av_fast_malloc :: (ptr: *void, size: *u32, min_size: u64) -> void #foreign avutil_58;
+av_fast_malloc :: (ptr: *void, size: *u32, min_size: u64) -> void #foreign libavutil;
 
 /**
 * Allocate and clear a buffer, reusing the given one if large enough.
@@ -1291,7 +1290,7 @@ av_fast_malloc :: (ptr: *void, size: *u32, min_size: u64) -> void #foreign avuti
 * @param[in]     min_size Desired minimal size of buffer `*ptr`
 * @see av_fast_malloc()
 */
-av_fast_mallocz :: (ptr: *void, size: *u32, min_size: u64) -> void #foreign avutil_58;
+av_fast_mallocz :: (ptr: *void, size: *u32, min_size: u64) -> void #foreign libavutil;
 
 /**
 * Free a memory block which has been allocated with a function of av_malloc()
@@ -1304,7 +1303,7 @@ av_fast_mallocz :: (ptr: *void, size: *u32, min_size: u64) -> void #foreign avut
 *       behind dangling pointers.
 * @see av_freep()
 */
-av_free :: (ptr: *void) -> void #foreign avutil_58;
+av_free :: (ptr: *void) -> void #foreign libavutil;
 
 /**
 * Free a memory block which has been allocated with a function of av_malloc()
@@ -1327,7 +1326,7 @@ av_free :: (ptr: *void) -> void #foreign avutil_58;
 * @note `*ptr = NULL` is safe and leads to no action.
 * @see av_free()
 */
-av_freep :: (ptr: *void) -> void #foreign avutil_58;
+av_freep :: (ptr: *void) -> void #foreign libavutil;
 
 /**
 * Duplicate a string.
@@ -1337,7 +1336,7 @@ av_freep :: (ptr: *void) -> void #foreign avutil_58;
 *         copy of `s` or `NULL` if the string cannot be allocated
 * @see av_strndup()
 */
-av_strdup :: (s: *u8) -> *u8 #foreign avutil_58;
+av_strdup :: (s: *u8) -> *u8 #foreign libavutil;
 
 /**
 * Duplicate a substring of a string.
@@ -1348,7 +1347,7 @@ av_strdup :: (s: *u8) -> *u8 #foreign avutil_58;
 * @return Pointer to a newly-allocated string containing a
 *         substring of `s` or `NULL` if the string cannot be allocated
 */
-av_strndup :: (s: *u8, len: u64) -> *u8 #foreign avutil_58;
+av_strndup :: (s: *u8, len: u64) -> *u8 #foreign libavutil;
 
 /**
 * Duplicate a buffer with av_malloc().
@@ -1358,7 +1357,7 @@ av_strndup :: (s: *u8, len: u64) -> *u8 #foreign avutil_58;
 * @return Pointer to a newly allocated buffer containing a
 *         copy of `p` or `NULL` if the buffer cannot be allocated
 */
-av_memdup :: (p: *void, size: u64) -> *void #foreign avutil_58;
+av_memdup :: (p: *void, size: u64) -> *void #foreign libavutil;
 
 /**
 * Overlapping memcpy() implementation.
@@ -1371,7 +1370,7 @@ av_memdup :: (p: *void, size: u64) -> *void #foreign avutil_58;
 * @note `cnt > back` is valid, this will copy the bytes we just copied,
 *       thus creating a repeating pattern with a period length of `back`.
 */
-av_memcpy_backptr :: (dst: *u8, back: s32, cnt: s32) -> void #foreign avutil_58;
+av_memcpy_backptr :: (dst: *u8, back: s32, cnt: s32) -> void #foreign libavutil;
 
 /**
 * Add the pointer to an element to a dynamic array.
@@ -1394,7 +1393,7 @@ av_memcpy_backptr :: (dst: *u8, back: s32, cnt: s32) -> void #foreign avutil_58;
 * @param[in]     elem    Element to add
 * @see av_dynarray_add_nofree(), av_dynarray2_add()
 */
-av_dynarray_add :: (tab_ptr: *void, nb_ptr: *s32, elem: *void) -> void #foreign avutil_58;
+av_dynarray_add :: (tab_ptr: *void, nb_ptr: *s32, elem: *void) -> void #foreign libavutil;
 
 /**
 * Add an element to a dynamic array.
@@ -1406,7 +1405,7 @@ av_dynarray_add :: (tab_ptr: *void, nb_ptr: *s32, elem: *void) -> void #foreign 
 * @return >=0 on success, negative otherwise
 * @see av_dynarray_add(), av_dynarray2_add()
 */
-av_dynarray_add_nofree :: (tab_ptr: *void, nb_ptr: *s32, elem: *void) -> s32 #foreign avutil_58;
+av_dynarray_add_nofree :: (tab_ptr: *void, nb_ptr: *s32, elem: *void) -> s32 #foreign libavutil;
 
 /**
 * Add an element of size `elem_size` to a dynamic array.
@@ -1431,7 +1430,7 @@ av_dynarray_add_nofree :: (tab_ptr: *void, nb_ptr: *s32, elem: *void) -> s32 #fo
 *         space
 * @see av_dynarray_add(), av_dynarray_add_nofree()
 */
-av_dynarray2_add :: (tab_ptr: **void, nb_ptr: *s32, elem_size: u64, elem_data: *u8) -> *void #foreign avutil_58;
+av_dynarray2_add :: (tab_ptr: **void, nb_ptr: *s32, elem_size: u64, elem_data: *u8) -> *void #foreign libavutil;
 
 /**
 * Multiply two `size_t` values checking for overflow.
@@ -1441,7 +1440,7 @@ av_dynarray2_add :: (tab_ptr: **void, nb_ptr: *s32, elem_size: u64, elem_data: *
 * @param[out] r   Pointer to the result of the operation
 * @return 0 on success, AVERROR(EINVAL) on overflow
 */
-av_size_mult :: (a: u64, b: u64, r: *u64) -> s32 #foreign avutil_58;
+av_size_mult :: (a: u64, b: u64, r: *u64) -> s32 #foreign libavutil;
 
 /**
 * Set the maximum size that may be allocated in one block.
@@ -1456,7 +1455,7 @@ av_size_mult :: (a: u64, b: u64, r: *u64) -> s32 #foreign avutil_58;
 * @warning Exercise extreme caution when using this function. Don't touch
 *          this if you do not understand the full consequence of doing so.
 */
-av_max_alloc :: (max: u64) -> void #foreign avutil_58;
+av_max_alloc :: (max: u64) -> void #foreign libavutil;
 
 /**
 * Put a description of the AVERROR code errnum in errbuf.
@@ -1470,7 +1469,7 @@ av_max_alloc :: (max: u64) -> void #foreign avutil_58;
 * @return 0 on success, a negative value if a description for errnum
 * cannot be found
 */
-av_strerror :: (errnum: s32, errbuf: *u8, errbuf_size: u64) -> s32 #foreign avutil_58;
+av_strerror :: (errnum: s32, errbuf: *u8, errbuf_size: u64) -> s32 #foreign libavutil;
 
 /**
 * Rational number (pair of numerator and denominator).
@@ -1492,7 +1491,7 @@ AVRational :: struct {
 * @param[in]      max Maximum allowed values for `dst_num` & `dst_den`
 * @return 1 if the operation is exact, 0 otherwise
 */
-av_reduce :: (dst_num: *s32, dst_den: *s32, num: s64, den: s64, max: s64) -> s32 #foreign avutil_58;
+av_reduce :: (dst_num: *s32, dst_den: *s32, num: s64, den: s64, max: s64) -> s32 #foreign libavutil;
 
 /**
 * Multiply two rationals.
@@ -1500,7 +1499,7 @@ av_reduce :: (dst_num: *s32, dst_den: *s32, num: s64, den: s64, max: s64) -> s32
 * @param c Second rational
 * @return b*c
 */
-av_mul_q :: (b: AVRational, c: AVRational) -> AVRational #foreign avutil_58;
+av_mul_q :: (b: AVRational, c: AVRational) -> AVRational #foreign libavutil;
 
 /**
 * Divide one rational by another.
@@ -1508,7 +1507,7 @@ av_mul_q :: (b: AVRational, c: AVRational) -> AVRational #foreign avutil_58;
 * @param c Second rational
 * @return b/c
 */
-av_div_q :: (b: AVRational, c: AVRational) -> AVRational #foreign avutil_58;
+av_div_q :: (b: AVRational, c: AVRational) -> AVRational #foreign libavutil;
 
 /**
 * Add two rationals.
@@ -1516,7 +1515,7 @@ av_div_q :: (b: AVRational, c: AVRational) -> AVRational #foreign avutil_58;
 * @param c Second rational
 * @return b+c
 */
-av_add_q :: (b: AVRational, c: AVRational) -> AVRational #foreign avutil_58;
+av_add_q :: (b: AVRational, c: AVRational) -> AVRational #foreign libavutil;
 
 /**
 * Subtract one rational from another.
@@ -1524,7 +1523,7 @@ av_add_q :: (b: AVRational, c: AVRational) -> AVRational #foreign avutil_58;
 * @param c Second rational
 * @return b-c
 */
-av_sub_q :: (b: AVRational, c: AVRational) -> AVRational #foreign avutil_58;
+av_sub_q :: (b: AVRational, c: AVRational) -> AVRational #foreign libavutil;
 
 /**
 * Convert a double precision floating point number to a rational.
@@ -1537,7 +1536,7 @@ av_sub_q :: (b: AVRational, c: AVRational) -> AVRational #foreign avutil_58;
 * @return `d` in AVRational form
 * @see av_q2d()
 */
-av_d2q :: (d: float64, max: s32) -> AVRational #foreign avutil_58;
+av_d2q :: (d: float64, max: s32) -> AVRational #foreign libavutil;
 
 /**
 * Find which of the two rationals is closer to another rational.
@@ -1550,7 +1549,7 @@ av_d2q :: (d: float64, max: s32) -> AVRational #foreign avutil_58;
 *         - -1 if `q2` is nearer to `q` than `q1`
 *         - 0 if they have the same distance
 */
-av_nearer_q :: (q: AVRational, q1: AVRational, q2: AVRational) -> s32 #foreign avutil_58;
+av_nearer_q :: (q: AVRational, q1: AVRational, q2: AVRational) -> s32 #foreign libavutil;
 
 /**
 * Find the value in a list of rationals nearest a given reference rational.
@@ -1559,7 +1558,7 @@ av_nearer_q :: (q: AVRational, q1: AVRational, q2: AVRational) -> s32 #foreign a
 * @param q_list Array of rationals terminated by `{0, 0}`
 * @return Index of the nearest value found in the array
 */
-av_find_nearest_q_idx :: (q: AVRational, q_list: *AVRational) -> s32 #foreign avutil_58;
+av_find_nearest_q_idx :: (q: AVRational, q_list: *AVRational) -> s32 #foreign libavutil;
 
 /**
 * Convert an AVRational to a IEEE 32-bit `float` expressed in fixed-point
@@ -1570,13 +1569,13 @@ av_find_nearest_q_idx :: (q: AVRational, q_list: *AVRational) -> s32 #foreign av
 *         integer.
 * @note The returned value is platform-indepedant.
 */
-av_q2intfloat :: (q: AVRational) -> u32 #foreign avutil_58;
+av_q2intfloat :: (q: AVRational) -> u32 #foreign libavutil;
 
 /**
 * Return the best rational so that a and b are multiple of it.
 * If the resulting denominator is larger than max_den, return def.
 */
-av_gcd_q :: (a: AVRational, b: AVRational, max_den: s32, def: AVRational) -> AVRational #foreign avutil_58;
+av_gcd_q :: (a: AVRational, b: AVRational, max_den: s32, def: AVRational) -> AVRational #foreign libavutil;
 
 av_intfloat32 :: union {
     i: u32;
@@ -1617,7 +1616,7 @@ AVRounding :: enum s32 {
 * @return GCD of a and b up to sign; if a >= 0 and b >= 0, return value is >= 0;
 * if a == 0 and b == 0, returns 0.
 */
-av_gcd :: (a: s64, b: s64) -> s64 #foreign avutil_58;
+av_gcd :: (a: s64, b: s64) -> s64 #foreign libavutil;
 
 /**
 * Rescale a 64-bit integer with rounding to nearest.
@@ -1629,7 +1628,7 @@ av_gcd :: (a: s64, b: s64) -> s64 #foreign avutil_58;
 *
 * @see av_rescale_rnd(), av_rescale_q(), av_rescale_q_rnd()
 */
-av_rescale :: (a: s64, b: s64, c: s64) -> s64 #foreign avutil_58;
+av_rescale :: (a: s64, b: s64, c: s64) -> s64 #foreign libavutil;
 
 /**
 * Rescale a 64-bit integer with specified rounding.
@@ -1640,7 +1639,7 @@ av_rescale :: (a: s64, b: s64, c: s64) -> s64 #foreign avutil_58;
 *
 * @see av_rescale(), av_rescale_q(), av_rescale_q_rnd()
 */
-av_rescale_rnd :: (a: s64, b: s64, c: s64, rnd: AVRounding) -> s64 #foreign avutil_58;
+av_rescale_rnd :: (a: s64, b: s64, c: s64, rnd: AVRounding) -> s64 #foreign libavutil;
 
 /**
 * Rescale a 64-bit integer by 2 rational numbers.
@@ -1651,7 +1650,7 @@ av_rescale_rnd :: (a: s64, b: s64, c: s64, rnd: AVRounding) -> s64 #foreign avut
 *
 * @see av_rescale(), av_rescale_rnd(), av_rescale_q_rnd()
 */
-av_rescale_q :: (a: s64, bq: AVRational, cq: AVRational) -> s64 #foreign avutil_58;
+av_rescale_q :: (a: s64, bq: AVRational, cq: AVRational) -> s64 #foreign libavutil;
 
 /**
 * Rescale a 64-bit integer by 2 rational numbers with specified rounding.
@@ -1660,7 +1659,7 @@ av_rescale_q :: (a: s64, bq: AVRational, cq: AVRational) -> s64 #foreign avutil_
 *
 * @see av_rescale(), av_rescale_rnd(), av_rescale_q()
 */
-av_rescale_q_rnd :: (a: s64, bq: AVRational, cq: AVRational, rnd: AVRounding) -> s64 #foreign avutil_58;
+av_rescale_q_rnd :: (a: s64, bq: AVRational, cq: AVRational, rnd: AVRounding) -> s64 #foreign libavutil;
 
 /**
 * Compare two timestamps each in its own time base.
@@ -1674,7 +1673,7 @@ av_rescale_q_rnd :: (a: s64, bq: AVRational, cq: AVRational, rnd: AVRounding) ->
 * The result of the function is undefined if one of the timestamps is outside
 * the `int64_t` range when represented in the other's timebase.
 */
-av_compare_ts :: (ts_a: s64, tb_a: AVRational, ts_b: s64, tb_b: AVRational) -> s32 #foreign avutil_58;
+av_compare_ts :: (ts_a: s64, tb_a: AVRational, ts_b: s64, tb_b: AVRational) -> s32 #foreign libavutil;
 
 /**
 * Compare the remainders of two integer operands divided by a common divisor.
@@ -1695,7 +1694,7 @@ av_compare_ts :: (ts_a: s64, tb_a: AVRational, ts_b: s64, tb_b: AVRational) -> s
 *         - a positive value if `a % mod > b % mod`
 *         - zero             if `a % mod == b % mod`
 */
-av_compare_mod :: (a: u64, b: u64, mod: u64) -> s64 #foreign avutil_58;
+av_compare_mod :: (a: u64, b: u64, mod: u64) -> s64 #foreign libavutil;
 
 /**
 * Rescale a timestamp while preserving known durations.
@@ -1722,7 +1721,7 @@ av_compare_mod :: (a: u64, b: u64, mod: u64) -> s64 #foreign avutil_58;
 * @note In the context of this function, "duration" is in term of samples, not
 *       seconds.
 */
-av_rescale_delta :: (in_tb: AVRational, in_ts: s64, fs_tb: AVRational, duration: s32, last: *s64, out_tb: AVRational) -> s64 #foreign avutil_58;
+av_rescale_delta :: (in_tb: AVRational, in_ts: s64, fs_tb: AVRational, duration: s32, last: *s64, out_tb: AVRational) -> s64 #foreign libavutil;
 
 /**
 * Add a value to a timestamp.
@@ -1735,7 +1734,7 @@ av_rescale_delta :: (in_tb: AVRational, in_ts: s64, fs_tb: AVRational, duration:
 * @param[in] inc    Value to be added
 * @param[in] inc_tb Time base of `inc`
 */
-av_add_stable :: (ts_tb: AVRational, ts: s64, inc_tb: AVRational, inc: s64) -> s64 #foreign avutil_58;
+av_add_stable :: (ts_tb: AVRational, ts: s64, inc_tb: AVRational, inc: s64) -> s64 #foreign libavutil;
 
 AVClassCategory :: enum s32 {
     NA                  :: 0;
@@ -1881,7 +1880,7 @@ AVClass :: struct {
 * @param fmt The format string (printf-compatible) that specifies how
 *        subsequent arguments are converted to output.
 */
-av_log_CFormat :: (avcl: *void, level: s32, fmt: *u8, __args: ..Any) -> void #foreign avutil_58 "av_log";
+av_log_CFormat :: (avcl: *void, level: s32, fmt: *u8, __args: ..Any) -> void #foreign libavutil "av_log";
 av_log :: (avcl: *void, level: s32, fmt: string, __args: ..Any) {
     push_allocator(temp);
     formatted_text_builder: String_Builder;
@@ -1910,7 +1909,7 @@ av_log :: (avcl: *void, level: s32, fmt: string, __args: ..Any) {
 *        this must be initialized to 0 before the first use. The same state
 *        must not be accessed by 2 Threads simultaneously.
 */
-av_log_once_CFormat :: (avcl: *void, initial_level: s32, subsequent_level: s32, state: *s32, fmt: *u8, __args: ..Any) -> void #foreign avutil_58 "av_log_once";
+av_log_once_CFormat :: (avcl: *void, initial_level: s32, subsequent_level: s32, state: *s32, fmt: *u8, __args: ..Any) -> void #foreign libavutil "av_log_once";
 av_log_once :: (avcl: *void, initial_level: s32, subsequent_level: s32, state: *s32, fmt: string, __args: ..Any) {
     push_allocator(temp);
     formatted_text_builder: String_Builder;
@@ -1927,7 +1926,7 @@ av_log_once :: (avcl: *void, initial_level: s32, subsequent_level: s32, state: *
 *
 * @return Current log level
 */
-av_log_get_level :: () -> s32 #foreign avutil_58;
+av_log_get_level :: () -> s32 #foreign libavutil;
 
 /**
 * Set the log level
@@ -1936,7 +1935,7 @@ av_log_get_level :: () -> s32 #foreign avutil_58;
 *
 * @param level Logging level
 */
-av_log_set_level :: (level: s32) -> void #foreign avutil_58;
+av_log_set_level :: (level: s32) -> void #foreign libavutil;
 
 /**
 * Return the context name
@@ -1945,11 +1944,11 @@ av_log_set_level :: (level: s32) -> void #foreign avutil_58;
 *
 * @return The AVClass class_name
 */
-av_default_item_name :: (ctx: *void) -> *u8 #foreign avutil_58;
-av_default_get_category :: (ptr: *void) -> AVClassCategory #foreign avutil_58;
+av_default_item_name :: (ctx: *void) -> *u8 #foreign libavutil;
+av_default_get_category :: (ptr: *void) -> AVClassCategory #foreign libavutil;
 
-av_log_set_flags :: (arg: s32) -> void #foreign avutil_58;
-av_log_get_flags :: () -> s32 #foreign avutil_58;
+av_log_set_flags :: (arg: s32) -> void #foreign libavutil;
+av_log_get_flags :: () -> s32 #foreign libavutil;
 
 /**
 * Pixel format.
@@ -2770,12 +2769,12 @@ AVChromaLocation :: enum s32 {
 * @param list    pointer to the list
 * @return  length of the list, in elements, not counting the terminator
 */
-av_int_list_length_for_size :: (elsize: u32, list: *void, term: u64) -> u32 #foreign avutil_58;
+av_int_list_length_for_size :: (elsize: u32, list: *void, term: u64) -> u32 #foreign libavutil;
 
 /**
 * Return the fractional representation of the internal time base.
 */
-av_get_time_base_q :: () -> AVRational #foreign avutil_58;
+av_get_time_base_q :: () -> AVRational #foreign libavutil;
 
 /**
 * Fill the provided buffer with a string containing a FourCC (four-character
@@ -2785,7 +2784,7 @@ av_get_time_base_q :: () -> AVRational #foreign avutil_58;
 * @param fourcc the fourcc to represent
 * @return the buffer in input
 */
-av_fourcc_make_string :: (buf: *u8, fourcc: u32) -> *u8 #foreign avutil_58;
+av_fourcc_make_string :: (buf: *u8, fourcc: u32) -> *u8 #foreign libavutil;
 
 AVBuffer :: struct {}
 
@@ -2816,13 +2815,13 @@ AVBufferRef :: struct {
 *
 * @return an AVBufferRef of given size or NULL when out of memory
 */
-av_buffer_alloc :: (size: u64) -> *AVBufferRef #foreign avutil_58;
+av_buffer_alloc :: (size: u64) -> *AVBufferRef #foreign libavutil;
 
 /**
 * Same as av_buffer_alloc(), except the returned buffer will be initialized
 * to zero.
 */
-av_buffer_allocz :: (size: u64) -> *AVBufferRef #foreign avutil_58;
+av_buffer_allocz :: (size: u64) -> *AVBufferRef #foreign libavutil;
 
 /**
 * Create an AVBuffer from an existing array.
@@ -2839,14 +2838,14 @@ av_buffer_allocz :: (size: u64) -> *AVBufferRef #foreign avutil_58;
 *
 * @return an AVBufferRef referring to data on success, NULL on failure.
 */
-av_buffer_create :: (data: *u8, size: u64, free: #type (opaque: *void, data: *u8) -> void #c_call, opaque: *void, flags: s32) -> *AVBufferRef #foreign avutil_58;
+av_buffer_create :: (data: *u8, size: u64, free: #type (opaque: *void, data: *u8) -> void #c_call, opaque: *void, flags: s32) -> *AVBufferRef #foreign libavutil;
 
 /**
 * Default free callback, which calls av_free() on the buffer data.
 * This function is meant to be passed to av_buffer_create(), not called
 * directly.
 */
-av_buffer_default_free :: (opaque: *void, data: *u8) -> void #foreign avutil_58;
+av_buffer_default_free :: (opaque: *void, data: *u8) -> void #foreign libavutil;
 
 /**
 * Create a new reference to an AVBuffer.
@@ -2854,7 +2853,7 @@ av_buffer_default_free :: (opaque: *void, data: *u8) -> void #foreign avutil_58;
 * @return a new AVBufferRef referring to the same AVBuffer as buf or NULL on
 * failure.
 */
-av_buffer_ref :: (buf: *AVBufferRef) -> *AVBufferRef #foreign avutil_58;
+av_buffer_ref :: (buf: *AVBufferRef) -> *AVBufferRef #foreign libavutil;
 
 /**
 * Free a given reference and automatically free the buffer if there are no more
@@ -2862,7 +2861,7 @@ av_buffer_ref :: (buf: *AVBufferRef) -> *AVBufferRef #foreign avutil_58;
 *
 * @param buf the reference to be freed. The pointer is set to NULL on return.
 */
-av_buffer_unref :: (buf: **AVBufferRef) -> void #foreign avutil_58;
+av_buffer_unref :: (buf: **AVBufferRef) -> void #foreign libavutil;
 
 /**
 * @return 1 if the caller may write to the data referred to by buf (which is
@@ -2870,14 +2869,14 @@ av_buffer_unref :: (buf: **AVBufferRef) -> void #foreign avutil_58;
 * Return 0 otherwise.
 * A positive answer is valid until av_buffer_ref() is called on buf.
 */
-av_buffer_is_writable :: (buf: *AVBufferRef) -> s32 #foreign avutil_58;
+av_buffer_is_writable :: (buf: *AVBufferRef) -> s32 #foreign libavutil;
 
 /**
 * @return the opaque parameter set by av_buffer_create.
 */
-av_buffer_get_opaque :: (buf: *AVBufferRef) -> *void #foreign avutil_58;
+av_buffer_get_opaque :: (buf: *AVBufferRef) -> *void #foreign libavutil;
 
-av_buffer_get_ref_count :: (buf: *AVBufferRef) -> s32 #foreign avutil_58;
+av_buffer_get_ref_count :: (buf: *AVBufferRef) -> s32 #foreign libavutil;
 
 /**
 * Create a writable reference from a given buffer reference, avoiding data copy
@@ -2888,7 +2887,7 @@ av_buffer_get_ref_count :: (buf: *AVBufferRef) -> s32 #foreign avutil_58;
 *            written in its place. On failure, buf is left untouched.
 * @return 0 on success, a negative AVERROR on failure.
 */
-av_buffer_make_writable :: (buf: **AVBufferRef) -> s32 #foreign avutil_58;
+av_buffer_make_writable :: (buf: **AVBufferRef) -> s32 #foreign libavutil;
 
 /**
 * Reallocate a given buffer.
@@ -2905,7 +2904,7 @@ av_buffer_make_writable :: (buf: **AVBufferRef) -> s32 #foreign avutil_58;
 * reference to it (i.e. the one passed to this function). In all other cases
 * a new buffer is allocated and the data is copied.
 */
-av_buffer_realloc :: (buf: **AVBufferRef, size: u64) -> s32 #foreign avutil_58;
+av_buffer_realloc :: (buf: **AVBufferRef, size: u64) -> s32 #foreign libavutil;
 
 /**
 * Ensure dst refers to the same data as src.
@@ -2921,7 +2920,7 @@ av_buffer_realloc :: (buf: **AVBufferRef, size: u64) -> s32 #foreign avutil_58;
 * @return 0 on success
 *         AVERROR(ENOMEM) on memory allocation failure.
 */
-av_buffer_replace :: (dst: **AVBufferRef, src: *AVBufferRef) -> s32 #foreign avutil_58;
+av_buffer_replace :: (dst: **AVBufferRef, src: *AVBufferRef) -> s32 #foreign libavutil;
 
 AVBufferPool :: struct {}
 
@@ -2934,7 +2933,7 @@ AVBufferPool :: struct {}
 * (av_buffer_alloc()).
 * @return newly created buffer pool on success, NULL on error.
 */
-av_buffer_pool_init :: (size: u64, alloc: #type (size: u64) -> *AVBufferRef #c_call) -> *AVBufferPool #foreign avutil_58;
+av_buffer_pool_init :: (size: u64, alloc: #type (size: u64) -> *AVBufferRef #c_call) -> *AVBufferPool #foreign libavutil;
 
 /**
 * Allocate and initialize a buffer pool with a more complex allocator.
@@ -2951,7 +2950,7 @@ av_buffer_pool_init :: (size: u64, alloc: #type (size: u64) -> *AVBufferRef #c_c
 *                  data. May be NULL.
 * @return newly created buffer pool on success, NULL on error.
 */
-av_buffer_pool_init2 :: (size: u64, opaque: *void, alloc: #type (opaque: *void, size: u64) -> *AVBufferRef #c_call, pool_free: #type (opaque: *void) -> void #c_call) -> *AVBufferPool #foreign avutil_58;
+av_buffer_pool_init2 :: (size: u64, opaque: *void, alloc: #type (opaque: *void, size: u64) -> *AVBufferRef #c_call, pool_free: #type (opaque: *void) -> void #c_call) -> *AVBufferPool #foreign libavutil;
 
 /**
 * Mark the pool as being available for freeing. It will actually be freed only
@@ -2961,7 +2960,7 @@ av_buffer_pool_init2 :: (size: u64, opaque: *void, alloc: #type (opaque: *void, 
 *
 * @param pool pointer to the pool to be freed. It will be set to NULL.
 */
-av_buffer_pool_uninit :: (pool: **AVBufferPool) -> void #foreign avutil_58;
+av_buffer_pool_uninit :: (pool: **AVBufferPool) -> void #foreign libavutil;
 
 /**
 * Allocate a new AVBuffer, reusing an old buffer from the pool when available.
@@ -2969,7 +2968,7 @@ av_buffer_pool_uninit :: (pool: **AVBufferPool) -> void #foreign avutil_58;
 *
 * @return a reference to the new buffer on success, NULL on error.
 */
-av_buffer_pool_get :: (pool: *AVBufferPool) -> *AVBufferRef #foreign avutil_58;
+av_buffer_pool_get :: (pool: *AVBufferPool) -> *AVBufferRef #foreign libavutil;
 
 /**
 * Query the original opaque parameter of an allocated buffer in the pool.
@@ -2982,7 +2981,7 @@ av_buffer_pool_get :: (pool: *AVBufferPool) -> *AVBufferRef #foreign avutil_58;
 * therefore you have to use this function to access the original opaque
 * parameter of an allocated buffer.
 */
-av_buffer_pool_buffer_get_opaque :: (ref: *AVBufferRef) -> *void #foreign avutil_58;
+av_buffer_pool_buffer_get_opaque :: (ref: *AVBufferRef) -> *void #foreign libavutil;
 
 /**
 * @}
@@ -3008,7 +3007,7 @@ AVDictionary :: struct {}
 *
 * @return      Found entry or NULL in case no matching entry was found in the dictionary
 */
-av_dict_get :: (m: *AVDictionary, key: *u8, prev: *AVDictionaryEntry, flags: s32) -> *AVDictionaryEntry #foreign avutil_58;
+av_dict_get :: (m: *AVDictionary, key: *u8, prev: *AVDictionaryEntry, flags: s32) -> *AVDictionaryEntry #foreign libavutil;
 
 /**
 * Iterate over a dictionary
@@ -3034,7 +3033,7 @@ av_dict_get :: (m: *AVDictionary, key: *u8, prev: *AVDictionaryEntry, flags: s32
 * @retval AVDictionaryEntry* The next element in the dictionary
 * @retval NULL               No more elements in the dictionary
 */
-av_dict_iterate :: (m: *AVDictionary, prev: *AVDictionaryEntry) -> *AVDictionaryEntry #foreign avutil_58;
+av_dict_iterate :: (m: *AVDictionary, prev: *AVDictionaryEntry) -> *AVDictionaryEntry #foreign libavutil;
 
 /**
 * Get number of entries in dictionary.
@@ -3042,7 +3041,7 @@ av_dict_iterate :: (m: *AVDictionary, prev: *AVDictionaryEntry) -> *AVDictionary
 * @param m dictionary
 * @return  number of entries in dictionary
 */
-av_dict_count :: (m: *AVDictionary) -> s32 #foreign avutil_58;
+av_dict_count :: (m: *AVDictionary) -> s32 #foreign libavutil;
 
 /**
 * Set the given entry in *pm, overwriting an existing entry.
@@ -3061,7 +3060,7 @@ av_dict_count :: (m: *AVDictionary) -> s32 #foreign avutil_58;
 *
 * @return          >= 0 on success otherwise an error code <0
 */
-av_dict_set :: (pm: **AVDictionary, key: *u8, value: *u8, flags: s32) -> s32 #foreign avutil_58;
+av_dict_set :: (pm: **AVDictionary, key: *u8, value: *u8, flags: s32) -> s32 #foreign libavutil;
 
 /**
 * Convenience wrapper for av_dict_set() that converts the value to a string
@@ -3069,7 +3068,7 @@ av_dict_set :: (pm: **AVDictionary, key: *u8, value: *u8, flags: s32) -> s32 #fo
 *
 * Note: If ::AV_DICT_DONT_STRDUP_KEY is set, key will be freed on error.
 */
-av_dict_set_int :: (pm: **AVDictionary, key: *u8, value: s64, flags: s32) -> s32 #foreign avutil_58;
+av_dict_set_int :: (pm: **AVDictionary, key: *u8, value: s64, flags: s32) -> s32 #foreign libavutil;
 
 /**
 * Parse the key/value pairs list and add the parsed entries to a dictionary.
@@ -3088,7 +3087,7 @@ av_dict_set_int :: (pm: **AVDictionary, key: *u8, value: s64, flags: s32) -> s32
 *
 * @return             0 on success, negative AVERROR code on failure
 */
-av_dict_parse_string :: (pm: **AVDictionary, str: *u8, key_val_sep: *u8, pairs_sep: *u8, flags: s32) -> s32 #foreign avutil_58;
+av_dict_parse_string :: (pm: **AVDictionary, str: *u8, key_val_sep: *u8, pairs_sep: *u8, flags: s32) -> s32 #foreign libavutil;
 
 /**
 * Copy entries from one AVDictionary struct into another.
@@ -3103,13 +3102,13 @@ av_dict_parse_string :: (pm: **AVDictionary, str: *u8, key_val_sep: *u8, pairs_s
 * @return 0 on success, negative AVERROR code on failure. If dst was allocated
 *           by this function, callers should free the associated memory.
 */
-av_dict_copy :: (dst: **AVDictionary, src: *AVDictionary, flags: s32) -> s32 #foreign avutil_58;
+av_dict_copy :: (dst: **AVDictionary, src: *AVDictionary, flags: s32) -> s32 #foreign libavutil;
 
 /**
 * Free all the memory allocated for an AVDictionary struct
 * and all keys and values.
 */
-av_dict_free :: (m: **AVDictionary) -> void #foreign avutil_58;
+av_dict_free :: (m: **AVDictionary) -> void #foreign libavutil;
 
 /**
 * Get dictionary entries as a string.
@@ -3128,7 +3127,7 @@ av_dict_free :: (m: **AVDictionary) -> void #foreign avutil_58;
 *
 * @return                   >= 0 on success, negative on error
 */
-av_dict_get_string :: (m: *AVDictionary, buffer: **u8, key_val_sep: u8, pairs_sep: u8) -> s32 #foreign avutil_58;
+av_dict_get_string :: (m: *AVDictionary, buffer: **u8, key_val_sep: u8, pairs_sep: u8) -> s32 #foreign libavutil;
 
 /**
 * @defgroup lavu_audio_channels Audio channels
@@ -3384,7 +3383,7 @@ AVBPrint :: struct {}
 *
 * @deprecated use av_channel_layout_from_string()
 */
-av_get_channel_layout :: (name: *u8) -> u64 #foreign avutil_58;
+av_get_channel_layout :: (name: *u8) -> u64 #foreign libavutil;
 
 /**
 * Return a channel layout and the number of channels based on the specified name.
@@ -3399,7 +3398,7 @@ av_get_channel_layout :: (name: *u8) -> u64 #foreign avutil_58;
 * @return 0 on success, AVERROR(EINVAL) if the parsing fails.
 * @deprecated use av_channel_layout_from_string()
 */
-av_get_extended_channel_layout :: (name: *u8, channel_layout: *u64, nb_channels: *s32) -> s32 #foreign avutil_58;
+av_get_extended_channel_layout :: (name: *u8, channel_layout: *u64, nb_channels: *s32) -> s32 #foreign libavutil;
 
 /**
 * Return a description of a channel layout.
@@ -3411,26 +3410,26 @@ av_get_extended_channel_layout :: (name: *u8, channel_layout: *u64, nb_channels:
 * @param channel_layout channel layout bitset
 * @deprecated use av_channel_layout_describe()
 */
-av_get_channel_layout_string :: (buf: *u8, buf_size: s32, nb_channels: s32, channel_layout: u64) -> void #foreign avutil_58;
+av_get_channel_layout_string :: (buf: *u8, buf_size: s32, nb_channels: s32, channel_layout: u64) -> void #foreign libavutil;
 
 /**
 * Append a description of a channel layout to a bprint buffer.
 * @deprecated use av_channel_layout_describe()
 */
-av_bprint_channel_layout :: (bp: *AVBPrint, nb_channels: s32, channel_layout: u64) -> void #foreign avutil_58;
+av_bprint_channel_layout :: (bp: *AVBPrint, nb_channels: s32, channel_layout: u64) -> void #foreign libavutil;
 
 /**
 * Return the number of channels in the channel layout.
 * @deprecated use AVChannelLayout.nb_channels
 */
-av_get_channel_layout_nb_channels :: (channel_layout: u64) -> s32 #foreign avutil_58;
+av_get_channel_layout_nb_channels :: (channel_layout: u64) -> s32 #foreign libavutil;
 
 /**
 * Return default channel layout for a given number of channels.
 *
 * @deprecated use av_channel_layout_default()
 */
-av_get_default_channel_layout :: (nb_channels: s32) -> s64 #foreign avutil_58;
+av_get_default_channel_layout :: (nb_channels: s32) -> s64 #foreign libavutil;
 
 /**
 * Get the index of a channel in channel_layout.
@@ -3444,13 +3443,13 @@ av_get_default_channel_layout :: (nb_channels: s32) -> s64 #foreign avutil_58;
 *
 * @deprecated use av_channel_layout_index_from_channel()
 */
-av_get_channel_layout_channel_index :: (channel_layout: u64, channel: u64) -> s32 #foreign avutil_58;
+av_get_channel_layout_channel_index :: (channel_layout: u64, channel: u64) -> s32 #foreign libavutil;
 
 /**
 * Get the channel with the given index in channel_layout.
 * @deprecated use av_channel_layout_channel_from_index()
 */
-av_channel_layout_extract_channel :: (channel_layout: u64, index: s32) -> u64 #foreign avutil_58;
+av_channel_layout_extract_channel :: (channel_layout: u64, index: s32) -> u64 #foreign libavutil;
 
 /**
 * Get the name of a given channel.
@@ -3459,7 +3458,7 @@ av_channel_layout_extract_channel :: (channel_layout: u64, index: s32) -> u64 #f
 *
 * @deprecated use av_channel_name()
 */
-av_get_channel_name :: (channel: u64) -> *u8 #foreign avutil_58;
+av_get_channel_name :: (channel: u64) -> *u8 #foreign libavutil;
 
 /**
 * Get the description of a given channel.
@@ -3468,7 +3467,7 @@ av_get_channel_name :: (channel: u64) -> *u8 #foreign avutil_58;
 * @return  channel description on success, NULL on error
 * @deprecated use av_channel_description()
 */
-av_get_channel_description :: (channel: u64) -> *u8 #foreign avutil_58;
+av_get_channel_description :: (channel: u64) -> *u8 #foreign libavutil;
 
 /**
 * Get the value and name of a standard channel layout.
@@ -3480,7 +3479,7 @@ av_get_channel_description :: (channel: u64) -> *u8 #foreign avutil_58;
 *          <0 if index is beyond the limits
 * @deprecated use av_channel_layout_standard()
 */
-av_get_standard_channel_layout :: (index: u32, layout: *u64, name: **u8) -> s32 #foreign avutil_58;
+av_get_standard_channel_layout :: (index: u32, layout: *u64, name: **u8) -> s32 #foreign libavutil;
 
 /**
 * Get a human readable string in an abbreviated form describing a given channel.
@@ -3493,14 +3492,14 @@ av_get_standard_channel_layout :: (index: u32, layout: *u64, name: **u8) -> s32 
 *         on failure. If the returned value is bigger than buf_size, then the
 *         string was truncated.
 */
-av_channel_name :: (buf: *u8, buf_size: u64, channel: AVChannel) -> s32 #foreign avutil_58;
+av_channel_name :: (buf: *u8, buf_size: u64, channel: AVChannel) -> s32 #foreign libavutil;
 
 /**
 * bprint variant of av_channel_name().
 *
 * @note the string will be appended to the bprint buffer.
 */
-av_channel_name_bprint :: (bp: *AVBPrint, channel_id: AVChannel) -> void #foreign avutil_58;
+av_channel_name_bprint :: (bp: *AVBPrint, channel_id: AVChannel) -> void #foreign libavutil;
 
 /**
 * Get a human readable string describing a given channel.
@@ -3512,14 +3511,14 @@ av_channel_name_bprint :: (bp: *AVBPrint, channel_id: AVChannel) -> void #foreig
 *         on failure. If the returned value is bigger than buf_size, then the
 *         string was truncated.
 */
-av_channel_description :: (buf: *u8, buf_size: u64, channel: AVChannel) -> s32 #foreign avutil_58;
+av_channel_description :: (buf: *u8, buf_size: u64, channel: AVChannel) -> s32 #foreign libavutil;
 
 /**
 * bprint variant of av_channel_description().
 *
 * @note the string will be appended to the bprint buffer.
 */
-av_channel_description_bprint :: (bp: *AVBPrint, channel_id: AVChannel) -> void #foreign avutil_58;
+av_channel_description_bprint :: (bp: *AVBPrint, channel_id: AVChannel) -> void #foreign libavutil;
 
 /**
 * This is the inverse function of @ref av_channel_name().
@@ -3527,7 +3526,7 @@ av_channel_description_bprint :: (bp: *AVBPrint, channel_id: AVChannel) -> void 
 * @return the channel with the given name
 *         AV_CHAN_NONE when name does not identify a known channel
 */
-av_channel_from_string :: (name: *u8) -> AVChannel #foreign avutil_58;
+av_channel_from_string :: (name: *u8) -> AVChannel #foreign libavutil;
 
 /**
 * Initialize a native channel layout from a bitmask indicating which channels
@@ -3539,7 +3538,7 @@ av_channel_from_string :: (name: *u8) -> AVChannel #foreign avutil_58;
 * @return 0 on success
 *         AVERROR(EINVAL) for invalid mask values
 */
-av_channel_layout_from_mask :: (channel_layout: *AVChannelLayout, mask: u64) -> s32 #foreign avutil_58;
+av_channel_layout_from_mask :: (channel_layout: *AVChannelLayout, mask: u64) -> s32 #foreign libavutil;
 
 /**
 * Initialize a channel layout from a given string description.
@@ -3558,7 +3557,7 @@ av_channel_layout_from_mask :: (channel_layout: *AVChannelLayout, mask: u64) -> 
 * @param str string describing the channel layout
 * @return 0 channel layout was detected, AVERROR_INVALIDATATA otherwise
 */
-av_channel_layout_from_string :: (channel_layout: *AVChannelLayout, str: *u8) -> s32 #foreign avutil_58;
+av_channel_layout_from_string :: (channel_layout: *AVChannelLayout, str: *u8) -> s32 #foreign libavutil;
 
 /**
 * Get the default channel layout for a given number of channels.
@@ -3566,7 +3565,7 @@ av_channel_layout_from_string :: (channel_layout: *AVChannelLayout, str: *u8) ->
 * @param ch_layout the layout structure to be initialized
 * @param nb_channels number of channels
 */
-av_channel_layout_default :: (ch_layout: *AVChannelLayout, nb_channels: s32) -> void #foreign avutil_58;
+av_channel_layout_default :: (ch_layout: *AVChannelLayout, nb_channels: s32) -> void #foreign libavutil;
 
 /**
 * Iterate over all standard channel layouts.
@@ -3577,7 +3576,7 @@ av_channel_layout_default :: (ch_layout: *AVChannelLayout, nb_channels: s32) -> 
 * @return the standard channel layout or NULL when the iteration is
 *         finished
 */
-av_channel_layout_standard :: (opaque: **void) -> *AVChannelLayout #foreign avutil_58;
+av_channel_layout_standard :: (opaque: **void) -> *AVChannelLayout #foreign libavutil;
 
 /**
 * Free any allocated data in the channel layout and reset the channel
@@ -3585,7 +3584,7 @@ av_channel_layout_standard :: (opaque: **void) -> *AVChannelLayout #foreign avut
 *
 * @param channel_layout the layout structure to be uninitialized
 */
-av_channel_layout_uninit :: (channel_layout: *AVChannelLayout) -> void #foreign avutil_58;
+av_channel_layout_uninit :: (channel_layout: *AVChannelLayout) -> void #foreign libavutil;
 
 /**
 * Make a copy of a channel layout. This differs from just assigning src to dst
@@ -3597,7 +3596,7 @@ av_channel_layout_uninit :: (channel_layout: *AVChannelLayout) -> void #foreign 
 * @param src source channel layout
 * @return 0 on success, a negative AVERROR on error.
 */
-av_channel_layout_copy :: (dst: *AVChannelLayout, src: *AVChannelLayout) -> s32 #foreign avutil_58;
+av_channel_layout_copy :: (dst: *AVChannelLayout, src: *AVChannelLayout) -> s32 #foreign libavutil;
 
 /**
 * Get a human-readable string describing the channel layout properties.
@@ -3612,7 +3611,7 @@ av_channel_layout_copy :: (dst: *AVChannelLayout, src: *AVChannelLayout) -> s32 
 *         on failure. If the returned value is bigger than buf_size, then the
 *         string was truncated.
 */
-av_channel_layout_describe :: (channel_layout: *AVChannelLayout, buf: *u8, buf_size: u64) -> s32 #foreign avutil_58;
+av_channel_layout_describe :: (channel_layout: *AVChannelLayout, buf: *u8, buf_size: u64) -> s32 #foreign libavutil;
 
 /**
 * bprint variant of av_channel_layout_describe().
@@ -3620,7 +3619,7 @@ av_channel_layout_describe :: (channel_layout: *AVChannelLayout, buf: *u8, buf_s
 * @note the string will be appended to the bprint buffer.
 * @return 0 on success, or a negative AVERROR value on failure.
 */
-av_channel_layout_describe_bprint :: (channel_layout: *AVChannelLayout, bp: *AVBPrint) -> s32 #foreign avutil_58;
+av_channel_layout_describe_bprint :: (channel_layout: *AVChannelLayout, bp: *AVBPrint) -> s32 #foreign libavutil;
 
 /**
 * Get the channel with the given index in a channel layout.
@@ -3631,7 +3630,7 @@ av_channel_layout_describe_bprint :: (channel_layout: *AVChannelLayout, bp: *AVB
 *         AV_CHAN_NONE on failure (if idx is not valid or the channel order is
 *         unspecified)
 */
-av_channel_layout_channel_from_index :: (channel_layout: *AVChannelLayout, idx: u32) -> AVChannel #foreign avutil_58;
+av_channel_layout_channel_from_index :: (channel_layout: *AVChannelLayout, idx: u32) -> AVChannel #foreign libavutil;
 
 /**
 * Get the index of a given channel in a channel layout. In case multiple
@@ -3642,7 +3641,7 @@ av_channel_layout_channel_from_index :: (channel_layout: *AVChannelLayout, idx: 
 * @return index of channel in channel_layout on success or a negative number if
 *         channel is not present in channel_layout.
 */
-av_channel_layout_index_from_channel :: (channel_layout: *AVChannelLayout, channel: AVChannel) -> s32 #foreign avutil_58;
+av_channel_layout_index_from_channel :: (channel_layout: *AVChannelLayout, channel: AVChannel) -> s32 #foreign libavutil;
 
 /**
 * Get the index in a channel layout of a channel described by the given string.
@@ -3656,7 +3655,7 @@ av_channel_layout_index_from_channel :: (channel_layout: *AVChannelLayout, chann
 * @return a channel index described by the given string, or a negative AVERROR
 *         value.
 */
-av_channel_layout_index_from_string :: (channel_layout: *AVChannelLayout, name: *u8) -> s32 #foreign avutil_58;
+av_channel_layout_index_from_string :: (channel_layout: *AVChannelLayout, name: *u8) -> s32 #foreign libavutil;
 
 /**
 * Get a channel described by the given string.
@@ -3670,7 +3669,7 @@ av_channel_layout_index_from_string :: (channel_layout: *AVChannelLayout, name: 
 *         or AV_CHAN_NONE on failure (if the string is not valid or the channel
 *         order is unspecified)
 */
-av_channel_layout_channel_from_string :: (channel_layout: *AVChannelLayout, name: *u8) -> AVChannel #foreign avutil_58;
+av_channel_layout_channel_from_string :: (channel_layout: *AVChannelLayout, name: *u8) -> AVChannel #foreign libavutil;
 
 /**
 * Find out what channels from a given set are present in a channel layout,
@@ -3681,7 +3680,7 @@ av_channel_layout_channel_from_string :: (channel_layout: *AVChannelLayout, name
 * @return a bitfield representing all the channels from mask that are present
 *         in channel_layout
 */
-av_channel_layout_subset :: (channel_layout: *AVChannelLayout, mask: u64) -> u64 #foreign avutil_58;
+av_channel_layout_subset :: (channel_layout: *AVChannelLayout, mask: u64) -> u64 #foreign libavutil;
 
 /**
 * Check whether a channel layout is valid, i.e. can possibly describe audio
@@ -3690,7 +3689,7 @@ av_channel_layout_subset :: (channel_layout: *AVChannelLayout, mask: u64) -> u64
 * @param channel_layout input channel layout
 * @return 1 if channel_layout is valid, 0 otherwise.
 */
-av_channel_layout_check :: (channel_layout: *AVChannelLayout) -> s32 #foreign avutil_58;
+av_channel_layout_check :: (channel_layout: *AVChannelLayout) -> s32 #foreign libavutil;
 
 /**
 * Check whether two channel layouts are semantically the same, i.e. the same
@@ -3705,7 +3704,7 @@ av_channel_layout_check :: (channel_layout: *AVChannelLayout) -> s32 #foreign av
 * @return 0 if chl and chl1 are equal, 1 if they are not equal. A negative
 *         AVERROR code if one or both are invalid.
 */
-av_channel_layout_compare :: (chl: *AVChannelLayout, chl1: *AVChannelLayout) -> s32 #foreign avutil_58;
+av_channel_layout_compare :: (chl: *AVChannelLayout, chl1: *AVChannelLayout) -> s32 #foreign libavutil;
 
 /**
 * @defgroup lavu_frame AVFrame
@@ -4320,7 +4319,7 @@ AVFrame :: struct {
 * must be allocated through other means, e.g. with av_frame_get_buffer() or
 * manually.
 */
-av_frame_alloc :: () -> *AVFrame #foreign avutil_58;
+av_frame_alloc :: () -> *AVFrame #foreign libavutil;
 
 /**
 * Free the frame and any dynamically allocated objects in it,
@@ -4329,7 +4328,7 @@ av_frame_alloc :: () -> *AVFrame #foreign avutil_58;
 *
 * @param frame frame to be freed. The pointer will be set to NULL.
 */
-av_frame_free :: (frame: **AVFrame) -> void #foreign avutil_58;
+av_frame_free :: (frame: **AVFrame) -> void #foreign libavutil;
 
 /**
 * Set up a new reference to the data described by the source frame.
@@ -4346,7 +4345,7 @@ av_frame_free :: (frame: **AVFrame) -> void #foreign avutil_58;
 *
 * @return 0 on success, a negative AVERROR on error
 */
-av_frame_ref :: (dst: *AVFrame, src: *AVFrame) -> s32 #foreign avutil_58;
+av_frame_ref :: (dst: *AVFrame, src: *AVFrame) -> s32 #foreign libavutil;
 
 /**
 * Create a new frame that references the same data as src.
@@ -4355,12 +4354,12 @@ av_frame_ref :: (dst: *AVFrame, src: *AVFrame) -> s32 #foreign avutil_58;
 *
 * @return newly created AVFrame on success, NULL on error.
 */
-av_frame_clone :: (src: *AVFrame) -> *AVFrame #foreign avutil_58;
+av_frame_clone :: (src: *AVFrame) -> *AVFrame #foreign libavutil;
 
 /**
 * Unreference all the buffers referenced by frame and reset the frame fields.
 */
-av_frame_unref :: (frame: *AVFrame) -> void #foreign avutil_58;
+av_frame_unref :: (frame: *AVFrame) -> void #foreign libavutil;
 
 /**
 * Move everything contained in src to dst and reset src.
@@ -4369,7 +4368,7 @@ av_frame_unref :: (frame: *AVFrame) -> void #foreign avutil_58;
 *           or deallocating its contents. Call av_frame_unref(dst) manually
 *           before calling this function to ensure that no memory is leaked.
 */
-av_frame_move_ref :: (dst: *AVFrame, src: *AVFrame) -> void #foreign avutil_58;
+av_frame_move_ref :: (dst: *AVFrame, src: *AVFrame) -> void #foreign libavutil;
 
 /**
 * Allocate new buffer(s) for audio or video data.
@@ -4394,7 +4393,7 @@ av_frame_move_ref :: (dst: *AVFrame, src: *AVFrame) -> void #foreign avutil_58;
 *
 * @return 0 on success, a negative AVERROR on error.
 */
-av_frame_get_buffer :: (frame: *AVFrame, align: s32) -> s32 #foreign avutil_58;
+av_frame_get_buffer :: (frame: *AVFrame, align: s32) -> s32 #foreign libavutil;
 
 /**
 * Check if the frame data is writable.
@@ -4408,7 +4407,7 @@ av_frame_get_buffer :: (frame: *AVFrame, align: s32) -> s32 #foreign avutil_58;
 *
 * @see av_frame_make_writable(), av_buffer_is_writable()
 */
-av_frame_is_writable :: (frame: *AVFrame) -> s32 #foreign avutil_58;
+av_frame_is_writable :: (frame: *AVFrame) -> s32 #foreign libavutil;
 
 /**
 * Ensure that the frame data is writable, avoiding data copy if possible.
@@ -4422,7 +4421,7 @@ av_frame_is_writable :: (frame: *AVFrame) -> s32 #foreign avutil_58;
 * @see av_frame_is_writable(), av_buffer_is_writable(),
 * av_buffer_make_writable()
 */
-av_frame_make_writable :: (frame: *AVFrame) -> s32 #foreign avutil_58;
+av_frame_make_writable :: (frame: *AVFrame) -> s32 #foreign libavutil;
 
 /**
 * Copy the frame data from src to dst.
@@ -4435,7 +4434,7 @@ av_frame_make_writable :: (frame: *AVFrame) -> s32 #foreign avutil_58;
 *
 * @return >= 0 on success, a negative AVERROR on error.
 */
-av_frame_copy :: (dst: *AVFrame, src: *AVFrame) -> s32 #foreign avutil_58;
+av_frame_copy :: (dst: *AVFrame, src: *AVFrame) -> s32 #foreign libavutil;
 
 /**
 * Copy only "metadata" fields from src to dst.
@@ -4445,7 +4444,7 @@ av_frame_copy :: (dst: *AVFrame, src: *AVFrame) -> s32 #foreign avutil_58;
 * aspect ratio (for video), but not width/height or channel layout.
 * Side data is also copied.
 */
-av_frame_copy_props :: (dst: *AVFrame, src: *AVFrame) -> s32 #foreign avutil_58;
+av_frame_copy_props :: (dst: *AVFrame, src: *AVFrame) -> s32 #foreign libavutil;
 
 /**
 * Get the buffer reference a given data plane is stored in.
@@ -4456,7 +4455,7 @@ av_frame_copy_props :: (dst: *AVFrame, src: *AVFrame) -> s32 #foreign avutil_58;
 * @return the buffer reference that contains the plane or NULL if the input
 * frame is not valid.
 */
-av_frame_get_plane_buffer :: (frame: *AVFrame, plane: s32) -> *AVBufferRef #foreign avutil_58;
+av_frame_get_plane_buffer :: (frame: *AVFrame, plane: s32) -> *AVBufferRef #foreign libavutil;
 
 /**
 * Add a new side data to a frame.
@@ -4467,7 +4466,7 @@ av_frame_get_plane_buffer :: (frame: *AVFrame, plane: s32) -> *AVBufferRef #fore
 *
 * @return newly added side data on success, NULL on error
 */
-av_frame_new_side_data :: (frame: *AVFrame, type: AVFrameSideDataType, size: u64) -> *AVFrameSideData #foreign avutil_58;
+av_frame_new_side_data :: (frame: *AVFrame, type: AVFrameSideDataType, size: u64) -> *AVFrameSideData #foreign libavutil;
 
 /**
 * Add a new side data to a frame from an existing AVBufferRef
@@ -4481,18 +4480,18 @@ av_frame_new_side_data :: (frame: *AVFrame, type: AVFrameSideDataType, size: u64
 *         the frame is unchanged and the AVBufferRef remains owned by
 *         the caller.
 */
-av_frame_new_side_data_from_buf :: (frame: *AVFrame, type: AVFrameSideDataType, buf: *AVBufferRef) -> *AVFrameSideData #foreign avutil_58;
+av_frame_new_side_data_from_buf :: (frame: *AVFrame, type: AVFrameSideDataType, buf: *AVBufferRef) -> *AVFrameSideData #foreign libavutil;
 
 /**
 * @return a pointer to the side data of a given type on success, NULL if there
 * is no side data with such type in this frame.
 */
-av_frame_get_side_data :: (frame: *AVFrame, type: AVFrameSideDataType) -> *AVFrameSideData #foreign avutil_58;
+av_frame_get_side_data :: (frame: *AVFrame, type: AVFrameSideDataType) -> *AVFrameSideData #foreign libavutil;
 
 /**
 * Remove and free all side data instances of the given type.
 */
-av_frame_remove_side_data :: (frame: *AVFrame, type: AVFrameSideDataType) -> void #foreign avutil_58;
+av_frame_remove_side_data :: (frame: *AVFrame, type: AVFrameSideDataType) -> void #foreign libavutil;
 
 /**
 * Flags for frame cropping.
@@ -4517,12 +4516,12 @@ anon_enum :: enum s32 {
 * @return >= 0 on success, a negative AVERROR on error. If the cropping fields
 * were invalid, AVERROR(ERANGE) is returned, and nothing is changed.
 */
-av_frame_apply_cropping :: (frame: *AVFrame, flags: s32) -> s32 #foreign avutil_58;
+av_frame_apply_cropping :: (frame: *AVFrame, flags: s32) -> s32 #foreign libavutil;
 
 /**
 * @return a string identifying the side data type
 */
-av_frame_side_data_name :: (type: AVFrameSideDataType) -> *u8 #foreign avutil_58;
+av_frame_side_data_name :: (type: AVFrameSideDataType) -> *u8 #foreign libavutil;
 
 AVHWDeviceType :: enum s32 {
     NONE         :: 0;
@@ -4755,7 +4754,7 @@ AVHWFramesContext :: struct {
 * @return The type from enum AVHWDeviceType, or AV_HWDEVICE_TYPE_NONE if
 *         not found.
 */
-av_hwdevice_find_type_by_name :: (name: *u8) -> AVHWDeviceType #foreign avutil_58;
+av_hwdevice_find_type_by_name :: (name: *u8) -> AVHWDeviceType #foreign libavutil;
 
 /** Get the string name of an AVHWDeviceType.
 *
@@ -4763,7 +4762,7 @@ av_hwdevice_find_type_by_name :: (name: *u8) -> AVHWDeviceType #foreign avutil_5
 * @return Pointer to a static string containing the name, or NULL if the type
 *         is not valid.
 */
-av_hwdevice_get_type_name :: (type: AVHWDeviceType) -> *u8 #foreign avutil_58;
+av_hwdevice_get_type_name :: (type: AVHWDeviceType) -> *u8 #foreign libavutil;
 
 /**
 * Iterate over supported device types.
@@ -4773,7 +4772,7 @@ av_hwdevice_get_type_name :: (type: AVHWDeviceType) -> *u8 #foreign avutil_58;
 * @return The next usable device type from enum AVHWDeviceType, or
 *         AV_HWDEVICE_TYPE_NONE if there are no more.
 */
-av_hwdevice_iterate_types :: (prev: AVHWDeviceType) -> AVHWDeviceType #foreign avutil_58;
+av_hwdevice_iterate_types :: (prev: AVHWDeviceType) -> AVHWDeviceType #foreign libavutil;
 
 /**
 * Allocate an AVHWDeviceContext for a given hardware type.
@@ -4782,7 +4781,7 @@ av_hwdevice_iterate_types :: (prev: AVHWDeviceType) -> AVHWDeviceType #foreign a
 * @return a reference to the newly created AVHWDeviceContext on success or NULL
 *         on failure.
 */
-av_hwdevice_ctx_alloc :: (type: AVHWDeviceType) -> *AVBufferRef #foreign avutil_58;
+av_hwdevice_ctx_alloc :: (type: AVHWDeviceType) -> *AVBufferRef #foreign libavutil;
 
 /**
 * Finalize the device context before use. This function must be called after
@@ -4792,7 +4791,7 @@ av_hwdevice_ctx_alloc :: (type: AVHWDeviceType) -> *AVBufferRef #foreign avutil_
 * @param ref a reference to the AVHWDeviceContext
 * @return 0 on success, a negative AVERROR code on failure
 */
-av_hwdevice_ctx_init :: (ref: *AVBufferRef) -> s32 #foreign avutil_58;
+av_hwdevice_ctx_init :: (ref: *AVBufferRef) -> s32 #foreign libavutil;
 
 /**
 * Open a device of the specified type and create an AVHWDeviceContext for it.
@@ -4819,7 +4818,7 @@ av_hwdevice_ctx_init :: (ref: *AVBufferRef) -> s32 #foreign avutil_58;
 *
 * @return 0 on success, a negative AVERROR code on failure.
 */
-av_hwdevice_ctx_create :: (device_ctx: **AVBufferRef, type: AVHWDeviceType, device: *u8, opts: *AVDictionary, flags: s32) -> s32 #foreign avutil_58;
+av_hwdevice_ctx_create :: (device_ctx: **AVBufferRef, type: AVHWDeviceType, device: *u8, opts: *AVDictionary, flags: s32) -> s32 #foreign libavutil;
 
 /**
 * Create a new device of the specified type from an existing device.
@@ -4842,7 +4841,7 @@ av_hwdevice_ctx_create :: (device_ctx: **AVBufferRef, type: AVHWDeviceType, devi
 * @param flags   Currently unused; should be set to zero.
 * @return        Zero on success, a negative AVERROR code on failure.
 */
-av_hwdevice_ctx_create_derived :: (dst_ctx: **AVBufferRef, type: AVHWDeviceType, src_ctx: *AVBufferRef, flags: s32) -> s32 #foreign avutil_58;
+av_hwdevice_ctx_create_derived :: (dst_ctx: **AVBufferRef, type: AVHWDeviceType, src_ctx: *AVBufferRef, flags: s32) -> s32 #foreign libavutil;
 
 /**
 * Create a new device of the specified type from an existing device.
@@ -4860,7 +4859,7 @@ av_hwdevice_ctx_create_derived :: (dst_ctx: **AVBufferRef, type: AVHWDeviceType,
 * @param flags   Currently unused; should be set to zero.
 * @return        Zero on success, a negative AVERROR code on failure.
 */
-av_hwdevice_ctx_create_derived_opts :: (dst_ctx: **AVBufferRef, type: AVHWDeviceType, src_ctx: *AVBufferRef, options: *AVDictionary, flags: s32) -> s32 #foreign avutil_58;
+av_hwdevice_ctx_create_derived_opts :: (dst_ctx: **AVBufferRef, type: AVHWDeviceType, src_ctx: *AVBufferRef, options: *AVDictionary, flags: s32) -> s32 #foreign libavutil;
 
 /**
 * Allocate an AVHWFramesContext tied to a given device context.
@@ -4871,7 +4870,7 @@ av_hwdevice_ctx_create_derived_opts :: (dst_ctx: **AVBufferRef, type: AVHWDevice
 * @return a reference to the newly created AVHWFramesContext on success or NULL
 *         on failure.
 */
-av_hwframe_ctx_alloc :: (device_ctx: *AVBufferRef) -> *AVBufferRef #foreign avutil_58;
+av_hwframe_ctx_alloc :: (device_ctx: *AVBufferRef) -> *AVBufferRef #foreign libavutil;
 
 /**
 * Finalize the context before use. This function must be called after the
@@ -4881,7 +4880,7 @@ av_hwframe_ctx_alloc :: (device_ctx: *AVBufferRef) -> *AVBufferRef #foreign avut
 * @param ref a reference to the AVHWFramesContext
 * @return 0 on success, a negative AVERROR code on failure
 */
-av_hwframe_ctx_init :: (ref: *AVBufferRef) -> s32 #foreign avutil_58;
+av_hwframe_ctx_init :: (ref: *AVBufferRef) -> s32 #foreign libavutil;
 
 /**
 * Allocate a new frame attached to the given AVHWFramesContext.
@@ -4892,7 +4891,7 @@ av_hwframe_ctx_init :: (ref: *AVBufferRef) -> s32 #foreign avutil_58;
 * @param flags currently unused, should be set to zero
 * @return 0 on success, a negative AVERROR code on failure
 */
-av_hwframe_get_buffer :: (hwframe_ctx: *AVBufferRef, frame: *AVFrame, flags: s32) -> s32 #foreign avutil_58;
+av_hwframe_get_buffer :: (hwframe_ctx: *AVBufferRef, frame: *AVFrame, flags: s32) -> s32 #foreign libavutil;
 
 /**
 * Copy data to or from a hw surface. At least one of dst/src must have an
@@ -4923,7 +4922,7 @@ av_hwframe_get_buffer :: (hwframe_ctx: *AVBufferRef, frame: *AVFrame, flags: s32
 * @param flags currently unused, should be set to zero
 * @return 0 on success, a negative AVERROR error code on failure.
 */
-av_hwframe_transfer_data :: (dst: *AVFrame, src: *AVFrame, flags: s32) -> s32 #foreign avutil_58;
+av_hwframe_transfer_data :: (dst: *AVFrame, src: *AVFrame, flags: s32) -> s32 #foreign libavutil;
 
 AVHWFrameTransferDirection :: enum s32 {
     FROM :: 0;
@@ -4950,7 +4949,7 @@ AVHWFrameTransferDirection :: enum s32 {
 * @param flags currently unused, should be set to zero
 * @return 0 on success, a negative AVERROR code on failure.
 */
-av_hwframe_transfer_get_formats :: (hwframe_ctx: *AVBufferRef, dir: AVHWFrameTransferDirection, formats: **AVPixelFormat, flags: s32) -> s32 #foreign avutil_58;
+av_hwframe_transfer_get_formats :: (hwframe_ctx: *AVBufferRef, dir: AVHWFrameTransferDirection, formats: **AVPixelFormat, flags: s32) -> s32 #foreign libavutil;
 
 /**
 * This struct describes the constraints on hardware frames attached to
@@ -4997,7 +4996,7 @@ AVHWFramesConstraints :: struct {
 * @return The newly created HW-specific configuration structure on
 *         success or NULL on failure.
 */
-av_hwdevice_hwconfig_alloc :: (device_ctx: *AVBufferRef) -> *void #foreign avutil_58;
+av_hwdevice_hwconfig_alloc :: (device_ctx: *AVBufferRef) -> *void #foreign libavutil;
 
 /**
 * Get the constraints on HW frames given a device and the HW-specific
@@ -5011,14 +5010,14 @@ av_hwdevice_hwconfig_alloc :: (device_ctx: *AVBufferRef) -> *void #foreign avuti
 * @return AVHWFramesConstraints structure describing the constraints
 *         on the device, or NULL if not available.
 */
-av_hwdevice_get_hwframe_constraints :: (ref: *AVBufferRef, hwconfig: *void) -> *AVHWFramesConstraints #foreign avutil_58;
+av_hwdevice_get_hwframe_constraints :: (ref: *AVBufferRef, hwconfig: *void) -> *AVHWFramesConstraints #foreign libavutil;
 
 /**
 * Free an AVHWFrameConstraints structure.
 *
 * @param constraints The (filled or unfilled) AVHWFrameConstraints structure.
 */
-av_hwframe_constraints_free :: (constraints: **AVHWFramesConstraints) -> void #foreign avutil_58;
+av_hwframe_constraints_free :: (constraints: **AVHWFramesConstraints) -> void #foreign libavutil;
 
 /**
 * Flags to apply to frame mappings.
@@ -5081,7 +5080,7 @@ AV_HWFRAME_MAP :: enum s32 {
 * @param flags Some combination of AV_HWFRAME_MAP_* flags.
 * @return Zero on success, negative AVERROR code on failure.
 */
-av_hwframe_map :: (dst: *AVFrame, src: *AVFrame, flags: s32) -> s32 #foreign avutil_58;
+av_hwframe_map :: (dst: *AVFrame, src: *AVFrame, flags: s32) -> s32 #foreign libavutil;
 
 /**
 * Create and initialise an AVHWFramesContext as a mapping of another existing
@@ -5101,7 +5100,7 @@ av_hwframe_map :: (dst: *AVFrame, src: *AVFrame, flags: s32) -> s32 #foreign avu
 *               in the derived device.
 * @return       Zero on success, negative AVERROR code on failure.
 */
-av_hwframe_ctx_create_derived :: (derived_frame_ctx: **AVBufferRef, format: AVPixelFormat, derived_device_ctx: *AVBufferRef, source_frame_ctx: *AVBufferRef, flags: s32) -> s32 #foreign avutil_58;
+av_hwframe_ctx_create_derived :: (derived_frame_ctx: **AVBufferRef, format: AVPixelFormat, derived_device_ctx: *AVBufferRef, source_frame_ctx: *AVBufferRef, flags: s32) -> s32 #foreign libavutil;
 
 /**
 * Identify the syntax and semantics of the bitstream.
@@ -6203,13 +6202,13 @@ AVCodecID :: enum s32 {
 /**
 * Get the type of the given codec.
 */
-avcodec_get_type :: (codec_id: AVCodecID) -> AVMediaType #foreign avcodec_60;
+avcodec_get_type :: (codec_id: AVCodecID) -> AVMediaType #foreign libavcodec;
 
 /**
 * Get the name of a codec.
 * @return  a static string identifying the codec; never NULL
 */
-avcodec_get_name :: (id: AVCodecID) -> *u8 #foreign avcodec_60;
+avcodec_get_name :: (id: AVCodecID) -> *u8 #foreign libavcodec;
 
 /**
 * Return codec bits per sample.
@@ -6217,7 +6216,7 @@ avcodec_get_name :: (id: AVCodecID) -> *u8 #foreign avcodec_60;
 * @param[in] codec_id the codec
 * @return Number of bits per sample or zero if unknown for the given codec.
 */
-av_get_bits_per_sample :: (codec_id: AVCodecID) -> s32 #foreign avcodec_60;
+av_get_bits_per_sample :: (codec_id: AVCodecID) -> s32 #foreign libavcodec;
 
 /**
 * Return codec bits per sample.
@@ -6227,7 +6226,7 @@ av_get_bits_per_sample :: (codec_id: AVCodecID) -> s32 #foreign avcodec_60;
 * @param[in] codec_id the codec
 * @return Number of bits per sample or zero if unknown for the given codec.
 */
-av_get_exact_bits_per_sample :: (codec_id: AVCodecID) -> s32 #foreign avcodec_60;
+av_get_exact_bits_per_sample :: (codec_id: AVCodecID) -> s32 #foreign libavcodec;
 
 /**
 * Return a name for the specified profile, if available.
@@ -6240,7 +6239,7 @@ av_get_exact_bits_per_sample :: (codec_id: AVCodecID) -> s32 #foreign avcodec_60
 *       supported by a specific decoder or encoder implementation, this
 *       function searches the list of profiles from the AVCodecDescriptor
 */
-avcodec_profile_name :: (codec_id: AVCodecID, profile: s32) -> *u8 #foreign avcodec_60;
+avcodec_profile_name :: (codec_id: AVCodecID, profile: s32) -> *u8 #foreign libavcodec;
 
 /**
 * Return the PCM codec associated with a sample format.
@@ -6248,7 +6247,7 @@ avcodec_profile_name :: (codec_id: AVCodecID, profile: s32) -> *u8 #foreign avco
 *            -1 (or anything else) for native
 * @return  AV_CODEC_ID_PCM_* or AV_CODEC_ID_NONE
 */
-av_get_pcm_codec :: (fmt: AVSampleFormat, be: s32) -> AVCodecID #foreign avcodec_60;
+av_get_pcm_codec :: (fmt: AVSampleFormat, be: s32) -> AVCodecID #foreign libavcodec;
 
 /**
 * AVProfile.
@@ -6321,7 +6320,7 @@ AVCodec :: struct {
 * @return the next registered codec or NULL when the iteration is
 *         finished
 */
-av_codec_iterate :: (opaque: **void) -> *AVCodec #foreign avcodec_60;
+av_codec_iterate :: (opaque: **void) -> *AVCodec #foreign libavcodec;
 
 /**
 * Find a registered decoder with a matching codec ID.
@@ -6329,7 +6328,7 @@ av_codec_iterate :: (opaque: **void) -> *AVCodec #foreign avcodec_60;
 * @param id AVCodecID of the requested decoder
 * @return A decoder if one was found, NULL otherwise.
 */
-avcodec_find_decoder :: (id: AVCodecID) -> *AVCodec #foreign avcodec_60;
+avcodec_find_decoder :: (id: AVCodecID) -> *AVCodec #foreign libavcodec;
 
 /**
 * Find a registered decoder with the specified name.
@@ -6337,7 +6336,7 @@ avcodec_find_decoder :: (id: AVCodecID) -> *AVCodec #foreign avcodec_60;
 * @param name name of the requested decoder
 * @return A decoder if one was found, NULL otherwise.
 */
-avcodec_find_decoder_by_name :: (name: *u8) -> *AVCodec #foreign avcodec_60;
+avcodec_find_decoder_by_name :: (name: *u8) -> *AVCodec #foreign libavcodec;
 
 /**
 * Find a registered encoder with a matching codec ID.
@@ -6345,7 +6344,7 @@ avcodec_find_decoder_by_name :: (name: *u8) -> *AVCodec #foreign avcodec_60;
 * @param id AVCodecID of the requested encoder
 * @return An encoder if one was found, NULL otherwise.
 */
-avcodec_find_encoder :: (id: AVCodecID) -> *AVCodec #foreign avcodec_60;
+avcodec_find_encoder :: (id: AVCodecID) -> *AVCodec #foreign libavcodec;
 
 /**
 * Find a registered encoder with the specified name.
@@ -6353,17 +6352,17 @@ avcodec_find_encoder :: (id: AVCodecID) -> *AVCodec #foreign avcodec_60;
 * @param name name of the requested encoder
 * @return An encoder if one was found, NULL otherwise.
 */
-avcodec_find_encoder_by_name :: (name: *u8) -> *AVCodec #foreign avcodec_60;
+avcodec_find_encoder_by_name :: (name: *u8) -> *AVCodec #foreign libavcodec;
 
 /**
 * @return a non-zero number if codec is an encoder, zero otherwise
 */
-av_codec_is_encoder :: (codec: *AVCodec) -> s32 #foreign avcodec_60;
+av_codec_is_encoder :: (codec: *AVCodec) -> s32 #foreign libavcodec;
 
 /**
 * @return a non-zero number if codec is a decoder, zero otherwise
 */
-av_codec_is_decoder :: (codec: *AVCodec) -> s32 #foreign avcodec_60;
+av_codec_is_decoder :: (codec: *AVCodec) -> s32 #foreign libavcodec;
 
 /**
 * Return a name for the specified profile, if available.
@@ -6372,7 +6371,7 @@ av_codec_is_decoder :: (codec: *AVCodec) -> s32 #foreign avcodec_60;
 * @param profile the profile value for which a name is requested
 * @return A name for the profile if found, NULL otherwise.
 */
-av_get_profile_name :: (codec: *AVCodec, profile: s32) -> *u8 #foreign avcodec_60;
+av_get_profile_name :: (codec: *AVCodec, profile: s32) -> *u8 #foreign libavcodec;
 
 AV_CODEC_HW_CONFIG_METHOD :: enum s32 {
     HW_DEVICE_CTX :: 1;
@@ -6425,7 +6424,7 @@ AVCodecHWConfig :: struct {
 * descriptor; all other values return NULL.  If the codec does not support
 * any hardware configurations then it will always return NULL.
 */
-avcodec_get_hw_config :: (codec: *AVCodec, index: s32) -> *AVCodecHWConfig #foreign avcodec_60;
+avcodec_get_hw_config :: (codec: *AVCodec, index: s32) -> *AVCodecHWConfig #foreign libavcodec;
 
 /**
 * This struct describes the properties of a single codec described by an
@@ -6470,7 +6469,7 @@ AVCodecDescriptor :: struct {
 /**
 * @return descriptor for given codec ID or NULL if no descriptor exists.
 */
-avcodec_descriptor_get :: (id: AVCodecID) -> *AVCodecDescriptor #foreign avcodec_60;
+avcodec_descriptor_get :: (id: AVCodecID) -> *AVCodecDescriptor #foreign libavcodec;
 
 /**
 * Iterate over all codec descriptors known to libavcodec.
@@ -6479,13 +6478,13 @@ avcodec_descriptor_get :: (id: AVCodecID) -> *AVCodecDescriptor #foreign avcodec
 *
 * @return next descriptor or NULL after the last descriptor
 */
-avcodec_descriptor_next :: (prev: *AVCodecDescriptor) -> *AVCodecDescriptor #foreign avcodec_60;
+avcodec_descriptor_next :: (prev: *AVCodecDescriptor) -> *AVCodecDescriptor #foreign libavcodec;
 
 /**
 * @return codec descriptor with the given name or NULL if no such descriptor
 *         exists.
 */
-avcodec_descriptor_get_by_name :: (name: *u8) -> *AVCodecDescriptor #foreign avcodec_60;
+avcodec_descriptor_get_by_name :: (name: *u8) -> *AVCodecDescriptor #foreign libavcodec;
 
 /**
 * @addtogroup lavc_core
@@ -6686,13 +6685,13 @@ AVCodecParameters :: struct {
 * (unknown/invalid/0). The returned struct must be freed with
 * avcodec_parameters_free().
 */
-avcodec_parameters_alloc :: () -> *AVCodecParameters #foreign avcodec_60;
+avcodec_parameters_alloc :: () -> *AVCodecParameters #foreign libavcodec;
 
 /**
 * Free an AVCodecParameters instance and everything associated with it and
 * write NULL to the supplied pointer.
 */
-avcodec_parameters_free :: (par: **AVCodecParameters) -> void #foreign avcodec_60;
+avcodec_parameters_free :: (par: **AVCodecParameters) -> void #foreign libavcodec;
 
 /**
 * Copy the contents of src to dst. Any allocated fields in dst are freed and
@@ -6700,13 +6699,13 @@ avcodec_parameters_free :: (par: **AVCodecParameters) -> void #foreign avcodec_6
 *
 * @return >= 0 on success, a negative AVERROR code on failure.
 */
-avcodec_parameters_copy :: (dst: *AVCodecParameters, src: *AVCodecParameters) -> s32 #foreign avcodec_60;
+avcodec_parameters_copy :: (dst: *AVCodecParameters, src: *AVCodecParameters) -> s32 #foreign libavcodec;
 
 /**
 * This function is the same as av_get_audio_frame_duration(), except it works
 * with AVCodecParameters instead of an AVCodecContext.
 */
-av_get_audio_frame_duration2 :: (par: *AVCodecParameters, frame_bytes: s32) -> s32 #foreign avcodec_60;
+av_get_audio_frame_duration2 :: (par: *AVCodecParameters, frame_bytes: s32) -> s32 #foreign libavcodec;
 
 /**
 * @ingroup lavc_decoding
@@ -6831,7 +6830,7 @@ AVCPBProperties :: struct {
 *
 * @return the newly allocated struct or NULL on failure
 */
-av_cpb_properties_alloc :: (size: *u64) -> *AVCPBProperties #foreign avcodec_60;
+av_cpb_properties_alloc :: (size: *u64) -> *AVCPBProperties #foreign libavcodec;
 
 /**
 * This structure supplies correlation between a packet timestamp and a wall clock
@@ -6853,7 +6852,7 @@ AVProducerReferenceTime :: struct {
 * @param v size of extradata in bytes
 * @return number of bytes written to the buffer.
 */
-av_xiphlacing :: (s: *u8, v: u32) -> u32 #foreign avcodec_60;
+av_xiphlacing :: (s: *u8, v: u32) -> u32 #foreign libavcodec;
 
 /**
 * @defgroup lavc_packet AVPacket
@@ -7135,7 +7134,7 @@ AVSideDataParamChangeFlags :: enum s32 {
 *
 * @see av_new_packet
 */
-av_packet_alloc :: () -> *AVPacket #foreign avcodec_60;
+av_packet_alloc :: () -> *AVPacket #foreign libavcodec;
 
 /**
 * Create a new packet that references the same data as src.
@@ -7147,7 +7146,7 @@ av_packet_alloc :: () -> *AVPacket #foreign avcodec_60;
 * @see av_packet_alloc
 * @see av_packet_ref
 */
-av_packet_clone :: (src: *AVPacket) -> *AVPacket #foreign avcodec_60;
+av_packet_clone :: (src: *AVPacket) -> *AVPacket #foreign libavcodec;
 
 /**
 * Free the packet, if the packet is reference counted, it will be
@@ -7156,7 +7155,7 @@ av_packet_clone :: (src: *AVPacket) -> *AVPacket #foreign avcodec_60;
 * @param pkt packet to be freed. The pointer will be set to NULL.
 * @note passing NULL is a no-op.
 */
-av_packet_free :: (pkt: **AVPacket) -> void #foreign avcodec_60;
+av_packet_free :: (pkt: **AVPacket) -> void #foreign libavcodec;
 
 /**
 * Initialize optional fields of a packet with default values.
@@ -7172,7 +7171,7 @@ av_packet_free :: (pkt: **AVPacket) -> void #foreign avcodec_60;
 * @deprecated This function is deprecated. Once it's removed,
 sizeof(AVPacket) will not be a part of the ABI anymore.
 */
-av_init_packet :: (pkt: *AVPacket) -> void #foreign avcodec_60;
+av_init_packet :: (pkt: *AVPacket) -> void #foreign libavcodec;
 
 /**
 * Allocate the payload of a packet and initialize its fields with
@@ -7182,7 +7181,7 @@ av_init_packet :: (pkt: *AVPacket) -> void #foreign avcodec_60;
 * @param size wanted payload size
 * @return 0 if OK, AVERROR_xxx otherwise
 */
-av_new_packet :: (pkt: *AVPacket, size: s32) -> s32 #foreign avcodec_60;
+av_new_packet :: (pkt: *AVPacket, size: s32) -> s32 #foreign libavcodec;
 
 /**
 * Reduce packet size, correctly zeroing padding
@@ -7190,7 +7189,7 @@ av_new_packet :: (pkt: *AVPacket, size: s32) -> s32 #foreign avcodec_60;
 * @param pkt packet
 * @param size new size
 */
-av_shrink_packet :: (pkt: *AVPacket, size: s32) -> void #foreign avcodec_60;
+av_shrink_packet :: (pkt: *AVPacket, size: s32) -> void #foreign libavcodec;
 
 /**
 * Increase packet size, correctly zeroing padding
@@ -7198,7 +7197,7 @@ av_shrink_packet :: (pkt: *AVPacket, size: s32) -> void #foreign avcodec_60;
 * @param pkt packet
 * @param grow_by number of bytes by which to increase the size of the packet
 */
-av_grow_packet :: (pkt: *AVPacket, grow_by: s32) -> s32 #foreign avcodec_60;
+av_grow_packet :: (pkt: *AVPacket, grow_by: s32) -> s32 #foreign libavcodec;
 
 /**
 * Initialize a reference-counted packet from av_malloc()ed data.
@@ -7213,7 +7212,7 @@ av_grow_packet :: (pkt: *AVPacket, grow_by: s32) -> s32 #foreign avcodec_60;
 *
 * @return 0 on success, a negative AVERROR on error
 */
-av_packet_from_data :: (pkt: *AVPacket, data: *u8, size: s32) -> s32 #foreign avcodec_60;
+av_packet_from_data :: (pkt: *AVPacket, data: *u8, size: s32) -> s32 #foreign libavcodec;
 
 /**
 * Allocate new information of a packet.
@@ -7223,7 +7222,7 @@ av_packet_from_data :: (pkt: *AVPacket, data: *u8, size: s32) -> s32 #foreign av
 * @param size side information size
 * @return pointer to fresh allocated data or NULL otherwise
 */
-av_packet_new_side_data :: (pkt: *AVPacket, type: AVPacketSideDataType, size: u64) -> *u8 #foreign avcodec_60;
+av_packet_new_side_data :: (pkt: *AVPacket, type: AVPacketSideDataType, size: u64) -> *u8 #foreign libavcodec;
 
 /**
 * Wrap an existing array as a packet side data.
@@ -7238,7 +7237,7 @@ av_packet_new_side_data :: (pkt: *AVPacket, type: AVPacketSideDataType, size: u6
 *         failure. On failure, the packet is unchanged and the data remains
 *         owned by the caller.
 */
-av_packet_add_side_data :: (pkt: *AVPacket, type: AVPacketSideDataType, data: *u8, size: u64) -> s32 #foreign avcodec_60;
+av_packet_add_side_data :: (pkt: *AVPacket, type: AVPacketSideDataType, data: *u8, size: u64) -> s32 #foreign libavcodec;
 
 /**
 * Shrink the already allocated side data buffer
@@ -7248,7 +7247,7 @@ av_packet_add_side_data :: (pkt: *AVPacket, type: AVPacketSideDataType, data: *u
 * @param size new side information size
 * @return 0 on success, < 0 on failure
 */
-av_packet_shrink_side_data :: (pkt: *AVPacket, type: AVPacketSideDataType, size: u64) -> s32 #foreign avcodec_60;
+av_packet_shrink_side_data :: (pkt: *AVPacket, type: AVPacketSideDataType, size: u64) -> s32 #foreign libavcodec;
 
 /**
 * Get side information from packet.
@@ -7259,9 +7258,9 @@ av_packet_shrink_side_data :: (pkt: *AVPacket, type: AVPacketSideDataType, size:
 *             or to zero if the desired side data is not present.
 * @return pointer to data if present or NULL otherwise
 */
-av_packet_get_side_data :: (pkt: *AVPacket, type: AVPacketSideDataType, size: *u64) -> *u8 #foreign avcodec_60;
+av_packet_get_side_data :: (pkt: *AVPacket, type: AVPacketSideDataType, size: *u64) -> *u8 #foreign libavcodec;
 
-av_packet_side_data_name :: (type: AVPacketSideDataType) -> *u8 #foreign avcodec_60;
+av_packet_side_data_name :: (type: AVPacketSideDataType) -> *u8 #foreign libavcodec;
 
 /**
 * Pack a dictionary for use in side_data.
@@ -7270,7 +7269,7 @@ av_packet_side_data_name :: (type: AVPacketSideDataType) -> *u8 #foreign avcodec
 * @param size pointer to store the size of the returned data
 * @return pointer to data if successful, NULL otherwise
 */
-av_packet_pack_dictionary :: (dict: *AVDictionary, size: *u64) -> *u8 #foreign avcodec_60;
+av_packet_pack_dictionary :: (dict: *AVDictionary, size: *u64) -> *u8 #foreign libavcodec;
 
 /**
 * Unpack a dictionary from side_data.
@@ -7280,7 +7279,7 @@ av_packet_pack_dictionary :: (dict: *AVDictionary, size: *u64) -> *u8 #foreign a
 * @param dict the metadata storage dictionary
 * @return 0 on success, < 0 on failure
 */
-av_packet_unpack_dictionary :: (data: *u8, size: u64, dict: **AVDictionary) -> s32 #foreign avcodec_60;
+av_packet_unpack_dictionary :: (data: *u8, size: u64, dict: **AVDictionary) -> s32 #foreign libavcodec;
 
 /**
 * Convenience function to free all the side data stored.
@@ -7288,7 +7287,7 @@ av_packet_unpack_dictionary :: (data: *u8, size: u64, dict: **AVDictionary) -> s
 *
 * @param pkt packet
 */
-av_packet_free_side_data :: (pkt: *AVPacket) -> void #foreign avcodec_60;
+av_packet_free_side_data :: (pkt: *AVPacket) -> void #foreign libavcodec;
 
 /**
 * Setup a new reference to the data described by a given packet
@@ -7307,7 +7306,7 @@ av_packet_free_side_data :: (pkt: *AVPacket) -> void #foreign avcodec_60;
 * @return 0 on success, a negative AVERROR on error. On error, dst
 *         will be blank (as if returned by av_packet_alloc()).
 */
-av_packet_ref :: (dst: *AVPacket, src: *AVPacket) -> s32 #foreign avcodec_60;
+av_packet_ref :: (dst: *AVPacket, src: *AVPacket) -> s32 #foreign libavcodec;
 
 /**
 * Wipe the packet.
@@ -7317,7 +7316,7 @@ av_packet_ref :: (dst: *AVPacket, src: *AVPacket) -> s32 #foreign avcodec_60;
 *
 * @param pkt The packet to be unreferenced.
 */
-av_packet_unref :: (pkt: *AVPacket) -> void #foreign avcodec_60;
+av_packet_unref :: (pkt: *AVPacket) -> void #foreign libavcodec;
 
 /**
 * Move every field in src to dst and reset src.
@@ -7327,7 +7326,7 @@ av_packet_unref :: (pkt: *AVPacket) -> void #foreign avcodec_60;
 * @param src Source packet, will be reset
 * @param dst Destination packet
 */
-av_packet_move_ref :: (dst: *AVPacket, src: *AVPacket) -> void #foreign avcodec_60;
+av_packet_move_ref :: (dst: *AVPacket, src: *AVPacket) -> void #foreign libavcodec;
 
 /**
 * Copy only "properties" fields from src to dst.
@@ -7340,7 +7339,7 @@ av_packet_move_ref :: (dst: *AVPacket, src: *AVPacket) -> void #foreign avcodec_
 *
 * @return 0 on success AVERROR on failure.
 */
-av_packet_copy_props :: (dst: *AVPacket, src: *AVPacket) -> s32 #foreign avcodec_60;
+av_packet_copy_props :: (dst: *AVPacket, src: *AVPacket) -> s32 #foreign libavcodec;
 
 /**
 * Ensure the data described by a given packet is reference counted.
@@ -7356,7 +7355,7 @@ av_packet_copy_props :: (dst: *AVPacket, src: *AVPacket) -> s32 #foreign avcodec
 * @return 0 on success, a negative AVERROR on error. On failure, the
 *         packet is unchanged.
 */
-av_packet_make_refcounted :: (pkt: *AVPacket) -> s32 #foreign avcodec_60;
+av_packet_make_refcounted :: (pkt: *AVPacket) -> s32 #foreign libavcodec;
 
 /**
 * Create a writable reference for the data described by a given packet,
@@ -7367,7 +7366,7 @@ av_packet_make_refcounted :: (pkt: *AVPacket) -> s32 #foreign avcodec_60;
 * @return 0 on success, a negative AVERROR on failure. On failure, the
 *         packet is unchanged.
 */
-av_packet_make_writable :: (pkt: *AVPacket) -> s32 #foreign avcodec_60;
+av_packet_make_writable :: (pkt: *AVPacket) -> s32 #foreign libavcodec;
 
 /**
 * Convert valid timing fields (timestamps / durations) in a packet from one
@@ -7380,7 +7379,7 @@ av_packet_make_writable :: (pkt: *AVPacket) -> s32 #foreign avcodec_60;
 * @param tb_dst destination timebase, to which the timing fields will be
 *               converted
 */
-av_packet_rescale_ts :: (pkt: *AVPacket, tb_src: AVRational, tb_dst: AVRational) -> void #foreign avcodec_60;
+av_packet_rescale_ts :: (pkt: *AVPacket, tb_src: AVRational, tb_dst: AVRational) -> void #foreign libavcodec;
 
 /**
 * @ingroup lavc_encoding
@@ -9063,17 +9062,17 @@ AVSubtitle :: struct {
 /**
 * Return the LIBAVCODEC_VERSION_INT constant.
 */
-avcodec_version :: () -> u32 #foreign avcodec_60;
+avcodec_version :: () -> u32 #foreign libavcodec;
 
 /**
 * Return the libavcodec build-time configuration.
 */
-avcodec_configuration :: () -> *u8 #foreign avcodec_60;
+avcodec_configuration :: () -> *u8 #foreign libavcodec;
 
 /**
 * Return the libavcodec license.
 */
-avcodec_license :: () -> *u8 #foreign avcodec_60;
+avcodec_license :: () -> *u8 #foreign libavcodec;
 
 /**
 * Allocate an AVCodecContext and set its fields to default values. The
@@ -9088,13 +9087,13 @@ avcodec_license :: () -> *u8 #foreign avcodec_60;
 *
 * @return An AVCodecContext filled with default values or NULL on failure.
 */
-avcodec_alloc_context3 :: (codec: *AVCodec) -> *AVCodecContext #foreign avcodec_60;
+avcodec_alloc_context3 :: (codec: *AVCodec) -> *AVCodecContext #foreign libavcodec;
 
 /**
 * Free the codec context and everything associated with it and write NULL to
 * the provided pointer.
 */
-avcodec_free_context :: (avctx: **AVCodecContext) -> void #foreign avcodec_60;
+avcodec_free_context :: (avctx: **AVCodecContext) -> void #foreign libavcodec;
 
 /**
 * Get the AVClass for AVCodecContext. It can be used in combination with
@@ -9102,7 +9101,7 @@ avcodec_free_context :: (avctx: **AVCodecContext) -> void #foreign avcodec_60;
 *
 * @see av_opt_find().
 */
-avcodec_get_class :: () -> *AVClass #foreign avcodec_60;
+avcodec_get_class :: () -> *AVClass #foreign libavcodec;
 
 /**
 * Get the AVClass for AVSubtitleRect. It can be used in combination with
@@ -9110,7 +9109,7 @@ avcodec_get_class :: () -> *AVClass #foreign avcodec_60;
 *
 * @see av_opt_find().
 */
-avcodec_get_subtitle_rect_class :: () -> *AVClass #foreign avcodec_60;
+avcodec_get_subtitle_rect_class :: () -> *AVClass #foreign libavcodec;
 
 /**
 * Fill the parameters struct based on the values from the supplied codec
@@ -9119,7 +9118,7 @@ avcodec_get_subtitle_rect_class :: () -> *AVClass #foreign avcodec_60;
 *
 * @return >= 0 on success, a negative AVERROR code on failure
 */
-avcodec_parameters_from_context :: (par: *AVCodecParameters, codec: *AVCodecContext) -> s32 #foreign avcodec_60;
+avcodec_parameters_from_context :: (par: *AVCodecParameters, codec: *AVCodecContext) -> s32 #foreign libavcodec;
 
 /**
 * Fill the codec context based on the values from the supplied codec
@@ -9129,7 +9128,7 @@ avcodec_parameters_from_context :: (par: *AVCodecParameters, codec: *AVCodecCont
 *
 * @return >= 0 on success, a negative AVERROR code on failure.
 */
-avcodec_parameters_to_context :: (codec: *AVCodecContext, par: *AVCodecParameters) -> s32 #foreign avcodec_60;
+avcodec_parameters_to_context :: (codec: *AVCodecContext, par: *AVCodecParameters) -> s32 #foreign libavcodec;
 
 /**
 * Initialize the AVCodecContext to use the given AVCodec. Prior to using this
@@ -9166,7 +9165,7 @@ avcodec_parameters_to_context :: (codec: *AVCodecContext, par: *AVCodecParameter
 * @see avcodec_alloc_context3(), avcodec_find_decoder(), avcodec_find_encoder(),
 *      av_dict_set(), av_opt_find().
 */
-avcodec_open2 :: (avctx: *AVCodecContext, codec: *AVCodec, options: **AVDictionary) -> s32 #foreign avcodec_60;
+avcodec_open2 :: (avctx: *AVCodecContext, codec: *AVCodec, options: **AVDictionary) -> s32 #foreign libavcodec;
 
 /**
 * Close a given AVCodecContext and free all the data associated with it
@@ -9181,28 +9180,28 @@ avcodec_open2 :: (avctx: *AVCodecContext, codec: *AVCodec, options: **AVDictiona
 * multiple times is not supported anymore -- use multiple codec contexts
 * instead.
 */
-avcodec_close :: (avctx: *AVCodecContext) -> s32 #foreign avcodec_60;
+avcodec_close :: (avctx: *AVCodecContext) -> s32 #foreign libavcodec;
 
 /**
 * Free all allocated data in the given subtitle struct.
 *
 * @param sub AVSubtitle to free.
 */
-avsubtitle_free :: (sub: *AVSubtitle) -> void #foreign avcodec_60;
+avsubtitle_free :: (sub: *AVSubtitle) -> void #foreign libavcodec;
 
 /**
 * The default callback for AVCodecContext.get_buffer2(). It is made public so
 * it can be called by custom get_buffer2() implementations for decoders without
 * AV_CODEC_CAP_DR1 set.
 */
-avcodec_default_get_buffer2 :: (s: *AVCodecContext, frame: *AVFrame, flags: s32) -> s32 #foreign avcodec_60;
+avcodec_default_get_buffer2 :: (s: *AVCodecContext, frame: *AVFrame, flags: s32) -> s32 #foreign libavcodec;
 
 /**
 * The default callback for AVCodecContext.get_encode_buffer(). It is made public so
 * it can be called by custom get_encode_buffer() implementations for encoders without
 * AV_CODEC_CAP_DR1 set.
 */
-avcodec_default_get_encode_buffer :: (s: *AVCodecContext, pkt: *AVPacket, flags: s32) -> s32 #foreign avcodec_60;
+avcodec_default_get_encode_buffer :: (s: *AVCodecContext, pkt: *AVPacket, flags: s32) -> s32 #foreign libavcodec;
 
 /**
 * Modify width and height values so that they will result in a memory
@@ -9211,7 +9210,7 @@ avcodec_default_get_encode_buffer :: (s: *AVCodecContext, pkt: *AVPacket, flags:
 *
 * May only be used if a codec with AV_CODEC_CAP_DR1 has been opened.
 */
-avcodec_align_dimensions :: (s: *AVCodecContext, width: *s32, height: *s32) -> void #foreign avcodec_60;
+avcodec_align_dimensions :: (s: *AVCodecContext, width: *s32, height: *s32) -> void #foreign libavcodec;
 
 /**
 * Modify width and height values so that they will result in a memory
@@ -9220,7 +9219,7 @@ avcodec_align_dimensions :: (s: *AVCodecContext, width: *s32, height: *s32) -> v
 *
 * May only be used if a codec with AV_CODEC_CAP_DR1 has been opened.
 */
-avcodec_align_dimensions2 :: (s: *AVCodecContext, width: *s32, height: *s32, linesize_align: *[8] s32) -> void #foreign avcodec_60;
+avcodec_align_dimensions2 :: (s: *AVCodecContext, width: *s32, height: *s32, linesize_align: *[8] s32) -> void #foreign libavcodec;
 
 /**
 * Converts AVChromaLocation to swscale x/y chroma position.
@@ -9232,7 +9231,7 @@ avcodec_align_dimensions2 :: (s: *AVCodecContext, width: *s32, height: *s32, lin
 * @param ypos  vertical   chroma sample position
 * @deprecated Use av_chroma_location_enum_to_pos() instead.
 */
-avcodec_enum_to_chroma_pos :: (xpos: *s32, ypos: *s32, pos: AVChromaLocation) -> s32 #foreign avcodec_60;
+avcodec_enum_to_chroma_pos :: (xpos: *s32, ypos: *s32, pos: AVChromaLocation) -> s32 #foreign libavcodec;
 
 /**
 * Converts swscale x/y chroma position to AVChromaLocation.
@@ -9244,7 +9243,7 @@ avcodec_enum_to_chroma_pos :: (xpos: *s32, ypos: *s32, pos: AVChromaLocation) ->
 * @param ypos  vertical   chroma sample position
 * @deprecated Use av_chroma_location_pos_to_enum() instead.
 */
-avcodec_chroma_pos_to_enum :: (xpos: s32, ypos: s32) -> AVChromaLocation #foreign avcodec_60;
+avcodec_chroma_pos_to_enum :: (xpos: s32, ypos: s32) -> AVChromaLocation #foreign libavcodec;
 
 /**
 * Decode a subtitle message.
@@ -9273,7 +9272,7 @@ avcodec_chroma_pos_to_enum :: (xpos: s32, ypos: s32) -> AVChromaLocation #foreig
 * @param[in,out] got_sub_ptr Zero if no subtitle could be decompressed, otherwise, it is nonzero.
 * @param[in] avpkt The input AVPacket containing the input buffer.
 */
-avcodec_decode_subtitle2 :: (avctx: *AVCodecContext, sub: *AVSubtitle, got_sub_ptr: *s32, avpkt: *AVPacket) -> s32 #foreign avcodec_60;
+avcodec_decode_subtitle2 :: (avctx: *AVCodecContext, sub: *AVSubtitle, got_sub_ptr: *s32, avpkt: *AVPacket) -> s32 #foreign libavcodec;
 
 /**
 * Supply raw packet data as input to a decoder.
@@ -9321,7 +9320,7 @@ avcodec_decode_subtitle2 :: (avctx: *AVCodecContext, sub: *AVSubtitle, got_sub_p
 * @retval AVERROR(ENOMEM)   failed to add packet to internal queue, or similar
 * @retval "another negative error code" legitimate decoding errors
 */
-avcodec_send_packet :: (avctx: *AVCodecContext, avpkt: *AVPacket) -> s32 #foreign avcodec_60;
+avcodec_send_packet :: (avctx: *AVCodecContext, avpkt: *AVPacket) -> s32 #foreign libavcodec;
 
 /**
 * Return decoded output data from a decoder or encoder (when the
@@ -9345,7 +9344,7 @@ avcodec_send_packet :: (avctx: *AVCodecContext, avpkt: *AVPacket) -> s32 #foreig
 *                          AV_CODEC_FLAG_DROPCHANGED is set.
 * @retval "other negative error code" legitimate decoding errors
 */
-avcodec_receive_frame :: (avctx: *AVCodecContext, frame: *AVFrame) -> s32 #foreign avcodec_60;
+avcodec_receive_frame :: (avctx: *AVCodecContext, frame: *AVFrame) -> s32 #foreign libavcodec;
 
 /**
 * Supply a raw video or audio frame to the encoder. Use avcodec_receive_packet()
@@ -9381,7 +9380,7 @@ avcodec_receive_frame :: (avctx: *AVCodecContext, frame: *AVFrame) -> s32 #forei
 * @retval AVERROR(ENOMEM)   failed to add packet to internal queue, or similar
 * @retval "another negative error code" legitimate encoding errors
 */
-avcodec_send_frame :: (avctx: *AVCodecContext, frame: *AVFrame) -> s32 #foreign avcodec_60;
+avcodec_send_frame :: (avctx: *AVCodecContext, frame: *AVFrame) -> s32 #foreign libavcodec;
 
 /**
 * Read encoded data from the encoder.
@@ -9398,7 +9397,7 @@ avcodec_send_frame :: (avctx: *AVCodecContext, frame: *AVFrame) -> s32 #foreign 
 * @retval AVERROR(EINVAL) codec not opened, or it is a decoder
 * @retval "another negative error code" legitimate encoding errors
 */
-avcodec_receive_packet :: (avctx: *AVCodecContext, avpkt: *AVPacket) -> s32 #foreign avcodec_60;
+avcodec_receive_packet :: (avctx: *AVCodecContext, avpkt: *AVPacket) -> s32 #foreign libavcodec;
 
 /**
 * Create and return a AVHWFramesContext with values adequate for hardware
@@ -9497,7 +9496,7 @@ avcodec_receive_packet :: (avctx: *AVCodecContext, avpkt: *AVPacket) -> s32 #for
 *                       this configuration, or the device_ref is not supported
 *                       for the hwaccel referenced by hw_pix_fmt.
 */
-avcodec_get_hw_frames_parameters :: (avctx: *AVCodecContext, device_ref: *AVBufferRef, hw_pix_fmt: AVPixelFormat, out_frames_ref: **AVBufferRef) -> s32 #foreign avcodec_60;
+avcodec_get_hw_frames_parameters :: (avctx: *AVCodecContext, device_ref: *AVBufferRef, hw_pix_fmt: AVPixelFormat, out_frames_ref: **AVBufferRef) -> s32 #foreign libavcodec;
 
 /**
 * @defgroup lavc_parsing Frame parsing
@@ -9684,9 +9683,9 @@ AVCodecParser :: struct {
 * @return the next registered codec parser or NULL when the iteration is
 *         finished
 */
-av_parser_iterate :: (opaque: **void) -> *AVCodecParser #foreign avcodec_60;
+av_parser_iterate :: (opaque: **void) -> *AVCodecParser #foreign libavcodec;
 
-av_parser_init :: (codec_id: s32) -> *AVCodecParserContext #foreign avcodec_60;
+av_parser_init :: (codec_id: s32) -> *AVCodecParserContext #foreign libavcodec;
 
 /**
 * Parse a packet.
@@ -9719,22 +9718,22 @@ can be output).
 *   }
 * @endcode
 */
-av_parser_parse2 :: (s: *AVCodecParserContext, avctx: *AVCodecContext, poutbuf: **u8, poutbuf_size: *s32, buf: *u8, buf_size: s32, pts: s64, dts: s64, pos: s64) -> s32 #foreign avcodec_60;
+av_parser_parse2 :: (s: *AVCodecParserContext, avctx: *AVCodecContext, poutbuf: **u8, poutbuf_size: *s32, buf: *u8, buf_size: s32, pts: s64, dts: s64, pos: s64) -> s32 #foreign libavcodec;
 
-av_parser_close :: (s: *AVCodecParserContext) -> void #foreign avcodec_60;
+av_parser_close :: (s: *AVCodecParserContext) -> void #foreign libavcodec;
 
 /**
 * @addtogroup lavc_encoding
 * @{
 */
-avcodec_encode_subtitle :: (avctx: *AVCodecContext, buf: *u8, buf_size: s32, sub: *AVSubtitle) -> s32 #foreign avcodec_60;
+avcodec_encode_subtitle :: (avctx: *AVCodecContext, buf: *u8, buf_size: s32, sub: *AVSubtitle) -> s32 #foreign libavcodec;
 
 /**
 * Return a value representing the fourCC code associated to the
 * pixel format pix_fmt, or 0 if no associated fourCC code can be
 * found.
 */
-avcodec_pix_fmt_to_codec_tag :: (pix_fmt: AVPixelFormat) -> u32 #foreign avcodec_60;
+avcodec_pix_fmt_to_codec_tag :: (pix_fmt: AVPixelFormat) -> u32 #foreign libavcodec;
 
 /**
 * Find the best pixel format to convert to given a certain source pixel
@@ -9753,17 +9752,17 @@ avcodec_pix_fmt_to_codec_tag :: (pix_fmt: AVPixelFormat) -> u32 #foreign avcodec
 * @param[out] loss_ptr Combination of flags informing you what kind of losses will occur.
 * @return The best pixel format to convert to or -1 if none was found.
 */
-avcodec_find_best_pix_fmt_of_list :: (pix_fmt_list: *AVPixelFormat, src_pix_fmt: AVPixelFormat, has_alpha: s32, loss_ptr: *s32) -> AVPixelFormat #foreign avcodec_60;
+avcodec_find_best_pix_fmt_of_list :: (pix_fmt_list: *AVPixelFormat, src_pix_fmt: AVPixelFormat, has_alpha: s32, loss_ptr: *s32) -> AVPixelFormat #foreign libavcodec;
 
-avcodec_default_get_format :: (s: *AVCodecContext, fmt: *AVPixelFormat) -> AVPixelFormat #foreign avcodec_60;
+avcodec_default_get_format :: (s: *AVCodecContext, fmt: *AVPixelFormat) -> AVPixelFormat #foreign libavcodec;
 
 /**
 * @}
 */
-avcodec_string :: (buf: *u8, buf_size: s32, enc: *AVCodecContext, encode: s32) -> void #foreign avcodec_60;
+avcodec_string :: (buf: *u8, buf_size: s32, enc: *AVCodecContext, encode: s32) -> void #foreign libavcodec;
 
-avcodec_default_execute :: (c: *AVCodecContext, func: #type (c2: *AVCodecContext, arg2: *void) -> s32 #c_call, arg: *void, ret: *s32, count: s32, size: s32) -> s32 #foreign avcodec_60;
-avcodec_default_execute2 :: (c: *AVCodecContext, func: #type (c2: *AVCodecContext, arg2: *void, unknown0: s32, unknown1: s32) -> s32 #c_call, arg: *void, ret: *s32, count: s32) -> s32 #foreign avcodec_60;
+avcodec_default_execute :: (c: *AVCodecContext, func: #type (c2: *AVCodecContext, arg2: *void) -> s32 #c_call, arg: *void, ret: *s32, count: s32, size: s32) -> s32 #foreign libavcodec;
+avcodec_default_execute2 :: (c: *AVCodecContext, func: #type (c2: *AVCodecContext, arg2: *void, unknown0: s32, unknown1: s32) -> s32 #c_call, arg: *void, ret: *s32, count: s32) -> s32 #foreign libavcodec;
 
 /**
 * Fill AVFrame audio data and linesize pointers.
@@ -9788,7 +9787,7 @@ avcodec_default_execute2 :: (c: *AVCodecContext, func: #type (c2: *AVCodecContex
 * @todo return the size in bytes required to store the samples in
 * case of success, at the next libavutil bump
 */
-avcodec_fill_audio_frame :: (frame: *AVFrame, nb_channels: s32, sample_fmt: AVSampleFormat, buf: *u8, buf_size: s32, align: s32) -> s32 #foreign avcodec_60;
+avcodec_fill_audio_frame :: (frame: *AVFrame, nb_channels: s32, sample_fmt: AVSampleFormat, buf: *u8, buf_size: s32, align: s32) -> s32 #foreign libavcodec;
 
 /**
 * Reset the internal codec state / flush internal buffers. Should be called
@@ -9804,7 +9803,7 @@ avcodec_fill_audio_frame :: (frame: *AVFrame, nb_channels: s32, sample_fmt: AVSa
 * in a permanent EOF state after draining). This can be desirable if the
 * cost of tearing down and replacing the encoder instance is high.
 */
-avcodec_flush_buffers :: (avctx: *AVCodecContext) -> void #foreign avcodec_60;
+avcodec_flush_buffers :: (avctx: *AVCodecContext) -> void #foreign libavcodec;
 
 /**
 * Return audio frame duration.
@@ -9814,7 +9813,7 @@ avcodec_flush_buffers :: (avctx: *AVCodecContext) -> void #foreign avcodec_60;
 * @return             frame duration, in samples, if known. 0 if not able to
 *                     determine.
 */
-av_get_audio_frame_duration :: (avctx: *AVCodecContext, frame_bytes: s32) -> s32 #foreign avcodec_60;
+av_get_audio_frame_duration :: (avctx: *AVCodecContext, frame_bytes: s32) -> s32 #foreign libavcodec;
 
 /**
 * Same behaviour av_fast_malloc but the buffer has additional
@@ -9823,19 +9822,19 @@ av_get_audio_frame_duration :: (avctx: *AVCodecContext, frame_bytes: s32) -> s32
 * In addition the whole buffer will initially and after resizes
 * be 0-initialized so that no uninitialized data will ever appear.
 */
-av_fast_padded_malloc :: (ptr: *void, size: *u32, min_size: u64) -> void #foreign avcodec_60;
+av_fast_padded_malloc :: (ptr: *void, size: *u32, min_size: u64) -> void #foreign libavcodec;
 
 /**
 * Same behaviour av_fast_padded_malloc except that buffer will always
 * be 0-initialized after call.
 */
-av_fast_padded_mallocz :: (ptr: *void, size: *u32, min_size: u64) -> void #foreign avcodec_60;
+av_fast_padded_mallocz :: (ptr: *void, size: *u32, min_size: u64) -> void #foreign libavcodec;
 
 /**
 * @return a positive value if s is open (i.e. avcodec_open2() was called on it
 * with no corresponding avcodec_close()), 0 otherwise.
 */
-avcodec_is_open :: (s: *AVCodecContext) -> s32 #foreign avcodec_60;
+avcodec_is_open :: (s: *AVCodecContext) -> s32 #foreign libavcodec;
 
 /**
 * Callback for checking whether to abort blocking functions.
@@ -10074,7 +10073,7 @@ AVIOContext :: struct {
 *
 * @return Name of the protocol or NULL.
 */
-avio_find_protocol_name :: (url: *u8) -> *u8 #foreign avformat_60;
+avio_find_protocol_name :: (url: *u8) -> *u8 #foreign libavformat;
 
 /**
 * Return AVIO_FLAG_* access flags corresponding to the access permissions
@@ -10088,7 +10087,7 @@ avio_find_protocol_name :: (url: *u8) -> *u8 #foreign avformat_60;
 * unless you are sure that no other processes are accessing the
 * checked resource.
 */
-avio_check :: (url: *u8, flags: s32) -> s32 #foreign avformat_60;
+avio_check :: (url: *u8, flags: s32) -> s32 #foreign libavformat;
 
 /**
 * Open directory for reading.
@@ -10100,7 +10099,7 @@ avio_check :: (url: *u8, flags: s32) -> s32 #foreign avformat_60;
 *                containing options that were not found. May be NULL.
 * @return >=0 on success or negative on error.
 */
-avio_open_dir :: (s: **AVIODirContext, url: *u8, options: **AVDictionary) -> s32 #foreign avformat_60;
+avio_open_dir :: (s: **AVIODirContext, url: *u8, options: **AVDictionary) -> s32 #foreign libavformat;
 
 /**
 * Get next directory entry.
@@ -10113,7 +10112,7 @@ avio_open_dir :: (s: **AVIODirContext, url: *u8, options: **AVDictionary) -> s32
 * @return >=0 on success or negative on error. End of list is not considered an
 *             error.
 */
-avio_read_dir :: (s: *AVIODirContext, next: **AVIODirEntry) -> s32 #foreign avformat_60;
+avio_read_dir :: (s: *AVIODirContext, next: **AVIODirEntry) -> s32 #foreign libavformat;
 
 /**
 * Close directory.
@@ -10124,14 +10123,14 @@ avio_read_dir :: (s: *AVIODirContext, next: **AVIODirEntry) -> s32 #foreign avfo
 * @param s         directory read context.
 * @return >=0 on success or negative on error.
 */
-avio_close_dir :: (s: **AVIODirContext) -> s32 #foreign avformat_60;
+avio_close_dir :: (s: **AVIODirContext) -> s32 #foreign libavformat;
 
 /**
 * Free entry allocated by avio_read_dir().
 *
 * @param entry entry to be freed.
 */
-avio_free_directory_entry :: (entry: **AVIODirEntry) -> void #foreign avformat_60;
+avio_free_directory_entry :: (entry: **AVIODirEntry) -> void #foreign libavformat;
 
 /**
 * Allocate and initialize an AVIOContext for buffered I/O. It must be later
@@ -10156,7 +10155,7 @@ avio_free_directory_entry :: (entry: **AVIODirEntry) -> void #foreign avformat_6
 *
 * @return Allocated AVIOContext or NULL on failure.
 */
-avio_alloc_context :: (buffer: *u8, buffer_size: s32, write_flag: s32, opaque: *void, read_packet: #type (opaque: *void, buf: *u8, buf_size: s32) -> s32 #c_call, write_packet: #type (opaque: *void, buf: *u8, buf_size: s32) -> s32 #c_call, seek: #type (opaque: *void, offset: s64, whence: s32) -> s64 #c_call) -> *AVIOContext #foreign avformat_60;
+avio_alloc_context :: (buffer: *u8, buffer_size: s32, write_flag: s32, opaque: *void, read_packet: #type (opaque: *void, buf: *u8, buf_size: s32) -> s32 #c_call, write_packet: #type (opaque: *void, buf: *u8, buf_size: s32) -> s32 #c_call, seek: #type (opaque: *void, offset: s64, whence: s32) -> s64 #c_call) -> *AVIOContext #foreign libavformat;
 
 /**
 * Free the supplied IO context and everything associated with it.
@@ -10164,24 +10163,24 @@ avio_alloc_context :: (buffer: *u8, buffer_size: s32, write_flag: s32, opaque: *
 * @param s Double pointer to the IO context. This function will write NULL
 * into s.
 */
-avio_context_free :: (s: **AVIOContext) -> void #foreign avformat_60;
+avio_context_free :: (s: **AVIOContext) -> void #foreign libavformat;
 
-avio_w8 :: (s: *AVIOContext, b: s32) -> void #foreign avformat_60;
-avio_write :: (s: *AVIOContext, buf: *u8, size: s32) -> void #foreign avformat_60;
-avio_wl64 :: (s: *AVIOContext, val: u64) -> void #foreign avformat_60;
-avio_wb64 :: (s: *AVIOContext, val: u64) -> void #foreign avformat_60;
-avio_wl32 :: (s: *AVIOContext, val: u32) -> void #foreign avformat_60;
-avio_wb32 :: (s: *AVIOContext, val: u32) -> void #foreign avformat_60;
-avio_wl24 :: (s: *AVIOContext, val: u32) -> void #foreign avformat_60;
-avio_wb24 :: (s: *AVIOContext, val: u32) -> void #foreign avformat_60;
-avio_wl16 :: (s: *AVIOContext, val: u32) -> void #foreign avformat_60;
-avio_wb16 :: (s: *AVIOContext, val: u32) -> void #foreign avformat_60;
+avio_w8 :: (s: *AVIOContext, b: s32) -> void #foreign libavformat;
+avio_write :: (s: *AVIOContext, buf: *u8, size: s32) -> void #foreign libavformat;
+avio_wl64 :: (s: *AVIOContext, val: u64) -> void #foreign libavformat;
+avio_wb64 :: (s: *AVIOContext, val: u64) -> void #foreign libavformat;
+avio_wl32 :: (s: *AVIOContext, val: u32) -> void #foreign libavformat;
+avio_wb32 :: (s: *AVIOContext, val: u32) -> void #foreign libavformat;
+avio_wl24 :: (s: *AVIOContext, val: u32) -> void #foreign libavformat;
+avio_wb24 :: (s: *AVIOContext, val: u32) -> void #foreign libavformat;
+avio_wl16 :: (s: *AVIOContext, val: u32) -> void #foreign libavformat;
+avio_wb16 :: (s: *AVIOContext, val: u32) -> void #foreign libavformat;
 
 /**
 * Write a NULL-terminated string.
 * @return number of bytes written.
 */
-avio_put_str :: (s: *AVIOContext, str: *u8) -> s32 #foreign avformat_60;
+avio_put_str :: (s: *AVIOContext, str: *u8) -> s32 #foreign libavformat;
 
 /**
 * Convert an UTF-8 string to UTF-16LE and write it.
@@ -10190,7 +10189,7 @@ avio_put_str :: (s: *AVIOContext, str: *u8) -> s32 #foreign avformat_60;
 *
 * @return number of bytes written.
 */
-avio_put_str16le :: (s: *AVIOContext, str: *u8) -> s32 #foreign avformat_60;
+avio_put_str16le :: (s: *AVIOContext, str: *u8) -> s32 #foreign libavformat;
 
 /**
 * Convert an UTF-8 string to UTF-16BE and write it.
@@ -10199,7 +10198,7 @@ avio_put_str16le :: (s: *AVIOContext, str: *u8) -> s32 #foreign avformat_60;
 *
 * @return number of bytes written.
 */
-avio_put_str16be :: (s: *AVIOContext, str: *u8) -> s32 #foreign avformat_60;
+avio_put_str16be :: (s: *AVIOContext, str: *u8) -> s32 #foreign libavformat;
 
 /**
 * Mark the written bytestream as a specific type.
@@ -10212,37 +10211,37 @@ avio_put_str16be :: (s: *AVIOContext, str: *u8) -> s32 #foreign avformat_60;
 *             applicable
 * @param type the kind of data written starting at the current pos
 */
-avio_write_marker :: (s: *AVIOContext, time: s64, type: AVIODataMarkerType) -> void #foreign avformat_60;
+avio_write_marker :: (s: *AVIOContext, time: s64, type: AVIODataMarkerType) -> void #foreign libavformat;
 
 /**
 * fseek() equivalent for AVIOContext.
 * @return new position or AVERROR.
 */
-avio_seek :: (s: *AVIOContext, offset: s64, whence: s32) -> s64 #foreign avformat_60;
+avio_seek :: (s: *AVIOContext, offset: s64, whence: s32) -> s64 #foreign libavformat;
 
 /**
 * Skip given number of bytes forward
 * @return new position or AVERROR.
 */
-avio_skip :: (s: *AVIOContext, offset: s64) -> s64 #foreign avformat_60;
+avio_skip :: (s: *AVIOContext, offset: s64) -> s64 #foreign libavformat;
 
 /**
 * Get the filesize.
 * @return filesize or AVERROR
 */
-avio_size :: (s: *AVIOContext) -> s64 #foreign avformat_60;
+avio_size :: (s: *AVIOContext) -> s64 #foreign libavformat;
 
 /**
 * Similar to feof() but also returns nonzero on read errors.
 * @return non zero if and only if at end of file or a read error happened when reading.
 */
-avio_feof :: (s: *AVIOContext) -> s32 #foreign avformat_60;
+avio_feof :: (s: *AVIOContext) -> s32 #foreign libavformat;
 
 /**
 * Writes a formatted string to the context.
 * @return number of bytes written, < 0 on error.
 */
-avio_printf_CFormat :: (s: *AVIOContext, fmt: *u8, __args: ..Any) -> s32 #foreign avformat_60 "avio_printf";
+avio_printf_CFormat :: (s: *AVIOContext, fmt: *u8, __args: ..Any) -> s32 #foreign libavformat "avio_printf";
 avio_printf :: (s: *AVIOContext, fmt: string, __args: ..Any) -> s32 {
     push_allocator(temp);
     formatted_text_builder: String_Builder;
@@ -10257,7 +10256,7 @@ avio_printf :: (s: *AVIOContext, fmt: string, __args: ..Any) -> s32 {
 * Usually you don't need to use this function directly but its macro wrapper,
 * avio_print.
 */
-avio_print_string_array :: (s: *AVIOContext, strings: **u8) -> void #foreign avformat_60;
+avio_print_string_array :: (s: *AVIOContext, strings: **u8) -> void #foreign libavformat;
 
 /**
 * Force flushing of buffered data.
@@ -10269,13 +10268,13 @@ avio_print_string_array :: (s: *AVIOContext, strings: **u8) -> void #foreign avf
 * reported file position to that of the underlying stream. This does not
 * read new data, and does not perform any seeks.
 */
-avio_flush :: (s: *AVIOContext) -> void #foreign avformat_60;
+avio_flush :: (s: *AVIOContext) -> void #foreign libavformat;
 
 /**
 * Read size bytes from AVIOContext into buf.
 * @return number of bytes read or AVERROR
 */
-avio_read :: (s: *AVIOContext, buf: *u8, size: s32) -> s32 #foreign avformat_60;
+avio_read :: (s: *AVIOContext, buf: *u8, size: s32) -> s32 #foreign libavformat;
 
 /**
 * Read size bytes from AVIOContext into buf. Unlike avio_read(), this is allowed
@@ -10284,7 +10283,7 @@ avio_read :: (s: *AVIOContext, buf: *u8, size: s32) -> s32 #foreign avformat_60;
 * Useful to reduce latency in certain cases.
 * @return number of bytes read or AVERROR
 */
-avio_read_partial :: (s: *AVIOContext, buf: *u8, size: s32) -> s32 #foreign avformat_60;
+avio_read_partial :: (s: *AVIOContext, buf: *u8, size: s32) -> s32 #foreign libavformat;
 
 /**
 * @name Functions for reading from AVIOContext
@@ -10293,15 +10292,15 @@ avio_read_partial :: (s: *AVIOContext, buf: *u8, size: s32) -> s32 #foreign avfo
 * @note return 0 if EOF, so you cannot use it if EOF handling is
 *       necessary
 */
-avio_r8 :: (s: *AVIOContext) -> s32 #foreign avformat_60;
-avio_rl16 :: (s: *AVIOContext) -> u32 #foreign avformat_60;
-avio_rl24 :: (s: *AVIOContext) -> u32 #foreign avformat_60;
-avio_rl32 :: (s: *AVIOContext) -> u32 #foreign avformat_60;
-avio_rl64 :: (s: *AVIOContext) -> u64 #foreign avformat_60;
-avio_rb16 :: (s: *AVIOContext) -> u32 #foreign avformat_60;
-avio_rb24 :: (s: *AVIOContext) -> u32 #foreign avformat_60;
-avio_rb32 :: (s: *AVIOContext) -> u32 #foreign avformat_60;
-avio_rb64 :: (s: *AVIOContext) -> u64 #foreign avformat_60;
+avio_r8 :: (s: *AVIOContext) -> s32 #foreign libavformat;
+avio_rl16 :: (s: *AVIOContext) -> u32 #foreign libavformat;
+avio_rl24 :: (s: *AVIOContext) -> u32 #foreign libavformat;
+avio_rl32 :: (s: *AVIOContext) -> u32 #foreign libavformat;
+avio_rl64 :: (s: *AVIOContext) -> u64 #foreign libavformat;
+avio_rb16 :: (s: *AVIOContext) -> u32 #foreign libavformat;
+avio_rb24 :: (s: *AVIOContext) -> u32 #foreign libavformat;
+avio_rb32 :: (s: *AVIOContext) -> u32 #foreign libavformat;
+avio_rb64 :: (s: *AVIOContext) -> u64 #foreign libavformat;
 
 /**
 * Read a string from pb into buf. The reading will terminate when either
@@ -10315,7 +10314,7 @@ avio_rb64 :: (s: *AVIOContext) -> u64 #foreign avformat_60;
 * If reading ends on EOF or error, the return value will be one more than
 * bytes actually read.
 */
-avio_get_str :: (pb: *AVIOContext, maxlen: s32, buf: *u8, buflen: s32) -> s32 #foreign avformat_60;
+avio_get_str :: (pb: *AVIOContext, maxlen: s32, buf: *u8, buflen: s32) -> s32 #foreign libavformat;
 
 /**
 * Read a UTF-16 string from pb and convert it to UTF-8.
@@ -10323,8 +10322,8 @@ avio_get_str :: (pb: *AVIOContext, maxlen: s32, buf: *u8, buflen: s32) -> s32 #f
 * encountered or maxlen bytes have been read.
 * @return number of bytes read (is always <= maxlen)
 */
-avio_get_str16le :: (pb: *AVIOContext, maxlen: s32, buf: *u8, buflen: s32) -> s32 #foreign avformat_60;
-avio_get_str16be :: (pb: *AVIOContext, maxlen: s32, buf: *u8, buflen: s32) -> s32 #foreign avformat_60;
+avio_get_str16le :: (pb: *AVIOContext, maxlen: s32, buf: *u8, buflen: s32) -> s32 #foreign libavformat;
+avio_get_str16be :: (pb: *AVIOContext, maxlen: s32, buf: *u8, buflen: s32) -> s32 #foreign libavformat;
 
 /**
 * Create and initialize a AVIOContext for accessing the
@@ -10340,7 +10339,7 @@ avio_get_str16be :: (pb: *AVIOContext, maxlen: s32, buf: *u8, buflen: s32) -> s3
 * @return >= 0 in case of success, a negative value corresponding to an
 * AVERROR code in case of failure
 */
-avio_open :: (s: **AVIOContext, url: *u8, flags: s32) -> s32 #foreign avformat_60;
+avio_open :: (s: **AVIOContext, url: *u8, flags: s32) -> s32 #foreign libavformat;
 
 /**
 * Create and initialize a AVIOContext for accessing the
@@ -10360,7 +10359,7 @@ avio_open :: (s: **AVIOContext, url: *u8, flags: s32) -> s32 #foreign avformat_6
 * @return >= 0 in case of success, a negative value corresponding to an
 * AVERROR code in case of failure
 */
-avio_open2 :: (s: **AVIOContext, url: *u8, flags: s32, int_cb: *AVIOInterruptCB, options: **AVDictionary) -> s32 #foreign avformat_60;
+avio_open2 :: (s: **AVIOContext, url: *u8, flags: s32, int_cb: *AVIOInterruptCB, options: **AVDictionary) -> s32 #foreign libavformat;
 
 /**
 * Close the resource accessed by the AVIOContext s and free it.
@@ -10372,7 +10371,7 @@ avio_open2 :: (s: **AVIOContext, url: *u8, flags: s32, int_cb: *AVIOInterruptCB,
 * @return 0 on success, an AVERROR < 0 on error.
 * @see avio_closep
 */
-avio_close :: (s: *AVIOContext) -> s32 #foreign avformat_60;
+avio_close :: (s: *AVIOContext) -> s32 #foreign libavformat;
 
 /**
 * Close the resource accessed by the AVIOContext *s, free it
@@ -10385,7 +10384,7 @@ avio_close :: (s: *AVIOContext) -> s32 #foreign avformat_60;
 * @return 0 on success, an AVERROR < 0 on error.
 * @see avio_close
 */
-avio_closep :: (s: **AVIOContext) -> s32 #foreign avformat_60;
+avio_closep :: (s: **AVIOContext) -> s32 #foreign libavformat;
 
 /**
 * Open a write only memory stream.
@@ -10393,7 +10392,7 @@ avio_closep :: (s: **AVIOContext) -> s32 #foreign avformat_60;
 * @param s new IO context
 * @return zero if no error.
 */
-avio_open_dyn_buf :: (s: **AVIOContext) -> s32 #foreign avformat_60;
+avio_open_dyn_buf :: (s: **AVIOContext) -> s32 #foreign libavformat;
 
 /**
 * Return the written size and a pointer to the buffer.
@@ -10405,7 +10404,7 @@ avio_open_dyn_buf :: (s: **AVIOContext) -> s32 #foreign avformat_60;
 * @param pbuffer pointer to a byte buffer
 * @return the length of the byte buffer
 */
-avio_get_dyn_buf :: (s: *AVIOContext, pbuffer: **u8) -> s32 #foreign avformat_60;
+avio_get_dyn_buf :: (s: *AVIOContext, pbuffer: **u8) -> s32 #foreign libavformat;
 
 /**
 * Return the written size and a pointer to the buffer. The buffer
@@ -10416,7 +10415,7 @@ avio_get_dyn_buf :: (s: *AVIOContext, pbuffer: **u8) -> s32 #foreign avformat_60
 * @param pbuffer pointer to a byte buffer
 * @return the length of the byte buffer
 */
-avio_close_dyn_buf :: (s: *AVIOContext, pbuffer: **u8) -> s32 #foreign avformat_60;
+avio_close_dyn_buf :: (s: *AVIOContext, pbuffer: **u8) -> s32 #foreign libavformat;
 
 /**
 * Iterate through names of available protocols.
@@ -10429,14 +10428,14 @@ avio_close_dyn_buf :: (s: *AVIOContext, pbuffer: **u8) -> s32 #foreign avformat_
 *
 * @return A static string containing the name of current protocol or NULL
 */
-avio_enum_protocols :: (opaque: **void, output: s32) -> *u8 #foreign avformat_60;
+avio_enum_protocols :: (opaque: **void, output: s32) -> *u8 #foreign libavformat;
 
 /**
 * Get AVClass by names of available protocols.
 *
 * @return A AVClass of input protocol name or NULL
 */
-avio_protocol_get_class :: (name: *u8) -> *AVClass #foreign avformat_60;
+avio_protocol_get_class :: (name: *u8) -> *AVClass #foreign libavformat;
 
 /**
 * Pause and resume playing - only meaningful if using a network streaming
@@ -10445,7 +10444,7 @@ avio_protocol_get_class :: (name: *u8) -> *AVClass #foreign avformat_60;
 * @param h     IO context from which to call the read_pause function pointer
 * @param pause 1 for pause, 0 for resume
 */
-avio_pause :: (h: *AVIOContext, pause: s32) -> s32 #foreign avformat_60;
+avio_pause :: (h: *AVIOContext, pause: s32) -> s32 #foreign libavformat;
 
 /**
 * Seek to a given timestamp relative to some component stream.
@@ -10466,7 +10465,7 @@ avio_pause :: (h: *AVIOContext, pause: s32) -> s32 #foreign avformat_60;
 * @return >= 0 on success
 * @see AVInputFormat::read_seek
 */
-avio_seek_time :: (h: *AVIOContext, stream_index: s32, timestamp: s64, flags: s32) -> s64 #foreign avformat_60;
+avio_seek_time :: (h: *AVIOContext, stream_index: s32, timestamp: s64, flags: s32) -> s64 #foreign libavformat;
 
 /**
 * Read contents of h into print buffer, up to max_size bytes, or up to EOF.
@@ -10474,7 +10473,7 @@ avio_seek_time :: (h: *AVIOContext, stream_index: s32, timestamp: s64, flags: s3
 * @return 0 for success (max_size bytes read or EOF reached), negative error
 * code otherwise
 */
-avio_read_to_bprint :: (h: *AVIOContext, pb: *AVBPrint, max_size: u64) -> s32 #foreign avformat_60;
+avio_read_to_bprint :: (h: *AVIOContext, pb: *AVBPrint, max_size: u64) -> s32 #foreign libavformat;
 
 /**
 * Accept and allocate a client context on a server context.
@@ -10483,7 +10482,7 @@ avio_read_to_bprint :: (h: *AVIOContext, pb: *AVBPrint, max_size: u64) -> s32 #f
 * @return   >= 0 on success or a negative value corresponding
 *           to an AVERROR on failure
 */
-avio_accept :: (s: *AVIOContext, c: **AVIOContext) -> s32 #foreign avformat_60;
+avio_accept :: (s: *AVIOContext, c: **AVIOContext) -> s32 #foreign libavformat;
 
 /**
 * Perform one step of the protocol handshake to accept a new client.
@@ -10504,7 +10503,7 @@ avio_accept :: (s: *AVIOContext, c: **AVIOContext) -> s32 #foreign avformat_60;
 *           > 0 if the handshake progressed, but is not complete
 *           < 0 for an AVERROR code
 */
-avio_handshake :: (c: *AVIOContext) -> s32 #foreign avformat_60;
+avio_handshake :: (c: *AVIOContext) -> s32 #foreign libavformat;
 
 AVDeviceInfoList :: struct {}
 
@@ -10517,7 +10516,7 @@ AVDeviceInfoList :: struct {}
 * @param size desired payload size
 * @return >0 (read size) if OK, AVERROR_xxx otherwise
 */
-av_get_packet :: (s: *AVIOContext, pkt: *AVPacket, size: s32) -> s32 #foreign avformat_60;
+av_get_packet :: (s: *AVIOContext, pkt: *AVPacket, size: s32) -> s32 #foreign libavformat;
 
 /**
 * Read data and append it to the current content of the AVPacket.
@@ -10533,7 +10532,7 @@ av_get_packet :: (s: *AVIOContext, pkt: *AVPacket, size: s32) -> s32 #foreign av
 * @return >0 (read size) if OK, AVERROR_xxx otherwise, previous data
 *         will not be lost even if an error occurs.
 */
-av_append_packet :: (s: *AVIOContext, pkt: *AVPacket, size: s32) -> s32 #foreign avformat_60;
+av_append_packet :: (s: *AVIOContext, pkt: *AVPacket, size: s32) -> s32 #foreign libavformat;
 
 /*************************************************/
 /* input/output formats */
@@ -10769,7 +10768,7 @@ AVIndexEntry :: struct {
 * @return The AV_DISPOSITION_* flag corresponding to disp or a negative error
 *         code if disp does not correspond to a known stream disposition.
 */
-av_disposition_from_string :: (disp: *u8) -> s32 #foreign avformat_60;
+av_disposition_from_string :: (disp: *u8) -> s32 #foreign libavformat;
 
 /**
 * @param disposition a combination of AV_DISPOSITION_* values
@@ -10777,7 +10776,7 @@ av_disposition_from_string :: (disp: *u8) -> s32 #foreign avformat_60;
 *         disposition. NULL when the lowest set bit does not correspond
 *         to a known disposition or when disposition is 0.
 */
-av_disposition_to_string :: (disposition: s32) -> *u8 #foreign avformat_60;
+av_disposition_to_string :: (disposition: s32) -> *u8 #foreign libavformat;
 
 /**
 * Stream structure.
@@ -10945,14 +10944,14 @@ AVStream :: struct {
     pts_wrap_bits:       s32;
 }
 
-av_stream_get_parser :: (s: *AVStream) -> *AVCodecParserContext #foreign avformat_60;
+av_stream_get_parser :: (s: *AVStream) -> *AVCodecParserContext #foreign libavformat;
 
 /**
 * Returns the pts of the last muxed packet + its duration
 *
 * the retuned value is undefined when used with a demuxer.
 */
-av_stream_get_end_pts :: (st: *AVStream) -> s64 #foreign avformat_60;
+av_stream_get_end_pts :: (st: *AVStream) -> s64 #foreign libavformat;
 
 /**
 * New fields can be added to the end with minor version bumps.
@@ -11610,29 +11609,29 @@ AVFormatContext :: struct {
 * This function will cause global side data to be injected in the next packet
 * of each stream as well as after any subsequent seek.
 */
-av_format_inject_global_side_data :: (s: *AVFormatContext) -> void #foreign avformat_60;
+av_format_inject_global_side_data :: (s: *AVFormatContext) -> void #foreign libavformat;
 
 /**
 * Returns the method used to set ctx->duration.
 *
 * @return AVFMT_DURATION_FROM_PTS, AVFMT_DURATION_FROM_STREAM, or AVFMT_DURATION_FROM_BITRATE.
 */
-av_fmt_ctx_get_duration_estimation_method :: (ctx: *AVFormatContext) -> AVDurationEstimationMethod #foreign avformat_60;
+av_fmt_ctx_get_duration_estimation_method :: (ctx: *AVFormatContext) -> AVDurationEstimationMethod #foreign libavformat;
 
 /**
 * Return the LIBAVFORMAT_VERSION_INT constant.
 */
-avformat_version :: () -> u32 #foreign avformat_60;
+avformat_version :: () -> u32 #foreign libavformat;
 
 /**
 * Return the libavformat build-time configuration.
 */
-avformat_configuration :: () -> *u8 #foreign avformat_60;
+avformat_configuration :: () -> *u8 #foreign libavformat;
 
 /**
 * Return the libavformat license.
 */
-avformat_license :: () -> *u8 #foreign avformat_60;
+avformat_license :: () -> *u8 #foreign libavformat;
 
 /**
 * Do global initialization of network libraries. This is optional,
@@ -11648,13 +11647,13 @@ avformat_license :: () -> *u8 #foreign avformat_60;
 * OpenSSL libraries is removed, and this function has no purpose
 * anymore.
 */
-avformat_network_init :: () -> s32 #foreign avformat_60;
+avformat_network_init :: () -> s32 #foreign libavformat;
 
 /**
 * Undo the initialization done by avformat_network_init. Call it only
 * once for each time you called avformat_network_init.
 */
-avformat_network_deinit :: () -> s32 #foreign avformat_60;
+avformat_network_deinit :: () -> s32 #foreign libavformat;
 
 /**
 * Iterate over all registered muxers.
@@ -11665,7 +11664,7 @@ avformat_network_deinit :: () -> s32 #foreign avformat_60;
 * @return the next registered muxer or NULL when the iteration is
 *         finished
 */
-av_muxer_iterate :: (opaque: **void) -> *AVOutputFormat #foreign avformat_60;
+av_muxer_iterate :: (opaque: **void) -> *AVOutputFormat #foreign libavformat;
 
 /**
 * Iterate over all registered demuxers.
@@ -11676,20 +11675,20 @@ av_muxer_iterate :: (opaque: **void) -> *AVOutputFormat #foreign avformat_60;
 * @return the next registered demuxer or NULL when the iteration is
 *         finished
 */
-av_demuxer_iterate :: (opaque: **void) -> *AVInputFormat #foreign avformat_60;
+av_demuxer_iterate :: (opaque: **void) -> *AVInputFormat #foreign libavformat;
 
 /**
 * Allocate an AVFormatContext.
 * avformat_free_context() can be used to free the context and everything
 * allocated by the framework within it.
 */
-avformat_alloc_context :: () -> *AVFormatContext #foreign avformat_60;
+avformat_alloc_context :: () -> *AVFormatContext #foreign libavformat;
 
 /**
 * Free an AVFormatContext and all its streams.
 * @param s context to free
 */
-avformat_free_context :: (s: *AVFormatContext) -> void #foreign avformat_60;
+avformat_free_context :: (s: *AVFormatContext) -> void #foreign libavformat;
 
 /**
 * Get the AVClass for AVFormatContext. It can be used in combination with
@@ -11697,7 +11696,7 @@ avformat_free_context :: (s: *AVFormatContext) -> void #foreign avformat_60;
 *
 * @see av_opt_find().
 */
-avformat_get_class :: () -> *AVClass #foreign avformat_60;
+avformat_get_class :: () -> *AVClass #foreign libavformat;
 
 /**
 * Get the AVClass for AVStream. It can be used in combination with
@@ -11705,7 +11704,7 @@ avformat_get_class :: () -> *AVClass #foreign avformat_60;
 *
 * @see av_opt_find().
 */
-av_stream_get_class :: () -> *AVClass #foreign avformat_60;
+av_stream_get_class :: () -> *AVClass #foreign libavformat;
 
 /**
 * Add a new stream to a media file.
@@ -11724,7 +11723,7 @@ av_stream_get_class :: () -> *AVClass #foreign avformat_60;
 *
 * @return newly created stream or NULL on error.
 */
-avformat_new_stream :: (s: *AVFormatContext, c: *AVCodec) -> *AVStream #foreign avformat_60;
+avformat_new_stream :: (s: *AVFormatContext, c: *AVCodec) -> *AVStream #foreign libavformat;
 
 /**
 * Wrap an existing array as stream side data.
@@ -11739,7 +11738,7 @@ avformat_new_stream :: (s: *AVFormatContext, c: *AVCodec) -> *AVStream #foreign 
 * @return zero on success, a negative AVERROR code on failure. On failure,
 *         the stream is unchanged and the data remains owned by the caller.
 */
-av_stream_add_side_data :: (st: *AVStream, type: AVPacketSideDataType, data: *u8, size: u64) -> s32 #foreign avformat_60;
+av_stream_add_side_data :: (st: *AVStream, type: AVPacketSideDataType, data: *u8, size: u64) -> s32 #foreign libavformat;
 
 /**
 * Allocate new information from stream.
@@ -11750,7 +11749,7 @@ av_stream_add_side_data :: (st: *AVStream, type: AVPacketSideDataType, data: *u8
 *
 * @return pointer to fresh allocated data or NULL otherwise
 */
-av_stream_new_side_data :: (stream: *AVStream, type: AVPacketSideDataType, size: u64) -> *u8 #foreign avformat_60;
+av_stream_new_side_data :: (stream: *AVStream, type: AVPacketSideDataType, size: u64) -> *u8 #foreign libavformat;
 
 /**
 * Get side information from stream.
@@ -11762,9 +11761,9 @@ av_stream_new_side_data :: (stream: *AVStream, type: AVPacketSideDataType, size:
 *
 * @return pointer to data if present or NULL otherwise
 */
-av_stream_get_side_data :: (stream: *AVStream, type: AVPacketSideDataType, size: *u64) -> *u8 #foreign avformat_60;
+av_stream_get_side_data :: (stream: *AVStream, type: AVPacketSideDataType, size: *u64) -> *u8 #foreign libavformat;
 
-av_new_program :: (s: *AVFormatContext, id: s32) -> *AVProgram #foreign avformat_60;
+av_new_program :: (s: *AVFormatContext, id: s32) -> *AVProgram #foreign libavformat;
 
 /**
 * Allocate an AVFormatContext for an output format.
@@ -11783,12 +11782,12 @@ av_new_program :: (s: *AVFormatContext, id: s32) -> *AVProgram #foreign avformat
 * @return  >= 0 in case of success, a negative AVERROR code in case of
 *          failure
 */
-avformat_alloc_output_context2 :: (ctx: **AVFormatContext, oformat: *AVOutputFormat, format_name: *u8, filename: *u8) -> s32 #foreign avformat_60;
+avformat_alloc_output_context2 :: (ctx: **AVFormatContext, oformat: *AVOutputFormat, format_name: *u8, filename: *u8) -> s32 #foreign libavformat;
 
 /**
 * Find AVInputFormat based on the short name of the input format.
 */
-av_find_input_format :: (short_name: *u8) -> *AVInputFormat #foreign avformat_60;
+av_find_input_format :: (short_name: *u8) -> *AVInputFormat #foreign libavformat;
 
 /**
 * Guess the file format.
@@ -11797,7 +11796,7 @@ av_find_input_format :: (short_name: *u8) -> *AVInputFormat #foreign avformat_60
 * @param is_opened Whether the file is already opened; determines whether
 *                  demuxers with or without AVFMT_NOFILE are probed.
 */
-av_probe_input_format :: (pd: *AVProbeData, is_opened: s32) -> *AVInputFormat #foreign avformat_60;
+av_probe_input_format :: (pd: *AVProbeData, is_opened: s32) -> *AVInputFormat #foreign libavformat;
 
 /**
 * Guess the file format.
@@ -11811,7 +11810,7 @@ av_probe_input_format :: (pd: *AVProbeData, is_opened: s32) -> *AVInputFormat #f
 *                  If the score is <= AVPROBE_SCORE_MAX / 4 it is recommended
 *                  to retry with a larger probe buffer.
 */
-av_probe_input_format2 :: (pd: *AVProbeData, is_opened: s32, score_max: *s32) -> *AVInputFormat #foreign avformat_60;
+av_probe_input_format2 :: (pd: *AVProbeData, is_opened: s32, score_max: *s32) -> *AVInputFormat #foreign libavformat;
 
 /**
 * Guess the file format.
@@ -11820,7 +11819,7 @@ av_probe_input_format2 :: (pd: *AVProbeData, is_opened: s32, score_max: *s32) ->
 *                  demuxers with or without AVFMT_NOFILE are probed.
 * @param score_ret The score of the best detection.
 */
-av_probe_input_format3 :: (pd: *AVProbeData, is_opened: s32, score_ret: *s32) -> *AVInputFormat #foreign avformat_60;
+av_probe_input_format3 :: (pd: *AVProbeData, is_opened: s32, score_ret: *s32) -> *AVInputFormat #foreign libavformat;
 
 /**
 * Probe a bytestream to determine the input format. Each time a probe returns
@@ -11839,12 +11838,12 @@ av_probe_input_format3 :: (pd: *AVProbeData, is_opened: s32, score_ret: *s32) ->
 *         the maximal score is AVPROBE_SCORE_MAX
 *         AVERROR code otherwise
 */
-av_probe_input_buffer2 :: (pb: *AVIOContext, fmt: **AVInputFormat, url: *u8, logctx: *void, offset: u32, max_probe_size: u32) -> s32 #foreign avformat_60;
+av_probe_input_buffer2 :: (pb: *AVIOContext, fmt: **AVInputFormat, url: *u8, logctx: *void, offset: u32, max_probe_size: u32) -> s32 #foreign libavformat;
 
 /**
 * Like av_probe_input_buffer2() but returns 0 on success
 */
-av_probe_input_buffer :: (pb: *AVIOContext, fmt: **AVInputFormat, url: *u8, logctx: *void, offset: u32, max_probe_size: u32) -> s32 #foreign avformat_60;
+av_probe_input_buffer :: (pb: *AVIOContext, fmt: **AVInputFormat, url: *u8, logctx: *void, offset: u32, max_probe_size: u32) -> s32 #foreign libavformat;
 
 /**
 * Open an input stream and read the header. The codecs are not opened.
@@ -11868,7 +11867,7 @@ av_probe_input_buffer :: (pb: *AVIOContext, fmt: **AVInputFormat, url: *u8, logc
 *
 * @note If you want to use custom IO, preallocate the format context and set its pb field.
 */
-avformat_open_input :: (ps: **AVFormatContext, url: *u8, fmt: *AVInputFormat, options: **AVDictionary) -> s32 #foreign avformat_60;
+avformat_open_input :: (ps: **AVFormatContext, url: *u8, fmt: *AVInputFormat, options: **AVDictionary) -> s32 #foreign libavformat;
 
 /**
 * Read packets of a media file to get stream information. This
@@ -11891,7 +11890,7 @@ avformat_open_input :: (ps: **AVFormatContext, url: *u8, fmt: *AVInputFormat, op
 * @todo Let the user decide somehow what information is needed so that
 *       we do not waste time getting stuff the user does not need.
 */
-avformat_find_stream_info :: (ic: *AVFormatContext, options: **AVDictionary) -> s32 #foreign avformat_60;
+avformat_find_stream_info :: (ic: *AVFormatContext, options: **AVDictionary) -> s32 #foreign libavformat;
 
 /**
 * Find the programs which belong to a given stream.
@@ -11904,9 +11903,9 @@ avformat_find_stream_info :: (ic: *AVFormatContext, options: **AVDictionary) -> 
 * @return the next program which belongs to s, NULL if no program is found or
 *         the last program is not among the programs of ic.
 */
-av_find_program_from_stream :: (ic: *AVFormatContext, last: *AVProgram, s: s32) -> *AVProgram #foreign avformat_60;
+av_find_program_from_stream :: (ic: *AVFormatContext, last: *AVProgram, s: s32) -> *AVProgram #foreign libavformat;
 
-av_program_add_stream_index :: (ac: *AVFormatContext, progid: s32, idx: u32) -> void #foreign avformat_60;
+av_program_add_stream_index :: (ac: *AVFormatContext, progid: s32, idx: u32) -> void #foreign libavformat;
 
 /**
 * Find the "best" stream in the file.
@@ -11934,7 +11933,7 @@ av_program_add_stream_index :: (ac: *AVFormatContext, progid: s32, idx: u32) -> 
 * @note  If av_find_best_stream returns successfully and decoder_ret is not
 *        NULL, then *decoder_ret is guaranteed to be set to a valid AVCodec.
 */
-av_find_best_stream :: (ic: *AVFormatContext, type: AVMediaType, wanted_stream_nb: s32, related_stream: s32, decoder_ret: **AVCodec, flags: s32) -> s32 #foreign avformat_60;
+av_find_best_stream :: (ic: *AVFormatContext, type: AVMediaType, wanted_stream_nb: s32, related_stream: s32, decoder_ret: **AVCodec, flags: s32) -> s32 #foreign libavformat;
 
 /**
 * Return the next frame of a stream.
@@ -11963,7 +11962,7 @@ av_find_best_stream :: (ic: *AVFormatContext, type: AVMediaType, wanted_stream_n
 * @note pkt will be initialized, so it may be uninitialized, but it must not
 *       contain data that needs to be freed.
 */
-av_read_frame :: (s: *AVFormatContext, pkt: *AVPacket) -> s32 #foreign avformat_60;
+av_read_frame :: (s: *AVFormatContext, pkt: *AVPacket) -> s32 #foreign libavformat;
 
 /**
 * Seek to the keyframe at timestamp.
@@ -11979,7 +11978,7 @@ av_read_frame :: (s: *AVFormatContext, pkt: *AVPacket) -> s32 #foreign avformat_
 *
 * @return >= 0 on success
 */
-av_seek_frame :: (s: *AVFormatContext, stream_index: s32, timestamp: s64, flags: s32) -> s32 #foreign avformat_60;
+av_seek_frame :: (s: *AVFormatContext, stream_index: s32, timestamp: s64, flags: s32) -> s32 #foreign libavformat;
 
 /**
 * Seek to timestamp ts.
@@ -12007,7 +12006,7 @@ av_seek_frame :: (s: *AVFormatContext, stream_index: s32, timestamp: s64, flags:
 *
 * @note This is part of the new seek API which is still under construction.
 */
-avformat_seek_file :: (s: *AVFormatContext, stream_index: s32, min_ts: s64, ts: s64, max_ts: s64, flags: s32) -> s32 #foreign avformat_60;
+avformat_seek_file :: (s: *AVFormatContext, stream_index: s32, min_ts: s64, ts: s64, max_ts: s64, flags: s32) -> s32 #foreign libavformat;
 
 /**
 * Discard all internally buffered data. This can be useful when dealing with
@@ -12025,26 +12024,26 @@ avformat_seek_file :: (s: *AVFormatContext, stream_index: s32, min_ts: s64, ts: 
 * @param s media file handle
 * @return >=0 on success, error code otherwise
 */
-avformat_flush :: (s: *AVFormatContext) -> s32 #foreign avformat_60;
+avformat_flush :: (s: *AVFormatContext) -> s32 #foreign libavformat;
 
 /**
 * Start playing a network-based stream (e.g. RTSP stream) at the
 * current position.
 */
-av_read_play :: (s: *AVFormatContext) -> s32 #foreign avformat_60;
+av_read_play :: (s: *AVFormatContext) -> s32 #foreign libavformat;
 
 /**
 * Pause a network-based stream (e.g. RTSP stream).
 *
 * Use av_read_play() to resume it.
 */
-av_read_pause :: (s: *AVFormatContext) -> s32 #foreign avformat_60;
+av_read_pause :: (s: *AVFormatContext) -> s32 #foreign libavformat;
 
 /**
 * Close an opened input AVFormatContext. Free it and all its contents
 * and set *s to NULL.
 */
-avformat_close_input :: (s: **AVFormatContext) -> void #foreign avformat_60;
+avformat_close_input :: (s: **AVFormatContext) -> void #foreign libavformat;
 
 /**
 * Allocate the stream private data and write the stream header to
@@ -12069,7 +12068,7 @@ avformat_close_input :: (s: **AVFormatContext) -> void #foreign avformat_60;
 *
 * @see av_opt_find, av_dict_set, avio_open, av_oformat_next, avformat_init_output.
 */
-avformat_write_header :: (s: *AVFormatContext, options: **AVDictionary) -> s32 #foreign avformat_60;
+avformat_write_header :: (s: *AVFormatContext, options: **AVDictionary) -> s32 #foreign libavformat;
 
 /**
 * Allocate the stream private data and initialize the codec, but do not write the header.
@@ -12096,7 +12095,7 @@ avformat_write_header :: (s: *AVFormatContext, options: **AVDictionary) -> s32 #
 *
 * @see av_opt_find, av_dict_set, avio_open, av_oformat_next, avformat_write_header.
 */
-avformat_init_output :: (s: *AVFormatContext, options: **AVDictionary) -> s32 #foreign avformat_60;
+avformat_init_output :: (s: *AVFormatContext, options: **AVDictionary) -> s32 #foreign libavformat;
 
 /**
 * Write a packet to an output media file.
@@ -12135,7 +12134,7 @@ avformat_init_output :: (s: *AVFormatContext, options: **AVDictionary) -> s32 #f
 *
 * @see av_interleaved_write_frame()
 */
-av_write_frame :: (s: *AVFormatContext, pkt: *AVPacket) -> s32 #foreign avformat_60;
+av_write_frame :: (s: *AVFormatContext, pkt: *AVPacket) -> s32 #foreign libavformat;
 
 /**
 * Write a packet to an output media file ensuring correct interleaving.
@@ -12179,7 +12178,7 @@ av_write_frame :: (s: *AVFormatContext, pkt: *AVPacket) -> s32 #foreign avformat
 *
 * @see av_write_frame(), AVFormatContext.max_interleave_delta
 */
-av_interleaved_write_frame :: (s: *AVFormatContext, pkt: *AVPacket) -> s32 #foreign avformat_60;
+av_interleaved_write_frame :: (s: *AVFormatContext, pkt: *AVPacket) -> s32 #foreign libavformat;
 
 /**
 * Write an uncoded frame to an output media file.
@@ -12189,7 +12188,7 @@ av_interleaved_write_frame :: (s: *AVFormatContext, pkt: *AVPacket) -> s32 #fore
 *
 * See av_interleaved_write_uncoded_frame() for details.
 */
-av_write_uncoded_frame :: (s: *AVFormatContext, stream_index: s32, frame: *AVFrame) -> s32 #foreign avformat_60;
+av_write_uncoded_frame :: (s: *AVFormatContext, stream_index: s32, frame: *AVFrame) -> s32 #foreign libavformat;
 
 /**
 * Write an uncoded frame to an output media file.
@@ -12207,7 +12206,7 @@ av_write_uncoded_frame :: (s: *AVFormatContext, stream_index: s32, frame: *AVFra
 *
 * @return  >=0 for success, a negative code on error
 */
-av_interleaved_write_uncoded_frame :: (s: *AVFormatContext, stream_index: s32, frame: *AVFrame) -> s32 #foreign avformat_60;
+av_interleaved_write_uncoded_frame :: (s: *AVFormatContext, stream_index: s32, frame: *AVFrame) -> s32 #foreign libavformat;
 
 /**
 * Test whether a muxer supports uncoded frame.
@@ -12215,7 +12214,7 @@ av_interleaved_write_uncoded_frame :: (s: *AVFormatContext, stream_index: s32, f
 * @return  >=0 if an uncoded frame can be written to that muxer and stream,
 *          <0 if not
 */
-av_write_uncoded_frame_query :: (s: *AVFormatContext, stream_index: s32) -> s32 #foreign avformat_60;
+av_write_uncoded_frame_query :: (s: *AVFormatContext, stream_index: s32) -> s32 #foreign libavformat;
 
 /**
 * Write the stream trailer to an output media file and free the
@@ -12226,7 +12225,7 @@ av_write_uncoded_frame_query :: (s: *AVFormatContext, stream_index: s32) -> s32 
 * @param s media file handle
 * @return 0 if OK, AVERROR_xxx on error
 */
-av_write_trailer :: (s: *AVFormatContext) -> s32 #foreign avformat_60;
+av_write_trailer :: (s: *AVFormatContext) -> s32 #foreign libavformat;
 
 /**
 * Return the output format in the list of registered output formats
@@ -12240,12 +12239,12 @@ av_write_trailer :: (s: *AVFormatContext) -> s32 #foreign avformat_60;
 * @param mime_type  if non-NULL checks if mime_type matches with the
 *                   MIME type of the registered formats
 */
-av_guess_format :: (short_name: *u8, filename: *u8, mime_type: *u8) -> *AVOutputFormat #foreign avformat_60;
+av_guess_format :: (short_name: *u8, filename: *u8, mime_type: *u8) -> *AVOutputFormat #foreign libavformat;
 
 /**
 * Guess the codec ID based upon muxer and filename.
 */
-av_guess_codec :: (fmt: *AVOutputFormat, short_name: *u8, filename: *u8, mime_type: *u8, type: AVMediaType) -> AVCodecID #foreign avformat_60;
+av_guess_codec :: (fmt: *AVOutputFormat, short_name: *u8, filename: *u8, mime_type: *u8, type: AVMediaType) -> AVCodecID #foreign libavformat;
 
 /**
 * Get timing information for the data currently output.
@@ -12264,7 +12263,7 @@ av_guess_codec :: (fmt: *AVOutputFormat, short_name: *u8, filename: *u8, mime_ty
 * @note Some formats or devices may not allow to measure dts and wall
 *       atomically.
 */
-av_get_output_timestamp :: (s: *AVFormatContext, stream: s32, dts: *s64, wall: *s64) -> s32 #foreign avformat_60;
+av_get_output_timestamp :: (s: *AVFormatContext, stream: s32, dts: *s64, wall: *s64) -> s32 #foreign libavformat;
 
 /**
 * Send a nice hexadecimal dump of a buffer to the log.
@@ -12278,7 +12277,7 @@ av_get_output_timestamp :: (s: *AVFormatContext, stream: s32, dts: *s64, wall: *
 *
 * @see av_hex_dump, av_pkt_dump2, av_pkt_dump_log2
 */
-av_hex_dump_log :: (avcl: *void, level: s32, buf: *u8, size: s32) -> void #foreign avformat_60;
+av_hex_dump_log :: (avcl: *void, level: s32, buf: *u8, size: s32) -> void #foreign libavformat;
 
 /**
 * Send a nice dump of a packet to the log.
@@ -12291,7 +12290,7 @@ av_hex_dump_log :: (avcl: *void, level: s32, buf: *u8, size: s32) -> void #forei
 * @param dump_payload True if the payload must be displayed, too.
 * @param st AVStream that the packet belongs to
 */
-av_pkt_dump_log2 :: (avcl: *void, level: s32, pkt: *AVPacket, dump_payload: s32, st: *AVStream) -> void #foreign avformat_60;
+av_pkt_dump_log2 :: (avcl: *void, level: s32, pkt: *AVPacket, dump_payload: s32, st: *AVStream) -> void #foreign libavformat;
 
 /**
 * Get the AVCodecID for the given codec tag tag.
@@ -12301,7 +12300,7 @@ av_pkt_dump_log2 :: (avcl: *void, level: s32, pkt: *AVPacket, dump_payload: s32,
 * in AVInputFormat.codec_tag and AVOutputFormat.codec_tag
 * @param tag  codec tag to match to a codec ID
 */
-av_codec_get_id :: (tags: **AVCodecTag, tag: u32) -> AVCodecID #foreign avformat_60;
+av_codec_get_id :: (tags: **AVCodecTag, tag: u32) -> AVCodecID #foreign libavformat;
 
 /**
 * Get the codec tag for the given codec id id.
@@ -12311,7 +12310,7 @@ av_codec_get_id :: (tags: **AVCodecTag, tag: u32) -> AVCodecID #foreign avformat
 * in AVInputFormat.codec_tag and AVOutputFormat.codec_tag
 * @param id   codec ID to match to a codec tag
 */
-av_codec_get_tag :: (tags: **AVCodecTag, id: AVCodecID) -> u32 #foreign avformat_60;
+av_codec_get_tag :: (tags: **AVCodecTag, id: AVCodecID) -> u32 #foreign libavformat;
 
 /**
 * Get the codec tag for the given codec id.
@@ -12322,9 +12321,9 @@ av_codec_get_tag :: (tags: **AVCodecTag, id: AVCodecID) -> u32 #foreign avformat
 * @param tag A pointer to the found tag
 * @return 0 if id was not found in tags, > 0 if it was found
 */
-av_codec_get_tag2 :: (tags: **AVCodecTag, id: AVCodecID, tag: *u32) -> s32 #foreign avformat_60;
+av_codec_get_tag2 :: (tags: **AVCodecTag, id: AVCodecID, tag: *u32) -> s32 #foreign libavformat;
 
-av_find_default_stream_index :: (s: *AVFormatContext) -> s32 #foreign avformat_60;
+av_find_default_stream_index :: (s: *AVFormatContext) -> s32 #foreign libavformat;
 
 /**
 * Get the index for a specific timestamp.
@@ -12337,7 +12336,7 @@ av_find_default_stream_index :: (s: *AVFormatContext) -> s32 #foreign avformat_6
 *              if AVSEEK_FLAG_ANY seek to any frame, only keyframes otherwise
 * @return < 0 if no such timestamp could be found
 */
-av_index_search_timestamp :: (st: *AVStream, timestamp: s64, flags: s32) -> s32 #foreign avformat_60;
+av_index_search_timestamp :: (st: *AVStream, timestamp: s64, flags: s32) -> s32 #foreign libavformat;
 
 /**
 * Get the index entry count for the given AVStream.
@@ -12345,7 +12344,7 @@ av_index_search_timestamp :: (st: *AVStream, timestamp: s64, flags: s32) -> s32 
 * @param st stream
 * @return the number of index entries in the stream
 */
-avformat_index_get_entries_count :: (st: *AVStream) -> s32 #foreign avformat_60;
+avformat_index_get_entries_count :: (st: *AVStream) -> s32 #foreign libavformat;
 
 /**
 * Get the AVIndexEntry corresponding to the given index.
@@ -12358,7 +12357,7 @@ avformat_index_get_entries_count :: (st: *AVStream) -> s32 #foreign avformat_60;
 *       until any function that takes the stream or the parent AVFormatContext
 *       as input argument is called.
 */
-avformat_index_get_entry :: (st: *AVStream, idx: s32) -> *AVIndexEntry #foreign avformat_60;
+avformat_index_get_entry :: (st: *AVStream, idx: s32) -> *AVIndexEntry #foreign libavformat;
 
 /**
 * Get the AVIndexEntry corresponding to the given timestamp.
@@ -12375,7 +12374,7 @@ avformat_index_get_entry :: (st: *AVStream, idx: s32) -> *AVIndexEntry #foreign 
 *       until any function that takes the stream or the parent AVFormatContext
 *       as input argument is called.
 */
-avformat_index_get_entry_from_timestamp :: (st: *AVStream, wanted_timestamp: s64, flags: s32) -> *AVIndexEntry #foreign avformat_60;
+avformat_index_get_entry_from_timestamp :: (st: *AVStream, wanted_timestamp: s64, flags: s32) -> *AVIndexEntry #foreign libavformat;
 
 /**
 * Add an index entry into a sorted list. Update the entry if the list
@@ -12383,7 +12382,7 @@ avformat_index_get_entry_from_timestamp :: (st: *AVStream, wanted_timestamp: s64
 *
 * @param timestamp timestamp in the time base of the given stream
 */
-av_add_index_entry :: (st: *AVStream, pos: s64, timestamp: s64, size: s32, distance: s32, flags: s32) -> s32 #foreign avformat_60;
+av_add_index_entry :: (st: *AVStream, pos: s64, timestamp: s64, size: s32, distance: s32, flags: s32) -> s32 #foreign libavformat;
 
 /**
 * Split a URL string into components.
@@ -12404,7 +12403,7 @@ av_add_index_entry :: (st: *AVStream, pos: s64, timestamp: s64, size: s32, dista
 * @param path_size the size of the path buffer
 * @param url the URL to split
 */
-av_url_split :: (proto: *u8, proto_size: s32, authorization: *u8, authorization_size: s32, hostname: *u8, hostname_size: s32, port_ptr: *s32, path: *u8, path_size: s32, url: *u8) -> void #foreign avformat_60;
+av_url_split :: (proto: *u8, proto_size: s32, authorization: *u8, authorization_size: s32, hostname: *u8, hostname_size: s32, port_ptr: *s32, path: *u8, path_size: s32, url: *u8) -> void #foreign libavformat;
 
 /**
 * Print detailed information about the input or output format, such as
@@ -12416,7 +12415,7 @@ av_url_split :: (proto: *u8, proto_size: s32, authorization: *u8, authorization_
 * @param url       the URL to print, such as source or destination file
 * @param is_output Select whether the specified context is an input(0) or output(1)
 */
-av_dump_format :: (ic: *AVFormatContext, index: s32, url: *u8, is_output: s32) -> void #foreign avformat_60;
+av_dump_format :: (ic: *AVFormatContext, index: s32, url: *u8, is_output: s32) -> void #foreign libavformat;
 
 /**
 * Return in 'buf' the path with '%d' replaced by a number.
@@ -12431,9 +12430,9 @@ av_dump_format :: (ic: *AVFormatContext, index: s32, url: *u8, is_output: s32) -
 * @param flags AV_FRAME_FILENAME_FLAGS_*
 * @return 0 if OK, -1 on format error
 */
-av_get_frame_filename2 :: (buf: *u8, buf_size: s32, path: *u8, number: s32, flags: s32) -> s32 #foreign avformat_60;
+av_get_frame_filename2 :: (buf: *u8, buf_size: s32, path: *u8, number: s32, flags: s32) -> s32 #foreign libavformat;
 
-av_get_frame_filename :: (buf: *u8, buf_size: s32, path: *u8, number: s32) -> s32 #foreign avformat_60;
+av_get_frame_filename :: (buf: *u8, buf_size: s32, path: *u8, number: s32) -> s32 #foreign libavformat;
 
 /**
 * Check whether filename actually is a numbered sequence generator.
@@ -12441,7 +12440,7 @@ av_get_frame_filename :: (buf: *u8, buf_size: s32, path: *u8, number: s32) -> s3
 * @param filename possible numbered sequence string
 * @return 1 if a valid numbered sequence string, 0 otherwise
 */
-av_filename_number_test :: (filename: *u8) -> s32 #foreign avformat_60;
+av_filename_number_test :: (filename: *u8) -> s32 #foreign libavformat;
 
 /**
 * Generate an SDP for an RTP session.
@@ -12460,7 +12459,7 @@ av_filename_number_test :: (filename: *u8) -> s32 #foreign avformat_60;
 * @param size the size of the buffer
 * @return 0 if OK, AVERROR_xxx on error
 */
-av_sdp_create :: (ac: **AVFormatContext, n_files: s32, buf: *u8, size: s32) -> s32 #foreign avformat_60;
+av_sdp_create :: (ac: **AVFormatContext, n_files: s32, buf: *u8, size: s32) -> s32 #foreign libavformat;
 
 /**
 * Return a positive value if the given filename has one of the given
@@ -12469,7 +12468,7 @@ av_sdp_create :: (ac: **AVFormatContext, n_files: s32, buf: *u8, size: s32) -> s
 * @param filename   file name to check against the given extensions
 * @param extensions a comma-separated list of filename extensions
 */
-av_match_ext :: (filename: *u8, extensions: *u8) -> s32 #foreign avformat_60;
+av_match_ext :: (filename: *u8, extensions: *u8) -> s32 #foreign libavformat;
 
 /**
 * Test if the given container can store a codec.
@@ -12481,7 +12480,7 @@ av_match_ext :: (filename: *u8, extensions: *u8) -> s32 #foreign avformat_60;
 * @return 1 if codec with ID codec_id can be stored in ofmt, 0 if it cannot.
 *         A negative number if this information is not available.
 */
-avformat_query_codec :: (ofmt: *AVOutputFormat, codec_id: AVCodecID, std_compliance: s32) -> s32 #foreign avformat_60;
+avformat_query_codec :: (ofmt: *AVOutputFormat, codec_id: AVCodecID, std_compliance: s32) -> s32 #foreign libavformat;
 
 /**
 * @defgroup riff_fourcc RIFF FourCCs
@@ -12498,22 +12497,22 @@ avformat_query_codec :: (ofmt: *AVOutputFormat, codec_id: AVCodecID, std_complia
 /**
 * @return the table mapping RIFF FourCCs for video to libavcodec AVCodecID.
 */
-avformat_get_riff_video_tags :: () -> *AVCodecTag #foreign avformat_60;
+avformat_get_riff_video_tags :: () -> *AVCodecTag #foreign libavformat;
 
 /**
 * @return the table mapping RIFF FourCCs for audio to AVCodecID.
 */
-avformat_get_riff_audio_tags :: () -> *AVCodecTag #foreign avformat_60;
+avformat_get_riff_audio_tags :: () -> *AVCodecTag #foreign libavformat;
 
 /**
 * @return the table mapping MOV FourCCs for video to libavcodec AVCodecID.
 */
-avformat_get_mov_video_tags :: () -> *AVCodecTag #foreign avformat_60;
+avformat_get_mov_video_tags :: () -> *AVCodecTag #foreign libavformat;
 
 /**
 * @return the table mapping MOV FourCCs for audio to AVCodecID.
 */
-avformat_get_mov_audio_tags :: () -> *AVCodecTag #foreign avformat_60;
+avformat_get_mov_audio_tags :: () -> *AVCodecTag #foreign libavformat;
 
 /**
 * Guess the sample aspect ratio of a frame, based on both the stream and the
@@ -12532,7 +12531,7 @@ avformat_get_mov_audio_tags :: () -> *AVCodecTag #foreign avformat_60;
 * @param frame the frame with the aspect ratio to be determined
 * @return the guessed (valid) sample_aspect_ratio, 0/1 if no idea
 */
-av_guess_sample_aspect_ratio :: (format: *AVFormatContext, stream: *AVStream, frame: *AVFrame) -> AVRational #foreign avformat_60;
+av_guess_sample_aspect_ratio :: (format: *AVFormatContext, stream: *AVStream, frame: *AVFrame) -> AVRational #foreign libavformat;
 
 /**
 * Guess the frame rate, based on both the container and codec information.
@@ -12542,7 +12541,7 @@ av_guess_sample_aspect_ratio :: (format: *AVFormatContext, stream: *AVStream, fr
 * @param frame the frame for which the frame rate should be determined, may be NULL
 * @return the guessed (valid) frame rate, 0/1 if no idea
 */
-av_guess_frame_rate :: (ctx: *AVFormatContext, stream: *AVStream, frame: *AVFrame) -> AVRational #foreign avformat_60;
+av_guess_frame_rate :: (ctx: *AVFormatContext, stream: *AVStream, frame: *AVFrame) -> AVRational #foreign libavformat;
 
 /**
 * Check if the stream st contained in s is matched by the stream specifier
@@ -12557,9 +12556,9 @@ av_guess_frame_rate :: (ctx: *AVFormatContext, stream: *AVStream, frame: *AVFram
 *
 * @note  A stream specifier can match several streams in the format.
 */
-avformat_match_stream_specifier :: (s: *AVFormatContext, st: *AVStream, spec: *u8) -> s32 #foreign avformat_60;
+avformat_match_stream_specifier :: (s: *AVFormatContext, st: *AVStream, spec: *u8) -> s32 #foreign libavformat;
 
-avformat_queue_attached_pictures :: (s: *AVFormatContext) -> s32 #foreign avformat_60;
+avformat_queue_attached_pictures :: (s: *AVFormatContext) -> s32 #foreign libavformat;
 
 AVTimebaseSource :: enum s32 {
     AUTO        :: -1;
@@ -12585,14 +12584,14 @@ AVTimebaseSource :: enum s32 {
 * @param ist      reference input stream to copy timings from
 * @param copy_tb  define from where the stream codec timebase needs to be imported
 */
-avformat_transfer_internal_stream_timing_info :: (ofmt: *AVOutputFormat, ost: *AVStream, ist: *AVStream, copy_tb: AVTimebaseSource) -> s32 #foreign avformat_60;
+avformat_transfer_internal_stream_timing_info :: (ofmt: *AVOutputFormat, ost: *AVStream, ist: *AVStream, copy_tb: AVTimebaseSource) -> s32 #foreign libavformat;
 
 /**
 * Get the internal codec timebase from a stream.
 *
 * @param st  input stream to extract the timebase from
 */
-av_stream_get_codec_timebase :: (st: *AVStream) -> AVRational #foreign avformat_60;
+av_stream_get_codec_timebase :: (st: *AVStream) -> AVRational #foreign libavformat;
 
 /**
 * @defgroup libsws libswscale
@@ -12602,17 +12601,17 @@ av_stream_get_codec_timebase :: (st: *AVStream) -> AVRational #foreign avformat_
 *
 * Return the LIBSWSCALE_VERSION_INT constant.
 */
-swscale_version :: () -> u32 #foreign swscale_7;
+swscale_version :: () -> u32 #foreign libswscale;
 
 /**
 * Return the libswscale build-time configuration.
 */
-swscale_configuration :: () -> *u8 #foreign swscale_7;
+swscale_configuration :: () -> *u8 #foreign libswscale;
 
 /**
 * Return the libswscale license.
 */
-swscale_license :: () -> *u8 #foreign swscale_7;
+swscale_license :: () -> *u8 #foreign libswscale;
 
 /**
 * Return a pointer to yuv<->rgb coefficients for the given colorspace
@@ -12621,7 +12620,7 @@ swscale_license :: () -> *u8 #foreign swscale_7;
 * @param colorspace One of the SWS_CS_* macros. If invalid,
 * SWS_CS_DEFAULT is used.
 */
-sws_getCoefficients :: (colorspace: s32) -> *s32 #foreign swscale_7;
+sws_getCoefficients :: (colorspace: s32) -> *s32 #foreign libswscale;
 
 // when used for filters they must have an odd number of elements
 // coeffs cannot be shared between vectors
@@ -12644,27 +12643,27 @@ SwsContext :: struct {}
 * Return a positive value if pix_fmt is a supported input format, 0
 * otherwise.
 */
-sws_isSupportedInput :: (pix_fmt: AVPixelFormat) -> s32 #foreign swscale_7;
+sws_isSupportedInput :: (pix_fmt: AVPixelFormat) -> s32 #foreign libswscale;
 
 /**
 * Return a positive value if pix_fmt is a supported output format, 0
 * otherwise.
 */
-sws_isSupportedOutput :: (pix_fmt: AVPixelFormat) -> s32 #foreign swscale_7;
+sws_isSupportedOutput :: (pix_fmt: AVPixelFormat) -> s32 #foreign libswscale;
 
 /**
 * @param[in]  pix_fmt the pixel format
 * @return a positive value if an endianness conversion for pix_fmt is
 * supported, 0 otherwise.
 */
-sws_isSupportedEndiannessConversion :: (pix_fmt: AVPixelFormat) -> s32 #foreign swscale_7;
+sws_isSupportedEndiannessConversion :: (pix_fmt: AVPixelFormat) -> s32 #foreign libswscale;
 
 /**
 * Allocate an empty SwsContext. This must be filled and passed to
 * sws_init_context(). For filling see AVOptions, options.c and
 * sws_setColorspaceDetails().
 */
-sws_alloc_context :: () -> *SwsContext #foreign swscale_7;
+sws_alloc_context :: () -> *SwsContext #foreign libswscale;
 
 /**
 * Initialize the swscaler context sws_context.
@@ -12672,13 +12671,13 @@ sws_alloc_context :: () -> *SwsContext #foreign swscale_7;
 * @return zero or positive value on success, a negative value on
 * error
 */
-sws_init_context :: (sws_context: *SwsContext, srcFilter: *SwsFilter, dstFilter: *SwsFilter) -> s32 #foreign swscale_7;
+sws_init_context :: (sws_context: *SwsContext, srcFilter: *SwsFilter, dstFilter: *SwsFilter) -> s32 #foreign libswscale;
 
 /**
 * Free the swscaler context swsContext.
 * If swsContext is NULL, then does nothing.
 */
-sws_freeContext :: (swsContext: *SwsContext) -> void #foreign swscale_7;
+sws_freeContext :: (swsContext: *SwsContext) -> void #foreign libswscale;
 
 /**
 * Allocate and return an SwsContext. You need it to perform
@@ -12701,7 +12700,7 @@ sws_freeContext :: (swsContext: *SwsContext) -> void #foreign swscale_7;
 * @note this function is to be removed after a saner alternative is
 *       written
 */
-sws_getContext :: (srcW: s32, srcH: s32, srcFormat: AVPixelFormat, dstW: s32, dstH: s32, dstFormat: AVPixelFormat, flags: s32, srcFilter: *SwsFilter, dstFilter: *SwsFilter, param: *float64) -> *SwsContext #foreign swscale_7;
+sws_getContext :: (srcW: s32, srcH: s32, srcFormat: AVPixelFormat, dstW: s32, dstH: s32, dstFormat: AVPixelFormat, flags: s32, srcFilter: *SwsFilter, dstFilter: *SwsFilter, param: *float64) -> *SwsContext #foreign libswscale;
 
 /**
 * Scale the image slice in srcSlice and put the resulting scaled
@@ -12729,7 +12728,7 @@ sws_getContext :: (srcW: s32, srcH: s32, srcFormat: AVPixelFormat, dstW: s32, ds
 *                  the destination image
 * @return          the height of the output slice
 */
-sws_scale :: (c: *SwsContext, srcSlice: **u8, srcStride: *s32, srcSliceY: s32, srcSliceH: s32, dst: **u8, dstStride: *s32) -> s32 #foreign swscale_7;
+sws_scale :: (c: *SwsContext, srcSlice: **u8, srcStride: *s32, srcSliceY: s32, srcSliceH: s32, dst: **u8, dstStride: *s32) -> s32 #foreign libswscale;
 
 /**
 * Scale source data from src and write the output to dst.
@@ -12747,7 +12746,7 @@ sws_scale :: (c: *SwsContext, srcSlice: **u8, srcStride: *s32, srcSliceY: s32, s
 *
 * @return 0 on success, a negative AVERROR code on failure
 */
-sws_scale_frame :: (c: *SwsContext, dst: *AVFrame, src: *AVFrame) -> s32 #foreign swscale_7;
+sws_scale_frame :: (c: *SwsContext, dst: *AVFrame, src: *AVFrame) -> s32 #foreign libswscale;
 
 /**
 * Initialize the scaling process for a given pair of source/destination frames.
@@ -12774,7 +12773,7 @@ sws_scale_frame :: (c: *SwsContext, dst: *AVFrame, src: *AVFrame) -> s32 #foreig
 *
 * @see sws_frame_end()
 */
-sws_frame_start :: (c: *SwsContext, dst: *AVFrame, src: *AVFrame) -> s32 #foreign swscale_7;
+sws_frame_start :: (c: *SwsContext, dst: *AVFrame, src: *AVFrame) -> s32 #foreign libswscale;
 
 /**
 * Finish the scaling process for a pair of source/destination frames previously
@@ -12784,7 +12783,7 @@ sws_frame_start :: (c: *SwsContext, dst: *AVFrame, src: *AVFrame) -> s32 #foreig
 *
 * @param c   The scaling context
 */
-sws_frame_end :: (c: *SwsContext) -> void #foreign swscale_7;
+sws_frame_end :: (c: *SwsContext) -> void #foreign libswscale;
 
 /**
 * Indicate that a horizontal slice of input data is available in the source
@@ -12798,7 +12797,7 @@ sws_frame_end :: (c: *SwsContext) -> void #foreign swscale_7;
 *
 * @return a non-negative number on success, a negative AVERROR code on failure.
 */
-sws_send_slice :: (c: *SwsContext, slice_start: u32, slice_height: u32) -> s32 #foreign swscale_7;
+sws_send_slice :: (c: *SwsContext, slice_start: u32, slice_height: u32) -> s32 #foreign libswscale;
 
 /**
 * Request a horizontal slice of the output data to be written into the frame
@@ -12817,7 +12816,7 @@ sws_send_slice :: (c: *SwsContext, slice_start: u32, slice_height: u32) -> s32 #
 *                         output can be produced
 *         another negative AVERROR code on other kinds of scaling failure
 */
-sws_receive_slice :: (c: *SwsContext, slice_start: u32, slice_height: u32) -> s32 #foreign swscale_7;
+sws_receive_slice :: (c: *SwsContext, slice_start: u32, slice_height: u32) -> s32 #foreign libswscale;
 
 /**
 * Get the alignment required for slices
@@ -12827,7 +12826,7 @@ sws_receive_slice :: (c: *SwsContext, slice_start: u32, slice_height: u32) -> s3
 *         Slice offsets and sizes passed to sws_receive_slice() must be
 *         multiples of the value returned from this function.
 */
-sws_receive_slice_alignment :: (c: *SwsContext) -> u32 #foreign swscale_7;
+sws_receive_slice_alignment :: (c: *SwsContext) -> u32 #foreign libswscale;
 
 /**
 * @param c the scaling context
@@ -12842,40 +12841,40 @@ sws_receive_slice_alignment :: (c: *SwsContext) -> u32 #foreign swscale_7;
 * @return A negative error code on error, non negative otherwise.
 *         If `LIBSWSCALE_VERSION_MAJOR < 7`, returns -1 if not supported.
 */
-sws_setColorspaceDetails :: (c: *SwsContext, inv_table: *[4] s32, srcRange: s32, table: *[4] s32, dstRange: s32, brightness: s32, contrast: s32, saturation: s32) -> s32 #foreign swscale_7;
+sws_setColorspaceDetails :: (c: *SwsContext, inv_table: *[4] s32, srcRange: s32, table: *[4] s32, dstRange: s32, brightness: s32, contrast: s32, saturation: s32) -> s32 #foreign libswscale;
 
 /**
 * @return A negative error code on error, non negative otherwise.
 *         If `LIBSWSCALE_VERSION_MAJOR < 7`, returns -1 if not supported.
 */
-sws_getColorspaceDetails :: (c: *SwsContext, inv_table: **s32, srcRange: *s32, table: **s32, dstRange: *s32, brightness: *s32, contrast: *s32, saturation: *s32) -> s32 #foreign swscale_7;
+sws_getColorspaceDetails :: (c: *SwsContext, inv_table: **s32, srcRange: *s32, table: **s32, dstRange: *s32, brightness: *s32, contrast: *s32, saturation: *s32) -> s32 #foreign libswscale;
 
 /**
 * Allocate and return an uninitialized vector with length coefficients.
 */
-sws_allocVec :: (length: s32) -> *SwsVector #foreign swscale_7;
+sws_allocVec :: (length: s32) -> *SwsVector #foreign libswscale;
 
 /**
 * Return a normalized Gaussian curve used to filter stuff
 * quality = 3 is high quality, lower is lower quality.
 */
-sws_getGaussianVec :: (variance: float64, quality: float64) -> *SwsVector #foreign swscale_7;
+sws_getGaussianVec :: (variance: float64, quality: float64) -> *SwsVector #foreign libswscale;
 
 /**
 * Scale all the coefficients of a by the scalar value.
 */
-sws_scaleVec :: (a: *SwsVector, scalar: float64) -> void #foreign swscale_7;
+sws_scaleVec :: (a: *SwsVector, scalar: float64) -> void #foreign libswscale;
 
 /**
 * Scale all the coefficients of a so that their sum equals height.
 */
-sws_normalizeVec :: (a: *SwsVector, height: float64) -> void #foreign swscale_7;
+sws_normalizeVec :: (a: *SwsVector, height: float64) -> void #foreign libswscale;
 
-sws_freeVec :: (a: *SwsVector) -> void #foreign swscale_7;
+sws_freeVec :: (a: *SwsVector) -> void #foreign libswscale;
 
-sws_getDefaultFilter :: (lumaGBlur: float, chromaGBlur: float, lumaSharpen: float, chromaSharpen: float, chromaHShift: float, chromaVShift: float, verbose: s32) -> *SwsFilter #foreign swscale_7;
+sws_getDefaultFilter :: (lumaGBlur: float, chromaGBlur: float, lumaSharpen: float, chromaSharpen: float, chromaHShift: float, chromaVShift: float, verbose: s32) -> *SwsFilter #foreign libswscale;
 
-sws_freeFilter :: (filter: *SwsFilter) -> void #foreign swscale_7;
+sws_freeFilter :: (filter: *SwsFilter) -> void #foreign libswscale;
 
 /**
 * Check if context can be reused, otherwise reallocate a new one.
@@ -12889,7 +12888,7 @@ sws_freeFilter :: (filter: *SwsFilter) -> void #foreign swscale_7;
 * Be warned that srcFilter and dstFilter are not checked, they
 * are assumed to remain the same.
 */
-sws_getCachedContext :: (_context: *SwsContext, srcW: s32, srcH: s32, srcFormat: AVPixelFormat, dstW: s32, dstH: s32, dstFormat: AVPixelFormat, flags: s32, srcFilter: *SwsFilter, dstFilter: *SwsFilter, param: *float64) -> *SwsContext #foreign swscale_7;
+sws_getCachedContext :: (_context: *SwsContext, srcW: s32, srcH: s32, srcFormat: AVPixelFormat, dstW: s32, dstH: s32, dstFormat: AVPixelFormat, flags: s32, srcFilter: *SwsFilter, dstFilter: *SwsFilter, param: *float64) -> *SwsContext #foreign libswscale;
 
 /**
 * Convert an 8-bit paletted frame into a frame with a color depth of 32 bits.
@@ -12901,7 +12900,7 @@ sws_getCachedContext :: (_context: *SwsContext, srcW: s32, srcH: s32, srcFormat:
 * @param num_pixels number of pixels to convert
 * @param palette    array with [256] entries, which must match color arrangement (RGB or BGR) of src
 */
-sws_convertPalette8ToPacked32 :: (src: *u8, dst: *u8, num_pixels: s32, palette: *u8) -> void #foreign swscale_7;
+sws_convertPalette8ToPacked32 :: (src: *u8, dst: *u8, num_pixels: s32, palette: *u8) -> void #foreign libswscale;
 
 /**
 * Convert an 8-bit paletted frame into a frame with a color depth of 24 bits.
@@ -12913,7 +12912,7 @@ sws_convertPalette8ToPacked32 :: (src: *u8, dst: *u8, num_pixels: s32, palette: 
 * @param num_pixels number of pixels to convert
 * @param palette    array with [256] entries, which must match color arrangement (RGB or BGR) of src
 */
-sws_convertPalette8ToPacked24 :: (src: *u8, dst: *u8, num_pixels: s32, palette: *u8) -> void #foreign swscale_7;
+sws_convertPalette8ToPacked24 :: (src: *u8, dst: *u8, num_pixels: s32, palette: *u8) -> void #foreign libswscale;
 
 /**
 * Get the AVClass for swsContext. It can be used in combination with
@@ -12921,18 +12920,18 @@ sws_convertPalette8ToPacked24 :: (src: *u8, dst: *u8, num_pixels: s32, palette: 
 *
 * @see av_opt_find().
 */
-sws_get_class :: () -> *AVClass #foreign swscale_7;
+sws_get_class :: () -> *AVClass #foreign libswscale;
 
 #scope_file
 
 #import "Basic"; // For push_context
 
-avutil_58 :: #library "windows/avutil-58";
-avutil_57 :: #library "windows/avutil-57";
-postproc_57 :: #library "windows/postproc-57";
-swresample_4 :: #library "windows/swresample-4";
-swscale_7 :: #library "windows/swscale-7";
-avcodec_60 :: #library "windows/avcodec-60";
-avformat_60 :: #library "windows/avformat-60";
-avfilter_9 :: #library "windows/avfilter-9";
-avdevice_60 :: #library "windows/avdevice-60";
+libavutil :: #library "windows/avutil-58";
+libavutil :: #library "windows/avutil-57";
+libpostproc :: #library "windows/postproc-57";
+libswresample :: #library "windows/swresample-4";
+libswscale :: #library "windows/swscale-7";
+libavcodec :: #library "windows/avcodec-60";
+libavformat :: #library "windows/avformat-60";
+libavfilter :: #library "windows/avfilter-9";
+libavdevice :: #library "windows/avdevice-60";
