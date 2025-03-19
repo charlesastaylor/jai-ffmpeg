@@ -1,7 +1,7 @@
 //
 // This file was auto-generated using the following command:
 //
-// jai generate.jai - -install
+// jai generate.jai
 //
 
 AV_NOPTS_VALUE :: 0x8000000000000000;
@@ -2253,6 +2253,18 @@ av_log_get_level :: () -> s32 #foreign libavutil;
 * @param level Logging level
 */
 av_log_set_level :: (level: s32) -> void #foreign libavutil;
+
+/**
+* Set the logging callback
+*
+* @note The callback must be thread safe, even if the application does not use
+*       threads itself as some codecs are multithreaded.
+*
+* @see av_log_default_callback
+*
+* @param callback A logging function with a compatible signature.
+*/
+av_log_set_callback :: (callback: *void /* function type contained C va_list argument */) -> void #foreign libavutil;
 
 /**
 * Return the context name
@@ -13813,6 +13825,17 @@ av_guess_codec :: (fmt: *AVOutputFormat, short_name: *u8, filename: *u8, mime_ty
 av_get_output_timestamp :: (s: *AVFormatContext, stream: s32, dts: *s64, wall: *s64) -> s32 #foreign libavformat;
 
 /**
+* Send a nice hexadecimal dump of a buffer to the specified file stream.
+*
+* @param f The file stream pointer where the dump should be sent to.
+* @param buf buffer
+* @param size buffer size
+*
+* @see av_hex_dump_log, av_pkt_dump2, av_pkt_dump_log2
+*/
+av_hex_dump :: (f: *FILE, buf: *u8, size: s32) -> void #foreign libavformat;
+
+/**
 * Send a nice hexadecimal dump of a buffer to the log.
 *
 * @param avcl A pointer to an arbitrary struct of which the first field is a
@@ -13825,6 +13848,16 @@ av_get_output_timestamp :: (s: *AVFormatContext, stream: s32, dts: *s64, wall: *
 * @see av_hex_dump, av_pkt_dump2, av_pkt_dump_log2
 */
 av_hex_dump_log :: (avcl: *void, level: s32, buf: *u8, size: s32) -> void #foreign libavformat;
+
+/**
+* Send a nice dump of a packet to the specified file stream.
+*
+* @param f The file stream pointer where the dump should be sent to.
+* @param pkt packet to dump
+* @param dump_payload True if the payload must be displayed, too.
+* @param st AVStream that the packet belongs to
+*/
+av_pkt_dump2 :: (f: *FILE, pkt: *AVPacket, dump_payload: s32, st: *AVStream) -> void #foreign libavformat;
 
 /**
 * Send a nice dump of a packet to the log.

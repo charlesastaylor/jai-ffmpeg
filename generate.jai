@@ -21,12 +21,7 @@ AT_COMPILE_TIME :: true;
 
 SOURCE_PATH :: "src/ffmpeg-7.1.1-full_build-shared";
 
-// Q: Why were these ommited?
 DECLARATIONS_TO_OMIT :: string.[
-    "av_log_set_callback",
-    "av_fopen_utf8",
-    "av_pkt_dump2",
-    "av_hex_dump",
 ];
 
 Pair :: struct {
