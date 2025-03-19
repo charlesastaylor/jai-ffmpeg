@@ -1,7 +1,7 @@
 //
 // This file was auto-generated using the following command:
 //
-// jai generate.jai
+// jai generate.jai - -install
 //
 
 AV_NOPTS_VALUE :: 0x8000000000000000;
@@ -45,42 +45,78 @@ AV_TIME_BASE :: 1000000;
 AV_HAVE_BIGENDIAN :: 0;
 AV_HAVE_FAST_UNALIGNED :: 1;
 
-LIBAVUTIL_VERSION_MAJOR :: 58;
-LIBAVUTIL_VERSION_MINOR :: 2;
-LIBAVUTIL_VERSION_MICRO :: 100;
-
-FF_API_FIFO_PEEK2 :: LIBAVUTIL_VERSION_MAJOR < 59;
-FF_API_FIFO_OLD_API :: LIBAVUTIL_VERSION_MAJOR < 59;
-FF_API_XVMC :: LIBAVUTIL_VERSION_MAJOR < 59;
-FF_API_OLD_CHANNEL_LAYOUT :: LIBAVUTIL_VERSION_MAJOR < 59;
-FF_API_AV_FOPEN_UTF8 :: LIBAVUTIL_VERSION_MAJOR < 59;
-FF_API_PKT_DURATION :: LIBAVUTIL_VERSION_MAJOR < 59;
-FF_API_REORDERED_OPAQUE :: LIBAVUTIL_VERSION_MAJOR < 59;
-FF_API_FRAME_PICTURE_NUMBER :: LIBAVUTIL_VERSION_MAJOR < 59;
-
 AVERROR_EXPERIMENTAL :: -0x2bb2afa8;
 AVERROR_INPUT_CHANGED :: -0x636e6701;
 AVERROR_OUTPUT_CHANGED :: -0x636e6702;
 
 AV_ERROR_MAX_STRING_SIZE :: 64;
 
+LIBAVUTIL_VERSION_MAJOR :: 59;
+LIBAVUTIL_VERSION_MINOR :: 39;
+LIBAVUTIL_VERSION_MICRO :: 100;
+
+FF_API_HDR_VIVID_THREE_SPLINE :: LIBAVUTIL_VERSION_MAJOR < 60;
+FF_API_FRAME_PKT :: LIBAVUTIL_VERSION_MAJOR < 60;
+FF_API_INTERLACED_FRAME :: LIBAVUTIL_VERSION_MAJOR < 60;
+FF_API_FRAME_KEY :: LIBAVUTIL_VERSION_MAJOR < 60;
+FF_API_PALETTE_HAS_CHANGED :: LIBAVUTIL_VERSION_MAJOR < 60;
+FF_API_VULKAN_CONTIGUOUS_MEMORY :: LIBAVUTIL_VERSION_MAJOR < 60;
+FF_API_H274_FILM_GRAIN_VCS :: LIBAVUTIL_VERSION_MAJOR < 60;
+FF_API_MOD_UINTP2 :: LIBAVUTIL_VERSION_MAJOR < 60;
+FF_API_RISCV_FD_ZBA :: LIBAVUTIL_VERSION_MAJOR < 60;
+FF_API_VULKAN_FIXED_QUEUES :: LIBAVUTIL_VERSION_MAJOR < 60;
+
 M_E :: 2.7182818284590452354;
+
+M_Ef :: 2.7182818284590452354;
 
 M_LN2 :: 0.69314718055994530942;
 
+M_LN2f :: 0.69314718055994530942;
+
 M_LN10 :: 2.30258509299404568402;
+
+M_LN10f :: 2.30258509299404568402;
 
 M_LOG2_10 :: 3.32192809488736234787;
 
+M_LOG2_10f :: 3.32192809488736234787;
+
 M_PHI :: 1.61803398874989484820;
+
+M_PHIf :: 1.61803398874989484820;
 
 M_PI :: 3.14159265358979323846;
 
+M_PIf :: 3.14159265358979323846;
+
 M_PI_2 :: 1.57079632679489661923;
+
+M_PI_2f :: 1.57079632679489661923;
+
+M_PI_4 :: 0.78539816339744830962;
+
+M_PI_4f :: 0.78539816339744830962;
+
+M_1_PI :: 0.31830988618379067154;
+
+M_1_PIf :: 0.31830988618379067154;
+
+M_2_PI :: 0.63661977236758134308;
+
+M_2_PIf :: 0.63661977236758134308;
+
+M_2_SQRTPI :: 1.12837916709551257390;
+
+M_2_SQRTPIf :: 1.12837916709551257390;
 
 M_SQRT1_2 :: 0.70710678118654752440;
 
+M_SQRT1_2f :: 0.70710678118654752440;
+
 M_SQRT2 :: 1.41421356237309504880;
+
+M_SQRT2f :: 1.41421356237309504880;
 
 AV_LOG_QUIET :: -8;
 
@@ -109,9 +145,15 @@ AV_LOG_PRINT_LEVEL :: 2;
 AVPALETTE_SIZE :: 1024;
 AVPALETTE_COUNT :: 256;
 
+AV_VIDEO_MAX_PLANES :: 4;
+
 AV_FOURCC_MAX_STRING_SIZE :: 32;
 
 AV_BUFFER_FLAG_READONLY :: 1 << 0;
+
+AV_CHANNEL_LAYOUT_RETYPE_FLAG_LOSSLESS :: 1 << 0;
+
+AV_CHANNEL_LAYOUT_RETYPE_FLAG_CANONICAL :: 1 << 1;
 
 AV_DICT_MATCH_CASE :: 1;
 AV_DICT_IGNORE_SUFFIX :: 2;
@@ -125,31 +167,40 @@ AV_DICT_APPEND :: 32;
 
 AV_DICT_MULTIKEY :: 64;
 
-AV_CH_LAYOUT_NATIVE :: 0x8000000000000000;
-
 AV_NUM_DATA_POINTERS :: 8;
 
 AV_FRAME_FLAG_CORRUPT :: 1 << 0;
 
+AV_FRAME_FLAG_KEY :: 1 << 1;
+
 AV_FRAME_FLAG_DISCARD :: 1 << 2;
+
+AV_FRAME_FLAG_INTERLACED :: 1 << 3;
+
+AV_FRAME_FLAG_TOP_FIELD_FIRST :: 1 << 4;
 
 FF_DECODE_ERROR_INVALID_BITSTREAM :: 1;
 FF_DECODE_ERROR_MISSING_REFERENCE :: 2;
 FF_DECODE_ERROR_CONCEALMENT_ACTIVE :: 4;
 FF_DECODE_ERROR_DECODE_SLICES :: 8;
 
-LIBAVCODEC_VERSION_MAJOR :: 60;
+AV_FRAME_SIDE_DATA_FLAG_UNIQUE :: 1 << 0;
 
-FF_API_INIT_PACKET :: LIBAVCODEC_VERSION_MAJOR < 61;
-FF_API_IDCT_NONE :: LIBAVCODEC_VERSION_MAJOR < 61;
-FF_API_SVTAV1_OPTS :: LIBAVCODEC_VERSION_MAJOR < 61;
-FF_API_AYUV_CODECID :: LIBAVCODEC_VERSION_MAJOR < 61;
-FF_API_VT_OUTPUT_CALLBACK :: LIBAVCODEC_VERSION_MAJOR < 61;
-FF_API_AVCODEC_CHROMA_POS :: LIBAVCODEC_VERSION_MAJOR < 61;
-FF_API_VT_HWACCEL_CONTEXT :: LIBAVCODEC_VERSION_MAJOR < 61;
-FF_API_AVCTX_FRAME_NUMBER :: LIBAVCODEC_VERSION_MAJOR < 61;
+AV_FRAME_SIDE_DATA_FLAG_REPLACE :: 1 << 1;
 
-FF_CODEC_CRYSTAL_HD :: LIBAVCODEC_VERSION_MAJOR < 61;
+LIBAVCODEC_VERSION_MAJOR :: 61;
+
+FF_API_INIT_PACKET :: LIBAVCODEC_VERSION_MAJOR < 62;
+FF_API_SUBFRAMES :: LIBAVCODEC_VERSION_MAJOR < 62;
+FF_API_TICKS_PER_FRAME :: LIBAVCODEC_VERSION_MAJOR < 62;
+FF_API_DROPCHANGED :: LIBAVCODEC_VERSION_MAJOR < 62;
+
+FF_API_AVFFT :: LIBAVCODEC_VERSION_MAJOR < 62;
+FF_API_FF_PROFILE_LEVEL :: LIBAVCODEC_VERSION_MAJOR < 62;
+FF_API_AVCODEC_CLOSE :: LIBAVCODEC_VERSION_MAJOR < 62;
+FF_API_BUFFER_MIN_SIZE :: LIBAVCODEC_VERSION_MAJOR < 62;
+FF_API_VDPAU_ALLOC_GET_SET :: LIBAVCODEC_VERSION_MAJOR < 62;
+FF_API_QUALITY_FACTOR :: LIBAVCODEC_VERSION_MAJOR < 62;
 
 AV_CODEC_CAP_DRAW_HORIZ_BAND :: 1 << 0;
 
@@ -187,18 +238,6 @@ AV_CODEC_CAP_ENCODER_FLUSH :: 1 << 21;
 
 AV_CODEC_CAP_ENCODER_RECON_FRAME :: 1 << 22;
 
-AV_CODEC_PROP_INTRA_ONLY :: 1 << 0;
-
-AV_CODEC_PROP_LOSSY :: 1 << 1;
-
-AV_CODEC_PROP_LOSSLESS :: 1 << 2;
-
-AV_CODEC_PROP_REORDER :: 1 << 3;
-
-AV_CODEC_PROP_BITMAP_SUB :: 1 << 16;
-
-AV_CODEC_PROP_TEXT_SUB :: 1 << 17;
-
 AV_INPUT_BUFFER_PADDING_SIZE :: 64;
 
 AV_EF_CRCCHECK :: 1<<0;
@@ -217,6 +256,140 @@ FF_COMPLIANCE_NORMAL :: 0;
 FF_COMPLIANCE_UNOFFICIAL :: -1;
 FF_COMPLIANCE_EXPERIMENTAL :: -2;
 
+AV_PROFILE_UNKNOWN :: -99;
+AV_PROFILE_RESERVED :: -100;
+
+AV_PROFILE_AAC_MAIN :: 0;
+AV_PROFILE_AAC_LOW :: 1;
+AV_PROFILE_AAC_SSR :: 2;
+AV_PROFILE_AAC_LTP :: 3;
+AV_PROFILE_AAC_HE :: 4;
+AV_PROFILE_AAC_HE_V2 :: 28;
+AV_PROFILE_AAC_LD :: 22;
+AV_PROFILE_AAC_ELD :: 38;
+AV_PROFILE_AAC_USAC :: 41;
+AV_PROFILE_MPEG2_AAC_LOW :: 128;
+AV_PROFILE_MPEG2_AAC_HE :: 131;
+
+AV_PROFILE_DNXHD :: 0;
+AV_PROFILE_DNXHR_LB :: 1;
+AV_PROFILE_DNXHR_SQ :: 2;
+AV_PROFILE_DNXHR_HQ :: 3;
+AV_PROFILE_DNXHR_HQX :: 4;
+AV_PROFILE_DNXHR_444 :: 5;
+
+AV_PROFILE_DTS :: 20;
+AV_PROFILE_DTS_ES :: 30;
+AV_PROFILE_DTS_96_24 :: 40;
+AV_PROFILE_DTS_HD_HRA :: 50;
+AV_PROFILE_DTS_HD_MA :: 60;
+AV_PROFILE_DTS_EXPRESS :: 70;
+AV_PROFILE_DTS_HD_MA_X :: 61;
+AV_PROFILE_DTS_HD_MA_X_IMAX :: 62;
+
+AV_PROFILE_EAC3_DDP_ATMOS :: 30;
+
+AV_PROFILE_TRUEHD_ATMOS :: 30;
+
+AV_PROFILE_MPEG2_422 :: 0;
+AV_PROFILE_MPEG2_HIGH :: 1;
+AV_PROFILE_MPEG2_SS :: 2;
+AV_PROFILE_MPEG2_SNR_SCALABLE :: 3;
+AV_PROFILE_MPEG2_MAIN :: 4;
+AV_PROFILE_MPEG2_SIMPLE :: 5;
+
+AV_PROFILE_H264_CONSTRAINED :: 1<<9;
+AV_PROFILE_H264_INTRA :: 1<<11;
+
+AV_PROFILE_H264_BASELINE :: 66;
+AV_PROFILE_H264_CONSTRAINED_BASELINE :: 66|AV_PROFILE_H264_CONSTRAINED;
+AV_PROFILE_H264_MAIN :: 77;
+AV_PROFILE_H264_EXTENDED :: 88;
+AV_PROFILE_H264_HIGH :: 100;
+AV_PROFILE_H264_HIGH_10 :: 110;
+AV_PROFILE_H264_HIGH_10_INTRA :: 110|AV_PROFILE_H264_INTRA;
+AV_PROFILE_H264_MULTIVIEW_HIGH :: 118;
+AV_PROFILE_H264_HIGH_422 :: 122;
+AV_PROFILE_H264_HIGH_422_INTRA :: 122|AV_PROFILE_H264_INTRA;
+AV_PROFILE_H264_STEREO_HIGH :: 128;
+AV_PROFILE_H264_HIGH_444 :: 144;
+AV_PROFILE_H264_HIGH_444_PREDICTIVE :: 244;
+AV_PROFILE_H264_HIGH_444_INTRA :: 244|AV_PROFILE_H264_INTRA;
+AV_PROFILE_H264_CAVLC_444 :: 44;
+
+AV_PROFILE_VC1_SIMPLE :: 0;
+AV_PROFILE_VC1_MAIN :: 1;
+AV_PROFILE_VC1_COMPLEX :: 2;
+AV_PROFILE_VC1_ADVANCED :: 3;
+
+AV_PROFILE_MPEG4_SIMPLE :: 0;
+AV_PROFILE_MPEG4_SIMPLE_SCALABLE :: 1;
+AV_PROFILE_MPEG4_CORE :: 2;
+AV_PROFILE_MPEG4_MAIN :: 3;
+AV_PROFILE_MPEG4_N_BIT :: 4;
+AV_PROFILE_MPEG4_SCALABLE_TEXTURE :: 5;
+AV_PROFILE_MPEG4_SIMPLE_FACE_ANIMATION :: 6;
+AV_PROFILE_MPEG4_BASIC_ANIMATED_TEXTURE :: 7;
+AV_PROFILE_MPEG4_HYBRID :: 8;
+AV_PROFILE_MPEG4_ADVANCED_REAL_TIME :: 9;
+AV_PROFILE_MPEG4_CORE_SCALABLE :: 10;
+AV_PROFILE_MPEG4_ADVANCED_CODING :: 11;
+AV_PROFILE_MPEG4_ADVANCED_CORE :: 12;
+AV_PROFILE_MPEG4_ADVANCED_SCALABLE_TEXTURE :: 13;
+AV_PROFILE_MPEG4_SIMPLE_STUDIO :: 14;
+AV_PROFILE_MPEG4_ADVANCED_SIMPLE :: 15;
+
+AV_PROFILE_JPEG2000_CSTREAM_RESTRICTION_0 :: 1;
+AV_PROFILE_JPEG2000_CSTREAM_RESTRICTION_1 :: 2;
+AV_PROFILE_JPEG2000_CSTREAM_NO_RESTRICTION :: 32768;
+AV_PROFILE_JPEG2000_DCINEMA_2K :: 3;
+AV_PROFILE_JPEG2000_DCINEMA_4K :: 4;
+
+AV_PROFILE_VP9_0 :: 0;
+AV_PROFILE_VP9_1 :: 1;
+AV_PROFILE_VP9_2 :: 2;
+AV_PROFILE_VP9_3 :: 3;
+
+AV_PROFILE_HEVC_MAIN :: 1;
+AV_PROFILE_HEVC_MAIN_10 :: 2;
+AV_PROFILE_HEVC_MAIN_STILL_PICTURE :: 3;
+AV_PROFILE_HEVC_REXT :: 4;
+AV_PROFILE_HEVC_MULTIVIEW_MAIN :: 6;
+AV_PROFILE_HEVC_SCC :: 9;
+
+AV_PROFILE_VVC_MAIN_10 :: 1;
+AV_PROFILE_VVC_MAIN_10_444 :: 33;
+
+AV_PROFILE_AV1_MAIN :: 0;
+AV_PROFILE_AV1_HIGH :: 1;
+AV_PROFILE_AV1_PROFESSIONAL :: 2;
+
+AV_PROFILE_MJPEG_HUFFMAN_BASELINE_DCT :: 0xc0;
+AV_PROFILE_MJPEG_HUFFMAN_EXTENDED_SEQUENTIAL_DCT :: 0xc1;
+AV_PROFILE_MJPEG_HUFFMAN_PROGRESSIVE_DCT :: 0xc2;
+AV_PROFILE_MJPEG_HUFFMAN_LOSSLESS :: 0xc3;
+AV_PROFILE_MJPEG_JPEG_LS :: 0xf7;
+
+AV_PROFILE_SBC_MSBC :: 1;
+
+AV_PROFILE_PRORES_PROXY :: 0;
+AV_PROFILE_PRORES_LT :: 1;
+AV_PROFILE_PRORES_STANDARD :: 2;
+AV_PROFILE_PRORES_HQ :: 3;
+AV_PROFILE_PRORES_4444 :: 4;
+AV_PROFILE_PRORES_XQ :: 5;
+
+AV_PROFILE_ARIB_PROFILE_A :: 0;
+AV_PROFILE_ARIB_PROFILE_C :: 1;
+
+AV_PROFILE_KLVA_SYNC :: 0;
+AV_PROFILE_KLVA_ASYNC :: 1;
+
+AV_PROFILE_EVC_BASELINE :: 0;
+AV_PROFILE_EVC_MAIN :: 1;
+
+AV_LEVEL_UNKNOWN :: -99;
+
 AV_PKT_FLAG_KEY :: 0x0001;
 AV_PKT_FLAG_CORRUPT :: 0x0002;
 
@@ -226,8 +399,22 @@ AV_PKT_FLAG_TRUSTED :: 0x0008;
 
 AV_PKT_FLAG_DISPOSABLE :: 0x0010;
 
-LIBAVCODEC_VERSION_MINOR :: 3;
-LIBAVCODEC_VERSION_MICRO :: 100;
+LIBAVCODEC_VERSION_MINOR :: 19;
+LIBAVCODEC_VERSION_MICRO :: 101;
+
+AV_CODEC_PROP_INTRA_ONLY :: 1 << 0;
+
+AV_CODEC_PROP_LOSSY :: 1 << 1;
+
+AV_CODEC_PROP_LOSSLESS :: 1 << 2;
+
+AV_CODEC_PROP_REORDER :: 1 << 3;
+
+AV_CODEC_PROP_FIELDS :: 1 << 4;
+
+AV_CODEC_PROP_BITMAP_SUB :: 1 << 16;
+
+AV_CODEC_PROP_TEXT_SUB :: 1 << 17;
 
 AV_INPUT_BUFFER_MIN_SIZE :: 16384;
 
@@ -300,11 +487,15 @@ AV_CODEC_EXPORT_DATA_VIDEO_ENC_PARAMS :: 1 << 2;
 
 AV_CODEC_EXPORT_DATA_FILM_GRAIN :: 1 << 3;
 
+AV_CODEC_EXPORT_DATA_ENHANCEMENTS :: 1 << 4;
+
 AV_GET_BUFFER_FLAG_REF :: 1 << 0;
 
 AV_GET_ENCODE_BUFFER_FLAG_REF :: 1 << 0;
 
-FF_COMPRESSION_DEFAULT :: -1;
+SLICE_FLAG_CODED_ORDER :: 0x0001;
+SLICE_FLAG_ALLOW_FIELD :: 0x0002;
+SLICE_FLAG_ALLOW_PLANE :: 0x0004;
 
 FF_CMP_SAD :: 0;
 FF_CMP_SSE :: 1;
@@ -324,13 +515,11 @@ FF_CMP_DCT264 :: 14;
 FF_CMP_MEDIAN_SAD :: 15;
 FF_CMP_CHROMA :: 256;
 
-SLICE_FLAG_CODED_ORDER :: 0x0001;
-SLICE_FLAG_ALLOW_FIELD :: 0x0002;
-SLICE_FLAG_ALLOW_PLANE :: 0x0004;
-
 FF_MB_DECISION_SIMPLE :: 0;
 FF_MB_DECISION_BITS :: 1;
 FF_MB_DECISION_RD :: 2;
+
+FF_COMPRESSION_DEFAULT :: -1;
 
 FF_BUG_AUTODETECT :: 1;
 FF_BUG_XVID_ILACE :: 4;
@@ -374,6 +563,7 @@ FF_DCT_INT :: 2;
 FF_DCT_MMX :: 3;
 FF_DCT_ALTIVEC :: 5;
 FF_DCT_FAAN :: 6;
+FF_DCT_NEON :: 7;
 
 FF_IDCT_AUTO :: 0;
 FF_IDCT_INT :: 1;
@@ -387,9 +577,6 @@ FF_IDCT_SIMPLEARMV5TE :: 16;
 FF_IDCT_SIMPLEARMV6 :: 17;
 FF_IDCT_FAAN :: 20;
 FF_IDCT_SIMPLENEON :: 22;
-
-FF_IDCT_NONE :: 24;
-
 FF_IDCT_SIMPLEAUTO :: 128;
 
 FF_THREAD_FRAME :: 1;
@@ -422,6 +609,12 @@ FF_PROFILE_DTS_96_24 :: 40;
 FF_PROFILE_DTS_HD_HRA :: 50;
 FF_PROFILE_DTS_HD_MA :: 60;
 FF_PROFILE_DTS_EXPRESS :: 70;
+FF_PROFILE_DTS_HD_MA_X :: 61;
+FF_PROFILE_DTS_HD_MA_X_IMAX :: 62;
+
+FF_PROFILE_EAC3_DDP_ATMOS :: 30;
+
+FF_PROFILE_TRUEHD_ATMOS :: 30;
 
 FF_PROFILE_MPEG2_422 :: 0;
 FF_PROFILE_MPEG2_HIGH :: 1;
@@ -486,6 +679,7 @@ FF_PROFILE_HEVC_MAIN :: 1;
 FF_PROFILE_HEVC_MAIN_10 :: 2;
 FF_PROFILE_HEVC_MAIN_STILL_PICTURE :: 3;
 FF_PROFILE_HEVC_REXT :: 4;
+FF_PROFILE_HEVC_SCC :: 9;
 
 FF_PROFILE_VVC_MAIN_10 :: 1;
 FF_PROFILE_VVC_MAIN_10_444 :: 33;
@@ -515,16 +709,19 @@ FF_PROFILE_ARIB_PROFILE_C :: 1;
 FF_PROFILE_KLVA_SYNC :: 0;
 FF_PROFILE_KLVA_ASYNC :: 1;
 
+FF_PROFILE_EVC_BASELINE :: 0;
+FF_PROFILE_EVC_MAIN :: 1;
+
 FF_LEVEL_UNKNOWN :: -99;
+
+FF_CODEC_PROPERTY_LOSSLESS :: 0x00000001;
+FF_CODEC_PROPERTY_CLOSED_CAPTIONS :: 0x00000002;
+FF_CODEC_PROPERTY_FILM_GRAIN :: 0x00000004;
 
 FF_SUB_CHARENC_MODE_DO_NOTHING :: -1;
 FF_SUB_CHARENC_MODE_AUTOMATIC :: 0;
 FF_SUB_CHARENC_MODE_PRE_DECODER :: 1;
 FF_SUB_CHARENC_MODE_IGNORE :: 2;
-
-FF_CODEC_PROPERTY_LOSSLESS :: 0x00000001;
-FF_CODEC_PROPERTY_CLOSED_CAPTIONS :: 0x00000002;
-FF_CODEC_PROPERTY_FILM_GRAIN :: 0x00000004;
 
 AV_HWACCEL_CODEC_CAP_EXPERIMENTAL :: 0x0200;
 
@@ -546,25 +743,37 @@ PARSER_FLAG_ONCE :: 0x0002;
 PARSER_FLAG_FETCHED_OFFSET :: 0x0004;
 PARSER_FLAG_USE_CODEC_TS :: 0x1000;
 
-LIBAVDEVICE_VERSION_MAJOR :: 60;
+LIBAVDEVICE_VERSION_MAJOR :: 61;
 
-LIBAVDEVICE_VERSION_MINOR :: 1;
+FF_API_BKTR_DEVICE :: LIBAVDEVICE_VERSION_MAJOR < 62;
+
+FF_API_OPENGL_DEVICE :: LIBAVDEVICE_VERSION_MAJOR < 62;
+
+FF_API_SDL2_DEVICE :: LIBAVDEVICE_VERSION_MAJOR < 62;
+
+LIBAVDEVICE_VERSION_MINOR :: 3;
 LIBAVDEVICE_VERSION_MICRO :: 100;
 
-AV_OPT_FLAG_ENCODING_PARAM :: 1;
-AV_OPT_FLAG_DECODING_PARAM :: 2;
-AV_OPT_FLAG_AUDIO_PARAM :: 8;
-AV_OPT_FLAG_VIDEO_PARAM :: 16;
-AV_OPT_FLAG_SUBTITLE_PARAM :: 32;
+AV_OPT_FLAG_ENCODING_PARAM :: 1 << 0;
 
-AV_OPT_FLAG_EXPORT :: 64;
+AV_OPT_FLAG_DECODING_PARAM :: 1 << 1;
+AV_OPT_FLAG_AUDIO_PARAM :: 1 << 3;
+AV_OPT_FLAG_VIDEO_PARAM :: 1 << 4;
+AV_OPT_FLAG_SUBTITLE_PARAM :: 1 << 5;
 
-AV_OPT_FLAG_READONLY :: 128;
-AV_OPT_FLAG_BSF_PARAM :: 1<<8;
-AV_OPT_FLAG_RUNTIME_PARAM :: 1<<15;
-AV_OPT_FLAG_FILTERING_PARAM :: 1<<16;
-AV_OPT_FLAG_DEPRECATED :: 1<<17;
-AV_OPT_FLAG_CHILD_CONSTS :: 1<<18;
+AV_OPT_FLAG_EXPORT :: 1 << 6;
+
+AV_OPT_FLAG_READONLY :: 1 << 7;
+
+AV_OPT_FLAG_BSF_PARAM :: 1 << 8;
+
+AV_OPT_FLAG_RUNTIME_PARAM :: 1 << 15;
+
+AV_OPT_FLAG_FILTERING_PARAM :: 1 << 16;
+
+AV_OPT_FLAG_DEPRECATED :: 1 << 17;
+
+AV_OPT_FLAG_CHILD_CONSTS :: 1 << 18;
 
 AV_OPT_SEARCH_CHILDREN :: 1 << 0;
 
@@ -572,17 +781,23 @@ AV_OPT_SEARCH_FAKE_OBJ :: 1 << 1;
 
 AV_OPT_ALLOW_NULL :: 1 << 2;
 
+AV_OPT_ARRAY_REPLACE :: 1 << 3;
+
 AV_OPT_MULTI_COMPONENT_RANGE :: 1 << 12;
 
 AV_OPT_SERIALIZE_SKIP_DEFAULTS :: 0x00000001;
 AV_OPT_SERIALIZE_OPT_FLAGS_EXACT :: 0x00000002;
+AV_OPT_SERIALIZE_SEARCH_CHILDREN :: 0x00000004;
 
-LIBAVFORMAT_VERSION_MAJOR :: 60;
+LIBAVFORMAT_VERSION_MAJOR :: 61;
 
-FF_API_COMPUTE_PKT_FIELDS2 :: LIBAVFORMAT_VERSION_MAJOR < 61;
-FF_API_GET_END_PTS :: LIBAVFORMAT_VERSION_MAJOR < 61;
-FF_API_AVIODIRCONTEXT :: LIBAVFORMAT_VERSION_MAJOR < 61;
-FF_API_AVFORMAT_IO_CLOSE :: LIBAVFORMAT_VERSION_MAJOR < 61;
+FF_API_COMPUTE_PKT_FIELDS2 :: LIBAVFORMAT_VERSION_MAJOR < 62;
+FF_API_LAVF_SHORTEST :: LIBAVFORMAT_VERSION_MAJOR < 62;
+FF_API_ALLOW_FLUSH :: LIBAVFORMAT_VERSION_MAJOR < 62;
+FF_API_AVSTREAM_SIDE_DATA :: LIBAVFORMAT_VERSION_MAJOR < 62;
+
+FF_API_GET_DUR_ESTIMATE_METHOD :: LIBAVFORMAT_VERSION_MAJOR < 62;
+FF_API_INTERNAL_TIMING :: LIBAVFORMAT_VERSION_MAJOR < 62;
 
 FF_API_R_FRAME_RATE :: 1;
 
@@ -602,7 +817,7 @@ AVIO_FLAG_NONBLOCK :: 8;
 
 AVIO_FLAG_DIRECT :: 0x8000;
 
-LIBAVFORMAT_VERSION_MINOR :: 3;
+LIBAVFORMAT_VERSION_MINOR :: 7;
 LIBAVFORMAT_VERSION_MICRO :: 100;
 
 AVPROBE_SCORE_RETRY :: AVPROBE_SCORE_MAX/4;
@@ -629,7 +844,9 @@ AVFMT_NOSTREAMS :: 0x1000;
 AVFMT_NOBINSEARCH :: 0x2000;
 AVFMT_NOGENSEARCH :: 0x4000;
 AVFMT_NO_BYTE_SEEK :: 0x8000;
+
 AVFMT_ALLOW_FLUSH :: 0x10000;
+
 AVFMT_TS_NONSTRICT :: 0x20000;
 
 AVFMT_TS_NEGATIVE :: 0x40000;
@@ -675,6 +892,8 @@ AV_DISPOSITION_DEPENDENT :: 1 << 19;
 
 AV_DISPOSITION_STILL_IMAGE :: 1 << 20;
 
+AV_DISPOSITION_MULTILAYER :: 1 << 21;
+
 AV_PTS_WRAP_IGNORE :: 0;
 AV_PTS_WRAP_ADD_OFFSET :: 1;
 AV_PTS_WRAP_SUB_OFFSET :: -1;
@@ -703,7 +922,9 @@ AVFMT_FLAG_FLUSH_PACKETS :: 0x0200;
 AVFMT_FLAG_BITEXACT :: 0x0400;
 AVFMT_FLAG_SORT_DTS :: 0x10000;
 AVFMT_FLAG_FAST_SEEK :: 0x80000;
+
 AVFMT_FLAG_SHORTEST :: 0x100000;
+
 AVFMT_FLAG_AUTO_BSF :: 0x200000;
 
 FF_FDEBUG_TS :: 0x0001;
@@ -725,9 +946,11 @@ AVSTREAM_INIT_IN_INIT_OUTPUT :: 1;
 
 AV_FRAME_FILENAME_FLAGS_MULTIPLE :: 1;
 
-LIBAVFILTER_VERSION_MAJOR :: 9;
+LIBAVFILTER_VERSION_MAJOR :: 10;
 
-LIBAVFILTER_VERSION_MINOR :: 3;
+FF_API_LINK_PUBLIC :: LIBAVFILTER_VERSION_MAJOR < 11;
+
+LIBAVFILTER_VERSION_MINOR :: 4;
 LIBAVFILTER_VERSION_MICRO :: 100;
 
 AVFILTER_FLAG_DYNAMIC_INPUTS :: 1 << 0;
@@ -737,6 +960,8 @@ AVFILTER_FLAG_DYNAMIC_OUTPUTS :: 1 << 1;
 AVFILTER_FLAG_SLICE_THREADS :: 1 << 2;
 
 AVFILTER_FLAG_METADATA_ONLY :: 1 << 3;
+
+AVFILTER_FLAG_HWDEVICE :: 1 << 4;
 
 AVFILTER_FLAG_SUPPORT_TIMELINE_GENERIC :: 1 << 16;
 
@@ -749,9 +974,9 @@ AVFILTER_THREAD_SLICE :: 1 << 0;
 AVFILTER_CMD_FLAG_ONE :: 1;
 AVFILTER_CMD_FLAG_FAST :: 2;
 
-LIBPOSTPROC_VERSION_MAJOR :: 57;
+LIBPOSTPROC_VERSION_MAJOR :: 58;
 
-LIBPOSTPROC_VERSION_MINOR :: 1;
+LIBPOSTPROC_VERSION_MINOR :: 3;
 LIBPOSTPROC_VERSION_MICRO :: 100;
 
 PP_QUALITY_MAX :: 6;
@@ -771,16 +996,16 @@ PP_FORMAT_440 :: 0x00000010|PP_FORMAT;
 
 PP_PICT_TYPE_QP2 :: 0x00000010;
 
-LIBSWRESAMPLE_VERSION_MAJOR :: 4;
+LIBSWRESAMPLE_VERSION_MAJOR :: 5;
 
-LIBSWRESAMPLE_VERSION_MINOR :: 10;
+LIBSWRESAMPLE_VERSION_MINOR :: 3;
 LIBSWRESAMPLE_VERSION_MICRO :: 100;
 
 SWR_FLAG_RESAMPLE :: 1;
 
-LIBSWSCALE_VERSION_MAJOR :: 7;
+LIBSWSCALE_VERSION_MAJOR :: 8;
 
-LIBSWSCALE_VERSION_MINOR :: 1;
+LIBSWSCALE_VERSION_MINOR :: 3;
 LIBSWSCALE_VERSION_MICRO :: 100;
 
 SWS_FAST_BILINEAR :: 1;
@@ -805,7 +1030,9 @@ SWS_PRINT_INFO :: 0x1000;
 SWS_FULL_CHR_H_INT :: 0x2000;
 
 SWS_FULL_CHR_H_INP :: 0x4000;
+
 SWS_DIRECT_BGR :: 0x8000;
+
 SWS_ACCURATE_RND :: 0x40000;
 SWS_BITEXACT :: 0x80000;
 SWS_ERROR_DIFFUSION :: 0x800000;
@@ -1139,9 +1366,19 @@ AVPictureType :: enum s32 {
 */
 av_get_picture_type_char :: (pict_type: AVPictureType) -> u8 #foreign libavutil;
 
-av_log2 :: (v: u32) -> s32 #foreign libavutil;
-
-av_log2_16bit :: (v: u32) -> s32 #foreign libavutil;
+/**
+* Put a description of the AVERROR code errnum in errbuf.
+* In case of failure the global variable errno is set to indicate the
+* error. Even in case of failure av_strerror() will print a generic
+* error message indicating the errnum provided to errbuf.
+*
+* @param errnum      error code to describe
+* @param errbuf      buffer to which description is written
+* @param errbuf_size the size in bytes of errbuf
+* @return 0 on success, a negative value if a description for errnum
+* cannot be found
+*/
+av_strerror :: (errnum: s32, errbuf: *u8, errbuf_size: u64) -> s32 #foreign libavutil;
 
 /**
 * Allocate a memory block with alignment suitable for all memory accesses
@@ -1541,19 +1778,9 @@ av_size_mult :: (a: u64, b: u64, r: *u64) -> s32 #foreign libavutil;
 */
 av_max_alloc :: (max: u64) -> void #foreign libavutil;
 
-/**
-* Put a description of the AVERROR code errnum in errbuf.
-* In case of failure the global variable errno is set to indicate the
-* error. Even in case of failure av_strerror() will print a generic
-* error message indicating the errnum provided to errbuf.
-*
-* @param errnum      error code to describe
-* @param errbuf      buffer to which description is written
-* @param errbuf_size the size in bytes of errbuf
-* @return 0 on success, a negative value if a description for errnum
-* cannot be found
-*/
-av_strerror :: (errnum: s32, errbuf: *u8, errbuf_size: u64) -> s32 #foreign libavutil;
+av_log2 :: (v: u32) -> s32 #foreign libavutil;
+
+av_log2_16bit :: (v: u32) -> s32 #foreign libavutil;
 
 /**
 * Rational number (pair of numerator and denominator).
@@ -1614,6 +1841,10 @@ av_sub_q :: (b: AVRational, c: AVRational) -> AVRational #foreign libavutil;
 *
 * In case of infinity, the returned value is expressed as `{1, 0}` or
 * `{-1, 0}` depending on the sign.
+*
+* In general rational numbers with |num| <= 1<<26 && |den| <= 1<<26
+* can be recovered exactly from their double representation.
+* (no exceptions were found within 1B random ones)
 *
 * @param d   `double` to convert
 * @param max Maximum allowed numerator and denominator
@@ -1819,6 +2050,11 @@ av_rescale_delta :: (in_tb: AVRational, in_ts: s64, fs_tb: AVRational, duration:
 * @param[in] inc_tb Time base of `inc`
 */
 av_add_stable :: (ts_tb: AVRational, ts: s64, inc_tb: AVRational, inc: s64) -> s64 #foreign libavutil;
+
+/**
+* 0th order modified bessel function of the first kind.
+*/
+av_bessel_i0 :: (x: float64) -> float64 #foreign libavutil;
 
 AVClassCategory :: enum s32 {
     NA                  :: 0;
@@ -2240,112 +2476,121 @@ AVPixelFormat :: enum s32 {
     BAYER_GRBG16LE :: 149;
     BAYER_GRBG16BE :: 150;
 
-    XVMC           :: 151;
+    YUV440P10LE    :: 151;
+    YUV440P10BE    :: 152;
+    YUV440P12LE    :: 153;
+    YUV440P12BE    :: 154;
+    AYUV64LE       :: 155;
+    AYUV64BE       :: 156;
 
-    YUV440P10LE    :: 152;
-    YUV440P10BE    :: 153;
-    YUV440P12LE    :: 154;
-    YUV440P12BE    :: 155;
-    AYUV64LE       :: 156;
-    AYUV64BE       :: 157;
+    VIDEOTOOLBOX   :: 157;
 
-    VIDEOTOOLBOX   :: 158;
+    P010LE         :: 158;
+    P010BE         :: 159;
 
-    P010LE         :: 159;
-    P010BE         :: 160;
+    GBRAP12BE      :: 160;
+    GBRAP12LE      :: 161;
 
-    GBRAP12BE      :: 161;
-    GBRAP12LE      :: 162;
+    GBRAP10BE      :: 162;
+    GBRAP10LE      :: 163;
 
-    GBRAP10BE      :: 163;
-    GBRAP10LE      :: 164;
+    MEDIACODEC     :: 164;
 
-    MEDIACODEC     :: 165;
+    GRAY12BE       :: 165;
+    GRAY12LE       :: 166;
+    GRAY10BE       :: 167;
+    GRAY10LE       :: 168;
 
-    GRAY12BE       :: 166;
-    GRAY12LE       :: 167;
-    GRAY10BE       :: 168;
-    GRAY10LE       :: 169;
+    P016LE         :: 169;
+    P016BE         :: 170;
 
-    P016LE         :: 170;
-    P016BE         :: 171;
+    D3D11          :: 171;
 
-    D3D11          :: 172;
+    GRAY9BE        :: 172;
+    GRAY9LE        :: 173;
 
-    GRAY9BE        :: 173;
-    GRAY9LE        :: 174;
+    GBRPF32BE      :: 174;
+    GBRPF32LE      :: 175;
+    GBRAPF32BE     :: 176;
+    GBRAPF32LE     :: 177;
 
-    GBRPF32BE      :: 175;
-    GBRPF32LE      :: 176;
-    GBRAPF32BE     :: 177;
-    GBRAPF32LE     :: 178;
+    DRM_PRIME      :: 178;
 
-    DRM_PRIME      :: 179;
+    OPENCL         :: 179;
 
-    OPENCL         :: 180;
+    GRAY14BE       :: 180;
+    GRAY14LE       :: 181;
 
-    GRAY14BE       :: 181;
-    GRAY14LE       :: 182;
+    GRAYF32BE      :: 182;
+    GRAYF32LE      :: 183;
 
-    GRAYF32BE      :: 183;
-    GRAYF32LE      :: 184;
+    YUVA422P12BE   :: 184;
+    YUVA422P12LE   :: 185;
+    YUVA444P12BE   :: 186;
+    YUVA444P12LE   :: 187;
 
-    YUVA422P12BE   :: 185;
-    YUVA422P12LE   :: 186;
-    YUVA444P12BE   :: 187;
-    YUVA444P12LE   :: 188;
+    NV24           :: 188;
+    NV42           :: 189;
 
-    NV24           :: 189;
-    NV42           :: 190;
+    VULKAN         :: 190;
 
-    VULKAN         :: 191;
+    Y210BE         :: 191;
+    Y210LE         :: 192;
 
-    Y210BE         :: 192;
-    Y210LE         :: 193;
+    X2RGB10LE      :: 193;
+    X2RGB10BE      :: 194;
+    X2BGR10LE      :: 195;
+    X2BGR10BE      :: 196;
 
-    X2RGB10LE      :: 194;
-    X2RGB10BE      :: 195;
-    X2BGR10LE      :: 196;
-    X2BGR10BE      :: 197;
+    P210BE         :: 197;
+    P210LE         :: 198;
 
-    P210BE         :: 198;
-    P210LE         :: 199;
+    P410BE         :: 199;
+    P410LE         :: 200;
 
-    P410BE         :: 200;
-    P410LE         :: 201;
+    P216BE         :: 201;
+    P216LE         :: 202;
 
-    P216BE         :: 202;
-    P216LE         :: 203;
+    P416BE         :: 203;
+    P416LE         :: 204;
 
-    P416BE         :: 204;
-    P416LE         :: 205;
+    VUYA           :: 205;
 
-    VUYA           :: 206;
+    RGBAF16BE      :: 206;
+    RGBAF16LE      :: 207;
 
-    RGBAF16BE      :: 207;
-    RGBAF16LE      :: 208;
+    VUYX           :: 208;
 
-    VUYX           :: 209;
+    P012LE         :: 209;
+    P012BE         :: 210;
 
-    P012LE         :: 210;
-    P012BE         :: 211;
+    Y212BE         :: 211;
+    Y212LE         :: 212;
 
-    Y212BE         :: 212;
-    Y212LE         :: 213;
+    XV30BE         :: 213;
+    XV30LE         :: 214;
 
-    XV30BE         :: 214;
-    XV30LE         :: 215;
+    XV36BE         :: 215;
+    XV36LE         :: 216;
 
-    XV36BE         :: 216;
-    XV36LE         :: 217;
+    RGBF32BE       :: 217;
+    RGBF32LE       :: 218;
 
-    RGBF32BE       :: 218;
-    RGBF32LE       :: 219;
+    RGBAF32BE      :: 219;
+    RGBAF32LE      :: 220;
 
-    RGBAF32BE      :: 220;
-    RGBAF32LE      :: 221;
+    P212BE         :: 221;
+    P212LE         :: 222;
 
-    NB             :: 222;
+    P412BE         :: 223;
+    P412LE         :: 224;
+
+    GBRAP14BE      :: 225;
+    GBRAP14LE      :: 226;
+
+    D3D12          :: 227;
+
+    NB             :: 228;
 
     AV_PIX_FMT_NONE           :: NONE;
     AV_PIX_FMT_YUV420P        :: YUV420P;
@@ -2526,8 +2771,6 @@ AVPixelFormat :: enum s32 {
     AV_PIX_FMT_BAYER_GRBG16LE :: BAYER_GRBG16LE;
     AV_PIX_FMT_BAYER_GRBG16BE :: BAYER_GRBG16BE;
 
-    AV_PIX_FMT_XVMC           :: XVMC;
-
     AV_PIX_FMT_YUV440P10LE    :: YUV440P10LE;
     AV_PIX_FMT_YUV440P10BE    :: YUV440P10BE;
     AV_PIX_FMT_YUV440P12LE    :: YUV440P12LE;
@@ -2630,6 +2873,17 @@ AVPixelFormat :: enum s32 {
 
     AV_PIX_FMT_RGBAF32BE      :: RGBAF32BE;
     AV_PIX_FMT_RGBAF32LE      :: RGBAF32LE;
+
+    AV_PIX_FMT_P212BE         :: P212BE;
+    AV_PIX_FMT_P212LE         :: P212LE;
+
+    AV_PIX_FMT_P412BE         :: P412BE;
+    AV_PIX_FMT_P412LE         :: P412LE;
+
+    AV_PIX_FMT_GBRAP14BE      :: GBRAP14BE;
+    AV_PIX_FMT_GBRAP14LE      :: GBRAP14LE;
+
+    AV_PIX_FMT_D3D12          :: D3D12;
 
     AV_PIX_FMT_NB             :: NB;
 }
@@ -2751,7 +3005,10 @@ AVColorSpace :: enum s32 {
     CHROMA_DERIVED_NCL :: 12;
     CHROMA_DERIVED_CL  :: 13;
     ICTCP              :: 14;
-    NB                 :: 15;
+    IPT_C2             :: 15;
+    YCGCO_RE           :: 16;
+    YCGCO_RO           :: 17;
+    NB                 :: 18;
 
     AVCOL_SPC_RGB                :: RGB;
     AVCOL_SPC_BT709              :: BT709;
@@ -2769,6 +3026,9 @@ AVColorSpace :: enum s32 {
     AVCOL_SPC_CHROMA_DERIVED_NCL :: CHROMA_DERIVED_NCL;
     AVCOL_SPC_CHROMA_DERIVED_CL  :: CHROMA_DERIVED_CL;
     AVCOL_SPC_ICTCP              :: ICTCP;
+    AVCOL_SPC_IPT_C2             :: IPT_C2;
+    AVCOL_SPC_YCGCO_RE           :: YCGCO_RE;
+    AVCOL_SPC_YCGCO_RO           :: YCGCO_RO;
     AVCOL_SPC_NB                 :: NB;
 }
 
@@ -3065,152 +3325,6 @@ av_buffer_pool_get :: (pool: *AVBufferPool) -> *AVBufferRef #foreign libavutil;
 av_buffer_pool_buffer_get_opaque :: (ref: *AVBufferRef) -> *void #foreign libavutil;
 
 /**
-* @}
-*/
-AVDictionaryEntry :: struct {
-    key:   *u8;
-    value: *u8;
-}
-
-AVDictionary :: struct {}
-
-/**
-* Get a dictionary entry with matching key.
-*
-* The returned entry key or value must not be changed, or it will
-* cause undefined behavior.
-*
-* @param prev  Set to the previous matching element to find the next.
-*              If set to NULL the first matching element is returned.
-* @param key   Matching key
-* @param flags A collection of AV_DICT_* flags controlling how the
-*              entry is retrieved
-*
-* @return      Found entry or NULL in case no matching entry was found in the dictionary
-*/
-av_dict_get :: (m: *AVDictionary, key: *u8, prev: *AVDictionaryEntry, flags: s32) -> *AVDictionaryEntry #foreign libavutil;
-
-/**
-* Iterate over a dictionary
-*
-* Iterates through all entries in the dictionary.
-*
-* @warning The returned AVDictionaryEntry key/value must not be changed.
-*
-* @warning As av_dict_set() invalidates all previous entries returned
-* by this function, it must not be called while iterating over the dict.
-*
-* Typical usage:
-* @code
-* const AVDictionaryEntry *e = NULL;
-* while ((e = av_dict_iterate(m, e))) {
-*     // ...
-* }
-* @endcode
-*
-* @param m     The dictionary to iterate over
-* @param prev  Pointer to the previous AVDictionaryEntry, NULL initially
-*
-* @retval AVDictionaryEntry* The next element in the dictionary
-* @retval NULL               No more elements in the dictionary
-*/
-av_dict_iterate :: (m: *AVDictionary, prev: *AVDictionaryEntry) -> *AVDictionaryEntry #foreign libavutil;
-
-/**
-* Get number of entries in dictionary.
-*
-* @param m dictionary
-* @return  number of entries in dictionary
-*/
-av_dict_count :: (m: *AVDictionary) -> s32 #foreign libavutil;
-
-/**
-* Set the given entry in *pm, overwriting an existing entry.
-*
-* Note: If AV_DICT_DONT_STRDUP_KEY or AV_DICT_DONT_STRDUP_VAL is set,
-* these arguments will be freed on error.
-*
-* @warning Adding a new entry to a dictionary invalidates all existing entries
-* previously returned with av_dict_get() or av_dict_iterate().
-*
-* @param pm        Pointer to a pointer to a dictionary struct. If *pm is NULL
-*                  a dictionary struct is allocated and put in *pm.
-* @param key       Entry key to add to *pm (will either be av_strduped or added as a new key depending on flags)
-* @param value     Entry value to add to *pm (will be av_strduped or added as a new key depending on flags).
-*                  Passing a NULL value will cause an existing entry to be deleted.
-*
-* @return          >= 0 on success otherwise an error code <0
-*/
-av_dict_set :: (pm: **AVDictionary, key: *u8, value: *u8, flags: s32) -> s32 #foreign libavutil;
-
-/**
-* Convenience wrapper for av_dict_set() that converts the value to a string
-* and stores it.
-*
-* Note: If ::AV_DICT_DONT_STRDUP_KEY is set, key will be freed on error.
-*/
-av_dict_set_int :: (pm: **AVDictionary, key: *u8, value: s64, flags: s32) -> s32 #foreign libavutil;
-
-/**
-* Parse the key/value pairs list and add the parsed entries to a dictionary.
-*
-* In case of failure, all the successfully set entries are stored in
-* *pm. You may need to manually free the created dictionary.
-*
-* @param key_val_sep  A 0-terminated list of characters used to separate
-*                     key from value
-* @param pairs_sep    A 0-terminated list of characters used to separate
-*                     two pairs from each other
-* @param flags        Flags to use when adding to the dictionary.
-*                     ::AV_DICT_DONT_STRDUP_KEY and ::AV_DICT_DONT_STRDUP_VAL
-*                     are ignored since the key/value tokens will always
-*                     be duplicated.
-*
-* @return             0 on success, negative AVERROR code on failure
-*/
-av_dict_parse_string :: (pm: **AVDictionary, str: *u8, key_val_sep: *u8, pairs_sep: *u8, flags: s32) -> s32 #foreign libavutil;
-
-/**
-* Copy entries from one AVDictionary struct into another.
-*
-* @note Metadata is read using the ::AV_DICT_IGNORE_SUFFIX flag
-*
-* @param dst   Pointer to a pointer to a AVDictionary struct to copy into. If *dst is NULL,
-*              this function will allocate a struct for you and put it in *dst
-* @param src   Pointer to the source AVDictionary struct to copy items from.
-* @param flags Flags to use when setting entries in *dst
-*
-* @return 0 on success, negative AVERROR code on failure. If dst was allocated
-*           by this function, callers should free the associated memory.
-*/
-av_dict_copy :: (dst: **AVDictionary, src: *AVDictionary, flags: s32) -> s32 #foreign libavutil;
-
-/**
-* Free all the memory allocated for an AVDictionary struct
-* and all keys and values.
-*/
-av_dict_free :: (m: **AVDictionary) -> void #foreign libavutil;
-
-/**
-* Get dictionary entries as a string.
-*
-* Create a string containing dictionary's entries.
-* Such string may be passed back to av_dict_parse_string().
-* @note String is escaped with backslashes ('\').
-*
-* @warning Separators cannot be neither '\\' nor '\0'. They also cannot be the same.
-*
-* @param[in]  m             The dictionary
-* @param[out] buffer        Pointer to buffer that will be allocated with string containg entries.
-*                           Buffer must be freed by the caller when is no longer needed.
-* @param[in]  key_val_sep   Character used to separate key from value
-* @param[in]  pairs_sep     Character used to separate two pairs from each other
-*
-* @return                   >= 0 on success, negative on error
-*/
-av_dict_get_string :: (m: *AVDictionary, buffer: **u8, key_val_sep: u8, pairs_sep: u8) -> s32 #foreign libavutil;
-
-/**
 * @defgroup lavu_audio_channels Audio channels
 * @ingroup lavu_audio
 *
@@ -3252,6 +3366,10 @@ AVChannel :: enum s32 {
     BOTTOM_FRONT_CENTER   :: 38;
     BOTTOM_FRONT_LEFT     :: 39;
     BOTTOM_FRONT_RIGHT    :: 40;
+    SIDE_SURROUND_LEFT    :: 41;
+    SIDE_SURROUND_RIGHT   :: 42;
+    TOP_SURROUND_LEFT     :: 43;
+    TOP_SURROUND_RIGHT    :: 44;
 
     UNUSED                :: 512;
 
@@ -3294,6 +3412,10 @@ AVChannel :: enum s32 {
     AV_CHAN_BOTTOM_FRONT_CENTER   :: BOTTOM_FRONT_CENTER;
     AV_CHAN_BOTTOM_FRONT_LEFT     :: BOTTOM_FRONT_LEFT;
     AV_CHAN_BOTTOM_FRONT_RIGHT    :: BOTTOM_FRONT_RIGHT;
+    AV_CHAN_SIDE_SURROUND_LEFT    :: SIDE_SURROUND_LEFT;
+    AV_CHAN_SIDE_SURROUND_RIGHT   :: SIDE_SURROUND_RIGHT;
+    AV_CHAN_TOP_SURROUND_LEFT     :: TOP_SURROUND_LEFT;
+    AV_CHAN_TOP_SURROUND_RIGHT    :: TOP_SURROUND_RIGHT;
 
     AV_CHAN_UNUSED                :: UNUSED;
 
@@ -3305,21 +3427,15 @@ AVChannel :: enum s32 {
 }
 
 AVChannelOrder :: enum s32 {
-    UNSPEC    :: 0;
+    AV_CHANNEL_ORDER_UNSPEC    :: 0;
 
-    NATIVE    :: 1;
+    AV_CHANNEL_ORDER_NATIVE    :: 1;
 
-    CUSTOM    :: 2;
+    AV_CHANNEL_ORDER_CUSTOM    :: 2;
 
-    AMBISONIC :: 3;
+    AV_CHANNEL_ORDER_AMBISONIC :: 3;
 
-    AV_CHANNEL_ORDER_UNSPEC    :: UNSPEC;
-
-    AV_CHANNEL_ORDER_NATIVE    :: NATIVE;
-
-    AV_CHANNEL_ORDER_CUSTOM    :: CUSTOM;
-
-    AV_CHANNEL_ORDER_AMBISONIC :: AMBISONIC;
+    FF_CHANNEL_ORDER_NB        :: 4;
 }
 
 AVMatrixEncoding :: enum s32 {
@@ -3446,123 +3562,6 @@ AVChannelLayout :: struct {
 AVBPrint :: struct {}
 
 /**
-* Return a channel layout id that matches name, or 0 if no match is found.
-*
-* name can be one or several of the following notations,
-* separated by '+' or '|':
-* - the name of an usual channel layout (mono, stereo, 4.0, quad, 5.0,
-*   5.0(side), 5.1, 5.1(side), 7.1, 7.1(wide), downmix);
-* - the name of a single channel (FL, FR, FC, LFE, BL, BR, FLC, FRC, BC,
-*   SL, SR, TC, TFL, TFC, TFR, TBL, TBC, TBR, DL, DR);
-* - a number of channels, in decimal, followed by 'c', yielding
-*   the default channel layout for that number of channels (@see
-*   av_get_default_channel_layout);
-* - a channel layout mask, in hexadecimal starting with "0x" (see the
-*   AV_CH_* macros).
-*
-* Example: "stereo+FC" = "2c+FC" = "2c+1c" = "0x7"
-*
-* @deprecated use av_channel_layout_from_string()
-*/
-av_get_channel_layout :: (name: *u8) -> u64 #foreign libavutil;
-
-/**
-* Return a channel layout and the number of channels based on the specified name.
-*
-* This function is similar to (@see av_get_channel_layout), but can also parse
-* unknown channel layout specifications.
-*
-* @param[in]  name             channel layout specification string
-* @param[out] channel_layout   parsed channel layout (0 if unknown)
-* @param[out] nb_channels      number of channels
-*
-* @return 0 on success, AVERROR(EINVAL) if the parsing fails.
-* @deprecated use av_channel_layout_from_string()
-*/
-av_get_extended_channel_layout :: (name: *u8, channel_layout: *u64, nb_channels: *s32) -> s32 #foreign libavutil;
-
-/**
-* Return a description of a channel layout.
-* If nb_channels is <= 0, it is guessed from the channel_layout.
-*
-* @param buf put here the string containing the channel layout
-* @param buf_size size in bytes of the buffer
-* @param nb_channels number of channels
-* @param channel_layout channel layout bitset
-* @deprecated use av_channel_layout_describe()
-*/
-av_get_channel_layout_string :: (buf: *u8, buf_size: s32, nb_channels: s32, channel_layout: u64) -> void #foreign libavutil;
-
-/**
-* Append a description of a channel layout to a bprint buffer.
-* @deprecated use av_channel_layout_describe()
-*/
-av_bprint_channel_layout :: (bp: *AVBPrint, nb_channels: s32, channel_layout: u64) -> void #foreign libavutil;
-
-/**
-* Return the number of channels in the channel layout.
-* @deprecated use AVChannelLayout.nb_channels
-*/
-av_get_channel_layout_nb_channels :: (channel_layout: u64) -> s32 #foreign libavutil;
-
-/**
-* Return default channel layout for a given number of channels.
-*
-* @deprecated use av_channel_layout_default()
-*/
-av_get_default_channel_layout :: (nb_channels: s32) -> s64 #foreign libavutil;
-
-/**
-* Get the index of a channel in channel_layout.
-*
-* @param channel_layout channel layout bitset
-* @param channel a channel layout describing exactly one channel which must be
-*                present in channel_layout.
-*
-* @return index of channel in channel_layout on success, a negative AVERROR
-*         on error.
-*
-* @deprecated use av_channel_layout_index_from_channel()
-*/
-av_get_channel_layout_channel_index :: (channel_layout: u64, channel: u64) -> s32 #foreign libavutil;
-
-/**
-* Get the channel with the given index in channel_layout.
-* @deprecated use av_channel_layout_channel_from_index()
-*/
-av_channel_layout_extract_channel :: (channel_layout: u64, index: s32) -> u64 #foreign libavutil;
-
-/**
-* Get the name of a given channel.
-*
-* @return channel name on success, NULL on error.
-*
-* @deprecated use av_channel_name()
-*/
-av_get_channel_name :: (channel: u64) -> *u8 #foreign libavutil;
-
-/**
-* Get the description of a given channel.
-*
-* @param channel  a channel layout with a single channel
-* @return  channel description on success, NULL on error
-* @deprecated use av_channel_description()
-*/
-av_get_channel_description :: (channel: u64) -> *u8 #foreign libavutil;
-
-/**
-* Get the value and name of a standard channel layout.
-*
-* @param[in]  index   index in an internal list, starting at 0
-* @param[out] layout  channel layout mask
-* @param[out] name    name of the layout
-* @return  0  if the layout exists,
-*          <0 if index is beyond the limits
-* @deprecated use av_channel_layout_standard()
-*/
-av_get_standard_channel_layout :: (index: u32, layout: *u64, name: **u8) -> s32 #foreign libavutil;
-
-/**
 * Get a human readable string in an abbreviated form describing a given channel.
 * This is the inverse function of @ref av_channel_from_string().
 *
@@ -3610,6 +3609,23 @@ av_channel_description_bprint :: (bp: *AVBPrint, channel_id: AVChannel) -> void 
 av_channel_from_string :: (name: *u8) -> AVChannel #foreign libavutil;
 
 /**
+* Initialize a custom channel layout with the specified number of channels.
+* The channel map will be allocated and the designation of all channels will
+* be set to AV_CHAN_UNKNOWN.
+*
+* This is only a convenience helper function, a custom channel layout can also
+* be constructed without using this.
+*
+* @param channel_layout the layout structure to be initialized
+* @param nb_channels the number of channels
+*
+* @return 0 on success
+*         AVERROR(EINVAL) if the number of channels <= 0
+*         AVERROR(ENOMEM) if the channel map could not be allocated
+*/
+av_channel_layout_custom_init :: (channel_layout: *AVChannelLayout, nb_channels: s32) -> s32 #foreign libavutil;
+
+/**
 * Initialize a native channel layout from a bitmask indicating which channels
 * are present.
 *
@@ -3633,10 +3649,14 @@ av_channel_layout_from_mask :: (channel_layout: *AVChannelLayout, mask: u64) -> 
 *  - the number of unordered channels (eg. "4C" or "4 channels")
 *  - the ambisonic order followed by optional non-diegetic channels (eg.
 *    "ambisonic 2+stereo")
+* On error, the channel layout will remain uninitialized, but not necessarily
+* untouched.
 *
-* @param channel_layout input channel layout
+* @param channel_layout uninitialized channel layout for the result
 * @param str string describing the channel layout
-* @return 0 channel layout was detected, AVERROR_INVALIDATATA otherwise
+* @return 0 on success parsing the channel layout
+*         AVERROR(EINVAL) if an invalid channel layout string was provided
+*         AVERROR(ENOMEM) if there was not enough memory
 */
 av_channel_layout_from_string :: (channel_layout: *AVChannelLayout, str: *u8) -> s32 #foreign libavutil;
 
@@ -3788,6 +3808,197 @@ av_channel_layout_check :: (channel_layout: *AVChannelLayout) -> s32 #foreign li
 av_channel_layout_compare :: (chl: *AVChannelLayout, chl1: *AVChannelLayout) -> s32 #foreign libavutil;
 
 /**
+* Return the order if the layout is n-th order standard-order ambisonic.
+* The presence of optional extra non-diegetic channels at the end is not taken
+* into account.
+*
+* @param channel_layout input channel layout
+* @return the order of the layout, a negative error code otherwise.
+*/
+av_channel_layout_ambisonic_order :: (channel_layout: *AVChannelLayout) -> s32 #foreign libavutil;
+
+/**
+* Change the AVChannelOrder of a channel layout.
+*
+* Change of AVChannelOrder can be either lossless or lossy. In case of a
+* lossless conversion all the channel designations and the associated channel
+* names (if any) are kept. On a lossy conversion the channel names and channel
+* designations might be lost depending on the capabilities of the desired
+* AVChannelOrder. Note that some conversions are simply not possible in which
+* case this function returns AVERROR(ENOSYS).
+*
+* The following conversions are supported:
+*
+* Any       -> Custom     : Always possible, always lossless.
+* Any       -> Unspecified: Always possible, lossless if channel designations
+*   are all unknown and channel names are not used, lossy otherwise.
+* Custom    -> Ambisonic  : Possible if it contains ambisonic channels with
+*   optional non-diegetic channels in the end. Lossy if the channels have
+*   custom names, lossless otherwise.
+* Custom    -> Native     : Possible if it contains native channels in native
+*     order. Lossy if the channels have custom names, lossless otherwise.
+*
+* On error this function keeps the original channel layout untouched.
+*
+* @param channel_layout channel layout which will be changed
+* @param order the desired channel layout order
+* @param flags a combination of AV_CHANNEL_LAYOUT_RETYPE_FLAG_* constants
+* @return 0 if the conversion was successful and lossless or if the channel
+*           layout was already in the desired order
+*         >0 if the conversion was successful but lossy
+*         AVERROR(ENOSYS) if the conversion was not possible (or would be
+*           lossy and AV_CHANNEL_LAYOUT_RETYPE_FLAG_LOSSLESS was specified)
+*         AVERROR(EINVAL), AVERROR(ENOMEM) on error
+*/
+av_channel_layout_retype :: (channel_layout: *AVChannelLayout, order: AVChannelOrder, flags: s32) -> s32 #foreign libavutil;
+
+/**
+* @}
+*/
+AVDictionaryEntry :: struct {
+    key:   *u8;
+    value: *u8;
+}
+
+AVDictionary :: struct {}
+
+/**
+* Get a dictionary entry with matching key.
+*
+* The returned entry key or value must not be changed, or it will
+* cause undefined behavior.
+*
+* @param prev  Set to the previous matching element to find the next.
+*              If set to NULL the first matching element is returned.
+* @param key   Matching key
+* @param flags A collection of AV_DICT_* flags controlling how the
+*              entry is retrieved
+*
+* @return      Found entry or NULL in case no matching entry was found in the dictionary
+*/
+av_dict_get :: (m: *AVDictionary, key: *u8, prev: *AVDictionaryEntry, flags: s32) -> *AVDictionaryEntry #foreign libavutil;
+
+/**
+* Iterate over a dictionary
+*
+* Iterates through all entries in the dictionary.
+*
+* @warning The returned AVDictionaryEntry key/value must not be changed.
+*
+* @warning As av_dict_set() invalidates all previous entries returned
+* by this function, it must not be called while iterating over the dict.
+*
+* Typical usage:
+* @code
+* const AVDictionaryEntry *e = NULL;
+* while ((e = av_dict_iterate(m, e))) {
+*     // ...
+* }
+* @endcode
+*
+* @param m     The dictionary to iterate over
+* @param prev  Pointer to the previous AVDictionaryEntry, NULL initially
+*
+* @retval AVDictionaryEntry* The next element in the dictionary
+* @retval NULL               No more elements in the dictionary
+*/
+av_dict_iterate :: (m: *AVDictionary, prev: *AVDictionaryEntry) -> *AVDictionaryEntry #foreign libavutil;
+
+/**
+* Get number of entries in dictionary.
+*
+* @param m dictionary
+* @return  number of entries in dictionary
+*/
+av_dict_count :: (m: *AVDictionary) -> s32 #foreign libavutil;
+
+/**
+* Set the given entry in *pm, overwriting an existing entry.
+*
+* Note: If AV_DICT_DONT_STRDUP_KEY or AV_DICT_DONT_STRDUP_VAL is set,
+* these arguments will be freed on error.
+*
+* @warning Adding a new entry to a dictionary invalidates all existing entries
+* previously returned with av_dict_get() or av_dict_iterate().
+*
+* @param pm        Pointer to a pointer to a dictionary struct. If *pm is NULL
+*                  a dictionary struct is allocated and put in *pm.
+* @param key       Entry key to add to *pm (will either be av_strduped or added as a new key depending on flags)
+* @param value     Entry value to add to *pm (will be av_strduped or added as a new key depending on flags).
+*                  Passing a NULL value will cause an existing entry to be deleted.
+*
+* @return          >= 0 on success otherwise an error code <0
+*/
+av_dict_set :: (pm: **AVDictionary, key: *u8, value: *u8, flags: s32) -> s32 #foreign libavutil;
+
+/**
+* Convenience wrapper for av_dict_set() that converts the value to a string
+* and stores it.
+*
+* Note: If ::AV_DICT_DONT_STRDUP_KEY is set, key will be freed on error.
+*/
+av_dict_set_int :: (pm: **AVDictionary, key: *u8, value: s64, flags: s32) -> s32 #foreign libavutil;
+
+/**
+* Parse the key/value pairs list and add the parsed entries to a dictionary.
+*
+* In case of failure, all the successfully set entries are stored in
+* *pm. You may need to manually free the created dictionary.
+*
+* @param key_val_sep  A 0-terminated list of characters used to separate
+*                     key from value
+* @param pairs_sep    A 0-terminated list of characters used to separate
+*                     two pairs from each other
+* @param flags        Flags to use when adding to the dictionary.
+*                     ::AV_DICT_DONT_STRDUP_KEY and ::AV_DICT_DONT_STRDUP_VAL
+*                     are ignored since the key/value tokens will always
+*                     be duplicated.
+*
+* @return             0 on success, negative AVERROR code on failure
+*/
+av_dict_parse_string :: (pm: **AVDictionary, str: *u8, key_val_sep: *u8, pairs_sep: *u8, flags: s32) -> s32 #foreign libavutil;
+
+/**
+* Copy entries from one AVDictionary struct into another.
+*
+* @note Metadata is read using the ::AV_DICT_IGNORE_SUFFIX flag
+*
+* @param dst   Pointer to a pointer to a AVDictionary struct to copy into. If *dst is NULL,
+*              this function will allocate a struct for you and put it in *dst
+* @param src   Pointer to the source AVDictionary struct to copy items from.
+* @param flags Flags to use when setting entries in *dst
+*
+* @return 0 on success, negative AVERROR code on failure. If dst was allocated
+*           by this function, callers should free the associated memory.
+*/
+av_dict_copy :: (dst: **AVDictionary, src: *AVDictionary, flags: s32) -> s32 #foreign libavutil;
+
+/**
+* Free all the memory allocated for an AVDictionary struct
+* and all keys and values.
+*/
+av_dict_free :: (m: **AVDictionary) -> void #foreign libavutil;
+
+/**
+* Get dictionary entries as a string.
+*
+* Create a string containing dictionary's entries.
+* Such string may be passed back to av_dict_parse_string().
+* @note String is escaped with backslashes ('\').
+*
+* @warning Separators cannot be neither '\\' nor '\0'. They also cannot be the same.
+*
+* @param[in]  m             The dictionary
+* @param[out] buffer        Pointer to buffer that will be allocated with string containg entries.
+*                           Buffer must be freed by the caller when is no longer needed.
+* @param[in]  key_val_sep   Character used to separate key from value
+* @param[in]  pairs_sep     Character used to separate two pairs from each other
+*
+* @return                   >= 0 on success, negative on error
+*/
+av_dict_get_string :: (m: *AVDictionary, buffer: **u8, key_val_sep: u8, pairs_sep: u8) -> s32 #foreign libavutil;
+
+/**
 * @defgroup lavu_frame AVFrame
 * @ingroup lavu_data
 *
@@ -3849,6 +4060,12 @@ AVFrameSideDataType :: enum s32 {
 
     AMBIENT_VIEWING_ENVIRONMENT :: 26;
 
+    VIDEO_HINT                  :: 27;
+
+    LCEVC                       :: 28;
+
+    VIEW_ID                     :: 29;
+
     AV_FRAME_DATA_PANSCAN                     :: PANSCAN;
 
     AV_FRAME_DATA_A53_CC                      :: A53_CC;
@@ -3902,6 +4119,12 @@ AVFrameSideDataType :: enum s32 {
     AV_FRAME_DATA_DYNAMIC_HDR_VIVID           :: DYNAMIC_HDR_VIVID;
 
     AV_FRAME_DATA_AMBIENT_VIEWING_ENVIRONMENT :: AMBIENT_VIEWING_ENVIRONMENT;
+
+    AV_FRAME_DATA_VIDEO_HINT                  :: VIDEO_HINT;
+
+    AV_FRAME_DATA_LCEVC                       :: LCEVC;
+
+    AV_FRAME_DATA_VIEW_ID                     :: VIEW_ID;
 }
 
 AVActiveFormatDescription :: enum s32 {
@@ -3934,6 +4157,32 @@ AVFrameSideData :: struct {
     size:     u64;
     metadata: *AVDictionary;
     buf:      *AVBufferRef;
+}
+
+AVSideDataProps :: enum s32 {
+    GLOBAL :: 1;
+
+    MULTI  :: 2;
+
+    AV_SIDE_DATA_PROP_GLOBAL :: GLOBAL;
+
+    AV_SIDE_DATA_PROP_MULTI  :: MULTI;
+}
+
+/**
+* This struct describes the properties of a side data type. Its instance
+* corresponding to a given type can be obtained from av_frame_side_data_desc().
+*/
+AVSideDataDescriptor :: struct {
+    /**
+    * Human-readable side data description.
+    */
+    name:  *u8;
+
+    /**
+    * Side data property flags, a combination of AVSideDataProps values.
+    */
+    props: u32;
 }
 
 /**
@@ -4021,8 +4270,7 @@ AVRegionOfInterest :: struct {
 * to the end with a minor bump.
 *
 * Fields can be accessed through AVOptions, the name string used, matches the
-* C structure field name for fields accessible through AVOptions. The AVClass
-* for AVFrame can be obtained from avcodec_get_frame_class()
+* C structure field name for fields accessible through AVOptions.
 */
 AVFrame :: struct {
     /**
@@ -4044,7 +4292,7 @@ AVFrame :: struct {
     * end of image data in order to reverse line order, when used in
     * combination with negative values in the linesize[] array.
     */
-    data:                   [8] *u8;
+    data:                  [8] *u8;
 
     /**
     * For video, a positive or negative value, which is typically indicating
@@ -4068,7 +4316,7 @@ AVFrame :: struct {
     * @attention In case of video, line size values can be negative to achieve
     * a vertically inverted iteration over image lines.
     */
-    linesize:               [8] s32;
+    linesize:              [8] s32;
 
     /**
     * pointers to the data planes/channels.
@@ -4084,7 +4332,7 @@ AVFrame :: struct {
     * but for planar audio with more channels that can fit in data,
     * extended_data must be used in order to access all channels.
     */
-    extended_data:          **u8;
+    extended_data:         **u8;
 
     /**
     * @name Video dimensions
@@ -4095,7 +4343,7 @@ AVFrame :: struct {
     * restricted by the @ref cropping "Cropping rectangle".
     * @{
     */
-    width:                  s32;
+    width:                 s32;
     /**
     * @name Video dimensions
     * Video frames only. The coded dimensions (in pixels) of the video frame,
@@ -4105,46 +4353,48 @@ AVFrame :: struct {
     * restricted by the @ref cropping "Cropping rectangle".
     * @{
     */
-    height:                 s32;
+    height:                s32;
 
     /**
     * number of audio samples (per channel) described by this frame
     */
-    nb_samples:             s32;
+    nb_samples:            s32;
 
     /**
     * format of the frame, -1 if unknown or unset
     * Values correspond to enum AVPixelFormat for video frames,
     * enum AVSampleFormat for audio)
     */
-    format:                 s32;
+    format:                s32;
 
     /**
     * 1 -> keyframe, 0-> not
+    *
+    * @deprecated Use AV_FRAME_FLAG_KEY instead
     */
-    key_frame:              s32;
+    key_frame:             s32;
 
     /**
     * Picture type of the frame.
     */
-    pict_type:              AVPictureType;
+    pict_type:             AVPictureType;
 
     /**
     * Sample aspect ratio for the video frame, 0/1 if unknown/unspecified.
     */
-    sample_aspect_ratio:    AVRational;
+    sample_aspect_ratio:   AVRational;
 
     /**
     * Presentation timestamp in time_base units (time when frame should be shown to user).
     */
-    pts:                    s64;
+    pts:                   s64;
 
     /**
     * DTS copied from the AVPacket that triggered returning this frame. (if frame threading isn't used)
     * This is also the Presentation time of this AVFrame calculated from
     * only AVPacket.dts values without pts values.
     */
-    pkt_dts:                s64;
+    pkt_dts:               s64;
 
     /**
     * Time base for the timestamps in this frame.
@@ -4152,71 +4402,72 @@ AVFrame :: struct {
     * filters, but its value will be by default ignored on input to encoders
     * or filters.
     */
-    time_base:              AVRational;
-
-    /**
-    * picture number in bitstream order
-    */
-    coded_picture_number:   s32;
-
-    /**
-    * picture number in display order
-    */
-    display_picture_number: s32;
+    time_base:             AVRational;
 
     /**
     * quality (between 1 (good) and FF_LAMBDA_MAX (bad))
     */
-    quality:                s32;
+    quality:               s32;
 
     /**
-    * for some private data of the user
+    * Frame owner's private data.
+    *
+    * This field may be set by the code that allocates/owns the frame data.
+    * It is then not touched by any library functions, except:
+    * - it is copied to other references by av_frame_copy_props() (and hence by
+    *   av_frame_ref());
+    * - it is set to NULL when the frame is cleared by av_frame_unref()
+    * - on the caller's explicit request. E.g. libavcodec encoders/decoders
+    *   will copy this field to/from @ref AVPacket "AVPackets" if the caller sets
+    *   @ref AV_CODEC_FLAG_COPY_OPAQUE.
+    *
+    * @see opaque_ref the reference-counted analogue
     */
-    opaque:                 *void;
+    opaque:                *void;
 
     /**
-    * When decoding, this signals how much the picture must be delayed.
-    * extra_delay = repeat_pict / (2*fps)
+    * Number of fields in this frame which should be repeated, i.e. the total
+    * duration of this frame should be repeat_pict + 2 normal field durations.
+    *
+    * For interlaced frames this field may be set to 1, which signals that this
+    * frame should be presented as 3 fields: beginning with the first field (as
+    * determined by AV_FRAME_FLAG_TOP_FIELD_FIRST being set or not), followed
+    * by the second field, and then the first field again.
+    *
+    * For progressive frames this field may be set to a multiple of 2, which
+    * signals that this frame's duration should be (repeat_pict + 2) / 2
+    * normal frame durations.
+    *
+    * @note This field is computed from MPEG2 repeat_first_field flag and its
+    * associated flags, H.264 pic_struct from picture timing SEI, and
+    * their analogues in other codecs. Typically it should only be used when
+    * higher-layer timing information is not available.
     */
-    repeat_pict:            s32;
+    repeat_pict:           s32;
 
     /**
     * The content of the picture is interlaced.
+    *
+    * @deprecated Use AV_FRAME_FLAG_INTERLACED instead
     */
-    interlaced_frame:       s32;
+    interlaced_frame:      s32;
 
     /**
     * If the content is interlaced, is top field displayed first.
+    *
+    * @deprecated Use AV_FRAME_FLAG_TOP_FIELD_FIRST instead
     */
-    top_field_first:        s32;
+    top_field_first:       s32;
 
     /**
     * Tell user application that palette has changed from previous frame.
     */
-    palette_has_changed:    s32;
-
-    /**
-    * reordered opaque 64 bits (generally an integer or a double precision float
-    * PTS but can be anything).
-    * The user sets AVCodecContext.reordered_opaque to represent the input at
-    * that time,
-    * the decoder reorders values as needed and sets AVFrame.reordered_opaque
-    * to exactly one of the values provided by the user through AVCodecContext.reordered_opaque
-    *
-    * @deprecated Use AV_CODEC_FLAG_COPY_OPAQUE instead
-    */
-    reordered_opaque:       s64;
+    palette_has_changed:   s32;
 
     /**
     * Sample rate of the audio data.
     */
-    sample_rate:            s32;
-
-    /**
-    * Channel layout of the audio data.
-    * @deprecated use ch_layout instead
-    */
-    channel_layout:         u64;
+    sample_rate:           s32;
 
     /**
     * AVBuffer references backing the data for this frame. All the pointers in
@@ -4230,7 +4481,7 @@ AVFrame :: struct {
     * this array. Then the extra AVBufferRef pointers are stored in the
     * extended_buf array.
     */
-    buf:                    [8] *AVBufferRef;
+    buf:                   [8] *AVBufferRef;
 
     /**
     * For planar audio which requires more than AV_NUM_DATA_POINTERS
@@ -4244,71 +4495,63 @@ AVFrame :: struct {
     * This array is always allocated using av_malloc() by whoever constructs
     * the frame. It is freed in av_frame_unref().
     */
-    extended_buf:           **AVBufferRef;
+    extended_buf:          **AVBufferRef;
 
     /**
     * Number of elements in extended_buf.
     */
-    nb_extended_buf:        s32;
+    nb_extended_buf:       s32;
 
-    side_data:              **AVFrameSideData;
-    nb_side_data:           s32;
+    side_data:             **AVFrameSideData;
+    nb_side_data:          s32;
 
     /**
     * Frame flags, a combination of @ref lavu_frame_flags
     */
-    flags:                  s32;
+    flags:                 s32;
 
     /**
     * MPEG vs JPEG YUV range.
     * - encoding: Set by user
     * - decoding: Set by libavcodec
     */
-    color_range:            AVColorRange;
+    color_range:           AVColorRange;
 
-    color_primaries:        AVColorPrimaries;
+    color_primaries:       AVColorPrimaries;
 
-    color_trc:              AVColorTransferCharacteristic;
+    color_trc:             AVColorTransferCharacteristic;
 
     /**
     * YUV colorspace type.
     * - encoding: Set by user
     * - decoding: Set by libavcodec
     */
-    colorspace:             AVColorSpace;
+    colorspace:            AVColorSpace;
 
-    chroma_location:        AVChromaLocation;
+    chroma_location:       AVChromaLocation;
 
     /**
     * frame timestamp estimated using various heuristics, in stream time base
     * - encoding: unused
     * - decoding: set by libavcodec, read by user.
     */
-    best_effort_timestamp:  s64;
+    best_effort_timestamp: s64;
 
     /**
     * reordered pos from the last AVPacket that has been input into the decoder
     * - encoding: unused
     * - decoding: Read by user.
+    * @deprecated use AV_CODEC_FLAG_COPY_OPAQUE to pass through arbitrary user
+    *             data from packets to frames
     */
-    pkt_pos:                s64;
-
-    /**
-    * duration of the corresponding packet, expressed in
-    * AVStream->time_base units, 0 if unknown.
-    * - encoding: unused
-    * - decoding: Read by user.
-    *
-    * @deprecated use duration instead
-    */
-    pkt_duration:           s64;
+    pkt_pos:               s64;
 
     /**
     * metadata.
     * - encoding: Set by user.
     * - decoding: Set by libavcodec.
     */
-    metadata:               *AVDictionary;
+    metadata:              *AVDictionary;
 
     /**
     * decode error flags of the frame, set to a combination of
@@ -4317,15 +4560,7 @@ AVFrame :: struct {
     * - encoding: unused
     * - decoding: set by libavcodec, read by user.
     */
-    decode_error_flags:     s32;
-
-    /**
-    * number of audio channels, only used for audio.
-    * - encoding: unused
-    * - decoding: Read by user.
-    * @deprecated use ch_layout instead
-    */
-    channels:               s32;
+    decode_error_flags:    s32;
 
     /**
     * size of the corresponding packet containing the compressed
@@ -4333,25 +4568,32 @@ AVFrame :: struct {
     * It is set to a negative value if unknown.
     * - encoding: unused
     * - decoding: set by libavcodec, read by user.
+    * @deprecated use AV_CODEC_FLAG_COPY_OPAQUE to pass through arbitrary user
+    *             data from packets to frames
     */
-    pkt_size:               s32;
+    pkt_size:              s32;
 
     /**
     * For hwaccel-format frames, this should be a reference to the
     * AVHWFramesContext describing the frame.
     */
-    hw_frames_ctx:          *AVBufferRef;
+    hw_frames_ctx:         *AVBufferRef;
 
     /**
-    * AVBufferRef for free use by the API user. FFmpeg will never check the
-    * contents of the buffer ref. FFmpeg calls av_buffer_unref() on it when
-    * the frame is unreferenced. av_frame_copy_props() calls create a new
-    * reference with av_buffer_ref() for the target frame's opaque_ref field.
+    * Frame owner's private data.
     *
-    * This is unrelated to the opaque field, although it serves a similar
-    * purpose.
+    * This field may be set by the code that allocates/owns the frame data.
+    * It is then not touched by any library functions, except:
+    * - a new reference to the underlying buffer is propagated by
+    *   av_frame_copy_props() (and hence by av_frame_ref());
+    * - it is unreferenced in av_frame_unref();
+    * - on the caller's explicit request. E.g. libavcodec encoders/decoders
+    *   will propagate a new reference to/from @ref AVPacket "AVPackets" if the
+    *   caller sets @ref AV_CODEC_FLAG_COPY_OPAQUE.
+    *
+    * @see opaque the plain pointer analogue
     */
-    opaque_ref:             *AVBufferRef;
+    opaque_ref:            *AVBufferRef;
 
     /**
     * @anchor cropping
@@ -4361,10 +4603,10 @@ AVFrame :: struct {
     * the frame intended for presentation.
     * @{
     */
-    crop_top:               u64;
-    crop_bottom:            u64;
-    crop_left:              u64;
-    crop_right:             u64;
+    crop_top:              u64;
+    crop_bottom:           u64;
+    crop_left:             u64;
+    crop_right:            u64;
 
     /**
     * AVBufferRef for internal use by a single libav* library.
@@ -4377,17 +4619,17 @@ AVFrame :: struct {
     * av_frame_copy_props() calls create a new reference with av_buffer_ref()
     * for the target frame's private_ref field.
     */
-    private_ref:            *AVBufferRef;
+    private_ref:           *AVBufferRef;
 
     /**
     * Channel layout of the audio data.
     */
-    ch_layout:              AVChannelLayout;
+    ch_layout:             AVChannelLayout;
 
     /**
     * Duration of the frame, in the same units as pts. 0 if unknown.
     */
-    duration:               s64;
+    duration:              s64;
 }
 
 /**
@@ -4427,6 +4669,19 @@ av_frame_free :: (frame: **AVFrame) -> void #foreign libavutil;
 * @return 0 on success, a negative AVERROR on error
 */
 av_frame_ref :: (dst: *AVFrame, src: *AVFrame) -> s32 #foreign libavutil;
+
+/**
+* Ensure the destination frame refers to the same data described by the source
+* frame, either by creating a new reference for each AVBufferRef from src if
+* they differ from those in dst, by allocating new buffers and copying data if
+* src is not reference counted, or by unrefencing it if src is empty.
+*
+* Frame properties on dst will be replaced by those from src.
+*
+* @return 0 on success, a negative AVERROR on error. On error, dst is
+*         unreferenced.
+*/
+av_frame_replace :: (dst: *AVFrame, src: *AVFrame) -> s32 #foreign libavutil;
 
 /**
 * Create a new frame that references the same data as src.
@@ -4604,6 +4859,105 @@ av_frame_apply_cropping :: (frame: *AVFrame, flags: s32) -> s32 #foreign libavut
 */
 av_frame_side_data_name :: (type: AVFrameSideDataType) -> *u8 #foreign libavutil;
 
+/**
+* @return side data descriptor corresponding to a given side data type, NULL
+*         when not available.
+*/
+av_frame_side_data_desc :: (type: AVFrameSideDataType) -> *AVSideDataDescriptor #foreign libavutil;
+
+/**
+* Free all side data entries and their contents, then zeroes out the
+* values which the pointers are pointing to.
+*
+* @param sd    pointer to array of side data to free. Will be set to NULL
+*              upon return.
+* @param nb_sd pointer to an integer containing the number of entries in
+*              the array. Will be set to 0 upon return.
+*/
+av_frame_side_data_free :: (sd: ***AVFrameSideData, nb_sd: *s32) -> void #foreign libavutil;
+
+/**
+* Add new side data entry to an array.
+*
+* @param sd    pointer to array of side data to which to add another entry,
+*              or to NULL in order to start a new array.
+* @param nb_sd pointer to an integer containing the number of entries in
+*              the array.
+* @param type  type of the added side data
+* @param size  size of the side data
+* @param flags Some combination of AV_FRAME_SIDE_DATA_FLAG_* flags, or 0.
+*
+* @return newly added side data on success, NULL on error.
+* @note In case of AV_FRAME_SIDE_DATA_FLAG_UNIQUE being set, entries of
+*       matching AVFrameSideDataType will be removed before the addition
+*       is attempted.
+* @note In case of AV_FRAME_SIDE_DATA_FLAG_REPLACE being set, if an
+*       entry of the same type already exists, it will be replaced instead.
+*/
+av_frame_side_data_new :: (sd: ***AVFrameSideData, nb_sd: *s32, type: AVFrameSideDataType, size: u64, flags: u32) -> *AVFrameSideData #foreign libavutil;
+
+/**
+* Add a new side data entry to an array from an existing AVBufferRef.
+*
+* @param sd    pointer to array of side data to which to add another entry,
+*              or to NULL in order to start a new array.
+* @param nb_sd pointer to an integer containing the number of entries in
+*              the array.
+* @param type  type of the added side data
+* @param buf   Pointer to AVBufferRef to add to the array. On success,
+*              the function takes ownership of the AVBufferRef and *buf is
+*              set to NULL, unless AV_FRAME_SIDE_DATA_FLAG_NEW_REF is set
+*              in which case the ownership will remain with the caller.
+* @param flags Some combination of AV_FRAME_SIDE_DATA_FLAG_* flags, or 0.
+*
+* @return newly added side data on success, NULL on error.
+* @note In case of AV_FRAME_SIDE_DATA_FLAG_UNIQUE being set, entries of
+*       matching AVFrameSideDataType will be removed before the addition
+*       is attempted.
+* @note In case of AV_FRAME_SIDE_DATA_FLAG_REPLACE being set, if an
+*       entry of the same type already exists, it will be replaced instead.
+*
+*/
+av_frame_side_data_add :: (sd: ***AVFrameSideData, nb_sd: *s32, type: AVFrameSideDataType, buf: **AVBufferRef, flags: u32) -> *AVFrameSideData #foreign libavutil;
+
+/**
+* Add a new side data entry to an array based on existing side data, taking
+* a reference towards the contained AVBufferRef.
+*
+* @param sd    pointer to array of side data to which to add another entry,
+*              or to NULL in order to start a new array.
+* @param nb_sd pointer to an integer containing the number of entries in
+*              the array.
+* @param src   side data to be cloned, with a new reference utilized
+*              for the buffer.
+* @param flags Some combination of AV_FRAME_SIDE_DATA_FLAG_* flags, or 0.
+*
+* @return negative error code on failure, >=0 on success.
+* @note In case of AV_FRAME_SIDE_DATA_FLAG_UNIQUE being set, entries of
+*       matching AVFrameSideDataType will be removed before the addition
+*       is attempted.
+* @note In case of AV_FRAME_SIDE_DATA_FLAG_REPLACE being set, if an
+*       entry of the same type already exists, it will be replaced instead.
+*/
+av_frame_side_data_clone :: (sd: ***AVFrameSideData, nb_sd: *s32, src: *AVFrameSideData, flags: u32) -> s32 #foreign libavutil;
+
+/**
+* Get a side data entry of a specific type from an array.
+*
+* @param sd    array of side data.
+* @param nb_sd integer containing the number of entries in the array.
+* @param type  type of side data to be queried
+*
+* @return a pointer to the side data of a given type on success, NULL if there
+*         is no side data with such type in this set.
+*/
+av_frame_side_data_get_c :: (sd: **AVFrameSideData, nb_sd: s32, type: AVFrameSideDataType) -> *AVFrameSideData #foreign libavutil;
+
+/**
+* Remove and free all side data instances of the given type from an array.
+*/
+av_frame_side_data_remove :: (sd: ***AVFrameSideData, nb_sd: *s32, type: AVFrameSideDataType) -> void #foreign libavutil;
+
 AVHWDeviceType :: enum s32 {
     NONE         :: 0;
     VDPAU        :: 1;
@@ -4617,6 +4971,7 @@ AVHWDeviceType :: enum s32 {
     OPENCL       :: 9;
     MEDIACODEC   :: 10;
     VULKAN       :: 11;
+    D3D12VA      :: 12;
 
     AV_HWDEVICE_TYPE_NONE         :: NONE;
     AV_HWDEVICE_TYPE_VDPAU        :: VDPAU;
@@ -4630,9 +4985,8 @@ AVHWDeviceType :: enum s32 {
     AV_HWDEVICE_TYPE_OPENCL       :: OPENCL;
     AV_HWDEVICE_TYPE_MEDIACODEC   :: MEDIACODEC;
     AV_HWDEVICE_TYPE_VULKAN       :: VULKAN;
+    AV_HWDEVICE_TYPE_D3D12VA      :: D3D12VA;
 }
-
-AVHWDeviceInternal :: struct {}
 
 /**
 * This struct aggregates all the (hardware/vendor-specific) "high-level" state,
@@ -4656,12 +5010,6 @@ AVHWDeviceContext :: struct {
     * A class for logging. Set by av_hwdevice_ctx_alloc().
     */
     av_class:    *AVClass;
-
-    /**
-    * Private data used internally by libavutil. Must not be accessed in any
-    * way by the caller.
-    */
-    internal:    *AVHWDeviceInternal;
 
     /**
     * This field identifies the underlying API used for hardware access.
@@ -4702,8 +5050,6 @@ AVHWDeviceContext :: struct {
     user_opaque: *void;
 }
 
-AVHWFramesInternal :: struct {}
-
 /**
 * This struct describes a set or pool of "hardware" frames (i.e. those with
 * data not located in normal system memory). All the frames in the pool are
@@ -4719,12 +5065,6 @@ AVHWFramesContext :: struct {
     * A class for logging.
     */
     av_class:          *AVClass;
-
-    /**
-    * Private data used internally by libavutil. Must not be accessed in any
-    * way by the caller.
-    */
-    internal:          *AVHWFramesInternal;
 
     /**
     * A reference to the parent AVHWDeviceContext. This reference is owned and
@@ -4745,9 +5085,12 @@ AVHWFramesContext :: struct {
     * The format-specific data, allocated and freed automatically along with
     * this context.
     *
-    * Should be cast by the user to the format-specific context defined in the
-    * corresponding header (hwframe_*.h) and filled as described in the
-    * documentation before calling av_hwframe_ctx_init().
+    * The user shall ignore this field if the corresponding format-specific
+    * header (hwcontext_*.h) does not define a context to be used as
+    * AVHWFramesContext.hwctx.
+    *
+    * Otherwise, it should be cast by the user to said context and filled
+    * as described in the documentation before calling av_hwframe_ctx_init().
     *
     * After any frames using this context are created, the contents of this
     * struct should not be modified by the caller.
@@ -5404,73 +5747,75 @@ AVCodecID :: enum s32 {
     AVRP               :: 198;
     _012V              :: 199;
     AVUI               :: 200;
-
-    AYUV               :: 201;
-
-    TARGA_Y216         :: 202;
-    V308               :: 203;
-    V408               :: 204;
-    YUV4               :: 205;
-    AVRN               :: 206;
-    CPIA               :: 207;
-    XFACE              :: 208;
-    SNOW               :: 209;
-    SMVJPEG            :: 210;
-    APNG               :: 211;
-    DAALA              :: 212;
-    CFHD               :: 213;
-    TRUEMOTION2RT      :: 214;
-    M101               :: 215;
-    MAGICYUV           :: 216;
-    SHEERVIDEO         :: 217;
-    YLC                :: 218;
-    PSD                :: 219;
-    PIXLET             :: 220;
-    SPEEDHQ            :: 221;
-    FMVC               :: 222;
-    SCPR               :: 223;
-    CLEARVIDEO         :: 224;
-    XPM                :: 225;
-    AV1                :: 226;
-    BITPACKED          :: 227;
-    MSCC               :: 228;
-    SRGC               :: 229;
-    SVG                :: 230;
-    GDV                :: 231;
-    FITS               :: 232;
-    IMM4               :: 233;
-    PROSUMER           :: 234;
-    MWSC               :: 235;
-    WCMV               :: 236;
-    RASC               :: 237;
-    HYMT               :: 238;
-    ARBC               :: 239;
-    AGM                :: 240;
-    LSCR               :: 241;
-    VP4                :: 242;
-    IMM5               :: 243;
-    MVDV               :: 244;
-    MVHA               :: 245;
-    CDTOONS            :: 246;
-    MV30               :: 247;
-    NOTCHLC            :: 248;
-    PFM                :: 249;
-    MOBICLIP           :: 250;
-    PHOTOCD            :: 251;
-    IPU                :: 252;
-    ARGO               :: 253;
-    CRI                :: 254;
-    SIMBIOSIS_IMX      :: 255;
-    SGA_VIDEO          :: 256;
-    GEM                :: 257;
-    VBN                :: 258;
-    JPEGXL             :: 259;
-    QOI                :: 260;
-    PHM                :: 261;
-    RADIANCE_HDR       :: 262;
-    WBMP               :: 263;
-    MEDIA100           :: 264;
-    VQC                :: 265;
+    TARGA_Y216         :: 201;
+    V308               :: 202;
+    V408               :: 203;
+    YUV4               :: 204;
+    AVRN               :: 205;
+    CPIA               :: 206;
+    XFACE              :: 207;
+    SNOW               :: 208;
+    SMVJPEG            :: 209;
+    APNG               :: 210;
+    DAALA              :: 211;
+    CFHD               :: 212;
+    TRUEMOTION2RT      :: 213;
+    M101               :: 214;
+    MAGICYUV           :: 215;
+    SHEERVIDEO         :: 216;
+    YLC                :: 217;
+    PSD                :: 218;
+    PIXLET             :: 219;
+    SPEEDHQ            :: 220;
+    FMVC               :: 221;
+    SCPR               :: 222;
+    CLEARVIDEO         :: 223;
+    XPM                :: 224;
+    AV1                :: 225;
+    BITPACKED          :: 226;
+    MSCC               :: 227;
+    SRGC               :: 228;
+    SVG                :: 229;
+    GDV                :: 230;
+    FITS               :: 231;
+    IMM4               :: 232;
+    PROSUMER           :: 233;
+    MWSC               :: 234;
+    WCMV               :: 235;
+    RASC               :: 236;
+    HYMT               :: 237;
+    ARBC               :: 238;
+    AGM                :: 239;
+    LSCR               :: 240;
+    VP4                :: 241;
+    IMM5               :: 242;
+    MVDV               :: 243;
+    MVHA               :: 244;
+    CDTOONS            :: 245;
+    MV30               :: 246;
+    NOTCHLC            :: 247;
+    PFM                :: 248;
+    MOBICLIP           :: 249;
+    PHOTOCD            :: 250;
+    IPU                :: 251;
+    ARGO               :: 252;
+    CRI                :: 253;
+    SIMBIOSIS_IMX      :: 254;
+    SGA_VIDEO          :: 255;
+    GEM                :: 256;
+    VBN                :: 257;
+    JPEGXL             :: 258;
+    QOI                :: 259;
+    PHM                :: 260;
+    RADIANCE_HDR       :: 261;
+    WBMP               :: 262;
+    MEDIA100           :: 263;
+    VQC                :: 264;
+    PDV                :: 265;
+    EVC                :: 266;
+    RTV1               :: 267;
+    VMIX               :: 268;
+    LEAD               :: 269;
 
     FIRST_AUDIO        :: 65536;
     PCM_S16LE          :: 65536;
@@ -5683,6 +6028,10 @@ AVCodecID :: enum s32 {
     FTR                :: 86116;
     WAVARC             :: 86117;
     RKA                :: 86118;
+    AC4                :: 86119;
+    OSQ                :: 86120;
+    QOA                :: 86121;
+    LC3                :: 86122;
 
     FIRST_SUBTITLE     :: 94208;
     DVD_SUBTITLE       :: 94208;
@@ -5725,6 +6074,8 @@ AVCodecID :: enum s32 {
     DVD_NAV            :: 98312;
     TIMED_ID3          :: 98313;
     BIN_DATA           :: 98314;
+    SMPTE_2038         :: 98315;
+    LCEVC              :: 98316;
 
     PROBE              :: 102400;
 
@@ -5944,9 +6295,6 @@ AVCodecID :: enum s32 {
     AV_CODEC_ID_AVRP               :: AVRP;
     AV_CODEC_ID_012V               :: _012V;
     AV_CODEC_ID_AVUI               :: AVUI;
-
-    AV_CODEC_ID_AYUV               :: AYUV;
-
     AV_CODEC_ID_TARGA_Y216         :: TARGA_Y216;
     AV_CODEC_ID_V308               :: V308;
     AV_CODEC_ID_V408               :: V408;
@@ -6011,6 +6359,11 @@ AVCodecID :: enum s32 {
     AV_CODEC_ID_WBMP               :: WBMP;
     AV_CODEC_ID_MEDIA100           :: MEDIA100;
     AV_CODEC_ID_VQC                :: VQC;
+    AV_CODEC_ID_PDV                :: PDV;
+    AV_CODEC_ID_EVC                :: EVC;
+    AV_CODEC_ID_RTV1               :: RTV1;
+    AV_CODEC_ID_VMIX               :: VMIX;
+    AV_CODEC_ID_LEAD               :: LEAD;
 
     AV_CODEC_ID_FIRST_AUDIO        :: FIRST_AUDIO;
     AV_CODEC_ID_PCM_S16LE          :: PCM_S16LE;
@@ -6223,6 +6576,10 @@ AVCodecID :: enum s32 {
     AV_CODEC_ID_FTR                :: FTR;
     AV_CODEC_ID_WAVARC             :: WAVARC;
     AV_CODEC_ID_RKA                :: RKA;
+    AV_CODEC_ID_AC4                :: AC4;
+    AV_CODEC_ID_OSQ                :: OSQ;
+    AV_CODEC_ID_QOA                :: QOA;
+    AV_CODEC_ID_LC3                :: LC3;
 
     AV_CODEC_ID_FIRST_SUBTITLE     :: FIRST_SUBTITLE;
     AV_CODEC_ID_DVD_SUBTITLE       :: DVD_SUBTITLE;
@@ -6265,6 +6622,8 @@ AVCodecID :: enum s32 {
     AV_CODEC_ID_DVD_NAV            :: DVD_NAV;
     AV_CODEC_ID_TIMED_ID3          :: TIMED_ID3;
     AV_CODEC_ID_BIN_DATA           :: BIN_DATA;
+    AV_CODEC_ID_SMPTE_2038         :: SMPTE_2038;
+    AV_CODEC_ID_LCEVC              :: LCEVC;
 
     AV_CODEC_ID_PROBE              :: PROBE;
 
@@ -6364,15 +6723,17 @@ AVCodec :: struct {
     */
     capabilities:          s32;
     max_lowres:            u8; ///< maximum value for lowres supported by the decoder
-    supported_framerates:  *AVRational; ///< array of supported framerates, or NULL if any, array is terminated by {0,0}
-    pix_fmts:              *AVPixelFormat; ///< array of supported pixel formats, or NULL if unknown, array is terminated by -1
-    supported_samplerates: *s32; ///< array of supported audio samplerates, or NULL if unknown, array is terminated by 0
-    sample_fmts:           *AVSampleFormat; ///< array of supported sample formats, or NULL if unknown, array is terminated by -1
 
-    channel_layouts:       *u64; ///< array of support channel layouts, or NULL if unknown. array is terminated by 0
+    supported_framerates:  *AVRational; ///< @deprecated use avcodec_get_supported_config()
+
+    pix_fmts:              *AVPixelFormat; ///< @deprecated use avcodec_get_supported_config()
+
+    supported_samplerates: *s32; ///< @deprecated use avcodec_get_supported_config()
+
+    sample_fmts:           *AVSampleFormat; ///< @deprecated use avcodec_get_supported_config()
 
     priv_class:            *AVClass; ///< AVClass for the private context
-    profiles:              *AVProfile; ///< array of recognized profiles, or NULL if unknown, array is terminated by {FF_PROFILE_UNKNOWN}
+    profiles:              *AVProfile; ///< array of recognized profiles, or NULL if unknown, array is terminated by {AV_PROFILE_UNKNOWN}
 
     /**
     * Group name of the codec implementation.
@@ -6388,6 +6749,7 @@ AVCodec :: struct {
 
     /**
     * Array of supported channel layouts, terminated with a zeroed layout.
+    * @deprecated use avcodec_get_supported_config()
     */
     ch_layouts:            *AVChannelLayout;
 }
@@ -6507,70 +6869,6 @@ AVCodecHWConfig :: struct {
 */
 avcodec_get_hw_config :: (codec: *AVCodec, index: s32) -> *AVCodecHWConfig #foreign libavcodec;
 
-/**
-* This struct describes the properties of a single codec described by an
-* AVCodecID.
-* @see avcodec_descriptor_get()
-*/
-AVCodecDescriptor :: struct {
-    id:         AVCodecID;
-    type:       AVMediaType;
-
-    /**
-    * Name of the codec described by this descriptor. It is non-empty and
-    * unique for each codec descriptor. It should contain alphanumeric
-    * characters and '_' only.
-    */
-    name:       *u8;
-
-    /**
-    * A more descriptive name for this codec. May be NULL.
-    */
-    long_name:  *u8;
-
-    /**
-    * Codec properties, a combination of AV_CODEC_PROP_* flags.
-    */
-    props:      s32;
-
-    /**
-    * MIME type(s) associated with the codec.
-    * May be NULL; if not, a NULL-terminated array of MIME types.
-    * The first item is always non-NULL and is the preferred MIME type.
-    */
-    mime_types: **u8;
-
-    /**
-    * If non-NULL, an array of profiles recognized for this codec.
-    * Terminated with FF_PROFILE_UNKNOWN.
-    */
-    profiles:   *AVProfile;
-}
-
-/**
-* @return descriptor for given codec ID or NULL if no descriptor exists.
-*/
-avcodec_descriptor_get :: (id: AVCodecID) -> *AVCodecDescriptor #foreign libavcodec;
-
-/**
-* Iterate over all codec descriptors known to libavcodec.
-*
-* @param prev previous descriptor. NULL to get the first descriptor.
-*
-* @return next descriptor or NULL after the last descriptor
-*/
-avcodec_descriptor_next :: (prev: *AVCodecDescriptor) -> *AVCodecDescriptor #foreign libavcodec;
-
-/**
-* @return codec descriptor with the given name or NULL if no such descriptor
-*         exists.
-*/
-avcodec_descriptor_get_by_name :: (name: *u8) -> *AVCodecDescriptor #foreign libavcodec;
-
-/**
-* @addtogroup lavc_core
-* @{
-*/
 AVFieldOrder :: enum s32 {
     UNKNOWN     :: 0;
     PROGRESSIVE :: 1;
@@ -6586,207 +6884,6 @@ AVFieldOrder :: enum s32 {
     AV_FIELD_TB          :: TB;
     AV_FIELD_BT          :: BT;
 }
-
-/**
-* This struct describes the properties of an encoded stream.
-*
-* sizeof(AVCodecParameters) is not a part of the public ABI, this struct must
-* be allocated with avcodec_parameters_alloc() and freed with
-* avcodec_parameters_free().
-*/
-AVCodecParameters :: struct {
-    /**
-    * General type of the encoded data.
-    */
-    codec_type:            AVMediaType;
-
-    /**
-    * Specific type of the encoded data (the codec used).
-    */
-    codec_id:              AVCodecID;
-
-    /**
-    * Additional information about the codec (corresponds to the AVI FOURCC).
-    */
-    codec_tag:             u32;
-
-    /**
-    * Extra binary data needed for initializing the decoder, codec-dependent.
-    *
-    * Must be allocated with av_malloc() and will be freed by
-    * avcodec_parameters_free(). The allocated size of extradata must be at
-    * least extradata_size + AV_INPUT_BUFFER_PADDING_SIZE, with the padding
-    * bytes zeroed.
-    */
-    extradata:             *u8;
-
-    /**
-    * Size of the extradata content in bytes.
-    */
-    extradata_size:        s32;
-
-    /**
-    * - video: the pixel format, the value corresponds to enum AVPixelFormat.
-    * - audio: the sample format, the value corresponds to enum AVSampleFormat.
-    */
-    format:                s32;
-
-    /**
-    * The average bitrate of the encoded data (in bits per second).
-    */
-    bit_rate:              s64;
-
-    /**
-    * The number of bits per sample in the codedwords.
-    *
-    * This is basically the bitrate per sample. It is mandatory for a bunch of
-    * formats to actually decode them. It's the number of bits for one sample in
-    * the actual coded bitstream.
-    *
-    * This could be for example 4 for ADPCM
-    * For PCM formats this matches bits_per_raw_sample
-    * Can be 0
-    */
-    bits_per_coded_sample: s32;
-
-    /**
-    * This is the number of valid bits in each output sample. If the
-    * sample format has more bits, the least significant bits are additional
-    * padding bits, which are always 0. Use right shifts to reduce the sample
-    * to its actual size. For example, audio formats with 24 bit samples will
-    * have bits_per_raw_sample set to 24, and format set to AV_SAMPLE_FMT_S32.
-    * To get the original sample use "(int32_t)sample >> 8"."
-    *
-    * For ADPCM this might be 12 or 16 or similar
-    * Can be 0
-    */
-    bits_per_raw_sample:   s32;
-
-    /**
-    * Codec-specific bitstream restrictions that the stream conforms to.
-    */
-    profile:               s32;
-    level:                 s32;
-
-    /**
-    * Video only. The dimensions of the video frame in pixels.
-    */
-    width:                 s32;
-    height:                s32;
-
-    /**
-    * Video only. The aspect ratio (width / height) which a single pixel
-    * should have when displayed.
-    *
-    * When the aspect ratio is unknown / undefined, the numerator should be
-    * set to 0 (the denominator may have any value).
-    */
-    sample_aspect_ratio:   AVRational;
-
-    /**
-    * Video only. The order of the fields in interlaced video.
-    */
-    field_order:           AVFieldOrder;
-
-    /**
-    * Video only. Additional colorspace characteristics.
-    */
-    color_range:           AVColorRange;
-    color_primaries:       AVColorPrimaries;
-    color_trc:             AVColorTransferCharacteristic;
-    color_space:           AVColorSpace;
-    chroma_location:       AVChromaLocation;
-
-    /**
-    * Video only. Number of delayed frames.
-    */
-    video_delay:           s32;
-
-    /**
-    * Audio only. The channel layout bitmask. May be 0 if the channel layout is
-    * unknown or unspecified, otherwise the number of bits set must be equal to
-    * the channels field.
-    * @deprecated use ch_layout
-    */
-    channel_layout:        u64;
-
-    /**
-    * Audio only. The number of audio channels.
-    * @deprecated use ch_layout.nb_channels
-    */
-    channels:              s32;
-
-    /**
-    * Audio only. The number of audio samples per second.
-    */
-    sample_rate:           s32;
-
-    /**
-    * Audio only. The number of bytes per coded audio frame, required by some
-    * formats.
-    *
-    * Corresponds to nBlockAlign in WAVEFORMATEX.
-    */
-    block_align:           s32;
-
-    /**
-    * Audio only. Audio frame size, if known. Required by some formats to be static.
-    */
-    frame_size:            s32;
-
-    /**
-    * Audio only. The amount of padding (in samples) inserted by the encoder at
-    * the beginning of the audio. I.e. this number of leading decoded samples
-    * must be discarded by the caller to get the original audio without leading
-    * padding.
-    */
-    initial_padding:       s32;
-
-    /**
-    * Audio only. The amount of padding (in samples) appended by the encoder to
-    * the end of the audio. I.e. this number of decoded samples must be
-    * discarded by the caller from the end of the stream to get the original
-    * audio without any trailing padding.
-    */
-    trailing_padding:      s32;
-
-    /**
-    * Audio only. Number of samples to skip after a discontinuity.
-    */
-    seek_preroll:          s32;
-
-    /**
-    * Audio only. The channel layout and number of channels.
-    */
-    ch_layout:             AVChannelLayout;
-}
-
-/**
-* Allocate a new AVCodecParameters and set its fields to default values
-* (unknown/invalid/0). The returned struct must be freed with
-* avcodec_parameters_free().
-*/
-avcodec_parameters_alloc :: () -> *AVCodecParameters #foreign libavcodec;
-
-/**
-* Free an AVCodecParameters instance and everything associated with it and
-* write NULL to the supplied pointer.
-*/
-avcodec_parameters_free :: (par: **AVCodecParameters) -> void #foreign libavcodec;
-
-/**
-* Copy the contents of src to dst. Any allocated fields in dst are freed and
-* replaced with newly allocated duplicates of the corresponding fields in src.
-*
-* @return >= 0 on success, a negative AVERROR code on failure.
-*/
-avcodec_parameters_copy :: (dst: *AVCodecParameters, src: *AVCodecParameters) -> s32 #foreign libavcodec;
-
-/**
-* This function is the same as av_get_audio_frame_duration(), except it works
-* with AVCodecParameters instead of an AVCodecContext.
-*/
-av_get_audio_frame_duration2 :: (par: *AVCodecParameters, frame_bytes: s32) -> s32 #foreign libavcodec;
 
 /**
 * @ingroup lavc_decoding
@@ -6936,150 +7033,273 @@ AVProducerReferenceTime :: struct {
 av_xiphlacing :: (s: *u8, v: u32) -> u32 #foreign libavcodec;
 
 /**
-* @defgroup lavc_packet AVPacket
+* @defgroup lavc_packet_side_data AVPacketSideData
 *
-* Types and functions for working with AVPacket.
+* Types and functions for working with AVPacketSideData.
 * @{
 */
 AVPacketSideDataType :: enum s32 {
-    PALETTE                    :: 0;
+    PALETTE                     :: 0;
 
-    NEW_EXTRADATA              :: 1;
+    NEW_EXTRADATA               :: 1;
 
-    PARAM_CHANGE               :: 2;
+    PARAM_CHANGE                :: 2;
 
-    H263_MB_INFO               :: 3;
+    H263_MB_INFO                :: 3;
 
-    REPLAYGAIN                 :: 4;
+    REPLAYGAIN                  :: 4;
 
-    DISPLAYMATRIX              :: 5;
+    DISPLAYMATRIX               :: 5;
 
-    STEREO3D                   :: 6;
+    STEREO3D                    :: 6;
 
-    AUDIO_SERVICE_TYPE         :: 7;
+    AUDIO_SERVICE_TYPE          :: 7;
 
-    QUALITY_STATS              :: 8;
+    QUALITY_STATS               :: 8;
 
-    FALLBACK_TRACK             :: 9;
+    FALLBACK_TRACK              :: 9;
 
-    CPB_PROPERTIES             :: 10;
+    CPB_PROPERTIES              :: 10;
 
-    SKIP_SAMPLES               :: 11;
+    SKIP_SAMPLES                :: 11;
 
-    JP_DUALMONO                :: 12;
+    JP_DUALMONO                 :: 12;
 
-    STRINGS_METADATA           :: 13;
+    STRINGS_METADATA            :: 13;
 
-    SUBTITLE_POSITION          :: 14;
+    SUBTITLE_POSITION           :: 14;
 
-    MATROSKA_BLOCKADDITIONAL   :: 15;
+    MATROSKA_BLOCKADDITIONAL    :: 15;
 
-    WEBVTT_IDENTIFIER          :: 16;
+    WEBVTT_IDENTIFIER           :: 16;
 
-    WEBVTT_SETTINGS            :: 17;
+    WEBVTT_SETTINGS             :: 17;
 
-    METADATA_UPDATE            :: 18;
+    METADATA_UPDATE             :: 18;
 
-    MPEGTS_STREAM_ID           :: 19;
+    MPEGTS_STREAM_ID            :: 19;
 
-    MASTERING_DISPLAY_METADATA :: 20;
+    MASTERING_DISPLAY_METADATA  :: 20;
 
-    SPHERICAL                  :: 21;
+    SPHERICAL                   :: 21;
 
-    CONTENT_LIGHT_LEVEL        :: 22;
+    CONTENT_LIGHT_LEVEL         :: 22;
 
-    A53_CC                     :: 23;
+    A53_CC                      :: 23;
 
-    ENCRYPTION_INIT_INFO       :: 24;
+    ENCRYPTION_INIT_INFO        :: 24;
 
-    ENCRYPTION_INFO            :: 25;
+    ENCRYPTION_INFO             :: 25;
 
-    AFD                        :: 26;
+    AFD                         :: 26;
 
-    PRFT                       :: 27;
+    PRFT                        :: 27;
 
-    ICC_PROFILE                :: 28;
+    ICC_PROFILE                 :: 28;
 
-    DOVI_CONF                  :: 29;
+    DOVI_CONF                   :: 29;
 
-    S12M_TIMECODE              :: 30;
+    S12M_TIMECODE               :: 30;
 
-    DYNAMIC_HDR10_PLUS         :: 31;
+    DYNAMIC_HDR10_PLUS          :: 31;
 
-    NB                         :: 32;
+    IAMF_MIX_GAIN_PARAM         :: 32;
 
-    AV_PKT_DATA_PALETTE                    :: PALETTE;
+    IAMF_DEMIXING_INFO_PARAM    :: 33;
 
-    AV_PKT_DATA_NEW_EXTRADATA              :: NEW_EXTRADATA;
+    IAMF_RECON_GAIN_INFO_PARAM  :: 34;
 
-    AV_PKT_DATA_PARAM_CHANGE               :: PARAM_CHANGE;
+    AMBIENT_VIEWING_ENVIRONMENT :: 35;
 
-    AV_PKT_DATA_H263_MB_INFO               :: H263_MB_INFO;
+    FRAME_CROPPING              :: 36;
 
-    AV_PKT_DATA_REPLAYGAIN                 :: REPLAYGAIN;
+    LCEVC                       :: 37;
 
-    AV_PKT_DATA_DISPLAYMATRIX              :: DISPLAYMATRIX;
+    NB                          :: 38;
 
-    AV_PKT_DATA_STEREO3D                   :: STEREO3D;
+    AV_PKT_DATA_PALETTE                     :: PALETTE;
 
-    AV_PKT_DATA_AUDIO_SERVICE_TYPE         :: AUDIO_SERVICE_TYPE;
+    AV_PKT_DATA_NEW_EXTRADATA               :: NEW_EXTRADATA;
 
-    AV_PKT_DATA_QUALITY_STATS              :: QUALITY_STATS;
+    AV_PKT_DATA_PARAM_CHANGE                :: PARAM_CHANGE;
 
-    AV_PKT_DATA_FALLBACK_TRACK             :: FALLBACK_TRACK;
+    AV_PKT_DATA_H263_MB_INFO                :: H263_MB_INFO;
 
-    AV_PKT_DATA_CPB_PROPERTIES             :: CPB_PROPERTIES;
+    AV_PKT_DATA_REPLAYGAIN                  :: REPLAYGAIN;
 
-    AV_PKT_DATA_SKIP_SAMPLES               :: SKIP_SAMPLES;
+    AV_PKT_DATA_DISPLAYMATRIX               :: DISPLAYMATRIX;
 
-    AV_PKT_DATA_JP_DUALMONO                :: JP_DUALMONO;
+    AV_PKT_DATA_STEREO3D                    :: STEREO3D;
 
-    AV_PKT_DATA_STRINGS_METADATA           :: STRINGS_METADATA;
+    AV_PKT_DATA_AUDIO_SERVICE_TYPE          :: AUDIO_SERVICE_TYPE;
 
-    AV_PKT_DATA_SUBTITLE_POSITION          :: SUBTITLE_POSITION;
+    AV_PKT_DATA_QUALITY_STATS               :: QUALITY_STATS;
 
-    AV_PKT_DATA_MATROSKA_BLOCKADDITIONAL   :: MATROSKA_BLOCKADDITIONAL;
+    AV_PKT_DATA_FALLBACK_TRACK              :: FALLBACK_TRACK;
 
-    AV_PKT_DATA_WEBVTT_IDENTIFIER          :: WEBVTT_IDENTIFIER;
+    AV_PKT_DATA_CPB_PROPERTIES              :: CPB_PROPERTIES;
 
-    AV_PKT_DATA_WEBVTT_SETTINGS            :: WEBVTT_SETTINGS;
+    AV_PKT_DATA_SKIP_SAMPLES                :: SKIP_SAMPLES;
 
-    AV_PKT_DATA_METADATA_UPDATE            :: METADATA_UPDATE;
+    AV_PKT_DATA_JP_DUALMONO                 :: JP_DUALMONO;
 
-    AV_PKT_DATA_MPEGTS_STREAM_ID           :: MPEGTS_STREAM_ID;
+    AV_PKT_DATA_STRINGS_METADATA            :: STRINGS_METADATA;
 
-    AV_PKT_DATA_MASTERING_DISPLAY_METADATA :: MASTERING_DISPLAY_METADATA;
+    AV_PKT_DATA_SUBTITLE_POSITION           :: SUBTITLE_POSITION;
 
-    AV_PKT_DATA_SPHERICAL                  :: SPHERICAL;
+    AV_PKT_DATA_MATROSKA_BLOCKADDITIONAL    :: MATROSKA_BLOCKADDITIONAL;
 
-    AV_PKT_DATA_CONTENT_LIGHT_LEVEL        :: CONTENT_LIGHT_LEVEL;
+    AV_PKT_DATA_WEBVTT_IDENTIFIER           :: WEBVTT_IDENTIFIER;
 
-    AV_PKT_DATA_A53_CC                     :: A53_CC;
+    AV_PKT_DATA_WEBVTT_SETTINGS             :: WEBVTT_SETTINGS;
 
-    AV_PKT_DATA_ENCRYPTION_INIT_INFO       :: ENCRYPTION_INIT_INFO;
+    AV_PKT_DATA_METADATA_UPDATE             :: METADATA_UPDATE;
 
-    AV_PKT_DATA_ENCRYPTION_INFO            :: ENCRYPTION_INFO;
+    AV_PKT_DATA_MPEGTS_STREAM_ID            :: MPEGTS_STREAM_ID;
 
-    AV_PKT_DATA_AFD                        :: AFD;
+    AV_PKT_DATA_MASTERING_DISPLAY_METADATA  :: MASTERING_DISPLAY_METADATA;
 
-    AV_PKT_DATA_PRFT                       :: PRFT;
+    AV_PKT_DATA_SPHERICAL                   :: SPHERICAL;
 
-    AV_PKT_DATA_ICC_PROFILE                :: ICC_PROFILE;
+    AV_PKT_DATA_CONTENT_LIGHT_LEVEL         :: CONTENT_LIGHT_LEVEL;
 
-    AV_PKT_DATA_DOVI_CONF                  :: DOVI_CONF;
+    AV_PKT_DATA_A53_CC                      :: A53_CC;
 
-    AV_PKT_DATA_S12M_TIMECODE              :: S12M_TIMECODE;
+    AV_PKT_DATA_ENCRYPTION_INIT_INFO        :: ENCRYPTION_INIT_INFO;
 
-    AV_PKT_DATA_DYNAMIC_HDR10_PLUS         :: DYNAMIC_HDR10_PLUS;
+    AV_PKT_DATA_ENCRYPTION_INFO             :: ENCRYPTION_INFO;
 
-    AV_PKT_DATA_NB                         :: NB;
+    AV_PKT_DATA_AFD                         :: AFD;
+
+    AV_PKT_DATA_PRFT                        :: PRFT;
+
+    AV_PKT_DATA_ICC_PROFILE                 :: ICC_PROFILE;
+
+    AV_PKT_DATA_DOVI_CONF                   :: DOVI_CONF;
+
+    AV_PKT_DATA_S12M_TIMECODE               :: S12M_TIMECODE;
+
+    AV_PKT_DATA_DYNAMIC_HDR10_PLUS          :: DYNAMIC_HDR10_PLUS;
+
+    AV_PKT_DATA_IAMF_MIX_GAIN_PARAM         :: IAMF_MIX_GAIN_PARAM;
+
+    AV_PKT_DATA_IAMF_DEMIXING_INFO_PARAM    :: IAMF_DEMIXING_INFO_PARAM;
+
+    AV_PKT_DATA_IAMF_RECON_GAIN_INFO_PARAM  :: IAMF_RECON_GAIN_INFO_PARAM;
+
+    AV_PKT_DATA_AMBIENT_VIEWING_ENVIRONMENT :: AMBIENT_VIEWING_ENVIRONMENT;
+
+    AV_PKT_DATA_FRAME_CROPPING              :: FRAME_CROPPING;
+
+    AV_PKT_DATA_LCEVC                       :: LCEVC;
+
+    AV_PKT_DATA_NB                          :: NB;
 }
 
+/**
+* This structure stores auxiliary information for decoding, presenting, or
+* otherwise processing the coded stream. It is typically exported by demuxers
+* and encoders and can be fed to decoders and muxers either in a per packet
+* basis, or as global side data (applying to the entire coded stream).
+*
+* Global side data is handled as follows:
+* - During demuxing, it may be exported through
+*   @ref AVStream.codecpar.side_data "AVStream's codec parameters", which can
+*   then be passed as input to decoders through the
+*   @ref AVCodecContext.coded_side_data "decoder context's side data", for
+*   initialization.
+* - For muxing, it can be fed through @ref AVStream.codecpar.side_data
+*   "AVStream's codec parameters", typically  the output of encoders through
+*   the @ref AVCodecContext.coded_side_data "encoder context's side data", for
+*   initialization.
+*
+* Packet specific side data is handled as follows:
+* - During demuxing, it may be exported through @ref AVPacket.side_data
+*   "AVPacket's side data", which can then be passed as input to decoders.
+* - For muxing, it can be fed through @ref AVPacket.side_data "AVPacket's
+*   side data", typically the output of encoders.
+*
+* Different modules may accept or export different types of side data
+* depending on media type and codec. Refer to @ref AVPacketSideDataType for a
+* list of defined types and where they may be found or used.
+*/
 AVPacketSideData :: struct {
     data: *u8;
     size: u64;
     type: AVPacketSideDataType;
 }
+
+/**
+* Allocate a new packet side data.
+*
+* @param sd    pointer to an array of side data to which the side data should
+*              be added. *sd may be NULL, in which case the array will be
+*              initialized.
+* @param nb_sd pointer to an integer containing the number of entries in
+*              the array. The integer value will be increased by 1 on success.
+* @param type  side data type
+* @param size  desired side data size
+* @param flags currently unused. Must be zero
+*
+* @return pointer to freshly allocated side data on success, or NULL otherwise.
+*/
+av_packet_side_data_new :: (psd: **AVPacketSideData, pnb_sd: *s32, type: AVPacketSideDataType, size: u64, flags: s32) -> *AVPacketSideData #foreign libavcodec;
+
+/**
+* Wrap existing data as packet side data.
+*
+* @param sd    pointer to an array of side data to which the side data should
+*              be added. *sd may be NULL, in which case the array will be
+*              initialized
+* @param nb_sd pointer to an integer containing the number of entries in
+*              the array. The integer value will be increased by 1 on success.
+* @param type  side data type
+* @param data  a data array. It must be allocated with the av_malloc() family
+*              of functions. The ownership of the data is transferred to the
+*              side data array on success
+* @param size  size of the data array
+* @param flags currently unused. Must be zero
+*
+* @return pointer to freshly allocated side data on success, or NULL otherwise
+*         On failure, the side data array is unchanged and the data remains
+*         owned by the caller.
+*/
+av_packet_side_data_add :: (sd: **AVPacketSideData, nb_sd: *s32, type: AVPacketSideDataType, data: *void, size: u64, flags: s32) -> *AVPacketSideData #foreign libavcodec;
+
+/**
+* Get side information from a side data array.
+*
+* @param sd    the array from which the side data should be fetched
+* @param nb_sd value containing the number of entries in the array.
+* @param type  desired side information type
+*
+* @return pointer to side data if present or NULL otherwise
+*/
+av_packet_side_data_get :: (sd: *AVPacketSideData, nb_sd: s32, type: AVPacketSideDataType) -> *AVPacketSideData #foreign libavcodec;
+
+/**
+* Remove side data of the given type from a side data array.
+*
+* @param sd    the array from which the side data should be removed
+* @param nb_sd pointer to an integer containing the number of entries in
+*              the array. Will be reduced by the amount of entries removed
+*              upon return
+* @param type  side information type
+*/
+av_packet_side_data_remove :: (sd: *AVPacketSideData, nb_sd: *s32, type: AVPacketSideDataType) -> void #foreign libavcodec;
+
+/**
+* Convenience function to free all the side data stored in an array, and
+* the array itself.
+*
+* @param sd    pointer to array of side data to free. Will be set to NULL
+*              upon return.
+* @param nb_sd pointer to an integer containing the number of entries in
+*              the array. Will be set to 0 upon return.
+*/
+av_packet_side_data_free :: (sd: **AVPacketSideData, nb_sd: *s32) -> void #foreign libavcodec;
+
+av_packet_side_data_name :: (type: AVPacketSideDataType) -> *u8 #foreign libavcodec;
 
 /**
 * This structure stores compressed data. It is typically exported by demuxers
@@ -7191,17 +7411,11 @@ AVPacketList :: struct {
 }
 
 AVSideDataParamChangeFlags :: enum s32 {
-    CHANNEL_COUNT  :: 1;
-    CHANNEL_LAYOUT :: 2;
+    SAMPLE_RATE :: 4;
+    DIMENSIONS  :: 8;
 
-    SAMPLE_RATE    :: 4;
-    DIMENSIONS     :: 8;
-
-    AV_SIDE_DATA_PARAM_CHANGE_CHANNEL_COUNT  :: CHANNEL_COUNT;
-    AV_SIDE_DATA_PARAM_CHANGE_CHANNEL_LAYOUT :: CHANNEL_LAYOUT;
-
-    AV_SIDE_DATA_PARAM_CHANGE_SAMPLE_RATE    :: SAMPLE_RATE;
-    AV_SIDE_DATA_PARAM_CHANGE_DIMENSIONS     :: DIMENSIONS;
+    AV_SIDE_DATA_PARAM_CHANGE_SAMPLE_RATE :: SAMPLE_RATE;
+    AV_SIDE_DATA_PARAM_CHANGE_DIMENSIONS  :: DIMENSIONS;
 }
 
 /**
@@ -7341,8 +7555,6 @@ av_packet_shrink_side_data :: (pkt: *AVPacket, type: AVPacketSideDataType, size:
 */
 av_packet_get_side_data :: (pkt: *AVPacket, type: AVPacketSideDataType, size: *u64) -> *u8 #foreign libavcodec;
 
-av_packet_side_data_name :: (type: AVPacketSideDataType) -> *u8 #foreign libavcodec;
-
 /**
 * Pack a dictionary for use in side_data.
 *
@@ -7463,6 +7675,278 @@ av_packet_make_writable :: (pkt: *AVPacket) -> s32 #foreign libavcodec;
 av_packet_rescale_ts :: (pkt: *AVPacket, tb_src: AVRational, tb_dst: AVRational) -> void #foreign libavcodec;
 
 /**
+* This struct describes the properties of a single codec described by an
+* AVCodecID.
+* @see avcodec_descriptor_get()
+*/
+AVCodecDescriptor :: struct {
+    id:         AVCodecID;
+    type:       AVMediaType;
+
+    /**
+    * Name of the codec described by this descriptor. It is non-empty and
+    * unique for each codec descriptor. It should contain alphanumeric
+    * characters and '_' only.
+    */
+    name:       *u8;
+
+    /**
+    * A more descriptive name for this codec. May be NULL.
+    */
+    long_name:  *u8;
+
+    /**
+    * Codec properties, a combination of AV_CODEC_PROP_* flags.
+    */
+    props:      s32;
+
+    /**
+    * MIME type(s) associated with the codec.
+    * May be NULL; if not, a NULL-terminated array of MIME types.
+    * The first item is always non-NULL and is the preferred MIME type.
+    */
+    mime_types: **u8;
+
+    /**
+    * If non-NULL, an array of profiles recognized for this codec.
+    * Terminated with AV_PROFILE_UNKNOWN.
+    */
+    profiles:   *AVProfile;
+}
+
+/**
+* @return descriptor for given codec ID or NULL if no descriptor exists.
+*/
+avcodec_descriptor_get :: (id: AVCodecID) -> *AVCodecDescriptor #foreign libavcodec;
+
+/**
+* Iterate over all codec descriptors known to libavcodec.
+*
+* @param prev previous descriptor. NULL to get the first descriptor.
+*
+* @return next descriptor or NULL after the last descriptor
+*/
+avcodec_descriptor_next :: (prev: *AVCodecDescriptor) -> *AVCodecDescriptor #foreign libavcodec;
+
+/**
+* @return codec descriptor with the given name or NULL if no such descriptor
+*         exists.
+*/
+avcodec_descriptor_get_by_name :: (name: *u8) -> *AVCodecDescriptor #foreign libavcodec;
+
+/**
+* This struct describes the properties of an encoded stream.
+*
+* sizeof(AVCodecParameters) is not a part of the public ABI, this struct must
+* be allocated with avcodec_parameters_alloc() and freed with
+* avcodec_parameters_free().
+*/
+AVCodecParameters :: struct {
+    /**
+    * General type of the encoded data.
+    */
+    codec_type:            AVMediaType;
+
+    /**
+    * Specific type of the encoded data (the codec used).
+    */
+    codec_id:              AVCodecID;
+
+    /**
+    * Additional information about the codec (corresponds to the AVI FOURCC).
+    */
+    codec_tag:             u32;
+
+    /**
+    * Extra binary data needed for initializing the decoder, codec-dependent.
+    *
+    * Must be allocated with av_malloc() and will be freed by
+    * avcodec_parameters_free(). The allocated size of extradata must be at
+    * least extradata_size + AV_INPUT_BUFFER_PADDING_SIZE, with the padding
+    * bytes zeroed.
+    */
+    extradata:             *u8;
+
+    /**
+    * Size of the extradata content in bytes.
+    */
+    extradata_size:        s32;
+
+    /**
+    * Additional data associated with the entire stream.
+    *
+    * Should be allocated with av_packet_side_data_new() or
+    * av_packet_side_data_add(), and will be freed by avcodec_parameters_free().
+    */
+    coded_side_data:       *AVPacketSideData;
+
+    /**
+    * Amount of entries in @ref coded_side_data.
+    */
+    nb_coded_side_data:    s32;
+
+    /**
+    * - video: the pixel format, the value corresponds to enum AVPixelFormat.
+    * - audio: the sample format, the value corresponds to enum AVSampleFormat.
+    */
+    format:                s32;
+
+    /**
+    * The average bitrate of the encoded data (in bits per second).
+    */
+    bit_rate:              s64;
+
+    /**
+    * The number of bits per sample in the codedwords.
+    *
+    * This is basically the bitrate per sample. It is mandatory for a bunch of
+    * formats to actually decode them. It's the number of bits for one sample in
+    * the actual coded bitstream.
+    *
+    * This could be for example 4 for ADPCM
+    * For PCM formats this matches bits_per_raw_sample
+    * Can be 0
+    */
+    bits_per_coded_sample: s32;
+
+    /**
+    * This is the number of valid bits in each output sample. If the
+    * sample format has more bits, the least significant bits are additional
+    * padding bits, which are always 0. Use right shifts to reduce the sample
+    * to its actual size. For example, audio formats with 24 bit samples will
+    * have bits_per_raw_sample set to 24, and format set to AV_SAMPLE_FMT_S32.
+    * To get the original sample use "(int32_t)sample >> 8"."
+    *
+    * For ADPCM this might be 12 or 16 or similar
+    * Can be 0
+    */
+    bits_per_raw_sample:   s32;
+
+    /**
+    * Codec-specific bitstream restrictions that the stream conforms to.
+    */
+    profile:               s32;
+    level:                 s32;
+
+    /**
+    * Video only. The dimensions of the video frame in pixels.
+    */
+    width:                 s32;
+    height:                s32;
+
+    /**
+    * Video only. The aspect ratio (width / height) which a single pixel
+    * should have when displayed.
+    *
+    * When the aspect ratio is unknown / undefined, the numerator should be
+    * set to 0 (the denominator may have any value).
+    */
+    sample_aspect_ratio:   AVRational;
+
+    /**
+    * Video only. Number of frames per second, for streams with constant frame
+    * durations. Should be set to { 0, 1 } when some frames have differing
+    * durations or if the value is not known.
+    *
+    * @note This field correponds to values that are stored in codec-level
+    * headers and is typically overridden by container/transport-layer
+    * timestamps, when available. It should thus be used only as a last resort,
+    * when no higher-level timing information is available.
+    */
+    framerate:             AVRational;
+
+    /**
+    * Video only. The order of the fields in interlaced video.
+    */
+    field_order:           AVFieldOrder;
+
+    /**
+    * Video only. Additional colorspace characteristics.
+    */
+    color_range:           AVColorRange;
+    color_primaries:       AVColorPrimaries;
+    color_trc:             AVColorTransferCharacteristic;
+    color_space:           AVColorSpace;
+    chroma_location:       AVChromaLocation;
+
+    /**
+    * Video only. Number of delayed frames.
+    */
+    video_delay:           s32;
+
+    /**
+    * Audio only. The channel layout and number of channels.
+    */
+    ch_layout:             AVChannelLayout;
+
+    /**
+    * Audio only. The number of audio samples per second.
+    */
+    sample_rate:           s32;
+
+    /**
+    * Audio only. The number of bytes per coded audio frame, required by some
+    * formats.
+    *
+    * Corresponds to nBlockAlign in WAVEFORMATEX.
+    */
+    block_align:           s32;
+
+    /**
+    * Audio only. Audio frame size, if known. Required by some formats to be static.
+    */
+    frame_size:            s32;
+
+    /**
+    * Audio only. The amount of padding (in samples) inserted by the encoder at
+    * the beginning of the audio. I.e. this number of leading decoded samples
+    * must be discarded by the caller to get the original audio without leading
+    * padding.
+    */
+    initial_padding:       s32;
+
+    /**
+    * Audio only. The amount of padding (in samples) appended by the encoder to
+    * the end of the audio. I.e. this number of decoded samples must be
+    * discarded by the caller from the end of the stream to get the original
+    * audio without any trailing padding.
+    */
+    trailing_padding:      s32;
+
+    /**
+    * Audio only. Number of samples to skip after a discontinuity.
+    */
+    seek_preroll:          s32;
+}
+
+/**
+* Allocate a new AVCodecParameters and set its fields to default values
+* (unknown/invalid/0). The returned struct must be freed with
+* avcodec_parameters_free().
+*/
+avcodec_parameters_alloc :: () -> *AVCodecParameters #foreign libavcodec;
+
+/**
+* Free an AVCodecParameters instance and everything associated with it and
+* write NULL to the supplied pointer.
+*/
+avcodec_parameters_free :: (par: **AVCodecParameters) -> void #foreign libavcodec;
+
+/**
+* Copy the contents of src to dst. Any allocated fields in dst are freed and
+* replaced with newly allocated duplicates of the corresponding fields in src.
+*
+* @return >= 0 on success, a negative AVERROR code on failure.
+*/
+avcodec_parameters_copy :: (dst: *AVCodecParameters, src: *AVCodecParameters) -> s32 #foreign libavcodec;
+
+/**
+* This function is the same as av_get_audio_frame_duration(), except it works
+* with AVCodecParameters instead of an AVCodecContext.
+*/
+av_get_audio_frame_duration2 :: (par: *AVCodecParameters, frame_bytes: s32) -> s32 #foreign libavcodec;
+
+/**
 * @ingroup lavc_encoding
 */
 RcOverride :: struct {
@@ -7471,8 +7955,6 @@ RcOverride :: struct {
     qscale:         s32; // If this is 0 then quality_factor will be used instead.
     quality_factor: float;
 }
-
-AVCodecInternal :: struct {}
 
 /**
 * main external API structure.
@@ -7492,12 +7974,12 @@ AVCodecContext :: struct #type_info_none {
     * information on struct for av_log
     * - set by avcodec_alloc_context3
     */
-    av_class:                      *AVClass;
-    log_level_offset:              s32;
+    av_class:                    *AVClass;
+    log_level_offset:            s32;
 
-    codec_type:                    AVMediaType; /* see AVMEDIA_TYPE_xxx */
-    codec:                         *AVCodec;
-    codec_id:                      AVCodecID; /* see AV_CODEC_ID_xxx */
+    codec_type:                  AVMediaType; /* see AVMEDIA_TYPE_xxx */
+    codec:                       *AVCodec;
+    codec_id:                    AVCodecID; /* see AV_CODEC_ID_xxx */
 
     /**
     * fourcc (LSB first, so "ABCD" -> ('D'<<24) + ('C'<<16) + ('B'<<8) + 'A').
@@ -7512,24 +7994,25 @@ AVCodecContext :: struct #type_info_none {
     * - encoding: Set by user, if not then the default based on codec_id will be used.
     * - decoding: Set by user, will be converted to uppercase by libavcodec during init.
     */
-    codec_tag:                     u32;
+    codec_tag:                   u32;
 
-    priv_data:                     *void;
+    priv_data:                   *void;
 
+    AVCodecInternal :: struct {}
     /**
     * Private context used for internal data.
     *
     * Unlike priv_data, this is not codec-specific. It is used in general
     * libavcodec functions.
     */
-    internal:                      *AVCodecInternal;
+    internal:                    *AVCodecInternal;
 
     /**
     * Private data of the user, can be used to carry app specific stuff.
     * - encoding: Set by user.
     * - decoding: Set by user.
     */
-    opaque:                        *void;
+    opaque:                      *void;
 
     /**
     * the average bitrate
@@ -7537,43 +8020,21 @@ AVCodecContext :: struct #type_info_none {
     * - decoding: Set by user, may be overwritten by libavcodec
     *             if this info is available in the stream
     */
-    bit_rate:                      s64;
-
-    /**
-    * number of bits the bitstream is allowed to diverge from the reference.
-    *           the reference can be CBR (for CBR pass1) or VBR (for pass2)
-    * - encoding: Set by user; unused for constant quantizer encoding.
-    * - decoding: unused
-    */
-    bit_rate_tolerance:            s32;
-
-    /**
-    * Global quality for codecs which cannot change it per frame.
-    * This should be proportional to MPEG-1/2/4 qscale.
-    * - encoding: Set by user.
-    * - decoding: unused
-    */
-    global_quality:                s32;
-
-    /**
-    * - encoding: Set by user.
-    * - decoding: unused
-    */
-    compression_level:             s32;
+    bit_rate:                    s64;
 
     /**
     * AV_CODEC_FLAG_*.
     * - encoding: Set by user.
     * - decoding: Set by user.
     */
-    flags:                         s32;
+    flags:                       s32;
 
     /**
     * AV_CODEC_FLAG2_*
     * - encoding: Set by user.
     * - decoding: Set by user.
     */
-    flags2:                        s32;
+    flags2:                      s32;
 
     /**
     * some codecs need / can use extradata like Huffman tables.
@@ -7587,8 +8048,8 @@ AVCodecContext :: struct #type_info_none {
     * - encoding: Set/allocated/freed by libavcodec.
     * - decoding: Set/allocated/freed by user.
     */
-    extradata:                     *u8;
-    extradata_size:                s32;
+    extradata:                   *u8;
+    extradata_size:              s32;
 
     /**
     * This is the fundamental unit of time (in seconds) in terms
@@ -7608,7 +8069,23 @@ AVCodecContext :: struct #type_info_none {
     * - encoding: MUST be set by user.
     * - decoding: unused.
     */
-    time_base:                     AVRational;
+    time_base:                   AVRational;
+
+    /**
+    * Timebase in which pkt_dts/pts and AVPacket.dts/pts are expressed.
+    * - encoding: unused.
+    * - decoding: set by user.
+    */
+    pkt_timebase:                AVRational;
+
+    /**
+    * - decoding: For codecs that store a framerate value in the compressed
+    *             bitstream, the decoder may export it here. { 0, 1} when
+    *             unknown.
+    * - encoding: May be used to signal the framerate of CFR content to an
+    *             encoder.
+    */
+    framerate:                   AVRational;
 
     /**
     * For some codecs, the time base is closer to the field rate than the frame rate.
@@ -7616,8 +8093,13 @@ AVCodecContext :: struct #type_info_none {
     * if no telecine is used ...
     *
     * Set to time_base ticks per frame. Default 1, e.g., H.264/MPEG-2 set it to 2.
+    *
+    * @deprecated
+    * - decoding: Use AVCodecDescriptor.props & AV_CODEC_PROP_FIELDS
+    * - encoding: Set AVCodecContext.framerate instead
+    *
     */
-    ticks_per_frame:               s32;
+    ticks_per_frame:             s32;
 
     /**
     * Codec delay.
@@ -7641,7 +8123,7 @@ AVCodecContext :: struct #type_info_none {
     * - encoding: Set by libavcodec.
     * - decoding: Set by libavcodec.
     */
-    delay:                         s32;
+    delay:                       s32;
 
     /* video only */
     /**
@@ -7657,7 +8139,7 @@ AVCodecContext :: struct #type_info_none {
     *             to be set by the caller. During decoding, the decoder may
     *             overwrite those values as required while parsing the data.
     */
-    width:                         s32;
+    width:                       s32;
     /* video only */
     /**
     * picture width / height.
@@ -7672,7 +8154,7 @@ AVCodecContext :: struct #type_info_none {
     *             to be set by the caller. During decoding, the decoder may
     *             overwrite those values as required while parsing the data.
     */
-    height:                        s32;
+    height:                      s32;
 
     /**
     * Bitstream width / height, may be different from width/height e.g. when
@@ -7687,7 +8169,7 @@ AVCodecContext :: struct #type_info_none {
     *             e.g. from the container. During decoding, the decoder may
     *             overwrite those values as required while parsing the data.
     */
-    coded_width:                   s32;
+    coded_width:                 s32;
     /**
     * Bitstream width / height, may be different from width/height e.g. when
     * the decoded frame is cropped before being output or lowres is enabled.
@@ -7701,14 +8183,16 @@ AVCodecContext :: struct #type_info_none {
     *             e.g. from the container. During decoding, the decoder may
     *             overwrite those values as required while parsing the data.
     */
-    coded_height:                  s32;
+    coded_height:                s32;
 
     /**
-    * the number of pictures in a group of pictures, or 0 for intra_only
+    * sample aspect ratio (0 if unknown)
+    * That is the width of a pixel divided by the height of the pixel.
+    * Numerator and denominator must be relatively prime and smaller than 256 for some video standards.
     * - encoding: Set by user.
-    * - decoding: unused
+    * - decoding: Set by libavcodec.
     */
-    gop_size:                      s32;
+    sample_aspect_ratio:         AVRational;
 
     /**
     * Pixel format, see AV_PIX_FMT_xxx.
@@ -7723,7 +8207,80 @@ AVCodecContext :: struct #type_info_none {
     * - decoding: Set by user if known, overridden by libavcodec while
     *             parsing the data.
     */
-    pix_fmt:                       AVPixelFormat;
+    pix_fmt:                     AVPixelFormat;
+
+    /**
+    * Nominal unaccelerated pixel format, see AV_PIX_FMT_xxx.
+    * - encoding: unused.
+    * - decoding: Set by libavcodec before calling get_format()
+    */
+    sw_pix_fmt:                  AVPixelFormat;
+
+    /**
+    * Chromaticity coordinates of the source primaries.
+    * - encoding: Set by user
+    * - decoding: Set by libavcodec
+    */
+    color_primaries:             AVColorPrimaries;
+
+    /**
+    * Color Transfer Characteristic.
+    * - encoding: Set by user
+    * - decoding: Set by libavcodec
+    */
+    color_trc:                   AVColorTransferCharacteristic;
+
+    /**
+    * YUV colorspace type.
+    * - encoding: Set by user
+    * - decoding: Set by libavcodec
+    */
+    colorspace:                  AVColorSpace;
+
+    /**
+    * MPEG vs JPEG YUV range.
+    * - encoding: Set by user to override the default output color range value,
+    *   If not specified, libavcodec sets the color range depending on the
+    *   output format.
+    * - decoding: Set by libavcodec, can be set by the user to propagate the
+    *   color range to components reading from the decoder context.
+    */
+    color_range:                 AVColorRange;
+
+    /**
+    * This defines the location of chroma samples.
+    * - encoding: Set by user
+    * - decoding: Set by libavcodec
+    */
+    chroma_sample_location:      AVChromaLocation;
+
+    /** Field order
+    * - encoding: set by libavcodec
+    * - decoding: Set by user.
+    */
+    field_order:                 AVFieldOrder;
+
+    /**
+    * number of reference frames
+    * - encoding: Set by user.
+    * - decoding: Set by lavc.
+    */
+    refs:                        s32;
+
+    /**
+    * Size of the frame reordering buffer in the decoder.
+    * For MPEG-2 it is 1 IPB or 0 low delay IP.
+    * - encoding: Set by libavcodec.
+    * - decoding: Set by libavcodec.
+    */
+    has_b_frames:                s32;
+
+    /**
+    * slice flags
+    * - encoding: unused
+    * - decoding: Set by user.
+    */
+    slice_flags:                 s32;
 
     /**
     * If non NULL, 'draw_horiz_band' is called by the libavcodec
@@ -7748,7 +8305,7 @@ AVCodecContext :: struct #type_info_none {
     * @param type 1->top field, 2->bottom field, 3->frame
     * @param offset offset into the AVFrame.data from which the slice should be read
     */
-    draw_horiz_band:               #type (s: *AVCodecContext, src: *AVFrame, offset: *[8] s32, y: s32, type: s32, height: s32) -> void #c_call;
+    draw_horiz_band:             #type (s: *AVCodecContext, src: *AVFrame, offset: *[8] s32, y: s32, type: s32, height: s32) -> void #c_call;
 
     /**
     * Callback to negotiate the pixel format. Decoding only, may be set by the
@@ -7775,7 +8332,7 @@ AVCodecContext :: struct #type_info_none {
     *          than one of the formats in fmt or AV_PIX_FMT_NONE.
     * @return the chosen format or AV_PIX_FMT_NONE
     */
-    get_format:                    #type (s: *AVCodecContext, fmt: *AVPixelFormat) -> AVPixelFormat #c_call;
+    get_format:                  #type (s: *AVCodecContext, fmt: *AVPixelFormat) -> AVPixelFormat #c_call;
 
     /**
     * maximum number of B-frames between non-B-frames
@@ -7783,7 +8340,7 @@ AVCodecContext :: struct #type_info_none {
     * - encoding: Set by user.
     * - decoding: unused
     */
-    max_b_frames:                  s32;
+    max_b_frames:                s32;
 
     /**
     * qscale factor between IP and B-frames
@@ -7792,22 +8349,14 @@ AVCodecContext :: struct #type_info_none {
     * - encoding: Set by user.
     * - decoding: unused
     */
-    b_quant_factor:                float;
+    b_quant_factor:              float;
 
     /**
     * qscale offset between IP and B-frames
     * - encoding: Set by user.
     * - decoding: unused
     */
-    b_quant_offset:                float;
-
-    /**
-    * Size of the frame reordering buffer in the decoder.
-    * For MPEG-2 it is 1 IPB or 0 low delay IP.
-    * - encoding: Set by libavcodec.
-    * - decoding: Set by libavcodec.
-    */
-    has_b_frames:                  s32;
+    b_quant_offset:              float;
 
     /**
     * qscale factor between P- and I-frames
@@ -7816,135 +8365,119 @@ AVCodecContext :: struct #type_info_none {
     * - encoding: Set by user.
     * - decoding: unused
     */
-    i_quant_factor:                float;
+    i_quant_factor:              float;
 
     /**
     * qscale offset between P and I-frames
     * - encoding: Set by user.
     * - decoding: unused
     */
-    i_quant_offset:                float;
+    i_quant_offset:              float;
 
     /**
     * luminance masking (0-> disabled)
     * - encoding: Set by user.
     * - decoding: unused
     */
-    lumi_masking:                  float;
+    lumi_masking:                float;
 
     /**
     * temporary complexity masking (0-> disabled)
     * - encoding: Set by user.
     * - decoding: unused
     */
-    temporal_cplx_masking:         float;
+    temporal_cplx_masking:       float;
 
     /**
     * spatial complexity masking (0-> disabled)
     * - encoding: Set by user.
     * - decoding: unused
     */
-    spatial_cplx_masking:          float;
+    spatial_cplx_masking:        float;
 
     /**
     * p block masking (0-> disabled)
     * - encoding: Set by user.
     * - decoding: unused
     */
-    p_masking:                     float;
+    p_masking:                   float;
 
     /**
     * darkness masking (0-> disabled)
     * - encoding: Set by user.
     * - decoding: unused
     */
-    dark_masking:                  float;
+    dark_masking:                float;
 
     /**
-    * slice count
-    * - encoding: Set by libavcodec.
-    * - decoding: Set by user (or 0).
-    */
-    slice_count:                   s32;
-
-    /**
-    * slice offsets in the frame in bytes
-    * - encoding: Set/allocated by libavcodec.
-    * - decoding: Set/allocated by user (or NULL).
-    */
-    slice_offset:                  *s32;
-
-    /**
-    * sample aspect ratio (0 if unknown)
-    * That is the width of a pixel divided by the height of the pixel.
-    * Numerator and denominator must be relatively prime and smaller than 256 for some video standards.
+    * noise vs. sse weight for the nsse comparison function
     * - encoding: Set by user.
-    * - decoding: Set by libavcodec.
+    * - decoding: unused
     */
-    sample_aspect_ratio:           AVRational;
+    nsse_weight:                 s32;
 
     /**
     * motion estimation comparison function
     * - encoding: Set by user.
     * - decoding: unused
     */
-    me_cmp:                        s32;
+    me_cmp:                      s32;
 
     /**
     * subpixel motion estimation comparison function
     * - encoding: Set by user.
     * - decoding: unused
     */
-    me_sub_cmp:                    s32;
+    me_sub_cmp:                  s32;
 
     /**
     * macroblock comparison function (not supported yet)
     * - encoding: Set by user.
     * - decoding: unused
     */
-    mb_cmp:                        s32;
+    mb_cmp:                      s32;
 
     /**
     * interlaced DCT comparison function
     * - encoding: Set by user.
     * - decoding: unused
     */
-    ildct_cmp:                     s32;
+    ildct_cmp:                   s32;
 
     /**
     * ME diamond size & shape
     * - encoding: Set by user.
     * - decoding: unused
     */
-    dia_size:                      s32;
+    dia_size:                    s32;
 
     /**
     * amount of previous MV predictors (2a+1 x 2a+1 square)
     * - encoding: Set by user.
     * - decoding: unused
     */
-    last_predictor_count:          s32;
+    last_predictor_count:        s32;
 
     /**
     * motion estimation prepass comparison function
     * - encoding: Set by user.
     * - decoding: unused
     */
-    me_pre_cmp:                    s32;
+    me_pre_cmp:                  s32;
 
     /**
     * ME prepass diamond size & shape
     * - encoding: Set by user.
     * - decoding: unused
     */
-    pre_dia_size:                  s32;
+    pre_dia_size:                s32;
 
     /**
     * subpel ME quality
     * - encoding: Set by user.
     * - decoding: unused
     */
-    me_subpel_quality:             s32;
+    me_subpel_quality:           s32;
 
     /**
     * maximum motion estimation search range in subpel units
@@ -7953,21 +8486,14 @@ AVCodecContext :: struct #type_info_none {
     * - encoding: Set by user.
     * - decoding: unused
     */
-    me_range:                      s32;
-
-    /**
-    * slice flags
-    * - encoding: unused
-    * - decoding: Set by user.
-    */
-    slice_flags:                   s32;
+    me_range:                    s32;
 
     /**
     * macroblock decision mode
     * - encoding: Set by user.
     * - decoding: unused
     */
-    mb_decision:                   s32;
+    mb_decision:                 s32;
 
     /**
     * custom intra quantization matrix
@@ -7976,7 +8502,7 @@ AVCodecContext :: struct #type_info_none {
     * - encoding: Set/allocated by user, freed by libavcodec. Can be NULL.
     * - decoding: Set/allocated/freed by libavcodec.
     */
-    intra_matrix:                  *u16;
+    intra_matrix:                *u16;
 
     /**
     * custom inter quantization matrix
@@ -7985,104 +8511,62 @@ AVCodecContext :: struct #type_info_none {
     * - encoding: Set/allocated by user, freed by libavcodec. Can be NULL.
     * - decoding: Set/allocated/freed by libavcodec.
     */
-    inter_matrix:                  *u16;
+    inter_matrix:                *u16;
+
+    /**
+    * custom intra quantization matrix
+    * - encoding: Set by user, can be NULL.
+    * - decoding: unused.
+    */
+    chroma_intra_matrix:         *u16;
 
     /**
     * precision of the intra DC coefficient - 8
     * - encoding: Set by user.
     * - decoding: Set by libavcodec
     */
-    intra_dc_precision:            s32;
-
-    /**
-    * Number of macroblock rows at the top which are skipped.
-    * - encoding: unused
-    * - decoding: Set by user.
-    */
-    skip_top:                      s32;
-
-    /**
-    * Number of macroblock rows at the bottom which are skipped.
-    * - encoding: unused
-    * - decoding: Set by user.
-    */
-    skip_bottom:                   s32;
+    intra_dc_precision:          s32;
 
     /**
     * minimum MB Lagrange multiplier
     * - encoding: Set by user.
     * - decoding: unused
     */
-    mb_lmin:                       s32;
+    mb_lmin:                     s32;
 
     /**
     * maximum MB Lagrange multiplier
     * - encoding: Set by user.
     * - decoding: unused
     */
-    mb_lmax:                       s32;
+    mb_lmax:                     s32;
 
     /**
     * - encoding: Set by user.
     * - decoding: unused
     */
-    bidir_refine:                  s32;
+    bidir_refine:                s32;
 
     /**
     * minimum GOP size
     * - encoding: Set by user.
     * - decoding: unused
     */
-    keyint_min:                    s32;
+    keyint_min:                  s32;
 
     /**
-    * number of reference frames
+    * the number of pictures in a group of pictures, or 0 for intra_only
     * - encoding: Set by user.
-    * - decoding: Set by lavc.
+    * - decoding: unused
     */
-    refs:                          s32;
+    gop_size:                    s32;
 
     /**
     * Note: Value depends upon the compare function used for fullpel ME.
     * - encoding: Set by user.
     * - decoding: unused
     */
-    mv0_threshold:                 s32;
-
-    /**
-    * Chromaticity coordinates of the source primaries.
-    * - encoding: Set by user
-    * - decoding: Set by libavcodec
-    */
-    color_primaries:               AVColorPrimaries;
-
-    /**
-    * Color Transfer Characteristic.
-    * - encoding: Set by user
-    * - decoding: Set by libavcodec
-    */
-    color_trc:                     AVColorTransferCharacteristic;
-
-    /**
-    * YUV colorspace type.
-    * - encoding: Set by user
-    * - decoding: Set by libavcodec
-    */
-    colorspace:                    AVColorSpace;
-
-    /**
-    * MPEG vs JPEG YUV range.
-    * - encoding: Set by user
-    * - decoding: Set by libavcodec
-    */
-    color_range:                   AVColorRange;
-
-    /**
-    * This defines the location of chroma samples.
-    * - encoding: Set by user
-    * - decoding: Set by libavcodec
-    */
-    chroma_sample_location:        AVChromaLocation;
+    mv0_threshold:               s32;
 
     /**
     * Number of slices.
@@ -8091,23 +8575,19 @@ AVCodecContext :: struct #type_info_none {
     * - encoding: Set by user
     * - decoding: unused
     */
-    slices:                        s32;
+    slices:                      s32;
 
-    /** Field order
-    * - encoding: set by libavcodec
-    * - decoding: Set by user.
-    */
-    field_order:                   AVFieldOrder;
+    sample_rate:                 s32; ///< samples per second
 
-    sample_rate:                   s32; ///< samples per second
+    sample_fmt:                  AVSampleFormat; ///< sample format
 
     /**
-    * number of audio channels
-    * @deprecated use ch_layout.nb_channels
+    * Audio channel layout.
+    * - encoding: must be set by the caller, to one of AVCodec.ch_layouts.
+    * - decoding: may be set by the caller if known e.g. from the container.
+    *             The decoder can then override during decoding as needed.
     */
-    channels:                      s32;
-
-    sample_fmt:                    AVSampleFormat; ///< sample format
+    ch_layout:                   AVChannelLayout;
 
     /* The following data should not be initialized. */
     /**
@@ -8119,55 +8599,27 @@ AVCodecContext :: struct #type_info_none {
     *   frame size is not restricted.
     * - decoding: may be set by some decoders to indicate constant frame size
     */
-    frame_size:                    s32;
-
-    /**
-    * Frame counter, set by libavcodec.
-    *
-    * - decoding: total number of frames returned from the decoder so far.
-    * - encoding: total number of frames passed to the encoder so far.
-    *
-    *   @note the counter is not incremented if encoding/decoding resulted in
-    *   an error.
-    *   @deprecated use frame_num instead
-    */
-    frame_number:                  s32;
+    frame_size:                  s32;
 
     /**
     * number of bytes per packet if constant and known or 0
     * Used by some WAV based audio codecs.
     */
-    block_align:                   s32;
+    block_align:                 s32;
 
     /**
     * Audio cutoff bandwidth (0 means "automatic")
     * - encoding: Set by user.
     * - decoding: unused
     */
-    cutoff:                        s32;
-
-    /**
-    * Audio channel layout.
-    * - encoding: set by user.
-    * - decoding: set by user, may be overwritten by libavcodec.
-    * @deprecated use ch_layout
-    */
-    channel_layout:                u64;
-
-    /**
-    * Request decoder to use this channel layout if it can (0 for default)
-    * - encoding: unused
-    * - decoding: Set by user.
-    * @deprecated use "downmix" codec private option
-    */
-    request_channel_layout:        u64;
+    cutoff:                      s32;
 
     /**
     * Type of service that the audio stream conveys.
     * - encoding: Set by user.
     * - decoding: Set by libavcodec.
     */
-    audio_service_type:            AVAudioServiceType;
+    audio_service_type:          AVAudioServiceType;
 
     /**
     * desired sample format
@@ -8175,7 +8627,42 @@ AVCodecContext :: struct #type_info_none {
     * - decoding: Set by user.
     * Decoder will decode to this format if it can.
     */
-    request_sample_fmt:            AVSampleFormat;
+    request_sample_fmt:          AVSampleFormat;
+
+    /**
+    * Audio only. The number of "priming" samples (padding) inserted by the
+    * encoder at the beginning of the audio. I.e. this number of leading
+    * decoded samples must be discarded by the caller to get the original audio
+    * without leading padding.
+    *
+    * - decoding: unused
+    * - encoding: Set by libavcodec. The timestamps on the output packets are
+    *             adjusted by the encoder so that they always refer to the
+    *             first sample of the data actually contained in the packet,
+    *             including any added padding.  E.g. if the timebase is
+    *             1/samplerate and the timestamp of the first input sample is
+    *             0, the timestamp of the first output packet will be
+    *             -initial_padding.
+    */
+    initial_padding:             s32;
+
+    /**
+    * Audio only. The amount of padding (in samples) appended by the encoder to
+    * the end of the audio. I.e. this number of decoded samples must be
+    * discarded by the caller from the end of the stream to get the original
+    * audio without any trailing padding.
+    *
+    * - decoding: unused
+    * - encoding: unused
+    */
+    trailing_padding:            s32;
+
+    /**
+    * Number of samples to skip after a discontinuity
+    * - decoding: unused
+    * - encoding: set by libavcodec
+    */
+    seek_preroll:                s32;
 
     /**
     * This callback is called at the beginning of each frame to get data
@@ -8213,6 +8700,10 @@ AVCodecContext :: struct #type_info_none {
     *   this callback and filled with the extra buffers if there are more
     *   buffers than buf[] can hold. extended_buf will be freed in
     *   av_frame_unref().
+    *   Decoders will generally initialize the whole buffer before it is output
+    *   but it can in rare error conditions happen that uninitialized data is passed
+    *   through. \important The buffers returned by get_buffer* should thus not contain sensitive
+    *   data.
     *
     * If AV_CODEC_CAP_DR1 is not set then get_buffer2() must call
     * avcodec_default_get_buffer2() instead of providing buffers allocated by
@@ -8257,95 +8748,118 @@ AVCodecContext :: struct #type_info_none {
     * - encoding: unused
     * - decoding: Set by libavcodec, user can override.
     */
-    get_buffer2:                   #type (s: *AVCodecContext, frame: *AVFrame, flags: s32) -> s32 #c_call;
+    get_buffer2:                 #type (s: *AVCodecContext, frame: *AVFrame, flags: s32) -> s32 #c_call;
 
-    qcompress:                     float; ///< amount of qscale change between easy & hard scenes (0.0-1.0)
-    qblur:                         float; ///< amount of qscale smoothing over time (0.0-1.0)
+    /* - encoding parameters */
+    /**
+    * number of bits the bitstream is allowed to diverge from the reference.
+    *           the reference can be CBR (for CBR pass1) or VBR (for pass2)
+    * - encoding: Set by user; unused for constant quantizer encoding.
+    * - decoding: unused
+    */
+    bit_rate_tolerance:          s32;
+
+    /**
+    * Global quality for codecs which cannot change it per frame.
+    * This should be proportional to MPEG-1/2/4 qscale.
+    * - encoding: Set by user.
+    * - decoding: unused
+    */
+    global_quality:              s32;
+
+    /**
+    * - encoding: Set by user.
+    * - decoding: unused
+    */
+    compression_level:           s32;
+
+    qcompress:                   float; ///< amount of qscale change between easy & hard scenes (0.0-1.0)
+    qblur:                       float; ///< amount of qscale smoothing over time (0.0-1.0)
 
     /**
     * minimum quantizer
     * - encoding: Set by user.
     * - decoding: unused
     */
-    qmin:                          s32;
+    qmin:                        s32;
 
     /**
     * maximum quantizer
     * - encoding: Set by user.
     * - decoding: unused
     */
-    qmax:                          s32;
+    qmax:                        s32;
 
     /**
     * maximum quantizer difference between frames
     * - encoding: Set by user.
     * - decoding: unused
     */
-    max_qdiff:                     s32;
+    max_qdiff:                   s32;
 
     /**
     * decoder bitstream buffer size
     * - encoding: Set by user.
-    * - decoding: unused
+    * - decoding: May be set by libavcodec.
     */
-    rc_buffer_size:                s32;
+    rc_buffer_size:              s32;
 
     /**
     * ratecontrol override, see RcOverride
     * - encoding: Allocated/set/freed by user.
     * - decoding: unused
     */
-    rc_override_count:             s32;
-    rc_override:                   *RcOverride;
+    rc_override_count:           s32;
+    rc_override:                 *RcOverride;
 
     /**
     * maximum bitrate
     * - encoding: Set by user.
     * - decoding: Set by user, may be overwritten by libavcodec.
     */
-    rc_max_rate:                   s64;
+    rc_max_rate:                 s64;
 
     /**
     * minimum bitrate
     * - encoding: Set by user.
     * - decoding: unused
     */
-    rc_min_rate:                   s64;
+    rc_min_rate:                 s64;
 
     /**
     * Ratecontrol attempt to use, at maximum, <value> of what can be used without an underflow.
     * - encoding: Set by user.
     * - decoding: unused.
     */
-    rc_max_available_vbv_use:      float;
+    rc_max_available_vbv_use:    float;
 
     /**
     * Ratecontrol attempt to use, at least, <value> times the amount needed to prevent a vbv overflow.
     * - encoding: Set by user.
     * - decoding: unused.
     */
-    rc_min_vbv_overflow_use:       float;
+    rc_min_vbv_overflow_use:     float;
 
     /**
     * Number of bits which should be loaded into the rc buffer before decoding starts.
     * - encoding: Set by user.
     * - decoding: unused
     */
-    rc_initial_buffer_occupancy:   s32;
+    rc_initial_buffer_occupancy: s32;
 
     /**
     * trellis RD quantization
     * - encoding: Set by user.
     * - decoding: unused
     */
-    trellis:                       s32;
+    trellis:                     s32;
 
     /**
     * pass1 encoding statistics output buffer
     * - encoding: Set by libavcodec.
     * - decoding: unused
     */
-    stats_out:                     *u8;
+    stats_out:                   *u8;
 
     /**
     * pass2 encoding statistics input buffer
@@ -8353,14 +8867,14 @@ AVCodecContext :: struct #type_info_none {
     * - encoding: Allocated/set/freed by user.
     * - decoding: unused
     */
-    stats_in:                      *u8;
+    stats_in:                    *u8;
 
     /**
     * Work around bugs in encoders which sometimes cannot be detected automatically.
     * - encoding: Set by user
     * - decoding: Set by user
     */
-    workaround_bugs:               s32;
+    workaround_bugs:             s32;
 
     /**
     * strictly follow the standard (MPEG-4, ...).
@@ -8375,21 +8889,21 @@ AVCodecContext :: struct #type_info_none {
     * (=strictly conform to the specs)
     * This may only be set to one of the FF_COMPLIANCE_* values in defs.h.
     */
-    strict_std_compliance:         s32;
+    strict_std_compliance:       s32;
 
     /**
     * error concealment flags
     * - encoding: unused
     * - decoding: Set by user.
     */
-    error_concealment:             s32;
+    error_concealment:           s32;
 
     /**
     * debug
     * - encoding: Set by user.
     * - decoding: Set by user.
     */
-    debug:                         s32;
+    debug:                       s32;
 
     /**
     * Error recognition; may misdetect some more or less valid parts as errors.
@@ -8398,27 +8912,14 @@ AVCodecContext :: struct #type_info_none {
     * - encoding: Set by user.
     * - decoding: Set by user.
     */
-    err_recognition:               s32;
-
-    /**
-    * opaque 64-bit number (generally a PTS) that will be reordered and
-    * output in AVFrame.reordered_opaque
-    * - encoding: Set by libavcodec to the reordered_opaque of the input
-    *             frame corresponding to the last returned packet. Only
-    *             supported by encoders with the
-    *             AV_CODEC_CAP_ENCODER_REORDERED_OPAQUE capability.
-    * - decoding: Set by user.
-    *
-    * @deprecated Use AV_CODEC_FLAG_COPY_OPAQUE instead
-    */
-    reordered_opaque:              s64;
+    err_recognition:             s32;
 
     /**
     * Hardware accelerator in use
     * - encoding: unused.
     * - decoding: Set by libavcodec
     */
-    hwaccel:                       *AVHWAccel;
+    hwaccel:                     *AVHWAccel;
 
     /**
     * Legacy hardware accelerator context.
@@ -8442,292 +8943,7 @@ AVCodecContext :: struct #type_info_none {
     *             Must remain valid until the next get_format() call,
     *             or avcodec_free_context() (whichever comes first).
     */
-    hwaccel_context:               *void;
-
-    /**
-    * error
-    * - encoding: Set by libavcodec if flags & AV_CODEC_FLAG_PSNR.
-    * - decoding: unused
-    */
-    error:                         [8] u64;
-
-    /**
-    * DCT algorithm, see FF_DCT_* below
-    * - encoding: Set by user.
-    * - decoding: unused
-    */
-    dct_algo:                      s32;
-
-    /**
-    * IDCT algorithm, see FF_IDCT_* below.
-    * - encoding: Set by user.
-    * - decoding: Set by user.
-    */
-    idct_algo:                     s32;
-
-    /**
-    * bits per sample/pixel from the demuxer (needed for huffyuv).
-    * - encoding: Set by libavcodec.
-    * - decoding: Set by user.
-    */
-    bits_per_coded_sample:         s32;
-
-    /**
-    * Bits per sample/pixel of internal libavcodec pixel/sample format.
-    * - encoding: set by user.
-    * - decoding: set by libavcodec.
-    */
-    bits_per_raw_sample:           s32;
-
-    /**
-    * low resolution decoding, 1-> 1/2 size, 2->1/4 size
-    * - encoding: unused
-    * - decoding: Set by user.
-    */
-    lowres:                        s32;
-
-    /**
-    * thread count
-    * is used to decide how many independent tasks should be passed to execute()
-    * - encoding: Set by user.
-    * - decoding: Set by user.
-    */
-    thread_count:                  s32;
-
-    /**
-    * Which multithreading methods to use.
-    * Use of FF_THREAD_FRAME will increase decoding delay by one frame per thread,
-    * so clients which cannot provide future frames should not use it.
-    *
-    * - encoding: Set by user, otherwise the default is used.
-    * - decoding: Set by user, otherwise the default is used.
-    */
-    thread_type:                   s32;
-
-    /**
-    * Which multithreading methods are in use by the codec.
-    * - encoding: Set by libavcodec.
-    * - decoding: Set by libavcodec.
-    */
-    active_thread_type:            s32;
-
-    /**
-    * The codec may call this to execute several independent things.
-    * It will return only after finishing all tasks.
-    * The user may replace this with some multithreaded implementation,
-    * the default implementation will execute the parts serially.
-    * @param count the number of things to execute
-    * - encoding: Set by libavcodec, user can override.
-    * - decoding: Set by libavcodec, user can override.
-    */
-    execute:                       #type (c: *AVCodecContext, func: #type (c2: *AVCodecContext, arg: *void) -> s32 #c_call, arg2: *void, ret: *s32, count: s32, size: s32) -> s32 #c_call;
-
-    /**
-    * The codec may call this to execute several independent things.
-    * It will return only after finishing all tasks.
-    * The user may replace this with some multithreaded implementation,
-    * the default implementation will execute the parts serially.
-    * @param c context passed also to func
-    * @param count the number of things to execute
-    * @param arg2 argument passed unchanged to func
-    * @param ret return values of executed functions, must have space for "count" values. May be NULL.
-    * @param func function that will be called count times, with jobnr from 0 to count-1.
-    *             threadnr will be in the range 0 to c->thread_count-1 < MAX_THREADS and so that no
-    *             two instances of func executing at the same time will have the same threadnr.
-    * @return always 0 currently, but code should handle a future improvement where when any call to func
-    *         returns < 0 no further calls to func may be done and < 0 is returned.
-    * - encoding: Set by libavcodec, user can override.
-    * - decoding: Set by libavcodec, user can override.
-    */
-    execute2:                      #type (c: *AVCodecContext, func: #type (c2: *AVCodecContext, arg: *void, jobnr: s32, threadnr: s32) -> s32 #c_call, arg2: *void, ret: *s32, count: s32) -> s32 #c_call;
-
-    /**
-    * noise vs. sse weight for the nsse comparison function
-    * - encoding: Set by user.
-    * - decoding: unused
-    */
-    nsse_weight:                   s32;
-
-    /**
-    * profile
-    * - encoding: Set by user.
-    * - decoding: Set by libavcodec.
-    */
-    profile:                       s32;
-
-    /**
-    * level
-    * - encoding: Set by user.
-    * - decoding: Set by libavcodec.
-    */
-    level:                         s32;
-
-    /**
-    * Skip loop filtering for selected frames.
-    * - encoding: unused
-    * - decoding: Set by user.
-    */
-    skip_loop_filter:              AVDiscard;
-
-    /**
-    * Skip IDCT/dequantization for selected frames.
-    * - encoding: unused
-    * - decoding: Set by user.
-    */
-    skip_idct:                     AVDiscard;
-
-    /**
-    * Skip decoding for selected frames.
-    * - encoding: unused
-    * - decoding: Set by user.
-    */
-    skip_frame:                    AVDiscard;
-
-    /**
-    * Header containing style information for text subtitles.
-    * For SUBTITLE_ASS subtitle type, it should contain the whole ASS
-    * [Script Info] and [V4+ Styles] section, plus the [Events] line and
-    * the Format line following. It shouldn't include any Dialogue line.
-    * - encoding: Set/allocated/freed by user (before avcodec_open2())
-    * - decoding: Set/allocated/freed by libavcodec (by avcodec_open2())
-    */
-    subtitle_header:               *u8;
-    subtitle_header_size:          s32;
-
-    /**
-    * Audio only. The number of "priming" samples (padding) inserted by the
-    * encoder at the beginning of the audio. I.e. this number of leading
-    * decoded samples must be discarded by the caller to get the original audio
-    * without leading padding.
-    *
-    * - decoding: unused
-    * - encoding: Set by libavcodec. The timestamps on the output packets are
-    *             adjusted by the encoder so that they always refer to the
-    *             first sample of the data actually contained in the packet,
-    *             including any added padding.  E.g. if the timebase is
-    *             1/samplerate and the timestamp of the first input sample is
-    *             0, the timestamp of the first output packet will be
-    *             -initial_padding.
-    */
-    initial_padding:               s32;
-
-    /**
-    * - decoding: For codecs that store a framerate value in the compressed
-    *             bitstream, the decoder may export it here. { 0, 1} when
-    *             unknown.
-    * - encoding: May be used to signal the framerate of CFR content to an
-    *             encoder.
-    */
-    framerate:                     AVRational;
-
-    /**
-    * Nominal unaccelerated pixel format, see AV_PIX_FMT_xxx.
-    * - encoding: unused.
-    * - decoding: Set by libavcodec before calling get_format()
-    */
-    sw_pix_fmt:                    AVPixelFormat;
-
-    /**
-    * Timebase in which pkt_dts/pts and AVPacket.dts/pts are.
-    * - encoding unused.
-    * - decoding set by user.
-    */
-    pkt_timebase:                  AVRational;
-
-    /**
-    * AVCodecDescriptor
-    * - encoding: unused.
-    * - decoding: set by libavcodec.
-    */
-    codec_descriptor:              *AVCodecDescriptor;
-
-    /**
-    * Current statistics for PTS correction.
-    * - decoding: maintained and used by libavcodec, not intended to be used by user apps
-    * - encoding: unused
-    */
-    pts_correction_num_faulty_pts: s64;
-    /// Number of incorrect PTS values so far
-    pts_correction_num_faulty_dts: s64;
-    /// Number of incorrect DTS values so far
-    pts_correction_last_pts:       s64;
-    /// PTS of the last frame
-    pts_correction_last_dts:       s64;
-
-    /**
-    * Character encoding of the input subtitles file.
-    * - decoding: set by user
-    * - encoding: unused
-    */
-    sub_charenc:                   *u8;
-
-    /**
-    * Subtitles character encoding mode. Formats or codecs might be adjusting
-    * this setting (if they are doing the conversion themselves for instance).
-    * - decoding: set by libavcodec
-    * - encoding: unused
-    */
-    sub_charenc_mode:              s32;
-
-    /**
-    * Skip processing alpha if supported by codec.
-    * Note that if the format uses pre-multiplied alpha (common with VP6,
-    * and recommended due to better video quality/compression)
-    * the image will look as if alpha-blended onto a black background.
-    * However for formats that do not use pre-multiplied alpha
-    * there might be serious artefacts (though e.g. libswscale currently
-    * assumes pre-multiplied alpha anyway).
-    *
-    * - decoding: set by user
-    * - encoding: unused
-    */
-    skip_alpha:                    s32;
-
-    /**
-    * Number of samples to skip after a discontinuity
-    * - decoding: unused
-    * - encoding: set by libavcodec
-    */
-    seek_preroll:                  s32;
-
-    /**
-    * custom intra quantization matrix
-    * - encoding: Set by user, can be NULL.
-    * - decoding: unused.
-    */
-    chroma_intra_matrix:           *u16;
-
-    /**
-    * dump format separator.
-    * can be ", " or "\n      " or anything else
-    * - encoding: Set by user.
-    * - decoding: Set by user.
-    */
-    dump_separator:                *u8;
-
-    /**
-    * ',' separated list of allowed decoders.
-    * If NULL then all are allowed
-    * - encoding: unused
-    * - decoding: set by user
-    */
-    codec_whitelist:               *u8;
-
-    /**
-    * Properties of the stream that gets decoded
-    * - encoding: unused
-    * - decoding: set by libavcodec
-    */
-    properties:                    u32;
-
-    /**
-    * Additional data associated with the entire coded stream.
-    *
-    * - decoding: unused
-    * - encoding: may be set by libavcodec after avcodec_open2().
-    */
-    coded_side_data:               *AVPacketSideData;
-    nb_coded_side_data:            s32;
+    hwaccel_context:             *void;
 
     /**
     * A reference to the AVHWFramesContext describing the input (for encoding)
@@ -8751,26 +8967,7 @@ AVCodecContext :: struct #type_info_none {
     *
     *             This field should be set before avcodec_open2() is called.
     */
-    hw_frames_ctx:                 *AVBufferRef;
-
-    /**
-    * Audio only. The amount of padding (in samples) appended by the encoder to
-    * the end of the audio. I.e. this number of decoded samples must be
-    * discarded by the caller from the end of the stream to get the original
-    * audio without any trailing padding.
-    *
-    * - decoding: unused
-    * - encoding: unused
-    */
-    trailing_padding:              s32;
-
-    /**
-    * The number of pixels per image to maximally accept.
-    *
-    * - decoding: set by user
-    * - encoding: set by user
-    */
-    max_pixels:                    s64;
+    hw_frames_ctx:               *AVBufferRef;
 
     /**
     * A reference to the AVHWDeviceContext describing the device which will
@@ -8792,7 +8989,7 @@ AVCodecContext :: struct #type_info_none {
     * order to support hw_frames_ctx at all - in that case, all frames
     * contexts used must be created on the same device.
     */
-    hw_device_ctx:                 *AVBufferRef;
+    hw_device_ctx:               *AVBufferRef;
 
     /**
     * Bit set of AV_HWACCEL_FLAG_* flags, which affect hardware accelerated
@@ -8801,7 +8998,268 @@ AVCodecContext :: struct #type_info_none {
     * - decoding: Set by user (either before avcodec_open2(), or in the
     *             AVCodecContext.get_format callback)
     */
-    hwaccel_flags:                 s32;
+    hwaccel_flags:               s32;
+
+    /**
+    * Video decoding only.  Sets the number of extra hardware frames which
+    * the decoder will allocate for use by the caller.  This must be set
+    * before avcodec_open2() is called.
+    *
+    * Some hardware decoders require all frames that they will use for
+    * output to be defined in advance before decoding starts.  For such
+    * decoders, the hardware frame pool must therefore be of a fixed size.
+    * The extra frames set here are on top of any number that the decoder
+    * needs internally in order to operate normally (for example, frames
+    * used as reference pictures).
+    */
+    extra_hw_frames:             s32;
+
+    /**
+    * error
+    * - encoding: Set by libavcodec if flags & AV_CODEC_FLAG_PSNR.
+    * - decoding: unused
+    */
+    error:                       [8] u64;
+
+    /**
+    * DCT algorithm, see FF_DCT_* below
+    * - encoding: Set by user.
+    * - decoding: unused
+    */
+    dct_algo:                    s32;
+
+    /**
+    * IDCT algorithm, see FF_IDCT_* below.
+    * - encoding: Set by user.
+    * - decoding: Set by user.
+    */
+    idct_algo:                   s32;
+
+    /**
+    * bits per sample/pixel from the demuxer (needed for huffyuv).
+    * - encoding: Set by libavcodec.
+    * - decoding: Set by user.
+    */
+    bits_per_coded_sample:       s32;
+
+    /**
+    * Bits per sample/pixel of internal libavcodec pixel/sample format.
+    * - encoding: set by user.
+    * - decoding: set by libavcodec.
+    */
+    bits_per_raw_sample:         s32;
+
+    /**
+    * thread count
+    * is used to decide how many independent tasks should be passed to execute()
+    * - encoding: Set by user.
+    * - decoding: Set by user.
+    */
+    thread_count:                s32;
+
+    /**
+    * Which multithreading methods to use.
+    * Use of FF_THREAD_FRAME will increase decoding delay by one frame per thread,
+    * so clients which cannot provide future frames should not use it.
+    *
+    * - encoding: Set by user, otherwise the default is used.
+    * - decoding: Set by user, otherwise the default is used.
+    */
+    thread_type:                 s32;
+
+    /**
+    * Which multithreading methods are in use by the codec.
+    * - encoding: Set by libavcodec.
+    * - decoding: Set by libavcodec.
+    */
+    active_thread_type:          s32;
+
+    /**
+    * The codec may call this to execute several independent things.
+    * It will return only after finishing all tasks.
+    * The user may replace this with some multithreaded implementation,
+    * the default implementation will execute the parts serially.
+    * @param count the number of things to execute
+    * - encoding: Set by libavcodec, user can override.
+    * - decoding: Set by libavcodec, user can override.
+    */
+    execute:                     #type (c: *AVCodecContext, func: #type (c2: *AVCodecContext, arg: *void) -> s32 #c_call, arg2: *void, ret: *s32, count: s32, size: s32) -> s32 #c_call;
+
+    /**
+    * The codec may call this to execute several independent things.
+    * It will return only after finishing all tasks.
+    * The user may replace this with some multithreaded implementation,
+    * the default implementation will execute the parts serially.
+    * @param c context passed also to func
+    * @param count the number of things to execute
+    * @param arg2 argument passed unchanged to func
+    * @param ret return values of executed functions, must have space for "count" values. May be NULL.
+    * @param func function that will be called count times, with jobnr from 0 to count-1.
+    *             threadnr will be in the range 0 to c->thread_count-1 < MAX_THREADS and so that no
+    *             two instances of func executing at the same time will have the same threadnr.
+    * @return always 0 currently, but code should handle a future improvement where when any call to func
+    *         returns < 0 no further calls to func may be done and < 0 is returned.
+    * - encoding: Set by libavcodec, user can override.
+    * - decoding: Set by libavcodec, user can override.
+    */
+    execute2:                    #type (c: *AVCodecContext, func: #type (c2: *AVCodecContext, arg: *void, jobnr: s32, threadnr: s32) -> s32 #c_call, arg2: *void, ret: *s32, count: s32) -> s32 #c_call;
+
+    /**
+    * profile
+    * - encoding: Set by user.
+    * - decoding: Set by libavcodec.
+    * See the AV_PROFILE_* defines in defs.h.
+    */
+    profile:                     s32;
+
+    /**
+    * Encoding level descriptor.
+    * - encoding: Set by user, corresponds to a specific level defined by the
+    *   codec, usually corresponding to the profile level, if not specified it
+    *   is set to FF_LEVEL_UNKNOWN.
+    * - decoding: Set by libavcodec.
+    * See AV_LEVEL_* in defs.h.
+    */
+    level:                       s32;
+
+    /**
+    * Properties of the stream that gets decoded
+    * - encoding: unused
+    * - decoding: set by libavcodec
+    */
+    properties:                  u32;
+
+    /**
+    * Skip loop filtering for selected frames.
+    * - encoding: unused
+    * - decoding: Set by user.
+    */
+    skip_loop_filter:            AVDiscard;
+
+    /**
+    * Skip IDCT/dequantization for selected frames.
+    * - encoding: unused
+    * - decoding: Set by user.
+    */
+    skip_idct:                   AVDiscard;
+
+    /**
+    * Skip decoding for selected frames.
+    * - encoding: unused
+    * - decoding: Set by user.
+    */
+    skip_frame:                  AVDiscard;
+
+    /**
+    * Skip processing alpha if supported by codec.
+    * Note that if the format uses pre-multiplied alpha (common with VP6,
+    * and recommended due to better video quality/compression)
+    * the image will look as if alpha-blended onto a black background.
+    * However for formats that do not use pre-multiplied alpha
+    * there might be serious artefacts (though e.g. libswscale currently
+    * assumes pre-multiplied alpha anyway).
+    *
+    * - decoding: set by user
+    * - encoding: unused
+    */
+    skip_alpha:                  s32;
+
+    /**
+    * Number of macroblock rows at the top which are skipped.
+    * - encoding: unused
+    * - decoding: Set by user.
+    */
+    skip_top:                    s32;
+
+    /**
+    * Number of macroblock rows at the bottom which are skipped.
+    * - encoding: unused
+    * - decoding: Set by user.
+    */
+    skip_bottom:                 s32;
+
+    /**
+    * low resolution decoding, 1-> 1/2 size, 2->1/4 size
+    * - encoding: unused
+    * - decoding: Set by user.
+    */
+    lowres:                      s32;
+
+    /**
+    * AVCodecDescriptor
+    * - encoding: unused.
+    * - decoding: set by libavcodec.
+    */
+    codec_descriptor:            *AVCodecDescriptor;
+
+    /**
+    * Character encoding of the input subtitles file.
+    * - decoding: set by user
+    * - encoding: unused
+    */
+    sub_charenc:                 *u8;
+
+    /**
+    * Subtitles character encoding mode. Formats or codecs might be adjusting
+    * this setting (if they are doing the conversion themselves for instance).
+    * - decoding: set by libavcodec
+    * - encoding: unused
+    */
+    sub_charenc_mode:            s32;
+
+    /**
+    * Header containing style information for text subtitles.
+    * For SUBTITLE_ASS subtitle type, it should contain the whole ASS
+    * [Script Info] and [V4+ Styles] section, plus the [Events] line and
+    * the Format line following. It shouldn't include any Dialogue line.
+    * - encoding: Set/allocated/freed by user (before avcodec_open2())
+    * - decoding: Set/allocated/freed by libavcodec (by avcodec_open2())
+    */
+    subtitle_header_size:        s32;
+    subtitle_header:             *u8;
+
+    /**
+    * dump format separator.
+    * can be ", " or "\n      " or anything else
+    * - encoding: Set by user.
+    * - decoding: Set by user.
+    */
+    dump_separator:              *u8;
+
+    /**
+    * ',' separated list of allowed decoders.
+    * If NULL then all are allowed
+    * - encoding: unused
+    * - decoding: set by user
+    */
+    codec_whitelist:             *u8;
+
+    /**
+    * Additional data associated with the entire coded stream.
+    *
+    * - decoding: may be set by user before calling avcodec_open2().
+    * - encoding: may be set by libavcodec after avcodec_open2().
+    */
+    coded_side_data:             *AVPacketSideData;
+    nb_coded_side_data:          s32;
+
+    /**
+    * Bit set of AV_CODEC_EXPORT_DATA_* flags, which affects the kind of
+    * metadata exported in frame, packet, or coded stream side data by
+    * decoders and encoders.
+    *
+    * - decoding: set by user
+    * - encoding: set by user
+    */
+    export_side_data:            s32;
+
+    /**
+    * The number of pixels per image to maximally accept.
+    *
+    * - decoding: set by user
+    * - encoding: set by user
+    */
+    max_pixels:                  s64;
 
     /**
     * Video decoding only. Certain video codecs support cropping, meaning that
@@ -8828,21 +9286,7 @@ AVCodecContext :: struct #type_info_none {
     * coded_width/height), while the frame fields store the coded dimensions
     * (with the display dimensions being determined by the crop_* fields).
     */
-    apply_cropping:                s32;
-
-    /*
-    * Video decoding only.  Sets the number of extra hardware frames which
-    * the decoder will allocate for use by the caller.  This must be set
-    * before avcodec_open2() is called.
-    *
-    * Some hardware decoders require all frames that they will use for
-    * output to be defined in advance before decoding starts.  For such
-    * decoders, the hardware frame pool must therefore be of a fixed size.
-    * The extra frames set here are on top of any number that the decoder
-    * needs internally in order to operate normally (for example, frames
-    * used as reference pictures).
-    */
-    extra_hw_frames:               s32;
+    apply_cropping:              s32;
 
     /**
     * The percentage of damaged samples to discard a frame.
@@ -8850,7 +9294,7 @@ AVCodecContext :: struct #type_info_none {
     * - decoding: set by user
     * - encoding: unused
     */
-    discard_damaged_percentage:    s32;
+    discard_damaged_percentage:  s32;
 
     /**
     * The number of samples per frame to maximally accept.
@@ -8858,17 +9302,7 @@ AVCodecContext :: struct #type_info_none {
     * - decoding: set by user
     * - encoding: set by user
     */
-    max_samples:                   s64;
-
-    /**
-    * Bit set of AV_CODEC_EXPORT_DATA_* flags, which affects the kind of
-    * metadata exported in frame, packet, or coded stream side data by
-    * decoders and encoders.
-    *
-    * - decoding: set by user
-    * - encoding: set by user
-    */
-    export_side_data:              s32;
+    max_samples:                 s64;
 
     /**
     * This callback is called at the beginning of each packet to get a data
@@ -8910,15 +9344,7 @@ AVCodecContext :: struct #type_info_none {
     * - encoding: Set by libavcodec, user can override.
     * - decoding: unused
     */
-    get_encode_buffer:             #type (s: *AVCodecContext, pkt: *AVPacket, flags: s32) -> s32 #c_call;
-
-    /**
-    * Audio channel layout.
-    * - encoding: must be set by the caller, to one of AVCodec.ch_layouts.
-    * - decoding: may be set by the caller if known e.g. from the container.
-    *             The decoder can then override during decoding as needed.
-    */
-    ch_layout:                     AVChannelLayout;
+    get_encode_buffer:           #type (s: *AVCodecContext, pkt: *AVPacket, flags: s32) -> s32 #c_call;
 
     /**
     * Frame counter, set by libavcodec.
@@ -8929,7 +9355,55 @@ AVCodecContext :: struct #type_info_none {
     *   @note the counter is not incremented if encoding/decoding resulted in
     *   an error.
     */
-    frame_num:                     s64;
+    frame_num:                   s64;
+
+    /**
+    * Decoding only. May be set by the caller before avcodec_open2() to an
+    * av_malloc()'ed array (or via AVOptions). Owned and freed by the decoder
+    * afterwards.
+    *
+    * Side data attached to decoded frames may come from several sources:
+    * 1. coded_side_data, which the decoder will for certain types translate
+    *    from packet-type to frame-type and attach to frames;
+    * 2. side data attached to an AVPacket sent for decoding (same
+    *    considerations as above);
+    * 3. extracted from the coded bytestream.
+    * The first two cases are supplied by the caller and typically come from a
+    * container.
+    *
+    * This array configures decoder behaviour in cases when side data of the
+    * same type is present both in the coded bytestream and in the
+    * user-supplied side data (items 1. and 2. above). In all cases, at most
+    * one instance of each side data type will be attached to output frames. By
+    * default it will be the bytestream side data. Adding an
+    * AVPacketSideDataType value to this array will flip the preference for
+    * this type, thus making the decoder prefer user-supplied side data over
+    * bytestream. In case side data of the same type is present both in
+    * coded_data and attacked to a packet, the packet instance always has
+    * priority.
+    *
+    * The array may also contain a single -1, in which case the preference is
+    * switched for all side data types.
+    */
+    side_data_prefer_packet:     *s32;
+
+    /**
+    * Number of entries in side_data_prefer_packet.
+    */
+    nb_side_data_prefer_packet:  u32;
+
+    /**
+    * Array containing static side data, such as HDR10 CLL / MDCV structures.
+    * Side data entries should be allocated by usage of helpers defined in
+    * libavutil/frame.h.
+    *
+    * - encoding: may be set by user before calling avcodec_open2() for
+    *             encoder configuration. Afterwards owned and freed by the
+    *             encoder.
+    * - decoding: may be set by libavcodec in avcodec_open2().
+    */
+    decoded_side_data:           **AVFrameSideData;
+    nb_decoded_side_data:        s32;
 }
 
 /**
@@ -8946,140 +9420,34 @@ AVHWAccel :: struct {
     * The name is globally unique among encoders and among decoders (but an
     * encoder and a decoder can share the same name).
     */
-    name:                 *u8;
+    name:         *u8;
 
     /**
     * Type of codec implemented by the hardware accelerator.
     *
     * See AVMEDIA_TYPE_xxx
     */
-    type:                 AVMediaType;
+    type:         AVMediaType;
 
     /**
     * Codec implemented by the hardware accelerator.
     *
     * See AV_CODEC_ID_xxx
     */
-    id:                   AVCodecID;
+    id:           AVCodecID;
 
     /**
     * Supported pixel format.
     *
     * Only hardware accelerated formats are supported here.
     */
-    pix_fmt:              AVPixelFormat;
+    pix_fmt:      AVPixelFormat;
 
     /**
     * Hardware accelerated codec capabilities.
     * see AV_HWACCEL_CODEC_CAP_*
     */
-    capabilities:         s32;
-
-    /**
-    * Allocate a custom buffer
-    */
-    alloc_frame:          #type (avctx: *AVCodecContext, frame: *AVFrame) -> s32 #c_call;
-
-    /**
-    * Called at the beginning of each frame or field picture.
-    *
-    * Meaningful frame information (codec specific) is guaranteed to
-    * be parsed at this point. This function is mandatory.
-    *
-    * Note that buf can be NULL along with buf_size set to 0.
-    * Otherwise, this means the whole frame is available at this point.
-    *
-    * @param avctx the codec context
-    * @param buf the frame data buffer base
-    * @param buf_size the size of the frame in bytes
-    * @return zero if successful, a negative value otherwise
-    */
-    start_frame:          #type (avctx: *AVCodecContext, buf: *u8, buf_size: u32) -> s32 #c_call;
-
-    /**
-    * Callback for parameter data (SPS/PPS/VPS etc).
-    *
-    * Useful for hardware decoders which keep persistent state about the
-    * video parameters, and need to receive any changes to update that state.
-    *
-    * @param avctx the codec context
-    * @param type the nal unit type
-    * @param buf the nal unit data buffer
-    * @param buf_size the size of the nal unit in bytes
-    * @return zero if successful, a negative value otherwise
-    */
-    decode_params:        #type (avctx: *AVCodecContext, type: s32, buf: *u8, buf_size: u32) -> s32 #c_call;
-
-    /**
-    * Callback for each slice.
-    *
-    * Meaningful slice information (codec specific) is guaranteed to
-    * be parsed at this point. This function is mandatory.
-    *
-    * @param avctx the codec context
-    * @param buf the slice data buffer base
-    * @param buf_size the size of the slice in bytes
-    * @return zero if successful, a negative value otherwise
-    */
-    decode_slice:         #type (avctx: *AVCodecContext, buf: *u8, buf_size: u32) -> s32 #c_call;
-
-    /**
-    * Called at the end of each frame or field picture.
-    *
-    * The whole picture is parsed at this point and can now be sent
-    * to the hardware accelerator. This function is mandatory.
-    *
-    * @param avctx the codec context
-    * @return zero if successful, a negative value otherwise
-    */
-    end_frame:            #type (avctx: *AVCodecContext) -> s32 #c_call;
-
-    /**
-    * Size of per-frame hardware accelerator private data.
-    *
-    * Private data is allocated with av_mallocz() before
-    * AVCodecContext.get_buffer() and deallocated after
-    * AVCodecContext.release_buffer().
-    */
-    frame_priv_data_size: s32;
-
-    /**
-    * Initialize the hwaccel private data.
-    *
-    * This will be called from ff_get_format(), after hwaccel and
-    * hwaccel_context are set and the hwaccel private data in AVCodecInternal
-    * is allocated.
-    */
-    init:                 #type (avctx: *AVCodecContext) -> s32 #c_call;
-
-    /**
-    * Uninitialize the hwaccel private data.
-    *
-    * This will be called from get_format() or avcodec_close(), after hwaccel
-    * and hwaccel_context are already uninitialized.
-    */
-    uninit:               #type (avctx: *AVCodecContext) -> s32 #c_call;
-
-    /**
-    * Size of the private data to allocate in
-    * AVCodecInternal.hwaccel_priv_data.
-    */
-    priv_data_size:       s32;
-
-    /**
-    * Internal hwaccel capabilities.
-    */
-    caps_internal:        s32;
-
-    /**
-    * Fill the given hw_frames context with current codec parameters. Called
-    * from get_format. Refer to avcodec_get_hw_frames_parameters() for
-    * details.
-    *
-    * This CAN be called before AVHWAccel.init is called, and you must assume
-    * that avctx->hwaccel_priv_data is invalid.
-    */
-    frame_params:         #type (avctx: *AVCodecContext, hw_frames_ctx: *AVBufferRef) -> s32 #c_call;
+    capabilities: s32;
 }
 
 /**
@@ -9117,6 +9485,7 @@ AVSubtitleRect :: struct {
     data:      [4] *u8;
     linesize:  [4] s32;
 
+    flags:     s32;
     type:      AVSubtitleType;
 
     text:      *u8; ///< 0 terminated plain UTF-8 text
@@ -9127,8 +9496,6 @@ AVSubtitleRect :: struct {
     * struct.
     */
     ass:       *u8;
-
-    flags:     s32;
 }
 
 AVSubtitle :: struct {
@@ -9219,9 +9586,16 @@ avcodec_parameters_to_context :: (codec: *AVCodecContext, par: *AVCodecParameter
 * avcodec_find_decoder() and avcodec_find_encoder() provide an easy way for
 * retrieving a codec.
 *
-* @note Always call this function before using decoding routines (such as
-* @ref avcodec_receive_frame()).
+* Depending on the codec, you might need to set options in the codec context
+* also for decoding (e.g. width, height, or the pixel or audio sample format in
+* the case the information is not available in the bitstream, as when decoding
+* raw audio or video).
 *
+* Options in the codec context can be set either by setting them in the options
+* AVDictionary, or by setting the values in the context itself, directly or by
+* using the av_opt_set() API before calling this function.
+*
+* Example:
 * @code
 * av_dict_set(&opts, "b", "2.5M", 0);
 * codec = avcodec_find_decoder(AV_CODEC_ID_H264);
@@ -9234,17 +9608,36 @@ avcodec_parameters_to_context :: (codec: *AVCodecContext, par: *AVCodecParameter
 *     exit(1);
 * @endcode
 *
+* In the case AVCodecParameters are available (e.g. when demuxing a stream
+* using libavformat, and accessing the AVStream contained in the demuxer), the
+* codec parameters can be copied to the codec context using
+* avcodec_parameters_to_context(), as in the following example:
+*
+* @code
+* AVStream *stream = ...;
+* context = avcodec_alloc_context3(codec);
+* if (avcodec_parameters_to_context(context, stream->codecpar) < 0)
+*     exit(1);
+* if (avcodec_open2(context, codec, NULL) < 0)
+*     exit(1);
+* @endcode
+*
+* @note Always call this function before using decoding routines (such as
+* @ref avcodec_receive_frame()).
+*
 * @param avctx The context to initialize.
 * @param codec The codec to open this context for. If a non-NULL codec has been
 *              previously passed to avcodec_alloc_context3() or
 *              for this context, then this parameter MUST be either NULL or
 *              equal to the previously passed codec.
-* @param options A dictionary filled with AVCodecContext and codec-private options.
-*                On return this object will be filled with options that were not found.
+* @param options A dictionary filled with AVCodecContext and codec-private
+*                options, which are set on top of the options already set in
+*                avctx, can be NULL. On return this object will be filled with
+*                options that were not found in the avctx codec context.
 *
 * @return zero on success, a negative value on error
 * @see avcodec_alloc_context3(), avcodec_find_decoder(), avcodec_find_encoder(),
-*      av_dict_set(), av_opt_find().
+*      av_dict_set(), av_opt_set(), av_opt_find(), avcodec_parameters_to_context()
 */
 avcodec_open2 :: (avctx: *AVCodecContext, codec: *AVCodec, options: **AVDictionary) -> s32 #foreign libavcodec;
 
@@ -9256,7 +9649,7 @@ avcodec_open2 :: (avctx: *AVCodecContext, codec: *AVCodec, options: **AVDictiona
 * the codec-specific data allocated in avcodec_alloc_context3() with a non-NULL
 * codec. Subsequent calls will do nothing.
 *
-* @note Do not use this function. Use avcodec_free_context() to destroy a
+* @deprecated Do not use this function. Use avcodec_free_context() to destroy a
 * codec context (either open or closed). Opening and closing a codec context
 * multiple times is not supported anymore -- use multiple codec contexts
 * instead.
@@ -9301,30 +9694,6 @@ avcodec_align_dimensions :: (s: *AVCodecContext, width: *s32, height: *s32) -> v
 * May only be used if a codec with AV_CODEC_CAP_DR1 has been opened.
 */
 avcodec_align_dimensions2 :: (s: *AVCodecContext, width: *s32, height: *s32, linesize_align: *[8] s32) -> void #foreign libavcodec;
-
-/**
-* Converts AVChromaLocation to swscale x/y chroma position.
-*
-* The positions represent the chroma (0,0) position in a coordinates system
-* with luma (0,0) representing the origin and luma(1,1) representing 256,256
-*
-* @param xpos  horizontal chroma sample position
-* @param ypos  vertical   chroma sample position
-* @deprecated Use av_chroma_location_enum_to_pos() instead.
-*/
-avcodec_enum_to_chroma_pos :: (xpos: *s32, ypos: *s32, pos: AVChromaLocation) -> s32 #foreign libavcodec;
-
-/**
-* Converts swscale x/y chroma position to AVChromaLocation.
-*
-* The positions represent the chroma (0,0) position in a coordinates system
-* with luma (0,0) representing the origin and luma(1,1) representing 256,256
-*
-* @param xpos  horizontal chroma sample position
-* @param ypos  vertical   chroma sample position
-* @deprecated Use av_chroma_location_pos_to_enum() instead.
-*/
-avcodec_chroma_pos_to_enum :: (xpos: s32, ypos: s32) -> AVChromaLocation #foreign libavcodec;
 
 /**
 * Decode a subtitle message.
@@ -9405,7 +9774,7 @@ avcodec_send_packet :: (avctx: *AVCodecContext, avpkt: *AVPacket) -> s32 #foreig
 
 /**
 * Return decoded output data from a decoder or encoder (when the
-* AV_CODEC_FLAG_RECON_FRAME flag is used).
+* @ref AV_CODEC_FLAG_RECON_FRAME flag is used).
 *
 * @param avctx codec context
 * @param frame This will be set to a reference-counted video or audio
@@ -9419,10 +9788,7 @@ avcodec_send_packet :: (avctx: *AVCodecContext, avpkt: *AVPacket) -> s32 #foreig
 * @retval AVERROR_EOF      the codec has been fully flushed, and there will be
 *                          no more output frames
 * @retval AVERROR(EINVAL)  codec not opened, or it is an encoder without the
-*                          AV_CODEC_FLAG_RECON_FRAME flag enabled
-* @retval AVERROR_INPUT_CHANGED current decoded frame has changed parameters with
-*                          respect to first decoded frame. Applicable when flag
-*                          AV_CODEC_FLAG_DROPCHANGED is set.
+*                          @ref AV_CODEC_FLAG_RECON_FRAME flag enabled
 * @retval "other negative error code" legitimate decoding errors
 */
 avcodec_receive_frame :: (avctx: *AVCodecContext, frame: *AVFrame) -> s32 #foreign libavcodec;
@@ -9578,6 +9944,41 @@ avcodec_receive_packet :: (avctx: *AVCodecContext, avpkt: *AVPacket) -> s32 #for
 *                       for the hwaccel referenced by hw_pix_fmt.
 */
 avcodec_get_hw_frames_parameters :: (avctx: *AVCodecContext, device_ref: *AVBufferRef, hw_pix_fmt: AVPixelFormat, out_frames_ref: **AVBufferRef) -> s32 #foreign libavcodec;
+
+AVCodecConfig :: enum s32 {
+    PIX_FORMAT     :: 0;
+    FRAME_RATE     :: 1;
+    SAMPLE_RATE    :: 2;
+    SAMPLE_FORMAT  :: 3;
+    CHANNEL_LAYOUT :: 4;
+    COLOR_RANGE    :: 5;
+    COLOR_SPACE    :: 6;
+
+    AV_CODEC_CONFIG_PIX_FORMAT     :: PIX_FORMAT;
+    AV_CODEC_CONFIG_FRAME_RATE     :: FRAME_RATE;
+    AV_CODEC_CONFIG_SAMPLE_RATE    :: SAMPLE_RATE;
+    AV_CODEC_CONFIG_SAMPLE_FORMAT  :: SAMPLE_FORMAT;
+    AV_CODEC_CONFIG_CHANNEL_LAYOUT :: CHANNEL_LAYOUT;
+    AV_CODEC_CONFIG_COLOR_RANGE    :: COLOR_RANGE;
+    AV_CODEC_CONFIG_COLOR_SPACE    :: COLOR_SPACE;
+}
+
+/**
+* Retrieve a list of all supported values for a given configuration type.
+*
+* @param avctx An optional context to use. Values such as
+*              `strict_std_compliance` may affect the result. If NULL,
+*              default values are used.
+* @param codec The codec to query, or NULL to use avctx->codec.
+* @param config The configuration to query.
+* @param flags Currently unused; should be set to zero.
+* @param out_configs On success, set to a list of configurations, terminated
+*                    by a config-specific terminator, or NULL if all
+*                    possible values are supported.
+* @param out_num_configs On success, set to the number of elements in
+*out_configs, excluding the terminator. Optional.
+*/
+avcodec_get_supported_config :: (avctx: *AVCodecContext, codec: *AVCodec, config: AVCodecConfig, flags: u32, out_configs: **void, out_num_configs: *s32) -> s32 #foreign libavcodec;
 
 /**
 * @defgroup lavc_parsing Frame parsing
@@ -9918,235 +10319,132 @@ av_fast_padded_mallocz :: (ptr: *void, size: *u32, min_size: u64) -> void #forei
 avcodec_is_open :: (s: *AVCodecContext) -> s32 #foreign libavcodec;
 
 /**
-* @defgroup avoptions AVOptions
-* @ingroup lavu_data
-* @{
-* AVOptions provide a generic system to declare options on arbitrary structs
-* ("objects"). An option can have a help text, a type and a range of possible
-* values. Options may then be enumerated, read and written to.
-*
-* @section avoptions_implement Implementing AVOptions
-* This section describes how to add AVOptions capabilities to a struct.
-*
-* All AVOptions-related information is stored in an AVClass. Therefore
-* the first member of the struct should be a pointer to an AVClass describing it.
-* The option field of the AVClass must be set to a NULL-terminated static array
-* of AVOptions. Each AVOption must have a non-empty name, a type, a default
-* value and for number-type AVOptions also a range of allowed values. It must
-* also declare an offset in bytes from the start of the struct, where the field
-* associated with this AVOption is located. Other fields in the AVOption struct
-* should also be set when applicable, but are not required.
-*
-* The following example illustrates an AVOptions-enabled struct:
-* @code
-* typedef struct test_struct {
-*     const AVClass *class;
-*     int      int_opt;
-*     char    *str_opt;
-*     uint8_t *bin_opt;
-*     int      bin_len;
-* } test_struct;
-*
-* static const AVOption test_options[] = {
-*   { "test_int", "This is a test option of int type.", offsetof(test_struct, int_opt),
-*     AV_OPT_TYPE_INT, { .i64 = -1 }, INT_MIN, INT_MAX },
-*   { "test_str", "This is a test option of string type.", offsetof(test_struct, str_opt),
-*     AV_OPT_TYPE_STRING },
-*   { "test_bin", "This is a test option of binary type.", offsetof(test_struct, bin_opt),
-*     AV_OPT_TYPE_BINARY },
-*   { NULL },
-* };
-*
-* static const AVClass test_class = {
-*     .class_name = "test class",
-*     .item_name  = av_default_item_name,
-*     .option     = test_options,
-*     .version    = LIBAVUTIL_VERSION_INT,
-* };
-* @endcode
-*
-* Next, when allocating your struct, you must ensure that the AVClass pointer
-* is set to the correct value. Then, av_opt_set_defaults() can be called to
-* initialize defaults. After that the struct is ready to be used with the
-* AVOptions API.
-*
-* When cleaning up, you may use the av_opt_free() function to automatically
-* free all the allocated string and binary options.
-*
-* Continuing with the above example:
-*
-* @code
-* test_struct *alloc_test_struct(void)
-* {
-*     test_struct *ret = av_mallocz(sizeof(*ret));
-*     ret->class = &test_class;
-*     av_opt_set_defaults(ret);
-*     return ret;
-* }
-* void free_test_struct(test_struct **foo)
-* {
-*     av_opt_free(*foo);
-*     av_freep(foo);
-* }
-* @endcode
-*
-* @subsection avoptions_implement_nesting Nesting
-*      It may happen that an AVOptions-enabled struct contains another
-*      AVOptions-enabled struct as a member (e.g. AVCodecContext in
-*      libavcodec exports generic options, while its priv_data field exports
-*      codec-specific options). In such a case, it is possible to set up the
-*      parent struct to export a child's options. To do that, simply
-*      implement AVClass.child_next() and AVClass.child_class_iterate() in the
-*      parent struct's AVClass.
-*      Assuming that the test_struct from above now also contains a
-*      child_struct field:
-*
-*      @code
-*      typedef struct child_struct {
-*          AVClass *class;
-*          int flags_opt;
-*      } child_struct;
-*      static const AVOption child_opts[] = {
-*          { "test_flags", "This is a test option of flags type.",
-*            offsetof(child_struct, flags_opt), AV_OPT_TYPE_FLAGS, { .i64 = 0 }, INT_MIN, INT_MAX },
-*          { NULL },
-*      };
-*      static const AVClass child_class = {
-*          .class_name = "child class",
-*          .item_name  = av_default_item_name,
-*          .option     = child_opts,
-*          .version    = LIBAVUTIL_VERSION_INT,
-*      };
-*
-*      void *child_next(void *obj, void *prev)
-*      {
-*          test_struct *t = obj;
-*          if (!prev && t->child_struct)
-*              return t->child_struct;
-*          return NULL
-*      }
-*      const AVClass child_class_iterate(void **iter)
-*      {
-*          const AVClass *c = *iter ? NULL : &child_class;
-*          *iter = (void*)(uintptr_t)c;
-*          return c;
-*      }
-*      @endcode
-*      Putting child_next() and child_class_iterate() as defined above into
-*      test_class will now make child_struct's options accessible through
-*      test_struct (again, proper setup as described above needs to be done on
-*      child_struct right after it is created).
-*
-*      From the above example it might not be clear why both child_next()
-*      and child_class_iterate() are needed. The distinction is that child_next()
-*      iterates over actually existing objects, while child_class_iterate()
-*      iterates over all possible child classes. E.g. if an AVCodecContext
-*      was initialized to use a codec which has private options, then its
-*      child_next() will return AVCodecContext.priv_data and finish
-*      iterating. OTOH child_class_iterate() on AVCodecContext.av_class will
-*      iterate over all available codecs with private options.
-*
-* @subsection avoptions_implement_named_constants Named constants
-*      It is possible to create named constants for options. Simply set the unit
-*      field of the option the constants should apply to a string and
-*      create the constants themselves as options of type AV_OPT_TYPE_CONST
-*      with their unit field set to the same string.
-*      Their default_val field should contain the value of the named
-*      constant.
-*      For example, to add some named constants for the test_flags option
-*      above, put the following into the child_opts array:
-*      @code
-*      { "test_flags", "This is a test option of flags type.",
-*        offsetof(child_struct, flags_opt), AV_OPT_TYPE_FLAGS, { .i64 = 0 }, INT_MIN, INT_MAX, "test_unit" },
-*      { "flag1", "This is a flag with value 16", 0, AV_OPT_TYPE_CONST, { .i64 = 16 }, 0, 0, "test_unit" },
-*      @endcode
-*
-* @section avoptions_use Using AVOptions
-* This section deals with accessing options in an AVOptions-enabled struct.
-* Such structs in FFmpeg are e.g. AVCodecContext in libavcodec or
-* AVFormatContext in libavformat.
-*
-* @subsection avoptions_use_examine Examining AVOptions
-* The basic functions for examining options are av_opt_next(), which iterates
-* over all options defined for one object, and av_opt_find(), which searches
-* for an option with the given name.
-*
-* The situation is more complicated with nesting. An AVOptions-enabled struct
-* may have AVOptions-enabled children. Passing the AV_OPT_SEARCH_CHILDREN flag
-* to av_opt_find() will make the function search children recursively.
-*
-* For enumerating there are basically two cases. The first is when you want to
-* get all options that may potentially exist on the struct and its children
-* (e.g.  when constructing documentation). In that case you should call
-* av_opt_child_class_iterate() recursively on the parent struct's AVClass.  The
-* second case is when you have an already initialized struct with all its
-* children and you want to get all options that can be actually written or read
-* from it. In that case you should call av_opt_child_next() recursively (and
-* av_opt_next() on each result).
-*
-* @subsection avoptions_use_get_set Reading and writing AVOptions
-* When setting options, you often have a string read directly from the
-* user. In such a case, simply passing it to av_opt_set() is enough. For
-* non-string type options, av_opt_set() will parse the string according to the
-* option type.
-*
-* Similarly av_opt_get() will read any option type and convert it to a string
-* which will be returned. Do not forget that the string is allocated, so you
-* have to free it with av_free().
-*
-* In some cases it may be more convenient to put all options into an
-* AVDictionary and call av_opt_set_dict() on it. A specific case of this
-* are the format/codec open functions in lavf/lavc which take a dictionary
-* filled with option as a parameter. This makes it possible to set some options
-* that cannot be set otherwise, since e.g. the input file format is not known
-* before the file is actually opened.
+* An option type determines:
+* - for native access, the underlying C type of the field that an AVOption
+*   refers to;
+* - for foreign access, the semantics of accessing the option through this API,
+*   e.g. which av_opt_get_*() and av_opt_set_*() functions can be called, or
+*   what format will av_opt_get()/av_opt_set() expect/produce.
 */
 AVOptionType :: enum s32 {
-    FLAGS          :: 0;
-    INT            :: 1;
-    INT64          :: 2;
-    DOUBLE         :: 3;
-    FLOAT          :: 4;
-    STRING         :: 5;
-    RATIONAL       :: 6;
-    BINARY         :: 7;
-    DICT           :: 8;
-    UINT64         :: 9;
-    CONST          :: 10;
-    IMAGE_SIZE     :: 11;
-    PIXEL_FMT      :: 12;
-    SAMPLE_FMT     :: 13;
-    VIDEO_RATE     :: 14;
-    DURATION       :: 15;
-    COLOR          :: 16;
+    FLAGS      :: 1;
 
-    CHANNEL_LAYOUT :: 17;
+    INT        :: 2;
 
-    BOOL           :: 18;
-    CHLAYOUT       :: 19;
+    INT64      :: 3;
 
-    AV_OPT_TYPE_FLAGS          :: FLAGS;
-    AV_OPT_TYPE_INT            :: INT;
-    AV_OPT_TYPE_INT64          :: INT64;
-    AV_OPT_TYPE_DOUBLE         :: DOUBLE;
-    AV_OPT_TYPE_FLOAT          :: FLOAT;
-    AV_OPT_TYPE_STRING         :: STRING;
-    AV_OPT_TYPE_RATIONAL       :: RATIONAL;
-    AV_OPT_TYPE_BINARY         :: BINARY;
-    AV_OPT_TYPE_DICT           :: DICT;
-    AV_OPT_TYPE_UINT64         :: UINT64;
-    AV_OPT_TYPE_CONST          :: CONST;
-    AV_OPT_TYPE_IMAGE_SIZE     :: IMAGE_SIZE;
-    AV_OPT_TYPE_PIXEL_FMT      :: PIXEL_FMT;
-    AV_OPT_TYPE_SAMPLE_FMT     :: SAMPLE_FMT;
-    AV_OPT_TYPE_VIDEO_RATE     :: VIDEO_RATE;
-    AV_OPT_TYPE_DURATION       :: DURATION;
-    AV_OPT_TYPE_COLOR          :: COLOR;
+    DOUBLE     :: 4;
 
-    AV_OPT_TYPE_CHANNEL_LAYOUT :: CHANNEL_LAYOUT;
+    FLOAT      :: 5;
 
-    AV_OPT_TYPE_BOOL           :: BOOL;
-    AV_OPT_TYPE_CHLAYOUT       :: CHLAYOUT;
+    STRING     :: 6;
+
+    RATIONAL   :: 7;
+
+    BINARY     :: 8;
+
+    DICT       :: 9;
+
+    UINT64     :: 10;
+
+    CONST      :: 11;
+
+    IMAGE_SIZE :: 12;
+
+    PIXEL_FMT  :: 13;
+
+    SAMPLE_FMT :: 14;
+
+    VIDEO_RATE :: 15;
+
+    DURATION   :: 16;
+
+    COLOR      :: 17;
+
+    BOOL       :: 18;
+
+    CHLAYOUT   :: 19;
+
+    UINT       :: 20;
+
+    FLAG_ARRAY :: 65536;
+
+    AV_OPT_TYPE_FLAGS      :: FLAGS;
+
+    AV_OPT_TYPE_INT        :: INT;
+
+    AV_OPT_TYPE_INT64      :: INT64;
+
+    AV_OPT_TYPE_DOUBLE     :: DOUBLE;
+
+    AV_OPT_TYPE_FLOAT      :: FLOAT;
+
+    AV_OPT_TYPE_STRING     :: STRING;
+
+    AV_OPT_TYPE_RATIONAL   :: RATIONAL;
+
+    AV_OPT_TYPE_BINARY     :: BINARY;
+
+    AV_OPT_TYPE_DICT       :: DICT;
+
+    AV_OPT_TYPE_UINT64     :: UINT64;
+
+    AV_OPT_TYPE_CONST      :: CONST;
+
+    AV_OPT_TYPE_IMAGE_SIZE :: IMAGE_SIZE;
+
+    AV_OPT_TYPE_PIXEL_FMT  :: PIXEL_FMT;
+
+    AV_OPT_TYPE_SAMPLE_FMT :: SAMPLE_FMT;
+
+    AV_OPT_TYPE_VIDEO_RATE :: VIDEO_RATE;
+
+    AV_OPT_TYPE_DURATION   :: DURATION;
+
+    AV_OPT_TYPE_COLOR      :: COLOR;
+
+    AV_OPT_TYPE_BOOL       :: BOOL;
+
+    AV_OPT_TYPE_CHLAYOUT   :: CHLAYOUT;
+
+    AV_OPT_TYPE_UINT       :: UINT;
+
+    AV_OPT_TYPE_FLAG_ARRAY :: FLAG_ARRAY;
+}
+
+/**
+* May be set as default_val for AV_OPT_TYPE_FLAG_ARRAY options.
+*/
+AVOptionArrayDef :: struct {
+    /**
+    * Native access only.
+    *
+    * Default value of the option, as would be serialized by av_opt_get() (i.e.
+    * using the value of sep as the separator).
+    */
+    def:      *u8;
+
+    /**
+    * Minimum number of elements in the array. When this field is non-zero, def
+    * must be non-NULL and contain at least this number of elements.
+    */
+    size_min: u32;
+
+    /**
+    * Maximum number of elements in the array, 0 when unlimited.
+    */
+    size_max: u32;
+
+    /**
+    * Separator between array elements in string representations of this
+    * option, used by av_opt_set() and av_opt_get(). It must be a printable
+    * ASCII character, excluding alphanumeric and the backslash. A comma is
+    * used when sep=0.
+    *
+    * The separator and the backslash must be backslash-escaped in order to
+    * appear in string representations of the option value.
+    */
+    sep:      u8;
 }
 
 /**
@@ -10162,6 +10460,8 @@ AVOption :: struct {
     help:        *u8;
 
     /**
+    * Native access only.
+    *
     * The offset relative to the context structure where the option
     * value is stored. It should be 0 for named constants.
     */
@@ -10175,11 +10475,22 @@ AVOption :: struct {
 
         /* TODO those are unused now */
         q:   AVRational;
+
+        /**
+        * Used for AV_OPT_TYPE_FLAG_ARRAY options. May be NULL.
+        *
+        * Foreign access to some members allowed, as noted in AVOptionArrayDef
+        * documentation.
+        */
+        arr: *AVOptionArrayDef;
     };
 
     min:         float64; ///< minimum valid value for the option
     max:         float64; ///< maximum valid value for the option
 
+    /**
+    * A combination of AV_OPT_FLAG_*.
+    */
     flags:       s32;
 
     /**
@@ -10275,17 +10586,6 @@ AVOptionRanges :: struct {
 }
 
 /**
-* Show the obj options.
-*
-* @param req_flags requested flags for the options to show. Show only the
-* options for which it is opt->flags & req_flags.
-* @param rej_flags rejected flags for the options to show. Show only the
-* options for which it is !(opt->flags & req_flags).
-* @param av_log_obj log context to use for showing the options
-*/
-av_opt_show2 :: (obj: *void, av_log_obj: *void, req_flags: s32, rej_flags: s32) -> s32 #foreign libavutil;
-
-/**
 * Set the values of all AVOption fields to their default values.
 *
 * @param s an AVOption-enabled struct (its first member must be a pointer to AVClass)
@@ -10302,6 +10602,121 @@ av_opt_set_defaults :: (s: *void) -> void #foreign libavutil;
 * @param flags combination of AV_OPT_FLAG_*
 */
 av_opt_set_defaults2 :: (s: *void, mask: s32, flags: s32) -> void #foreign libavutil;
+
+/**
+* Free all allocated objects in obj.
+*/
+av_opt_free :: (obj: *void) -> void #foreign libavutil;
+
+/**
+* Iterate over all AVOptions belonging to obj.
+*
+* @param obj an AVOptions-enabled struct or a double pointer to an
+*            AVClass describing it.
+* @param prev result of the previous call to av_opt_next() on this object
+*             or NULL
+* @return next AVOption or NULL
+*/
+av_opt_next :: (obj: *void, prev: *AVOption) -> *AVOption #foreign libavutil;
+
+/**
+* Iterate over AVOptions-enabled children of obj.
+*
+* @param prev result of a previous call to this function or NULL
+* @return next AVOptions-enabled child or NULL
+*/
+av_opt_child_next :: (obj: *void, prev: *void) -> *void #foreign libavutil;
+
+/**
+* Iterate over potential AVOptions-enabled children of parent.
+*
+* @param iter a pointer where iteration state is stored.
+* @return AVClass corresponding to next potential child or NULL
+*/
+av_opt_child_class_iterate :: (parent: *AVClass, iter: **void) -> *AVClass #foreign libavutil;
+
+/**
+* Look for an option in an object. Consider only options which
+* have all the specified flags set.
+*
+* @param[in] obj A pointer to a struct whose first element is a
+*                pointer to an AVClass.
+*                Alternatively a double pointer to an AVClass, if
+*                AV_OPT_SEARCH_FAKE_OBJ search flag is set.
+* @param[in] name The name of the option to look for.
+* @param[in] unit When searching for named constants, name of the unit
+*                 it belongs to.
+* @param opt_flags Find only options with all the specified flags set (AV_OPT_FLAG).
+* @param search_flags A combination of AV_OPT_SEARCH_*.
+*
+* @return A pointer to the option found, or NULL if no option
+*         was found.
+*
+* @note Options found with AV_OPT_SEARCH_CHILDREN flag may not be settable
+* directly with av_opt_set(). Use special calls which take an options
+* AVDictionary (e.g. avformat_open_input()) to set options found with this
+* flag.
+*/
+av_opt_find :: (obj: *void, name: *u8, unit: *u8, opt_flags: s32, search_flags: s32) -> *AVOption #foreign libavutil;
+
+/**
+* Look for an option in an object. Consider only options which
+* have all the specified flags set.
+*
+* @param[in] obj A pointer to a struct whose first element is a
+*                pointer to an AVClass.
+*                Alternatively a double pointer to an AVClass, if
+*                AV_OPT_SEARCH_FAKE_OBJ search flag is set.
+* @param[in] name The name of the option to look for.
+* @param[in] unit When searching for named constants, name of the unit
+*                 it belongs to.
+* @param opt_flags Find only options with all the specified flags set (AV_OPT_FLAG).
+* @param search_flags A combination of AV_OPT_SEARCH_*.
+* @param[out] target_obj if non-NULL, an object to which the option belongs will be
+* written here. It may be different from obj if AV_OPT_SEARCH_CHILDREN is present
+* in search_flags. This parameter is ignored if search_flags contain
+* AV_OPT_SEARCH_FAKE_OBJ.
+*
+* @return A pointer to the option found, or NULL if no option
+*         was found.
+*/
+av_opt_find2 :: (obj: *void, name: *u8, unit: *u8, opt_flags: s32, search_flags: s32, target_obj: **void) -> *AVOption #foreign libavutil;
+
+/**
+* Show the obj options.
+*
+* @param req_flags requested flags for the options to show. Show only the
+* options for which it is opt->flags & req_flags.
+* @param rej_flags rejected flags for the options to show. Show only the
+* options for which it is !(opt->flags & req_flags).
+* @param av_log_obj log context to use for showing the options
+*/
+av_opt_show2 :: (obj: *void, av_log_obj: *void, req_flags: s32, rej_flags: s32) -> s32 #foreign libavutil;
+
+/**
+* Extract a key-value pair from the beginning of a string.
+*
+* @param ropts        pointer to the options string, will be updated to
+*                     point to the rest of the string (one of the pairs_sep
+*                     or the final NUL)
+* @param key_val_sep  a 0-terminated list of characters used to separate
+*                     key from value, for example '='
+* @param pairs_sep    a 0-terminated list of characters used to separate
+*                     two pairs from each other, for example ':' or ','
+* @param flags        flags; see the AV_OPT_FLAG_* values below
+* @param rkey         parsed key; must be freed using av_free()
+* @param rval         parsed value; must be freed using av_free()
+*
+* @return  >=0 for success, or a negative value corresponding to an
+*          AVERROR code in case of error; in particular:
+*          AVERROR(EINVAL) if no key is present
+*
+*/
+av_opt_get_key_value :: (ropts: **u8, key_val_sep: *u8, pairs_sep: *u8, flags: u32, rkey: **u8, rval: **u8) -> s32 #foreign libavutil;
+
+anon_enum_1 :: enum s32 {
+    AV_OPT_FLAG_IMPLICIT_KEY :: 1;
+}
 
 /**
 * Parse the key/value pairs list in opts. For each key/value pair
@@ -10352,21 +10767,6 @@ av_set_options_string :: (ctx: *void, opts: *u8, key_val_sep: *u8, pairs_sep: *u
 av_opt_set_from_string :: (ctx: *void, opts: *u8, shorthand: **u8, key_val_sep: *u8, pairs_sep: *u8) -> s32 #foreign libavutil;
 
 /**
-* Free all allocated objects in obj.
-*/
-av_opt_free :: (obj: *void) -> void #foreign libavutil;
-
-/**
-* Check whether a particular flag is set in a flags field.
-*
-* @param field_name the name of the flag field option
-* @param flag_name the name of the flag to check
-* @return non-zero if the flag is set, zero if the flag isn't set,
-*         isn't of the right type, or the flags field doesn't exist.
-*/
-av_opt_flag_is_set :: (obj: *void, field_name: *u8, flag_name: *u8) -> s32 #foreign libavutil;
-
-/**
 * Set all the options from a given dictionary on an object.
 *
 * @param obj a struct whose first element is a pointer to AVClass
@@ -10400,124 +10800,23 @@ av_opt_set_dict :: (obj: *void, options: **AVDictionary) -> s32 #foreign libavut
 av_opt_set_dict2 :: (obj: *void, options: **AVDictionary, search_flags: s32) -> s32 #foreign libavutil;
 
 /**
-* Extract a key-value pair from the beginning of a string.
+* Copy options from src object into dest object.
 *
-* @param ropts        pointer to the options string, will be updated to
-*                     point to the rest of the string (one of the pairs_sep
-*                     or the final NUL)
-* @param key_val_sep  a 0-terminated list of characters used to separate
-*                     key from value, for example '='
-* @param pairs_sep    a 0-terminated list of characters used to separate
-*                     two pairs from each other, for example ':' or ','
-* @param flags        flags; see the AV_OPT_FLAG_* values below
-* @param rkey         parsed key; must be freed using av_free()
-* @param rval         parsed value; must be freed using av_free()
+* The underlying AVClass of both src and dest must coincide. The guarantee
+* below does not apply if this is not fulfilled.
 *
-* @return  >=0 for success, or a negative value corresponding to an
-*          AVERROR code in case of error; in particular:
-*          AVERROR(EINVAL) if no key is present
+* Options that require memory allocation (e.g. string or binary) are malloc'ed in dest object.
+* Original memory allocated for such options is freed unless both src and dest options points to the same memory.
 *
+* Even on error it is guaranteed that allocated options from src and dest
+* no longer alias each other afterwards; in particular calling av_opt_free()
+* on both src and dest is safe afterwards if dest has been memdup'ed from src.
+*
+* @param dest Object to copy from
+* @param src  Object to copy into
+* @return 0 on success, negative on error
 */
-av_opt_get_key_value :: (ropts: **u8, key_val_sep: *u8, pairs_sep: *u8, flags: u32, rkey: **u8, rval: **u8) -> s32 #foreign libavutil;
-
-anon_enum_1 :: enum s32 {
-    AV_OPT_FLAG_IMPLICIT_KEY :: 1;
-}
-
-/**
-* @defgroup opt_eval_funcs Evaluating option strings
-* @{
-* This group of functions can be used to evaluate option strings
-* and get numbers out of them. They do the same thing as av_opt_set(),
-* except the result is written into the caller-supplied pointer.
-*
-* @param obj a struct whose first element is a pointer to AVClass.
-* @param o an option for which the string is to be evaluated.
-* @param val string to be evaluated.
-* @param *_out value of the string will be written here.
-*
-* @return 0 on success, a negative number on failure.
-*/
-av_opt_eval_flags :: (obj: *void, o: *AVOption, val: *u8, flags_out: *s32) -> s32 #foreign libavutil;
-av_opt_eval_int :: (obj: *void, o: *AVOption, val: *u8, int_out: *s32) -> s32 #foreign libavutil;
-av_opt_eval_int64 :: (obj: *void, o: *AVOption, val: *u8, int64_out: *s64) -> s32 #foreign libavutil;
-av_opt_eval_float :: (obj: *void, o: *AVOption, val: *u8, float_out: *float) -> s32 #foreign libavutil;
-av_opt_eval_double :: (obj: *void, o: *AVOption, val: *u8, double_out: *float64) -> s32 #foreign libavutil;
-av_opt_eval_q :: (obj: *void, o: *AVOption, val: *u8, q_out: *AVRational) -> s32 #foreign libavutil;
-
-/**
-* Look for an option in an object. Consider only options which
-* have all the specified flags set.
-*
-* @param[in] obj A pointer to a struct whose first element is a
-*                pointer to an AVClass.
-*                Alternatively a double pointer to an AVClass, if
-*                AV_OPT_SEARCH_FAKE_OBJ search flag is set.
-* @param[in] name The name of the option to look for.
-* @param[in] unit When searching for named constants, name of the unit
-*                 it belongs to.
-* @param opt_flags Find only options with all the specified flags set (AV_OPT_FLAG).
-* @param search_flags A combination of AV_OPT_SEARCH_*.
-*
-* @return A pointer to the option found, or NULL if no option
-*         was found.
-*
-* @note Options found with AV_OPT_SEARCH_CHILDREN flag may not be settable
-* directly with av_opt_set(). Use special calls which take an options
-* AVDictionary (e.g. avformat_open_input()) to set options found with this
-* flag.
-*/
-av_opt_find :: (obj: *void, name: *u8, unit: *u8, opt_flags: s32, search_flags: s32) -> *AVOption #foreign libavutil;
-
-/**
-* Look for an option in an object. Consider only options which
-* have all the specified flags set.
-*
-* @param[in] obj A pointer to a struct whose first element is a
-*                pointer to an AVClass.
-*                Alternatively a double pointer to an AVClass, if
-*                AV_OPT_SEARCH_FAKE_OBJ search flag is set.
-* @param[in] name The name of the option to look for.
-* @param[in] unit When searching for named constants, name of the unit
-*                 it belongs to.
-* @param opt_flags Find only options with all the specified flags set (AV_OPT_FLAG).
-* @param search_flags A combination of AV_OPT_SEARCH_*.
-* @param[out] target_obj if non-NULL, an object to which the option belongs will be
-* written here. It may be different from obj if AV_OPT_SEARCH_CHILDREN is present
-* in search_flags. This parameter is ignored if search_flags contain
-* AV_OPT_SEARCH_FAKE_OBJ.
-*
-* @return A pointer to the option found, or NULL if no option
-*         was found.
-*/
-av_opt_find2 :: (obj: *void, name: *u8, unit: *u8, opt_flags: s32, search_flags: s32, target_obj: **void) -> *AVOption #foreign libavutil;
-
-/**
-* Iterate over all AVOptions belonging to obj.
-*
-* @param obj an AVOptions-enabled struct or a double pointer to an
-*            AVClass describing it.
-* @param prev result of the previous call to av_opt_next() on this object
-*             or NULL
-* @return next AVOption or NULL
-*/
-av_opt_next :: (obj: *void, prev: *AVOption) -> *AVOption #foreign libavutil;
-
-/**
-* Iterate over AVOptions-enabled children of obj.
-*
-* @param prev result of a previous call to this function or NULL
-* @return next AVOptions-enabled child or NULL
-*/
-av_opt_child_next :: (obj: *void, prev: *void) -> *void #foreign libavutil;
-
-/**
-* Iterate over potential AVOptions-enabled children of parent.
-*
-* @param iter a pointer where iteration state is stored.
-* @return AVClass corresponding to next potential child or NULL
-*/
-av_opt_child_class_iterate :: (parent: *AVClass, iter: **void) -> *AVClass #foreign libavutil;
+av_opt_copy :: (dest: *void, src: *void) -> s32 #foreign libavutil;
 
 /**
 * @defgroup opt_set_funcs Option setting functions
@@ -10558,8 +10857,10 @@ av_opt_set_pixel_fmt :: (obj: *void, name: *u8, fmt: AVPixelFormat, search_flags
 av_opt_set_sample_fmt :: (obj: *void, name: *u8, fmt: AVSampleFormat, search_flags: s32) -> s32 #foreign libavutil;
 av_opt_set_video_rate :: (obj: *void, name: *u8, val: AVRational, search_flags: s32) -> s32 #foreign libavutil;
 
-av_opt_set_channel_layout :: (obj: *void, name: *u8, ch_layout: s64, search_flags: s32) -> s32 #foreign libavutil;
-
+/**
+* @note Any old chlayout present is discarded and replaced with a copy of the new one. The
+* caller still owns layout and is responsible for uninitializing it.
+*/
 av_opt_set_chlayout :: (obj: *void, name: *u8, layout: *AVChannelLayout, search_flags: s32) -> s32 #foreign libavutil;
 
 /**
@@ -10567,6 +10868,54 @@ av_opt_set_chlayout :: (obj: *void, name: *u8, layout: *AVChannelLayout, search_
 * caller still owns val is and responsible for freeing it.
 */
 av_opt_set_dict_val :: (obj: *void, name: *u8, val: *AVDictionary, search_flags: s32) -> s32 #foreign libavutil;
+
+/**
+* Add, replace, or remove elements for an array option. Which of these
+* operations is performed depends on the values of val and search_flags.
+*
+* @param start_elem Index of the first array element to modify; must not be
+*                   larger than array size as returned by
+*                   av_opt_get_array_size().
+* @param nb_elems number of array elements to modify; when val is NULL,
+*                 start_elem+nb_elems must not be larger than array size as
+*                 returned by av_opt_get_array_size()
+*
+* @param val_type Option type corresponding to the type of val, ignored when val is
+*                 NULL.
+*
+*                 The effect of this function will will be as if av_opt_setX()
+*                 was called for each element, where X is specified by type.
+*                 E.g. AV_OPT_TYPE_STRING corresponds to av_opt_set().
+*
+*                 Typically this should be the same as the scalarized type of
+*                 the AVOption being set, but certain conversions are also
+*                 possible - the same as those done by the corresponding
+*                 av_opt_set*() function. E.g. any option type can be set from
+*                 a string, numeric types can be set from int64, double, or
+*                 rational, etc.
+*
+* @param val Array with nb_elems elements or NULL.
+*
+*            When NULL, nb_elems array elements starting at start_elem are
+*            removed from the array. Any array elements remaining at the end
+*            are shifted by nb_elems towards the first element in order to keep
+*            the array contiguous.
+*
+*            Otherwise (val is non-NULL), the type of val must match the
+*            underlying C type as documented for val_type.
+*
+*            When AV_OPT_ARRAY_REPLACE is not set in search_flags, the array is
+*            enlarged by nb_elems, and the contents of val are inserted at
+*            start_elem. Previously existing array elements from start_elem
+*            onwards (if present) are shifted by nb_elems away from the first
+*            element in order to make space for the new elements.
+*
+*            When AV_OPT_ARRAY_REPLACE is set in search_flags, the contents
+*            of val replace existing array elements from start_elem to
+*            start_elem+nb_elems (if present). New array size is
+*            max(start_elem + nb_elems, old array size).
+*/
+av_opt_set_array :: (obj: *void, name: *u8, search_flags: s32, start_elem: u32, nb_elems: u32, val_type: AVOptionType, val: *void) -> s32 #foreign libavutil;
 
 /**
 * @defgroup opt_get_funcs Option getting functions
@@ -10597,8 +10946,10 @@ av_opt_get_pixel_fmt :: (obj: *void, name: *u8, search_flags: s32, out_fmt: *AVP
 av_opt_get_sample_fmt :: (obj: *void, name: *u8, search_flags: s32, out_fmt: *AVSampleFormat) -> s32 #foreign libavutil;
 av_opt_get_video_rate :: (obj: *void, name: *u8, search_flags: s32, out_val: *AVRational) -> s32 #foreign libavutil;
 
-av_opt_get_channel_layout :: (obj: *void, name: *u8, search_flags: s32, ch_layout: *s64) -> s32 #foreign libavutil;
-
+/**
+* @param[out] layout The returned layout is a copy of the actual value and must
+* be freed with av_channel_layout_uninit() by the caller
+*/
 av_opt_get_chlayout :: (obj: *void, name: *u8, search_flags: s32, layout: *AVChannelLayout) -> s32 #foreign libavutil;
 
 /**
@@ -10608,8 +10959,64 @@ av_opt_get_chlayout :: (obj: *void, name: *u8, search_flags: s32, layout: *AVCha
 av_opt_get_dict_val :: (obj: *void, name: *u8, search_flags: s32, out_val: **AVDictionary) -> s32 #foreign libavutil;
 
 /**
-* @}
+* For an array-type option, get the number of elements in the array.
 */
+av_opt_get_array_size :: (obj: *void, name: *u8, search_flags: s32, out_val: *u32) -> s32 #foreign libavutil;
+
+/**
+* For an array-type option, retrieve the values of one or more array elements.
+*
+* @param start_elem index of the first array element to retrieve
+* @param nb_elems number of array elements to retrieve; start_elem+nb_elems
+*                 must not be larger than array size as returned by
+*                 av_opt_get_array_size()
+*
+* @param out_type Option type corresponding to the desired output.
+*
+*                 The array elements produced by this function will
+*                 will be as if av_opt_getX() was called for each element,
+*                 where X is specified by out_type. E.g. AV_OPT_TYPE_STRING
+*                 corresponds to av_opt_get().
+*
+*                 Typically this should be the same as the scalarized type of
+*                 the AVOption being retrieved, but certain conversions are
+*                 also possible - the same as those done by the corresponding
+*                 av_opt_get*() function. E.g. any option type can be retrieved
+*                 as a string, numeric types can be retrieved as int64, double,
+*                 or rational, etc.
+*
+* @param out_val  Array with nb_elems members into which the output will be
+*                 written. The array type must match the underlying C type as
+*                 documented for out_type, and be zeroed on entry to this
+*                 function.
+*
+*                 For dynamically allocated types (strings, binary, dicts,
+*                 etc.), the result is owned and freed by the caller.
+*/
+av_opt_get_array :: (obj: *void, name: *u8, search_flags: s32, start_elem: u32, nb_elems: u32, out_type: AVOptionType, out_val: *void) -> s32 #foreign libavutil;
+
+/**
+* @defgroup opt_eval_funcs Evaluating option strings
+* @{
+* This group of functions can be used to evaluate option strings
+* and get numbers out of them. They do the same thing as av_opt_set(),
+* except the result is written into the caller-supplied pointer.
+*
+* @param obj a struct whose first element is a pointer to AVClass.
+* @param o an option for which the string is to be evaluated.
+* @param val string to be evaluated.
+* @param *_out value of the string will be written here.
+*
+* @return 0 on success, a negative number on failure.
+*/
+av_opt_eval_flags :: (obj: *void, o: *AVOption, val: *u8, flags_out: *s32) -> s32 #foreign libavutil;
+av_opt_eval_int :: (obj: *void, o: *AVOption, val: *u8, int_out: *s32) -> s32 #foreign libavutil;
+av_opt_eval_uint :: (obj: *void, o: *AVOption, val: *u8, uint_out: *u32) -> s32 #foreign libavutil;
+av_opt_eval_int64 :: (obj: *void, o: *AVOption, val: *u8, int64_out: *s64) -> s32 #foreign libavutil;
+av_opt_eval_float :: (obj: *void, o: *AVOption, val: *u8, float_out: *float) -> s32 #foreign libavutil;
+av_opt_eval_double :: (obj: *void, o: *AVOption, val: *u8, double_out: *float64) -> s32 #foreign libavutil;
+av_opt_eval_q :: (obj: *void, o: *AVOption, val: *u8, q_out: *AVRational) -> s32 #foreign libavutil;
+
 /**
 * Gets a pointer to the requested field in a struct.
 * This function allows accessing a struct even when its fields are moved or
@@ -10619,61 +11026,6 @@ av_opt_get_dict_val :: (obj: *void, name: *u8, search_flags: s32, out_val: **AVD
 *          or written to.
 */
 av_opt_ptr :: (avclass: *AVClass, obj: *void, name: *u8) -> *void #foreign libavutil;
-
-/**
-* Free an AVOptionRanges struct and set it to NULL.
-*/
-av_opt_freep_ranges :: (ranges: **AVOptionRanges) -> void #foreign libavutil;
-
-/**
-* Get a list of allowed ranges for the given option.
-*
-* The returned list may depend on other fields in obj like for example profile.
-*
-* @param flags is a bitmask of flags, undefined flags should not be set and should be ignored
-*              AV_OPT_SEARCH_FAKE_OBJ indicates that the obj is a double pointer to a AVClass instead of a full instance
-*              AV_OPT_MULTI_COMPONENT_RANGE indicates that function may return more than one component, @see AVOptionRanges
-*
-* The result must be freed with av_opt_freep_ranges.
-*
-* @return number of compontents returned on success, a negative errro code otherwise
-*/
-av_opt_query_ranges :: (unknown0: **AVOptionRanges, obj: *void, key: *u8, flags: s32) -> s32 #foreign libavutil;
-
-/**
-* Copy options from src object into dest object.
-*
-* The underlying AVClass of both src and dest must coincide. The guarantee
-* below does not apply if this is not fulfilled.
-*
-* Options that require memory allocation (e.g. string or binary) are malloc'ed in dest object.
-* Original memory allocated for such options is freed unless both src and dest options points to the same memory.
-*
-* Even on error it is guaranteed that allocated options from src and dest
-* no longer alias each other afterwards; in particular calling av_opt_free()
-* on both src and dest is safe afterwards if dest has been memdup'ed from src.
-*
-* @param dest Object to copy from
-* @param src  Object to copy into
-* @return 0 on success, negative on error
-*/
-av_opt_copy :: (dest: *void, src: *void) -> s32 #foreign libavutil;
-
-/**
-* Get a default list of allowed ranges for the given option.
-*
-* This list is constructed without using the AVClass.query_ranges() callback
-* and can be used as fallback from within the callback.
-*
-* @param flags is a bitmask of flags, undefined flags should not be set and should be ignored
-*              AV_OPT_SEARCH_FAKE_OBJ indicates that the obj is a double pointer to a AVClass instead of a full instance
-*              AV_OPT_MULTI_COMPONENT_RANGE indicates that function may return more than one component, @see AVOptionRanges
-*
-* The result must be freed with av_opt_free_ranges.
-*
-* @return number of compontents returned on success, a negative errro code otherwise
-*/
-av_opt_query_ranges_default :: (unknown0: **AVOptionRanges, obj: *void, key: *u8, flags: s32) -> s32 #foreign libavutil;
 
 /**
 * Check if given option is set to its default value.
@@ -10699,7 +11051,17 @@ av_opt_is_set_to_default :: (obj: *void, o: *AVOption) -> s32 #foreign libavutil
 *                     0 when option is not set its default,
 *                     <0 on error
 */
-av_opt_is_set_to_default_by_name :: (obj: *void, name: *u8, search_flags: s32) -> s32 #foreign libavutil_;
+av_opt_is_set_to_default_by_name :: (obj: *void, name: *u8, search_flags: s32) -> s32 #foreign libavutil;
+
+/**
+* Check whether a particular flag is set in a flags field.
+*
+* @param field_name the name of the flag field option
+* @param flag_name the name of the flag to check
+* @return non-zero if the flag is set, zero if the flag isn't set,
+*         isn't of the right type, or the flags field doesn't exist.
+*/
+av_opt_flag_is_set :: (obj: *void, field_name: *u8, flag_name: *u8) -> s32 #foreign libavutil;
 
 /**
 * Serialize object's options.
@@ -10720,6 +11082,42 @@ av_opt_is_set_to_default_by_name :: (obj: *void, name: *u8, search_flags: s32) -
 * @warning Separators cannot be neither '\\' nor '\0'. They also cannot be the same.
 */
 av_opt_serialize :: (obj: *void, opt_flags: s32, flags: s32, buffer: **u8, key_val_sep: u8, pairs_sep: u8) -> s32 #foreign libavutil;
+
+/**
+* Free an AVOptionRanges struct and set it to NULL.
+*/
+av_opt_freep_ranges :: (ranges: **AVOptionRanges) -> void #foreign libavutil;
+
+/**
+* Get a list of allowed ranges for the given option.
+*
+* The returned list may depend on other fields in obj like for example profile.
+*
+* @param flags is a bitmask of flags, undefined flags should not be set and should be ignored
+*              AV_OPT_SEARCH_FAKE_OBJ indicates that the obj is a double pointer to a AVClass instead of a full instance
+*              AV_OPT_MULTI_COMPONENT_RANGE indicates that function may return more than one component, @see AVOptionRanges
+*
+* The result must be freed with av_opt_freep_ranges.
+*
+* @return number of compontents returned on success, a negative errro code otherwise
+*/
+av_opt_query_ranges :: (unknown0: **AVOptionRanges, obj: *void, key: *u8, flags: s32) -> s32 #foreign libavutil;
+
+/**
+* Get a default list of allowed ranges for the given option.
+*
+* This list is constructed without using the AVClass.query_ranges() callback
+* and can be used as fallback from within the callback.
+*
+* @param flags is a bitmask of flags, undefined flags should not be set and should be ignored
+*              AV_OPT_SEARCH_FAKE_OBJ indicates that the obj is a double pointer to a AVClass instead of a full instance
+*              AV_OPT_MULTI_COMPONENT_RANGE indicates that function may return more than one component, @see AVOptionRanges
+*
+* The result must be freed with av_opt_free_ranges.
+*
+* @return number of compontents returned on success, a negative errro code otherwise
+*/
+av_opt_query_ranges_default :: (unknown0: **AVOptionRanges, obj: *void, key: *u8, flags: s32) -> s32 #foreign libavutil;
 
 /**
 * Callback for checking whether to abort blocking functions.
@@ -10797,10 +11195,7 @@ AVIODirEntry :: struct {
     filemode:                s64; /**< Unix file mode, -1 if unknown. */
 }
 
-AVIODirContext :: struct {
-    URLContext :: struct {}
-    url_context: *URLContext;
-}
+AVIODirContext :: struct {}
 
 /**
 * Different data types that can be returned via the AVIO
@@ -11454,7 +11849,7 @@ AVOutputFormat :: struct {
     /**
     * can use flags: AVFMT_NOFILE, AVFMT_NEEDNUMBER,
     * AVFMT_GLOBALHEADER, AVFMT_NOTIMESTAMPS, AVFMT_VARIABLE_FPS,
-    * AVFMT_NODIMENSIONS, AVFMT_NOSTREAMS, AVFMT_ALLOW_FLUSH,
+    * AVFMT_NODIMENSIONS, AVFMT_NOSTREAMS,
     * AVFMT_TS_NONSTRICT, AVFMT_TS_NEGATIVE
     */
     flags:          s32;
@@ -11477,133 +11872,39 @@ AVInputFormat :: struct {
     * A comma separated list of short names for the format. New names
     * may be appended with a minor bump.
     */
-    name:            *u8;
+    name:       *u8;
 
     /**
     * Descriptive name for the format, meant to be more human-readable
     * than name. You should use the NULL_IF_CONFIG_SMALL() macro
     * to define it.
     */
-    long_name:       *u8;
+    long_name:  *u8;
 
     /**
     * Can use flags: AVFMT_NOFILE, AVFMT_NEEDNUMBER, AVFMT_SHOW_IDS,
     * AVFMT_NOTIMESTAMPS, AVFMT_GENERIC_INDEX, AVFMT_TS_DISCONT, AVFMT_NOBINSEARCH,
     * AVFMT_NOGENSEARCH, AVFMT_NO_BYTE_SEEK, AVFMT_SEEK_TO_PTS.
     */
-    flags:           s32;
+    flags:      s32;
 
     /**
     * If extensions are defined, then no probe is done. You should
     * usually not use extension format guessing because it is not
     * reliable enough
     */
-    extensions:      *u8;
+    extensions: *u8;
 
-    codec_tag:       **AVCodecTag;
+    codec_tag:  **AVCodecTag;
 
-    priv_class:      *AVClass; ///< AVClass for the private context
+    priv_class: *AVClass; ///< AVClass for the private context
 
     /**
     * Comma-separated list of mime types.
     * It is used check for matching mime types while probing.
     * @see av_probe_input_format2
     */
-    mime_type:       *u8;
-
-    /*****************************************************************
-    * No fields below this line are part of the public API. They
-    * may not be used outside of libavformat and can be changed and
-    * removed at will.
-    * New public fields should be added right above.
-    *****************************************************************
-    */
-    /**
-    * Raw demuxers store their codec ID here.
-    */
-    raw_codec_id:    s32;
-
-    /**
-    * Size of private data so that it can be allocated in the wrapper.
-    */
-    priv_data_size:  s32;
-
-    /**
-    * Internal flags. See FF_FMT_FLAG_* in internal.h.
-    */
-    flags_internal:  s32;
-
-    /**
-    * Tell if a given file has a chance of being parsed as this format.
-    * The buffer provided is guaranteed to be AVPROBE_PADDING_SIZE bytes
-    * big so you do not have to check for that unless you need more.
-    */
-    read_probe:      #type (unknown0: *AVProbeData) -> s32 #c_call;
-
-    /**
-    * Read the format header and initialize the AVFormatContext
-    * structure. Return 0 if OK. 'avformat_new_stream' should be
-    * called to create new streams.
-    */
-    read_header:     #type (unknown0: *AVFormatContext) -> s32 #c_call;
-
-    /**
-    * Read one packet and put it in 'pkt'. pts and flags are also
-    * set. 'avformat_new_stream' can be called only if the flag
-    * AVFMTCTX_NOHEADER is used and only in the calling thread (not in a
-    * background thread).
-    * @return 0 on success, < 0 on error.
-    *         Upon returning an error, pkt must be unreferenced by the caller.
-    */
-    read_packet:     #type (unknown0: *AVFormatContext, pkt: *AVPacket) -> s32 #c_call;
-
-    /**
-    * Close the stream. The AVFormatContext and AVStreams are not
-    * freed by this function
-    */
-    read_close:      #type (unknown0: *AVFormatContext) -> s32 #c_call;
-
-    /**
-    * Seek to a given timestamp relative to the frames in
-    * stream component stream_index.
-    * @param stream_index Must not be -1.
-    * @param flags Selects which direction should be preferred if no exact
-    *              match is available.
-    * @return >= 0 on success (but not necessarily the new offset)
-    */
-    read_seek:       #type (unknown0: *AVFormatContext, stream_index: s32, timestamp: s64, flags: s32) -> s32 #c_call;
-
-    /**
-    * Get the next timestamp in stream[stream_index].time_base units.
-    * @return the timestamp or AV_NOPTS_VALUE if an error occurred
-    */
-    read_timestamp:  #type (s: *AVFormatContext, stream_index: s32, pos: *s64, pos_limit: s64) -> s64 #c_call;
-
-    /**
-    * Start/resume playing - only meaningful if using a network-based format
-    * (RTSP).
-    */
-    read_play:       #type (unknown0: *AVFormatContext) -> s32 #c_call;
-
-    /**
-    * Pause playing - only meaningful if using a network-based format
-    * (RTSP).
-    */
-    read_pause:      #type (unknown0: *AVFormatContext) -> s32 #c_call;
-
-    /**
-    * Seek to timestamp ts.
-    * Seeking will be done so that the point from which all active streams
-    * can be presented successfully will be closest to ts and within min/max_ts.
-    * Active streams are all streams that have AVStream.discard < AVDISCARD_ALL.
-    */
-    read_seek2:      #type (s: *AVFormatContext, stream_index: s32, min_ts: s64, ts: s64, max_ts: s64, flags: s32) -> s32 #c_call;
-
-    /**
-    * Returns device list with it properties.
-    * @see avdevice_list_devices() for more details.
-    */
-    get_device_list: #type (s: *AVFormatContext, device_list: *AVDeviceInfoList) -> s32 #c_call;
+    mime_type:  *u8;
 }
 
 /**
@@ -11785,12 +12086,16 @@ AVStream :: struct {
     *
     * Freed by libavformat in avformat_free_context().
     *
-    * @see av_format_inject_global_side_data()
+    * @deprecated use AVStream's @ref AVCodecParameters.coded_side_data
+    *             "codecpar side data".
     */
     side_data:           *AVPacketSideData;
 
     /**
     * The number of elements in the AVStream.side_data array.
+    *
+    * @deprecated use AVStream's @ref AVCodecParameters.nb_coded_side_data
+    *             "codecpar side data".
     */
     nb_side_data:        s32;
 
@@ -11827,14 +12132,282 @@ AVStream :: struct {
     pts_wrap_bits:       s32;
 }
 
-av_stream_get_parser :: (s: *AVStream) -> *AVCodecParserContext #foreign libavformat;
+/**
+* AVStreamGroupTileGrid holds information on how to combine several
+* independent images on a single canvas for presentation.
+*
+* The output should be a @ref AVStreamGroupTileGrid.background "background"
+* colored @ref AVStreamGroupTileGrid.coded_width "coded_width" x
+* @ref AVStreamGroupTileGrid.coded_height "coded_height" canvas where a
+* @ref AVStreamGroupTileGrid.nb_tiles "nb_tiles" amount of tiles are placed in
+* the order they appear in the @ref AVStreamGroupTileGrid.offsets "offsets"
+* array, at the exact offset described for them. In particular, if two or more
+* tiles overlap, the image with higher index in the
+* @ref AVStreamGroupTileGrid.offsets "offsets" array takes priority.
+* Note that a single image may be used multiple times, i.e. multiple entries
+* in @ref AVStreamGroupTileGrid.offsets "offsets" may have the same value of
+* idx.
+*
+* The following is an example of a simple grid with 3 rows and 4 columns:
+*
+* +---+---+---+---+
+* | 0 | 1 | 2 | 3 |
+* +---+---+---+---+
+* | 4 | 5 | 6 | 7 |
+* +---+---+---+---+
+* | 8 | 9 |10 |11 |
+* +---+---+---+---+
+*
+* Assuming all tiles have a dimension of 512x512, the
+* @ref AVStreamGroupTileGrid.offsets "offset" of the topleft pixel of
+* the first @ref AVStreamGroup.streams "stream" in the group is "0,0", the
+* @ref AVStreamGroupTileGrid.offsets "offset" of the topleft pixel of
+* the second @ref AVStreamGroup.streams "stream" in the group is "512,0", the
+* @ref AVStreamGroupTileGrid.offsets "offset" of the topleft pixel of
+* the fifth @ref AVStreamGroup.streams "stream" in the group is "0,512", the
+* @ref AVStreamGroupTileGrid.offsets "offset", of the topleft pixel of
+* the sixth @ref AVStreamGroup.streams "stream" in the group is "512,512",
+* etc.
+*
+* The following is an example of a canvas with overlaping tiles:
+*
+* +-----------+
+* |   %%%%%   |
+* |***%%3%%@@@|
+* |**0%%%%%2@@|
+* |***##1@@@@@|
+* |   #####   |
+* +-----------+
+*
+* Assuming a canvas with size 1024x1024 and all tiles with a dimension of
+* 512x512, a possible @ref AVStreamGroupTileGrid.offsets "offset" for the
+* topleft pixel of the first @ref AVStreamGroup.streams "stream" in the group
+* would be 0x256, the @ref AVStreamGroupTileGrid.offsets "offset" for the
+* topleft pixel of the second @ref AVStreamGroup.streams "stream" in the group
+* would be 256x512, the @ref AVStreamGroupTileGrid.offsets "offset" for the
+* topleft pixel of the third @ref AVStreamGroup.streams "stream" in the group
+* would be 512x256, and the @ref AVStreamGroupTileGrid.offsets "offset" for
+* the topleft pixel of the fourth @ref AVStreamGroup.streams "stream" in the
+* group would be 256x0.
+*
+* sizeof(AVStreamGroupTileGrid) is not a part of the ABI and may only be
+* allocated by avformat_stream_group_create().
+*/
+AVStreamGroupTileGrid :: struct {
+    av_class:          *AVClass;
+
+    /**
+    * Amount of tiles in the grid.
+    *
+    * Must be > 0.
+    */
+    nb_tiles:          u32;
+
+    /**
+    * Width of the canvas.
+    *
+    * Must be > 0.
+    */
+    coded_width:       s32;
+
+    /**
+    * Width of the canvas.
+    *
+    * Must be > 0.
+    */
+    coded_height:      s32;
+
+    offsets:           *struct {
+        /**
+        * Index of the stream in the group this tile references.
+        *
+        * Must be < @ref AVStreamGroup.nb_streams "nb_streams".
+        */
+        idx:        u32;
+
+        /**
+        * Offset in pixels from the left edge of the canvas where the tile
+        * should be placed.
+        */
+        horizontal: s32;
+
+        /**
+        * Offset in pixels from the top edge of the canvas where the tile
+        * should be placed.
+        */
+        vertical:   s32;
+    };
+
+    /**
+    * The pixel value per channel in RGBA format used if no pixel of any tile
+    * is located at a particular pixel location.
+    *
+    * @see av_image_fill_color().
+    * @see av_parse_color().
+    */
+    background:        [4] u8;
+
+    /**
+    * Offset in pixels from the left edge of the canvas where the actual image
+    * meant for presentation starts.
+    *
+    * This field must be >= 0 and < @ref coded_width.
+    */
+    horizontal_offset: s32;
+
+    /**
+    * Offset in pixels from the top edge of the canvas where the actual image
+    * meant for presentation starts.
+    *
+    * This field must be >= 0 and < @ref coded_height.
+    */
+    vertical_offset:   s32;
+
+    /**
+    * Width of the final image for presentation.
+    *
+    * Must be > 0 and <= (@ref coded_width - @ref horizontal_offset).
+    * When it's not equal to (@ref coded_width - @ref horizontal_offset), the
+    * result of (@ref coded_width - width - @ref horizontal_offset) is the
+    * amount amount of pixels to be cropped from the right edge of the
+    * final image before presentation.
+    */
+    width:             s32;
+
+    /**
+    * Height of the final image for presentation.
+    *
+    * Must be > 0 and <= (@ref coded_height - @ref vertical_offset).
+    * When it's not equal to (@ref coded_height - @ref vertical_offset), the
+    * result of (@ref coded_height - height - @ref vertical_offset) is the
+    * amount amount of pixels to be cropped from the bottom edge of the
+    * final image before presentation.
+    */
+    height:            s32;
+}
 
 /**
-* Returns the pts of the last muxed packet + its duration
+* AVStreamGroupLCEVC is meant to define the relation between video streams
+* and a data stream containing LCEVC enhancement layer NALUs.
 *
-* the retuned value is undefined when used with a demuxer.
+* No more than one stream of @ref AVCodecParameters.codec_type "codec_type"
+* AVMEDIA_TYPE_DATA shall be present, and it must be of
+* @ref AVCodecParameters.codec_id "codec_id" AV_CODEC_ID_LCEVC.
 */
-av_stream_get_end_pts :: (st: *AVStream) -> s64 #foreign libavformat;
+AVStreamGroupLCEVC :: struct {
+    av_class:    *AVClass;
+
+    /**
+    * Index of the LCEVC data stream in AVStreamGroup.
+    */
+    lcevc_index: u32;
+
+    /**
+    * Width of the final stream for presentation.
+    */
+    width:       s32;
+
+    /**
+    * Height of the final image for presentation.
+    */
+    height:      s32;
+}
+
+AVStreamGroupParamsType :: enum s32 {
+    NONE                  :: 0;
+    IAMF_AUDIO_ELEMENT    :: 1;
+    IAMF_MIX_PRESENTATION :: 2;
+    TILE_GRID             :: 3;
+    LCEVC                 :: 4;
+
+    AV_STREAM_GROUP_PARAMS_NONE                  :: NONE;
+    AV_STREAM_GROUP_PARAMS_IAMF_AUDIO_ELEMENT    :: IAMF_AUDIO_ELEMENT;
+    AV_STREAM_GROUP_PARAMS_IAMF_MIX_PRESENTATION :: IAMF_MIX_PRESENTATION;
+    AV_STREAM_GROUP_PARAMS_TILE_GRID             :: TILE_GRID;
+    AV_STREAM_GROUP_PARAMS_LCEVC                 :: LCEVC;
+}
+
+AVIAMFAudioElement :: struct {}
+AVIAMFMixPresentation :: struct {}
+
+AVStreamGroup :: struct {
+    /**
+    * A class for @ref avoptions. Set by avformat_stream_group_create().
+    */
+    av_class:    *AVClass;
+
+    priv_data:   *void;
+
+    /**
+    * Group index in AVFormatContext.
+    */
+    index:       u32;
+
+    /**
+    * Group type-specific group ID.
+    *
+    * decoding: set by libavformat
+    * encoding: may set by the user
+    */
+    id:          s64;
+
+    /**
+    * Group type
+    *
+    * decoding: set by libavformat on group creation
+    * encoding: set by avformat_stream_group_create()
+    */
+    type:        AVStreamGroupParamsType;
+
+    params:      union {
+        iamf_audio_element:    *AVIAMFAudioElement;
+        iamf_mix_presentation: *AVIAMFMixPresentation;
+        tile_grid:             *AVStreamGroupTileGrid;
+        lcevc:                 *AVStreamGroupLCEVC;
+    };
+
+    /**
+    * Metadata that applies to the whole group.
+    *
+    * - demuxing: set by libavformat on group creation
+    * - muxing: may be set by the caller before avformat_write_header()
+    *
+    * Freed by libavformat in avformat_free_context().
+    */
+    metadata:    *AVDictionary;
+
+    /**
+    * Number of elements in AVStreamGroup.streams.
+    *
+    * Set by avformat_stream_group_add_stream() must not be modified by any other code.
+    */
+    nb_streams:  u32;
+
+    /**
+    * A list of streams in the group. New entries are created with
+    * avformat_stream_group_add_stream().
+    *
+    * - demuxing: entries are created by libavformat on group creation.
+    *             If AVFMTCTX_NOHEADER is set in ctx_flags, then new entries may also
+    *             appear in av_read_frame().
+    * - muxing: entries are created by the user before avformat_write_header().
+    *
+    * Freed by libavformat in avformat_free_context().
+    */
+    streams:     **AVStream;
+
+    /**
+    * Stream group disposition - a combination of AV_DISPOSITION_* flags.
+    * This field currently applies to all defined AVStreamGroupParamsType.
+    *
+    * - demuxing: set by libavformat when creating the group or in
+    *             avformat_find_stream_info().
+    * - muxing: may be set by the caller before avformat_write_header().
+    */
+    disposition: s32;
+}
+
+av_stream_get_parser :: (s: *AVStream) -> *AVCodecParserContext #foreign libavformat;
 
 /**
 * New fields can be added to the end with minor version bumps.
@@ -11984,6 +12557,40 @@ AVFormatContext :: struct {
     streams:                         **AVStream;
 
     /**
+    * Number of elements in AVFormatContext.stream_groups.
+    *
+    * Set by avformat_stream_group_create(), must not be modified by any other code.
+    */
+    nb_stream_groups:                u32;
+
+    /**
+    * A list of all stream groups in the file. New groups are created with
+    * avformat_stream_group_create(), and filled with avformat_stream_group_add_stream().
+    *
+    * - demuxing: groups may be created by libavformat in avformat_open_input().
+    *             If AVFMTCTX_NOHEADER is set in ctx_flags, then new groups may also
+    *             appear in av_read_frame().
+    * - muxing: groups may be created by the user before avformat_write_header().
+    *
+    * Freed by libavformat in avformat_free_context().
+    */
+    stream_groups:                   **AVStreamGroup;
+
+    /**
+    * Number of chapters in AVChapter array.
+    * When muxing, chapters are normally written in the file header,
+    * so nb_chapters should normally be initialized before write_header
+    * is called. Some muxers (e.g. mov and mkv) can also write chapters
+    * in the trailer.  To write chapters in the trailer, nb_chapters
+    * must be zero when write_header is called and non-zero when
+    * write_trailer is called.
+    * - muxing: set by user
+    * - demuxing: set by libavformat
+    */
+    nb_chapters:                     u32;
+    chapters:                        **AVChapter;
+
+    /**
     * input or output URL. Unlike the old filename field, this field has no
     * length restriction.
     *
@@ -12042,7 +12649,7 @@ AVFormatContext :: struct {
     *
     * @note this is \e not  used for determining the \ref AVInputFormat
     *       "input format"
-    * @sa format_probesize
+    * @see format_probesize
     */
     probesize:                       s64;
 
@@ -12079,36 +12686,10 @@ AVFormatContext :: struct {
     subtitle_codec_id:               AVCodecID;
 
     /**
-    * Maximum amount of memory in bytes to use for the index of each stream.
-    * If the index exceeds this size, entries will be discarded as
-    * needed to maintain a smaller size. This can lead to slower or less
-    * accurate seeking (depends on demuxer).
-    * Demuxers for which a full in-memory index is mandatory will ignore
-    * this.
-    * - muxing: unused
-    * - demuxing: set by user
+    * Forced Data codec_id.
+    * Demuxing: Set by user.
     */
-    max_index_size:                  u32;
-
-    /**
-    * Maximum amount of memory in bytes to use for buffering frames
-    * obtained from realtime capture devices.
-    */
-    max_picture_buffer:              u32;
-
-    /**
-    * Number of chapters in AVChapter array.
-    * When muxing, chapters are normally written in the file header,
-    * so nb_chapters should normally be initialized before write_header
-    * is called. Some muxers (e.g. mov and mkv) can also write chapters
-    * in the trailer.  To write chapters in the trailer, nb_chapters
-    * must be zero when write_header is called and non-zero when
-    * write_trailer is called.
-    * - muxing: set by user
-    * - demuxing: set by libavformat
-    */
-    nb_chapters:                     u32;
-    chapters:                        **AVChapter;
+    data_codec_id:                   AVCodecID;
 
     /**
     * Metadata that applies to the whole file.
@@ -12164,6 +12745,31 @@ AVFormatContext :: struct {
     debug:                           s32;
 
     /**
+    * The maximum number of streams.
+    * - encoding: unused
+    * - decoding: set by user
+    */
+    max_streams:                     s32;
+
+    /**
+    * Maximum amount of memory in bytes to use for the index of each stream.
+    * If the index exceeds this size, entries will be discarded as
+    * needed to maintain a smaller size. This can lead to slower or less
+    * accurate seeking (depends on demuxer).
+    * Demuxers for which a full in-memory index is mandatory will ignore
+    * this.
+    * - muxing: unused
+    * - demuxing: set by user
+    */
+    max_index_size:                  u32;
+
+    /**
+    * Maximum amount of memory in bytes to use for buffering frames
+    * obtained from realtime capture devices.
+    */
+    max_picture_buffer:              u32;
+
+    /**
     * Maximum buffering duration for interleaving.
     *
     * To ensure all the streams are interleaved correctly,
@@ -12180,6 +12786,35 @@ AVFormatContext :: struct {
     * Muxing only, set by the caller before avformat_write_header().
     */
     max_interleave_delta:            s64;
+
+    /**
+    * Maximum number of packets to read while waiting for the first timestamp.
+    * Decoding only.
+    */
+    max_ts_probe:                    s32;
+
+    /**
+    * Max chunk time in microseconds.
+    * Note, not all formats support this and unpredictable things may happen if it is used when not supported.
+    * - encoding: Set by user
+    * - decoding: unused
+    */
+    max_chunk_duration:              s32;
+
+    /**
+    * Max chunk size in bytes
+    * Note, not all formats support this and unpredictable things may happen if it is used when not supported.
+    * - encoding: Set by user
+    * - decoding: unused
+    */
+    max_chunk_size:                  s32;
+
+    /**
+    * Maximum number of packets that can be probed
+    * - encoding: unused
+    * - decoding: set by user
+    */
+    max_probe_packets:               s32;
 
     /**
     * Allow non-standard and experimental extension
@@ -12201,12 +12836,6 @@ AVFormatContext :: struct {
     event_flags:                     s32;
 
     /**
-    * Maximum number of packets to read while waiting for the first timestamp.
-    * Decoding only.
-    */
-    max_ts_probe:                    s32;
-
-    /**
     * Avoid negative timestamps during muxing.
     * Any value of the AVFMT_AVOID_NEG_TS_* constants.
     * Note, this works better when using av_interleaved_write_frame().
@@ -12214,12 +12843,6 @@ AVFormatContext :: struct {
     * - demuxing: unused
     */
     avoid_negative_ts:               s32;
-
-    /**
-    * Transport stream id.
-    * This will be moved into demuxer private options. Thus no API/ABI compatibility
-    */
-    ts_id:                           s32;
 
     /**
     * Audio preload in microseconds.
@@ -12230,28 +12853,21 @@ AVFormatContext :: struct {
     audio_preload:                   s32;
 
     /**
-    * Max chunk time in microseconds.
-    * Note, not all formats support this and unpredictable things may happen if it is used when not supported.
-    * - encoding: Set by user
-    * - decoding: unused
-    */
-    max_chunk_duration:              s32;
-
-    /**
-    * Max chunk size in bytes
-    * Note, not all formats support this and unpredictable things may happen if it is used when not supported.
-    * - encoding: Set by user
-    * - decoding: unused
-    */
-    max_chunk_size:                  s32;
-
-    /**
     * forces the use of wallclock timestamps as pts/dts of packets
     * This has undefined results in the presence of B frames.
     * - encoding: unused
     * - decoding: Set by user
     */
     use_wallclock_as_timestamps:     s32;
+
+    /**
+    * Skip duration calcuation in estimate_timings_from_pts.
+    * - encoding: unused
+    * - decoding: set by user
+    *
+    * @see duration_probesize
+    */
+    skip_estimate_duration_from_pts: s32;
 
     /**
     * avio flags, used to force AVIO_FLAG_DIRECT.
@@ -12312,7 +12928,7 @@ AVFormatContext :: struct {
     *
     * Demuxing only, set by the caller before avformat_open_input().
     *
-    * @sa probesize
+    * @see probesize
     */
     format_probesize:                s32;
 
@@ -12331,6 +12947,20 @@ AVFormatContext :: struct {
     * - decoding: set by user
     */
     format_whitelist:                *u8;
+
+    /**
+    * ',' separated list of allowed protocols.
+    * - encoding: unused
+    * - decoding: set by user
+    */
+    protocol_whitelist:              *u8;
+
+    /**
+    * ',' separated list of disallowed protocols.
+    * - encoding: unused
+    * - decoding: set by user
+    */
+    protocol_blacklist:              *u8;
 
     /**
     * IO repositioned flag.
@@ -12375,7 +13005,7 @@ AVFormatContext :: struct {
     /**
     * Number of bytes to be written as padding in a metadata header.
     * Demuxing: Unused.
-    * Muxing: Set by user via av_format_set_metadata_header_padding.
+    * Muxing: Set by user.
     */
     metadata_header_padding:         s32;
 
@@ -12405,19 +13035,6 @@ AVFormatContext :: struct {
     dump_separator:                  *u8;
 
     /**
-    * Forced Data codec_id.
-    * Demuxing: Set by user.
-    */
-    data_codec_id:                   AVCodecID;
-
-    /**
-    * ',' separated list of allowed protocols.
-    * - encoding: unused
-    * - decoding: set by user
-    */
-    protocol_whitelist:              *u8;
-
-    /**
     * A callback for opening new IO streams.
     *
     * Whenever a muxer or a demuxer needs to open an IO stream (typically from
@@ -12442,41 +13059,6 @@ AVFormatContext :: struct {
     /**
     * A callback for closing the streams opened with AVFormatContext.io_open().
     *
-    * @deprecated use io_close2
-    */
-    io_close:                        #type (s: *AVFormatContext, pb: *AVIOContext) -> void #c_call;
-
-    /**
-    * ',' separated list of disallowed protocols.
-    * - encoding: unused
-    * - decoding: set by user
-    */
-    protocol_blacklist:              *u8;
-
-    /**
-    * The maximum number of streams.
-    * - encoding: unused
-    * - decoding: set by user
-    */
-    max_streams:                     s32;
-
-    /**
-    * Skip duration calcuation in estimate_timings_from_pts.
-    * - encoding: unused
-    * - decoding: set by user
-    */
-    skip_estimate_duration_from_pts: s32;
-
-    /**
-    * Maximum number of packets that can be probed
-    * - encoding: unused
-    * - decoding: set by user
-    */
-    max_probe_packets:               s32;
-
-    /**
-    * A callback for closing the streams opened with AVFormatContext.io_open().
-    *
     * Using this is preferred over io_close, because this can return an error.
     * Therefore this callback is used instead of io_close by the generic
     * libavformat code if io_close is NULL or the default.
@@ -12486,11 +13068,27 @@ AVFormatContext :: struct {
     * @return 0 on success, a negative AVERROR code on failure
     */
     io_close2:                       #type (s: *AVFormatContext, pb: *AVIOContext) -> s32 #c_call;
+
+    /**
+    * Maximum number of bytes read from input in order to determine stream durations
+    * when using estimate_timings_from_pts in avformat_find_stream_info().
+    * Demuxing only, set by the caller before avformat_find_stream_info().
+    * Can be set to 0 to let avformat choose using a heuristic.
+    *
+    * @see skip_estimate_duration_from_pts
+    */
+    duration_probesize:              s64;
 }
 
 /**
 * This function will cause global side data to be injected in the next packet
 * of each stream as well as after any subsequent seek.
+*
+* @note global side data is always available in every AVStream's
+*       @ref AVCodecParameters.coded_side_data "codecpar side data" array, and
+*       in a @ref AVCodecContext.coded_side_data "decoder's side data" array if
+*       initialized with said stream's codecpar.
+* @see av_packet_side_data_get()
 */
 av_format_inject_global_side_data :: (s: *AVFormatContext) -> void #foreign libavformat;
 
@@ -12498,6 +13096,7 @@ av_format_inject_global_side_data :: (s: *AVFormatContext) -> void #foreign liba
 * Returns the method used to set ctx->duration.
 *
 * @return AVFMT_DURATION_FROM_PTS, AVFMT_DURATION_FROM_STREAM, or AVFMT_DURATION_FROM_BITRATE.
+* @deprecated duration_estimation_method is public and can be read directly.
 */
 av_fmt_ctx_get_duration_estimation_method :: (ctx: *AVFormatContext) -> AVDurationEstimationMethod #foreign libavformat;
 
@@ -12590,6 +13189,40 @@ avformat_get_class :: () -> *AVClass #foreign libavformat;
 av_stream_get_class :: () -> *AVClass #foreign libavformat;
 
 /**
+* Get the AVClass for AVStreamGroup. It can be used in combination with
+* AV_OPT_SEARCH_FAKE_OBJ for examining options.
+*
+* @see av_opt_find().
+*/
+av_stream_group_get_class :: () -> *AVClass #foreign libavformat;
+
+/**
+* @return a string identifying the stream group type, or NULL if unknown
+*/
+avformat_stream_group_name :: (type: AVStreamGroupParamsType) -> *u8 #foreign libavformat;
+
+/**
+* Add a new empty stream group to a media file.
+*
+* When demuxing, it may be called by the demuxer in read_header(). If the
+* flag AVFMTCTX_NOHEADER is set in s.ctx_flags, then it may also
+* be called in read_packet().
+*
+* When muxing, may be called by the user before avformat_write_header().
+*
+* User is required to call avformat_free_context() to clean up the allocation
+* by avformat_stream_group_create().
+*
+* New streams can be added to the group with avformat_stream_group_add_stream().
+*
+* @param s media file handle
+*
+* @return newly created group or NULL on error.
+* @see avformat_new_stream, avformat_stream_group_add_stream.
+*/
+avformat_stream_group_create :: (s: *AVFormatContext, type: AVStreamGroupParamsType, options: **AVDictionary) -> *AVStreamGroup #foreign libavformat;
+
+/**
 * Add a new stream to a media file.
 *
 * When demuxing, it is called by the demuxer in read_header(). If the
@@ -12609,6 +13242,31 @@ av_stream_get_class :: () -> *AVClass #foreign libavformat;
 avformat_new_stream :: (s: *AVFormatContext, c: *AVCodec) -> *AVStream #foreign libavformat;
 
 /**
+* Add an already allocated stream to a stream group.
+*
+* When demuxing, it may be called by the demuxer in read_header(). If the
+* flag AVFMTCTX_NOHEADER is set in s.ctx_flags, then it may also
+* be called in read_packet().
+*
+* When muxing, may be called by the user before avformat_write_header() after
+* having allocated a new group with avformat_stream_group_create() and stream with
+* avformat_new_stream().
+*
+* User is required to call avformat_free_context() to clean up the allocation
+* by avformat_stream_group_add_stream().
+*
+* @param stg stream group belonging to a media file.
+* @param st  stream in the media file to add to the group.
+*
+* @retval 0                 success
+* @retval AVERROR(EEXIST)   the stream was already in the group
+* @retval "another negative error code" legitimate errors
+*
+* @see avformat_new_stream, avformat_stream_group_create.
+*/
+avformat_stream_group_add_stream :: (stg: *AVStreamGroup, st: *AVStream) -> s32 #foreign libavformat;
+
+/**
 * Wrap an existing array as stream side data.
 *
 * @param st   stream
@@ -12620,6 +13278,8 @@ avformat_new_stream :: (s: *AVFormatContext, c: *AVCodec) -> *AVStream #foreign 
 *
 * @return zero on success, a negative AVERROR code on failure. On failure,
 *         the stream is unchanged and the data remains owned by the caller.
+* @deprecated use av_packet_side_data_add() with the stream's
+*             @ref AVCodecParameters.coded_side_data "codecpar side data"
 */
 av_stream_add_side_data :: (st: *AVStream, type: AVPacketSideDataType, data: *u8, size: u64) -> s32 #foreign libavformat;
 
@@ -12631,6 +13291,8 @@ av_stream_add_side_data :: (st: *AVStream, type: AVPacketSideDataType, data: *u8
 * @param size   side information size
 *
 * @return pointer to fresh allocated data or NULL otherwise
+* @deprecated use av_packet_side_data_new() with the stream's
+*             @ref AVCodecParameters.coded_side_data "codecpar side data"
 */
 av_stream_new_side_data :: (stream: *AVStream, type: AVPacketSideDataType, size: u64) -> *u8 #foreign libavformat;
 
@@ -12643,6 +13305,8 @@ av_stream_new_side_data :: (stream: *AVStream, type: AVPacketSideDataType, size:
 *               or to zero if the desired side data is not present.
 *
 * @return pointer to data if present or NULL otherwise
+* @deprecated use av_packet_side_data_get() with the stream's
+*             @ref AVCodecParameters.coded_side_data "codecpar side data"
 */
 av_stream_get_side_data :: (stream: *AVStream, type: AVPacketSideDataType, size: *u64) -> *u8 #foreign libavformat;
 
@@ -13458,21 +14122,12 @@ AVTimebaseSource :: enum s32 {
 }
 
 /**
-* Transfer internal timing information from one stream to another.
-*
-* This function is useful when doing stream copy.
-*
-* @param ofmt     target output format for ost
-* @param ost      output stream which needs timings copy and adjustments
-* @param ist      reference input stream to copy timings from
-* @param copy_tb  define from where the stream codec timebase needs to be imported
+* @deprecated do not call this function
 */
 avformat_transfer_internal_stream_timing_info :: (ofmt: *AVOutputFormat, ost: *AVStream, ist: *AVStream, copy_tb: AVTimebaseSource) -> s32 #foreign libavformat;
 
 /**
-* Get the internal codec timebase from a stream.
-*
-* @param st  input stream to extract the timebase from
+* @deprecated do not call this function
 */
 av_stream_get_codec_timebase :: (st: *AVStream) -> AVRational #foreign libavformat;
 
@@ -13755,6 +14410,36 @@ avfilter_pad_get_name :: (pads: *AVFilterPad, pad_idx: s32) -> *u8 #foreign liba
 avfilter_pad_get_type :: (pads: *AVFilterPad, pad_idx: s32) -> AVMediaType #foreign libavfilter;
 
 /**
+* Lists of formats / etc. supported by an end of a link.
+*
+* This structure is directly part of AVFilterLink, in two copies:
+* one for the source filter, one for the destination filter.
+
+* These lists are used for negotiating the format to actually be used,
+* which will be loaded into the format and channel_layout members of
+* AVFilterLink, when chosen.
+*/
+AVFilterFormatsConfig :: struct {
+    /**
+    * List of supported formats (pixel or sample).
+    */
+    formats:         *AVFilterFormats;
+
+    /**
+    * Lists of supported sample rates, only for audio.
+    */
+    samplerates:     *AVFilterFormats;
+
+    /**
+    * Lists of supported channel layouts, only for audio.
+    */
+    channel_layouts: *AVFilterChannelLayouts;
+
+    color_spaces:    *AVFilterFormats; ///< AVColorSpace
+    color_ranges:    *AVFilterFormats; ///< AVColorRange
+}
+
+/**
 * Filter definition. This defines the pads a filter contains, and all the
 * callback functions used to interact with the filter.
 */
@@ -13884,6 +14569,14 @@ AVFilter :: struct {
         * @ref AVFilterFormatsConfig.formats "incfg.formats"
         * on every output link to a list of pixel/sample formats that the filter
         * supports on that link.
+        * For video links, this filter may also set
+        * @ref AVFilterFormatsConfig.color_spaces "incfg.color_spaces"
+        *  /
+        * @ref AVFilterFormatsConfig.color_spaces "outcfg.color_spaces"
+        * and @ref AVFilterFormatsConfig.color_ranges "incfg.color_ranges"
+        *  /
+        * @ref AVFilterFormatsConfig.color_ranges "outcfg.color_ranges"
+        * analogously.
         * For audio links, this filter must also set
         * @ref AVFilterFormatsConfig.samplerates "incfg.samplerates"
         *  /
@@ -13901,10 +14594,27 @@ AVFilter :: struct {
         query_func:   #type (unknown0: *AVFilterContext) -> s32 #c_call;
 
         /**
+        * Same as query_func(), except this function writes the results into
+        * provided arrays.
+        *
+        * @param cfg_in  array of input format configurations with as many
+        *                members as the filters has inputs (NULL when there are
+        *                no inputs);
+        * @param cfg_out array of output format configurations with as many
+        *                members as the filters has outputs (NULL when there
+        *                are no outputs);
+        */
+        query_func2:  #type (unknown0: *AVFilterContext, cfg_in: **AVFilterFormatsConfig, cfg_out: **AVFilterFormatsConfig) -> s32 #c_call;
+
+        /**
         * A pointer to an array of admissible pixel formats delimited
         * by AV_PIX_FMT_NONE. The generic code will use this list
         * to indicate that this filter supports each of these pixel formats,
         * provided that all inputs and outputs use the same pixel format.
+        *
+        * In addition to that the generic code will mark all inputs
+        * and all outputs as supporting all color spaces and ranges, as
+        * long as all inputs and outputs use the same color space/range.
         *
         * This list must never be NULL if the union is in this state.
         * The type of all inputs and outputs of filters using this must
@@ -13973,8 +14683,6 @@ AVFilter :: struct {
 */
 avfilter_filter_pad_count :: (filter: *AVFilter, is_output: s32) -> u32 #foreign libavfilter;
 
-AVFilterInternal :: struct {}
-
 /** An instance of a filter */
 AVFilterContext :: struct {
     av_class:        *AVClass; ///< needed for av_log() and filters common options
@@ -14014,9 +14722,11 @@ AVFilterContext :: struct {
     thread_type:     s32;
 
     /**
-    * An opaque struct for libavfilter internal use.
+    * Max number of threads allowed in this filter instance.
+    * If <= 0, its value is ignored.
+    * Overrides global number of threads set per filter graph.
     */
-    internal:        *AVFilterInternal;
+    nb_threads:      s32;
 
     AVFilterCommand :: struct {}
     command_queue:   *AVFilterCommand;
@@ -14032,15 +14742,12 @@ AVFilterContext :: struct {
     * in particular, a filter which consumes or processes hardware frames will
     * instead use the hw_frames_ctx field in AVFilterLink to carry the
     * hardware context information.
+    *
+    * May be set by the caller on filters flagged with AVFILTER_FLAG_HWDEVICE
+    * before initializing the filter with avfilter_init_str() or
+    * avfilter_init_dict().
     */
     hw_device_ctx:   *AVBufferRef;
-
-    /**
-    * Max number of threads allowed in this filter instance.
-    * If <= 0, its value is ignored.
-    * Overrides global number of threads set per filter graph.
-    */
-    nb_threads:      s32;
 
     /**
     * Ready status of the filter.
@@ -14067,33 +14774,6 @@ AVFilterContext :: struct {
 }
 
 /**
-* Lists of formats / etc. supported by an end of a link.
-*
-* This structure is directly part of AVFilterLink, in two copies:
-* one for the source filter, one for the destination filter.
-
-* These lists are used for negotiating the format to actually be used,
-* which will be loaded into the format and channel_layout members of
-* AVFilterLink, when chosen.
-*/
-AVFilterFormatsConfig :: struct {
-    /**
-    * List of supported formats (pixel or sample).
-    */
-    formats:         *AVFilterFormats;
-
-    /**
-    * Lists of supported sample rates, only for audio.
-    */
-    samplerates:     *AVFilterFormats;
-
-    /**
-    * Lists of supported channel layouts, only for audio.
-    */
-    channel_layouts: *AVFilterChannelLayouts;
-}
-
-/**
 * A link between two filters. This contains pointers to the source and
 * destination filters between which this link exists, and the indexes of
 * the pads involved. In addition, this link also contains the parameters
@@ -14114,19 +14794,17 @@ AVFilterLink :: struct {
 
     type:                AVMediaType; ///< filter media type
 
+    format:              s32; ///< agreed upon media format
+
     w:                   s32; ///< agreed upon image width
     h:                   s32; ///< agreed upon image height
     sample_aspect_ratio: AVRational; ///< agreed upon sample aspect ratio
 
-    /**
-    * channel layout of current buffer (see libavutil/channel_layout.h)
-    * @deprecated use ch_layout
-    */
-    channel_layout:      u64;
+    colorspace:          AVColorSpace; ///< agreed upon YUV color space
+    color_range:         AVColorRange; ///< agreed upon YUV color range
 
     sample_rate:         s32; ///< samples per second
-
-    format:              s32; ///< agreed upon media format
+    ch_layout:           AVChannelLayout; ///< channel layout of current buffer (see libavutil/channel_layout.h)
 
     /**
     * Define the time base used by the PTS of the frames/samples
@@ -14137,8 +14815,6 @@ AVFilterLink :: struct {
     */
     time_base:           AVRational;
 
-    ch_layout:           AVChannelLayout; ///< channel layout of current buffer (see libavutil/channel_layout.h)
-
     /**
     * Lists of supported formats / etc. supported by the input filter.
     */
@@ -14148,112 +14824,6 @@ AVFilterLink :: struct {
     * Lists of supported formats / etc. supported by the output filter.
     */
     outcfg:              AVFilterFormatsConfig;
-
-    /** stage of the initialization of the link properties (dimensions, etc) */
-    AVLINK :: enum s32 {
-        UNINIT    :: 0;
-        STARTINIT :: 1;
-        INIT      :: 2;
-
-        AVLINK_UNINIT    :: UNINIT;
-        AVLINK_STARTINIT :: STARTINIT;
-        AVLINK_INIT      :: INIT;
-    }
-
-    init_state:          AVLINK;
-
-    /**
-    * Graph the filter belongs to.
-    */
-    graph:               *AVFilterGraph;
-
-    /**
-    * Current timestamp of the link, as defined by the most recent
-    * frame(s), in link time_base units.
-    */
-    current_pts:         s64;
-
-    /**
-    * Current timestamp of the link, as defined by the most recent
-    * frame(s), in AV_TIME_BASE units.
-    */
-    current_pts_us:      s64;
-
-    /**
-    * Index in the age array.
-    */
-    age_index:           s32;
-
-    /**
-    * Frame rate of the stream on the link, or 1/0 if unknown or variable;
-    * if left to 0/0, will be automatically copied from the first input
-    * of the source filter if it exists.
-    *
-    * Sources should set it to the best estimation of the real frame rate.
-    * If the source frame rate is unknown or variable, set this to 1/0.
-    * Filters should update it if necessary depending on their function.
-    * Sinks can use it to set a default output frame rate.
-    * It is similar to the r_frame_rate field in AVStream.
-    */
-    frame_rate:          AVRational;
-
-    /**
-    * Minimum number of samples to filter at once. If filter_frame() is
-    * called with fewer samples, it will accumulate them in fifo.
-    * This field and the related ones must not be changed after filtering
-    * has started.
-    * If 0, all related fields are ignored.
-    */
-    min_samples:         s32;
-
-    /**
-    * Maximum number of samples to filter at once. If filter_frame() is
-    * called with more samples, it will split them.
-    */
-    max_samples:         s32;
-
-    /**
-    * Number of past frames sent through the link.
-    */
-    frame_count_in:      s64;
-    /**
-    * Number of past frames sent through the link.
-    */
-    frame_count_out:     s64;
-
-    /**
-    * Number of past samples sent through the link.
-    */
-    sample_count_in:     s64;
-    /**
-    * Number of past samples sent through the link.
-    */
-    sample_count_out:    s64;
-
-    /**
-    * A pointer to a FFFramePool struct.
-    */
-    frame_pool:          *void;
-
-    /**
-    * True if a frame is currently wanted on the output of this filter.
-    * Set when ff_request_frame() is called by the output,
-    * cleared when a frame is filtered.
-    */
-    frame_wanted_out:    s32;
-
-    /**
-    * For hwaccel pixel formats, this should be a reference to the
-    * AVHWFramesContext describing the frames.
-    */
-    hw_frames_ctx:       *AVBufferRef;
-
-    /**
-    * Internal structure members.
-    * The fields below this limit are internal for libavfilter's use
-    * and must in no way be accessed by applications.
-    */
-    reserved:            [61440] u8;
 }
 
 /**
@@ -14268,15 +14838,12 @@ AVFilterLink :: struct {
 avfilter_link :: (src: *AVFilterContext, srcpad: u32, dst: *AVFilterContext, dstpad: u32) -> s32 #foreign libavfilter;
 
 /**
-* Free the link in *link, and set its pointer to NULL.
+* @deprecated this function should never be called by users
 */
 avfilter_link_free :: (link: **AVFilterLink) -> void #foreign libavfilter;
 
 /**
-* Negotiate the media format, dimensions, etc of all inputs to a filter.
-*
-* @param filter the filter to negotiate the properties for its inputs
-* @return       zero on successful negotiation
+* @deprecated this function should never be called by users
 */
 avfilter_config_links :: (filter: *AVFilterContext) -> s32 #foreign libavfilter;
 
@@ -14366,8 +14933,6 @@ avfilter_insert_filter :: (link: *AVFilterLink, filt: *AVFilterContext, filt_src
 */
 avfilter_get_class :: () -> *AVClass #foreign libavfilter;
 
-AVFilterGraphInternal :: struct {}
-
 /**
 * A function pointer passed to the @ref AVFilterGraph.execute callback to be
 * executed multiple times, possibly in parallel.
@@ -14397,11 +14962,11 @@ avfilter_action_func :: #type (ctx: *AVFilterContext, arg: *void, jobnr: s32, nb
 avfilter_execute_func :: #type (ctx: *AVFilterContext, func: avfilter_action_func, arg: *void, ret: *s32, nb_jobs: s32) -> s32 #c_call;
 
 AVFilterGraph :: struct {
-    av_class:             *AVClass;
-    filters:              **AVFilterContext;
-    nb_filters:           u32;
+    av_class:           *AVClass;
+    filters:            **AVFilterContext;
+    nb_filters:         u32;
 
-    scale_sws_opts:       *u8; ///< sws options to use for the auto-inserted scale filters
+    scale_sws_opts:     *u8; ///< sws options to use for the auto-inserted scale filters
 
     /**
     * Type of multithreading allowed for filters in this graph. A combination
@@ -14415,26 +14980,21 @@ AVFilterGraph :: struct {
     * determining allowed threading types. I.e. a threading type needs to be
     * set in both to be allowed.
     */
-    thread_type:          s32;
+    thread_type:        s32;
 
     /**
     * Maximum number of threads used by filters in this graph. May be set by
     * the caller before adding any filters to the filtergraph. Zero (the
     * default) means that the number of threads is determined automatically.
     */
-    nb_threads:           s32;
-
-    /**
-    * Opaque object for libavfilter internal use.
-    */
-    internal:             *AVFilterGraphInternal;
+    nb_threads:         s32;
 
     /**
     * Opaque user data. May be set by the caller to an arbitrary value, e.g. to
     * be used from callbacks like @ref AVFilterGraph.execute.
     * Libavfilter will not touch this field in any way.
     */
-    opaque:               *void;
+    opaque:             *void;
 
     /**
     * This callback may be set by the caller immediately after allocating the
@@ -14448,20 +15008,9 @@ AVFilterGraph :: struct {
     * implementation, which may or may not be multithreaded depending on the
     * platform and build options.
     */
-    execute:              avfilter_execute_func;
+    execute:            avfilter_execute_func;
 
-    aresample_swr_opts:   *u8; ///< swr options to use for the auto-inserted aresample filters, Access ONLY through AVOptions
-
-    /**
-    * Private fields
-    *
-    * The following fields are for internal use only.
-    * Their type, offset, number and semantic can change without notice.
-    */
-    sink_links:           **AVFilterLink;
-    sink_links_count:     s32;
-
-    disable_auto_convert: u32;
+    aresample_swr_opts: *u8; ///< swr options to use for the auto-inserted aresample filters, Access ONLY through AVOptions
 }
 
 /**
@@ -15150,29 +15699,6 @@ swr_is_initialized :: (s: *SwrContext) -> s32 #foreign libswresample;
 /**
 * Allocate SwrContext if needed and set/reset common parameters.
 *
-* This function does not require s to be allocated with swr_alloc(). On the
-* other hand, swr_alloc() can use swr_alloc_set_opts() to set the parameters
-* on the allocated context.
-*
-* @param s               existing Swr context if available, or NULL if not
-* @param out_ch_layout   output channel layout (AV_CH_LAYOUT_*)
-* @param out_sample_fmt  output sample format (AV_SAMPLE_FMT_*).
-* @param out_sample_rate output sample rate (frequency in Hz)
-* @param in_ch_layout    input channel layout (AV_CH_LAYOUT_*)
-* @param in_sample_fmt   input sample format (AV_SAMPLE_FMT_*).
-* @param in_sample_rate  input sample rate (frequency in Hz)
-* @param log_offset      logging level offset
-* @param log_ctx         parent logging context, can be NULL
-*
-* @see swr_init(), swr_free()
-* @return NULL on error, allocated context otherwise
-* @deprecated use @ref swr_alloc_set_opts2()
-*/
-swr_alloc_set_opts :: (s: *SwrContext, out_ch_layout: s64, out_sample_fmt: AVSampleFormat, out_sample_rate: s32, in_ch_layout: s64, in_sample_fmt: AVSampleFormat, in_sample_rate: s32, log_offset: s32, log_ctx: *void) -> *SwrContext #foreign libswresample;
-
-/**
-* Allocate SwrContext if needed and set/reset common parameters.
-*
 * This function does not require *ps to be allocated with swr_alloc(). On the
 * other hand, swr_alloc() can use swr_alloc_set_opts2() to set the parameters
 * on the allocated context.
@@ -15279,32 +15805,6 @@ swr_set_compensation :: (s: *SwrContext, sample_delta: s32, compensation_distanc
 * @return >= 0 on success, or AVERROR error code in case of failure.
 */
 swr_set_channel_mapping :: (s: *SwrContext, channel_map: *s32) -> s32 #foreign libswresample;
-
-/**
-* Generate a channel mixing matrix.
-*
-* This function is the one used internally by libswresample for building the
-* default mixing matrix. It is made public just as a utility function for
-* building custom matrices.
-*
-* @param in_layout           input channel layout
-* @param out_layout          output channel layout
-* @param center_mix_level    mix level for the center channel
-* @param surround_mix_level  mix level for the surround channel(s)
-* @param lfe_mix_level       mix level for the low-frequency effects channel
-* @param rematrix_maxval     if 1.0, coefficients will be normalized to prevent
-*                            overflow. if INT_MAX, coefficients will not be
-*                            normalized.
-* @param[out] matrix         mixing coefficients; matrix[i + stride * o] is
-*                            the weight of input channel i in output channel o.
-* @param stride              distance between adjacent input channels in the
-*                            matrix array
-* @param matrix_encoding     matrixed stereo downmix mode (e.g. dplii)
-* @param log_ctx             parent logging context, can be NULL
-* @return                    0 on success, negative AVERROR code on failure
-* @deprecated                use @ref swr_build_matrix2()
-*/
-swr_build_matrix :: (in_layout: u64, out_layout: u64, center_mix_level: float64, surround_mix_level: float64, lfe_mix_level: float64, rematrix_maxval: float64, rematrix_volume: float64, matrix: *float64, stride: s32, matrix_encoding: AVMatrixEncoding, log_ctx: *void) -> s32 #foreign libswresample;
 
 /**
 * Generate a channel mixing matrix.
@@ -15822,13 +16322,12 @@ sws_get_class :: () -> *AVClass #foreign libswscale;
 #import "Basic"; // For push_context
 
 #if true {
-    libavutil     :: #library "windows/avutil-58";
-    libavutil_    :: #library "windows/avutil-57";
-    libpostproc   :: #library "windows/postproc-57";
-    libswresample :: #library "windows/swresample-4";
-    libswscale    :: #library "windows/swscale-7";
-    libavcodec    :: #library "windows/avcodec-60";
-    libavformat   :: #library "windows/avformat-60";
-    libavfilter   :: #library "windows/avfilter-9";
-    libavdevice   :: #library "windows/avdevice-60";
+    libavutil     :: #library "windows/avutil-59";
+    libpostproc   :: #library "windows/postproc-58";
+    libswresample :: #library "windows/swresample-5";
+    libswscale    :: #library "windows/swscale-8";
+    libavcodec    :: #library "windows/avcodec-61";
+    libavformat   :: #library "windows/avformat-61";
+    libavfilter   :: #library "windows/avfilter-10";
+    libavdevice   :: #library "windows/avdevice-61";
 }

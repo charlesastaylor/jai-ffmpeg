@@ -19,59 +19,75 @@
 
 AT_COMPILE_TIME :: true;
 
-#if AT_COMPILE_TIME {
-    #run {
-        set_build_options_dc(.{do_output=false});
-        if !generate_bindings() {
-            compiler_set_workspace_status(.FAILED);
-        }
-    }
-} else {
-    #import "System";
+SOURCE_PATH :: "src/ffmpeg-7.1.1-full_build-shared";
 
-    main :: () {
-        set_working_directory(path_strip_filename(get_path_of_running_executable()));
-        if !generate_bindings() {
-            exit(1);
-        }
-    }
+// Q: Why were these ommited?
+DECLARATIONS_TO_OMIT :: string.[
+    "av_log_set_callback",
+    "av_fopen_utf8",
+    "av_pkt_dump2",
+    "av_hex_dump",
+];
+
+Pair :: struct {
+    type: string;
+    replacement: string;
 }
 
-HEADER :: #string DONE
+TYPE_REPLACEMENTS_TO_MAKE :: Pair.[
+    Pair.{"__some_type", "some_cooler_type"},
+];
 
-AV_NOPTS_VALUE :: 0x8000000000000000;
+TYPES_WITHOUT_TYPE_INFO :: string.[
+    // NOTE(Charles): This used to cause a warning about type info being large. It no longer does so maybe it's fine
+    // to reenable. But also, do we actually care about type info on generated bindings at all? It might be better to
+    // go the other way and disable type info on other large structs in the bindings.
+    "AVCodecContext",
+];
 
-DONE
+generate_bindings :: (args: [] string) -> bool {
+    install := array_find(args, "-install"); // Clear out old binaries, copy in new ones from source. Equivalent of "-compile" but we don't actually compile here init.
+    
+    if install {
+        if !install_binaries()  return false;
+    } else {
+        // If we didn't install we still need to know the library version numbers, read them from the dlls.
+        output_directory := "windows";
+        assert(is_directory(output_directory));
 
-SOURCE_PATH :: "src/ffmpeg-6.0-full_build-shared";
-// SOURCE_PATH :: "src/ffmpeg-7.1.1-full_build-shared";
+        // Visit the binary directory, copying all the dlls, and recording the version numbers so we can rename the libs.        
+        bin_files := file_list(output_directory,, temp);
+        for bin_files {
+            path, basename, extension, basename_with_extension := path_decomp(it);
 
-generate_bindings :: () -> bool {
-    output_filename := "windows.jai";
+            if extension == "dll" {
+                filename := path_filename(it);
+
+                found, unversioned_basename, version := split_from_left(basename, #char "-");
+                assert(found, "Failed to find version for %", basename);
+
+                set_library_version(unversioned_basename, to_integer(version));
+            }
+        }
+    }
+
+    // for library_infos  print("%: %\n", it_index, it);
 
     opts: Generate_Bindings_Options;
     {
         using opts;
         try_to_preserve_comments            = true; // This means the binidngs are ~3x as long. It is kinda useful to have the comments when looking up procedures, so leaving for now.
         generate_compile_time_struct_checks = false;
-        log_stripped_declarations           = false;
+        log_stripped_declarations           = true;
         visitor = my_visitor;
 
         array_add(*libpaths, "windows");
 
-        // The comments are the listed libraries dependencies. Make sure we load the librares in the correct order.
-        libraries := string.[
-            "avutil-58",
-            "avutil-57",    // :FfmpegAvutilHack
-            "postproc-57",  // avutil-58.dll
-            "swresample-4", // avutil-57.dll - WTF, why is this 57... :FfmpegAvutilHack
-            "swscale-7",    // avutil-58.dll
-            "avcodec-60",   // avutil-58.dll, swresample-4.dll
-            "avformat-60",  // avutil-58.dll, avcodec-60.dll
-            "avfilter-9",   // avutil-58.dll, avcodec-60.dll, avformat-60.dll, postproc-57.dll, swresample-4.dll, swscale-7.dll
-            "avdevice-60",  // avutil-58.dll, avcodec-60.dll, avformat-60.dll, avfilter-9.dll
-        ];
-        for libraries array_add(*libnames, it);
+        // library_infos has the libraries in dependency order so we can load succesfully.
+        for library_infos {
+            libname := tprint("%-%", it.name, it.version);
+            array_add(*libnames, libname);
+        }   
 
         include_path := tprint("%/include", SOURCE_PATH);
         array_add(*include_paths, include_path);
@@ -102,16 +118,127 @@ generate_bindings :: () -> bool {
             }
         };
 
-        // Need to do the stupid #if true{} hack so dll loading works.
+        // Need to do the stupid #if true{} hack so dll loading works. :LibraryDependnciesFixedByStaticIf
+        // NOTE(Charles): To add to the confusion, I found that if you have the dlls in the same directory as the file
+        // you are compiling then the dependncies are also resolved, the dlls are loaded from that directory.
         generate_library_declarations = false;
-        footer = FOOTER;
+        footer_builder: String_Builder;
+        {
+            b := *footer_builder;
+            append(b, "#if true {\n");
+
+            // Why do I care so much about lining stuff up... :roll:
+            longest_name := -1;
+            for library_infos  longest_name = Max(longest_name, it.name.count);
+
+            for library_infos {
+                SPACES :: "       ";
+                spaces := SPACES;
+                spaces.count = longest_name - it.name.count;
+                print(b, "    lib% %:: #library \"windows/%-%\";\n", it.name, spaces, it.name, it.version);
+            }
+            append(b, "}\n");
+        }
+        footer = builder_to_string(*footer_builder);
     }
 
     print("Generating ffmpeg bindings...\n");
+    output_filename := "windows.jai";
     result := generate_bindings(opts, output_filename);
 
     return result;
 }
+
+install_binaries :: () -> bool {
+    output_directory := "windows";
+
+    delete_directory(output_directory);
+    make_directory_if_it_does_not_exist(output_directory, recursive = true);
+
+    bin_path := tprint("%/bin", SOURCE_PATH);
+    lib_path := tprint("%/lib", SOURCE_PATH);
+
+    // Visit the binary directory, copying all the dlls, and recording the version numbers so we can rename the libs.        
+    bin_files := file_list(bin_path,, temp);
+    for bin_files {
+        path, basename, extension, basename_with_extension := path_decomp(it);
+
+        if extension == "dll" {
+            filename := path_filename(it);
+
+            found, unversioned_basename, version := split_from_left(basename, #char "-");
+            assert(found, "Failed to find version for %", basename);
+
+            set_library_version(unversioned_basename, to_integer(version));
+
+            dest := tprint("%/%", output_directory, basename_with_extension);
+            // print("Copying % -> %\n", it, dest);
+            copy_file(it, dest);
+        }
+    }
+
+    // Visit the lib directory, copying the libs with version numbers appended.
+    lib_files := file_list(lib_path,, temp);
+    for lib_files {
+        path, basename, extension, basename_with_extension := path_decomp(it);
+
+        if extension == "lib" {
+            version := get_library_version(basename);
+
+            dest := tprint("%/%-%.lib", output_directory, basename, version);
+            // print("Copying % -> %\n", it, dest);
+            copy_file(it, dest);
+        }
+    }
+
+    return true;
+}
+
+Library_Version_Info :: struct {
+    name: string;
+    version: int;
+}
+
+// The libraries, listed in dependncy order. The comments are the listed libraries dependencies.
+library_infos := Library_Version_Info.[
+    .{ name = "avutil" },
+    .{ name = "postproc" },   // avutil
+    .{ name = "swresample" }, // avutil
+    .{ name = "swscale" },    // avutil
+    .{ name = "avcodec" },    // avutil, swresample
+    .{ name = "avformat" },   // avutil, avcodec
+    .{ name = "avfilter" },   // avutil, avcodec, avformat, postproc, swresample, swscale
+    .{ name = "avdevice" },   // avutil, avcodec, avformat, avfilter
+];
+
+get_library_version :: (name: string) -> int {
+    version := -1;
+    for info: library_infos {
+        if info.name == name {
+            version = info.version;
+            break;
+        }
+    }
+    assert(version != -1, "Failed to find version for library %", name);
+
+    return version;
+}
+
+set_library_version :: (name: string, version: int) {
+    for * info: library_infos {
+        if info.name == name {
+            info.version = version;
+            return;
+        }
+    }
+    assert(false, "Failed to find set version for library %", name);
+}
+
+HEADER :: #string DONE
+
+AV_NOPTS_VALUE :: 0x8000000000000000;
+
+DONE
 
 FOOTER :: #string DONE
 #if true {
@@ -127,30 +254,6 @@ FOOTER :: #string DONE
 }
 DONE
 
-
-// Q: Why were these ommited?
-DECLARATIONS_TO_OMIT :: string.[
-    "av_log_set_callback",
-    "av_fopen_utf8",
-    "av_pkt_dump2",
-    "av_hex_dump",
-];
-
-Pair :: struct {
-    type: string;
-    replacement: string;
-}
-
-TYPE_REPLACEMENTS_TO_MAKE :: Pair.[
-    Pair.{"__some_type", "some_cooler_type"},
-];
-
-TYPES_WITHOUT_TYPE_INFO :: string.[
-    // NOTE(Charles): This used to cause a warning about type info being large. It no longer does so maybe it's fine
-    // to reenable. But also, do we actually care about type info on generated bindings at all? It might be better to
-    // go the other way and disable type info on other large structs in the bindings.
-    "AVCodecContext",
-];
 
 // NOTE(Charles): Most of this stuff doesn't acheive anything. I just yoinked it from other examples of
 // visitor functions for reference. 
@@ -244,16 +347,29 @@ generate_error_codes :: (b: *String_Builder) {
     }
 }
 
-has_extension :: (name: string, extension: string) -> bool {
-    if name.count < extension.count  return false;
-    test := name;
-    advance(*test, name.count - extension.count);
-    return test == extension;
-}
-
 #import "Basic";
-#import "String";
-#import "File_Utilities";
-#import "Compiler";
 #import "Bindings_Generator";
 #import "File";
+#import "File_Utilities";
+#import "String";
+
+#if AT_COMPILE_TIME {
+    #import "Compiler";
+    #run {
+        set_build_options_dc(.{do_output=false});
+        options := get_build_options();
+        args := options.compile_time_command_line;
+        if !generate_bindings(args) {
+            compiler_set_workspace_status(.FAILED);
+        }
+    }
+} else {
+    #import "System";
+    main :: () {
+        args := get_command_line_arguments();
+        set_working_directory(path_strip_filename(get_path_of_running_executable()));
+        if !generate_bindings(args) {
+            exit(69);
+        }
+    }
+}

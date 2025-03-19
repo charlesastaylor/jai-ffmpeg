@@ -74,11 +74,11 @@ main :: () {
                 frame.pts = frame.best_effort_timestamp;
 
                 // Just print out some frame data to show we are doing something.
-                print("Frame %: width: %, height: %, format: %\n", frame.coded_picture_number, frame.width, frame.height, frame.format);
+                print("Frame %: width: %, height: %, format: %\n", num_frames, frame.width, frame.height, frame.format);
                 num_frames += 1;
 
-                if frame.coded_picture_number == FRAME_TO_CAPTURE {
-                    print("Saving frame %!!!\n", frame.coded_picture_number);
+                if num_frames == FRAME_TO_CAPTURE {
+                    print("Saving frame %!!!\n", num_frames);
 
                     // Convert YUV frame data to rgb data. Courtesy of chatgpt.
                     sws_context := sws_getContext(decode_context.width, decode_context.height, decode_context.pix_fmt, decode_context.width,
