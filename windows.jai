@@ -10699,7 +10699,7 @@ av_opt_is_set_to_default :: (obj: *void, o: *AVOption) -> s32 #foreign libavutil
 *                     0 when option is not set its default,
 *                     <0 on error
 */
-av_opt_is_set_to_default_by_name :: (obj: *void, name: *u8, search_flags: s32) -> s32 #foreign libavutil;
+av_opt_is_set_to_default_by_name :: (obj: *void, name: *u8, search_flags: s32) -> s32 #foreign libavutil_;
 
 /**
 * Serialize object's options.
@@ -15821,12 +15821,14 @@ sws_get_class :: () -> *AVClass #foreign libswscale;
 
 #import "Basic"; // For push_context
 
-libavutil :: #library "windows/avutil-58";
-libavutil :: #library "windows/avutil-57";
-libpostproc :: #library "windows/postproc-57";
-libswresample :: #library "windows/swresample-4";
-libswscale :: #library "windows/swscale-7";
-libavcodec :: #library "windows/avcodec-60";
-libavformat :: #library "windows/avformat-60";
-libavfilter :: #library "windows/avfilter-9";
-libavdevice :: #library "windows/avdevice-60";
+#if true {
+    libavutil     :: #library "windows/avutil-58";
+    libavutil_    :: #library "windows/avutil-57";
+    libpostproc   :: #library "windows/postproc-57";
+    libswresample :: #library "windows/swresample-4";
+    libswscale    :: #library "windows/swscale-7";
+    libavcodec    :: #library "windows/avcodec-60";
+    libavformat   :: #library "windows/avformat-60";
+    libavfilter   :: #library "windows/avfilter-9";
+    libavdevice   :: #library "windows/avdevice-60";
+}

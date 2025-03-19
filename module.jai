@@ -3,10 +3,9 @@
 
 #scope_module
 
-size_t :: u64;
-
 #if OS == .WINDOWS {
     #load "windows.jai";
+    ptrdiff_t :: s64;
 } else {
     #assert false, "Only windows has bindings atm, sorry bros!";
 }

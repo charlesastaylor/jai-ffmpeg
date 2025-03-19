@@ -10,6 +10,7 @@
 
 // @Incomplete: Not all headers have bindings generated. Currently it's only the ones I needed.
 // @Incomplete: E* error codes, eg EAGAIN, for one thing these aren't defined on windows, on posix they will be, but there is also some weirdness with themsometimes being negated?
+// @Incomplete? There are a number of static functions defined in headers that we don't have bindings for, if any of them are actually useful, we'd need to define jai versions of them. Enable log_stripped_declarations to see them.
 
 // NOTE(Charles): The version of ffmpeg binaries I downloaded seem to have an issue where swresample-4 depends upon
 // avutil-57.dll instead of avutil-58.dll like all the other dlls do. I just hackily worked around this by copying
@@ -52,8 +53,9 @@ generate_bindings :: () -> bool {
     opts: Generate_Bindings_Options;
     {
         using opts;
-        try_to_preserve_comments = true; // This means the binidngs are ~3x as long. It is kinda useful to have the comments when looking up procedures, so leaving for now.
+        try_to_preserve_comments            = true; // This means the binidngs are ~3x as long. It is kinda useful to have the comments when looking up procedures, so leaving for now.
         generate_compile_time_struct_checks = false;
+        log_stripped_declarations           = false;
         visitor = my_visitor;
 
         array_add(*libpaths, "windows");
@@ -91,7 +93,7 @@ generate_bindings :: () -> bool {
         generate_error_codes(*builder);
         header = builder_to_string(*builder);
 
-       will_print_bindings = () {
+        will_print_bindings = () {
             for context.generator.libraries {
                 // Rename the lib identifier to not be versioned.
 
@@ -100,6 +102,10 @@ generate_bindings :: () -> bool {
                 it.name = tprint("lib%", basename);
             }
         };
+
+        // Need to do the stupid #if true{} hack so dll loading works.
+        generate_library_declarations = false;
+        footer = FOOTER;
     }
 
     print("Generating ffmpeg bindings...\n");
@@ -108,7 +114,22 @@ generate_bindings :: () -> bool {
     return result;
 }
 
+FOOTER :: #string DONE
+#if true {
+    libavutil     :: #library "windows/avutil-58";
+    libavutil_    :: #library "windows/avutil-57";
+    libpostproc   :: #library "windows/postproc-57";
+    libswresample :: #library "windows/swresample-4";
+    libswscale    :: #library "windows/swscale-7";
+    libavcodec    :: #library "windows/avcodec-60";
+    libavformat   :: #library "windows/avformat-60";
+    libavfilter   :: #library "windows/avfilter-9";
+    libavdevice   :: #library "windows/avdevice-60";
+}
+DONE
 
+
+// Q: Why were these ommited?
 DECLARATIONS_TO_OMIT :: string.[
     "av_log_set_callback",
     "av_fopen_utf8",
