@@ -546,6 +546,37 @@ PARSER_FLAG_ONCE :: 0x0002;
 PARSER_FLAG_FETCHED_OFFSET :: 0x0004;
 PARSER_FLAG_USE_CODEC_TS :: 0x1000;
 
+LIBAVDEVICE_VERSION_MAJOR :: 60;
+
+LIBAVDEVICE_VERSION_MINOR :: 1;
+LIBAVDEVICE_VERSION_MICRO :: 100;
+
+AV_OPT_FLAG_ENCODING_PARAM :: 1;
+AV_OPT_FLAG_DECODING_PARAM :: 2;
+AV_OPT_FLAG_AUDIO_PARAM :: 8;
+AV_OPT_FLAG_VIDEO_PARAM :: 16;
+AV_OPT_FLAG_SUBTITLE_PARAM :: 32;
+
+AV_OPT_FLAG_EXPORT :: 64;
+
+AV_OPT_FLAG_READONLY :: 128;
+AV_OPT_FLAG_BSF_PARAM :: 1<<8;
+AV_OPT_FLAG_RUNTIME_PARAM :: 1<<15;
+AV_OPT_FLAG_FILTERING_PARAM :: 1<<16;
+AV_OPT_FLAG_DEPRECATED :: 1<<17;
+AV_OPT_FLAG_CHILD_CONSTS :: 1<<18;
+
+AV_OPT_SEARCH_CHILDREN :: 1 << 0;
+
+AV_OPT_SEARCH_FAKE_OBJ :: 1 << 1;
+
+AV_OPT_ALLOW_NULL :: 1 << 2;
+
+AV_OPT_MULTI_COMPONENT_RANGE :: 1 << 12;
+
+AV_OPT_SERIALIZE_SKIP_DEFAULTS :: 0x00000001;
+AV_OPT_SERIALIZE_OPT_FLAGS_EXACT :: 0x00000002;
+
 LIBAVFORMAT_VERSION_MAJOR :: 60;
 
 FF_API_COMPUTE_PKT_FIELDS2 :: LIBAVFORMAT_VERSION_MAJOR < 61;
@@ -693,6 +724,37 @@ AVSTREAM_INIT_IN_WRITE_HEADER :: 0;
 AVSTREAM_INIT_IN_INIT_OUTPUT :: 1;
 
 AV_FRAME_FILENAME_FLAGS_MULTIPLE :: 1;
+
+LIBAVFILTER_VERSION_MAJOR :: 9;
+
+LIBAVFILTER_VERSION_MINOR :: 3;
+LIBAVFILTER_VERSION_MICRO :: 100;
+
+AVFILTER_FLAG_DYNAMIC_INPUTS :: 1 << 0;
+
+AVFILTER_FLAG_DYNAMIC_OUTPUTS :: 1 << 1;
+
+AVFILTER_FLAG_SLICE_THREADS :: 1 << 2;
+
+AVFILTER_FLAG_METADATA_ONLY :: 1 << 3;
+
+AVFILTER_FLAG_SUPPORT_TIMELINE_GENERIC :: 1 << 16;
+
+AVFILTER_FLAG_SUPPORT_TIMELINE_INTERNAL :: 1 << 17;
+
+AVFILTER_FLAG_SUPPORT_TIMELINE :: AVFILTER_FLAG_SUPPORT_TIMELINE_GENERIC | AVFILTER_FLAG_SUPPORT_TIMELINE_INTERNAL;
+
+AVFILTER_THREAD_SLICE :: 1 << 0;
+
+AVFILTER_CMD_FLAG_ONE :: 1;
+AVFILTER_CMD_FLAG_FAST :: 2;
+
+LIBSWRESAMPLE_VERSION_MAJOR :: 4;
+
+LIBSWRESAMPLE_VERSION_MINOR :: 10;
+LIBSWRESAMPLE_VERSION_MICRO :: 100;
+
+SWR_FLAG_RESAMPLE :: 1;
 
 LIBSWSCALE_VERSION_MAJOR :: 7;
 
@@ -1776,8 +1838,6 @@ AVClassCategory :: enum s32 {
     AV_CLASS_CATEGORY_NB                  :: NB;
 }
 
-AVOptionRanges :: struct {}
-
 /**
 * Describe the class of an AVClass context structure. That is an
 * arbitrary struct of which the first field is a pointer to an
@@ -1796,7 +1856,6 @@ AVClass :: struct {
     */
     item_name:                 #type (ctx: *void) -> *u8 #c_call;
 
-    AVOption :: struct {}
     /**
     * a pointer to the first option specified in the class if any or NULL
     *
@@ -9837,6 +9896,810 @@ av_fast_padded_mallocz :: (ptr: *void, size: *u32, min_size: u64) -> void #forei
 avcodec_is_open :: (s: *AVCodecContext) -> s32 #foreign libavcodec;
 
 /**
+* @defgroup avoptions AVOptions
+* @ingroup lavu_data
+* @{
+* AVOptions provide a generic system to declare options on arbitrary structs
+* ("objects"). An option can have a help text, a type and a range of possible
+* values. Options may then be enumerated, read and written to.
+*
+* @section avoptions_implement Implementing AVOptions
+* This section describes how to add AVOptions capabilities to a struct.
+*
+* All AVOptions-related information is stored in an AVClass. Therefore
+* the first member of the struct should be a pointer to an AVClass describing it.
+* The option field of the AVClass must be set to a NULL-terminated static array
+* of AVOptions. Each AVOption must have a non-empty name, a type, a default
+* value and for number-type AVOptions also a range of allowed values. It must
+* also declare an offset in bytes from the start of the struct, where the field
+* associated with this AVOption is located. Other fields in the AVOption struct
+* should also be set when applicable, but are not required.
+*
+* The following example illustrates an AVOptions-enabled struct:
+* @code
+* typedef struct test_struct {
+*     const AVClass *class;
+*     int      int_opt;
+*     char    *str_opt;
+*     uint8_t *bin_opt;
+*     int      bin_len;
+* } test_struct;
+*
+* static const AVOption test_options[] = {
+*   { "test_int", "This is a test option of int type.", offsetof(test_struct, int_opt),
+*     AV_OPT_TYPE_INT, { .i64 = -1 }, INT_MIN, INT_MAX },
+*   { "test_str", "This is a test option of string type.", offsetof(test_struct, str_opt),
+*     AV_OPT_TYPE_STRING },
+*   { "test_bin", "This is a test option of binary type.", offsetof(test_struct, bin_opt),
+*     AV_OPT_TYPE_BINARY },
+*   { NULL },
+* };
+*
+* static const AVClass test_class = {
+*     .class_name = "test class",
+*     .item_name  = av_default_item_name,
+*     .option     = test_options,
+*     .version    = LIBAVUTIL_VERSION_INT,
+* };
+* @endcode
+*
+* Next, when allocating your struct, you must ensure that the AVClass pointer
+* is set to the correct value. Then, av_opt_set_defaults() can be called to
+* initialize defaults. After that the struct is ready to be used with the
+* AVOptions API.
+*
+* When cleaning up, you may use the av_opt_free() function to automatically
+* free all the allocated string and binary options.
+*
+* Continuing with the above example:
+*
+* @code
+* test_struct *alloc_test_struct(void)
+* {
+*     test_struct *ret = av_mallocz(sizeof(*ret));
+*     ret->class = &test_class;
+*     av_opt_set_defaults(ret);
+*     return ret;
+* }
+* void free_test_struct(test_struct **foo)
+* {
+*     av_opt_free(*foo);
+*     av_freep(foo);
+* }
+* @endcode
+*
+* @subsection avoptions_implement_nesting Nesting
+*      It may happen that an AVOptions-enabled struct contains another
+*      AVOptions-enabled struct as a member (e.g. AVCodecContext in
+*      libavcodec exports generic options, while its priv_data field exports
+*      codec-specific options). In such a case, it is possible to set up the
+*      parent struct to export a child's options. To do that, simply
+*      implement AVClass.child_next() and AVClass.child_class_iterate() in the
+*      parent struct's AVClass.
+*      Assuming that the test_struct from above now also contains a
+*      child_struct field:
+*
+*      @code
+*      typedef struct child_struct {
+*          AVClass *class;
+*          int flags_opt;
+*      } child_struct;
+*      static const AVOption child_opts[] = {
+*          { "test_flags", "This is a test option of flags type.",
+*            offsetof(child_struct, flags_opt), AV_OPT_TYPE_FLAGS, { .i64 = 0 }, INT_MIN, INT_MAX },
+*          { NULL },
+*      };
+*      static const AVClass child_class = {
+*          .class_name = "child class",
+*          .item_name  = av_default_item_name,
+*          .option     = child_opts,
+*          .version    = LIBAVUTIL_VERSION_INT,
+*      };
+*
+*      void *child_next(void *obj, void *prev)
+*      {
+*          test_struct *t = obj;
+*          if (!prev && t->child_struct)
+*              return t->child_struct;
+*          return NULL
+*      }
+*      const AVClass child_class_iterate(void **iter)
+*      {
+*          const AVClass *c = *iter ? NULL : &child_class;
+*          *iter = (void*)(uintptr_t)c;
+*          return c;
+*      }
+*      @endcode
+*      Putting child_next() and child_class_iterate() as defined above into
+*      test_class will now make child_struct's options accessible through
+*      test_struct (again, proper setup as described above needs to be done on
+*      child_struct right after it is created).
+*
+*      From the above example it might not be clear why both child_next()
+*      and child_class_iterate() are needed. The distinction is that child_next()
+*      iterates over actually existing objects, while child_class_iterate()
+*      iterates over all possible child classes. E.g. if an AVCodecContext
+*      was initialized to use a codec which has private options, then its
+*      child_next() will return AVCodecContext.priv_data and finish
+*      iterating. OTOH child_class_iterate() on AVCodecContext.av_class will
+*      iterate over all available codecs with private options.
+*
+* @subsection avoptions_implement_named_constants Named constants
+*      It is possible to create named constants for options. Simply set the unit
+*      field of the option the constants should apply to a string and
+*      create the constants themselves as options of type AV_OPT_TYPE_CONST
+*      with their unit field set to the same string.
+*      Their default_val field should contain the value of the named
+*      constant.
+*      For example, to add some named constants for the test_flags option
+*      above, put the following into the child_opts array:
+*      @code
+*      { "test_flags", "This is a test option of flags type.",
+*        offsetof(child_struct, flags_opt), AV_OPT_TYPE_FLAGS, { .i64 = 0 }, INT_MIN, INT_MAX, "test_unit" },
+*      { "flag1", "This is a flag with value 16", 0, AV_OPT_TYPE_CONST, { .i64 = 16 }, 0, 0, "test_unit" },
+*      @endcode
+*
+* @section avoptions_use Using AVOptions
+* This section deals with accessing options in an AVOptions-enabled struct.
+* Such structs in FFmpeg are e.g. AVCodecContext in libavcodec or
+* AVFormatContext in libavformat.
+*
+* @subsection avoptions_use_examine Examining AVOptions
+* The basic functions for examining options are av_opt_next(), which iterates
+* over all options defined for one object, and av_opt_find(), which searches
+* for an option with the given name.
+*
+* The situation is more complicated with nesting. An AVOptions-enabled struct
+* may have AVOptions-enabled children. Passing the AV_OPT_SEARCH_CHILDREN flag
+* to av_opt_find() will make the function search children recursively.
+*
+* For enumerating there are basically two cases. The first is when you want to
+* get all options that may potentially exist on the struct and its children
+* (e.g.  when constructing documentation). In that case you should call
+* av_opt_child_class_iterate() recursively on the parent struct's AVClass.  The
+* second case is when you have an already initialized struct with all its
+* children and you want to get all options that can be actually written or read
+* from it. In that case you should call av_opt_child_next() recursively (and
+* av_opt_next() on each result).
+*
+* @subsection avoptions_use_get_set Reading and writing AVOptions
+* When setting options, you often have a string read directly from the
+* user. In such a case, simply passing it to av_opt_set() is enough. For
+* non-string type options, av_opt_set() will parse the string according to the
+* option type.
+*
+* Similarly av_opt_get() will read any option type and convert it to a string
+* which will be returned. Do not forget that the string is allocated, so you
+* have to free it with av_free().
+*
+* In some cases it may be more convenient to put all options into an
+* AVDictionary and call av_opt_set_dict() on it. A specific case of this
+* are the format/codec open functions in lavf/lavc which take a dictionary
+* filled with option as a parameter. This makes it possible to set some options
+* that cannot be set otherwise, since e.g. the input file format is not known
+* before the file is actually opened.
+*/
+AVOptionType :: enum s32 {
+    FLAGS          :: 0;
+    INT            :: 1;
+    INT64          :: 2;
+    DOUBLE         :: 3;
+    FLOAT          :: 4;
+    STRING         :: 5;
+    RATIONAL       :: 6;
+    BINARY         :: 7;
+    DICT           :: 8;
+    UINT64         :: 9;
+    CONST          :: 10;
+    IMAGE_SIZE     :: 11;
+    PIXEL_FMT      :: 12;
+    SAMPLE_FMT     :: 13;
+    VIDEO_RATE     :: 14;
+    DURATION       :: 15;
+    COLOR          :: 16;
+
+    CHANNEL_LAYOUT :: 17;
+
+    BOOL           :: 18;
+    CHLAYOUT       :: 19;
+
+    AV_OPT_TYPE_FLAGS          :: FLAGS;
+    AV_OPT_TYPE_INT            :: INT;
+    AV_OPT_TYPE_INT64          :: INT64;
+    AV_OPT_TYPE_DOUBLE         :: DOUBLE;
+    AV_OPT_TYPE_FLOAT          :: FLOAT;
+    AV_OPT_TYPE_STRING         :: STRING;
+    AV_OPT_TYPE_RATIONAL       :: RATIONAL;
+    AV_OPT_TYPE_BINARY         :: BINARY;
+    AV_OPT_TYPE_DICT           :: DICT;
+    AV_OPT_TYPE_UINT64         :: UINT64;
+    AV_OPT_TYPE_CONST          :: CONST;
+    AV_OPT_TYPE_IMAGE_SIZE     :: IMAGE_SIZE;
+    AV_OPT_TYPE_PIXEL_FMT      :: PIXEL_FMT;
+    AV_OPT_TYPE_SAMPLE_FMT     :: SAMPLE_FMT;
+    AV_OPT_TYPE_VIDEO_RATE     :: VIDEO_RATE;
+    AV_OPT_TYPE_DURATION       :: DURATION;
+    AV_OPT_TYPE_COLOR          :: COLOR;
+
+    AV_OPT_TYPE_CHANNEL_LAYOUT :: CHANNEL_LAYOUT;
+
+    AV_OPT_TYPE_BOOL           :: BOOL;
+    AV_OPT_TYPE_CHLAYOUT       :: CHLAYOUT;
+}
+
+/**
+* AVOption
+*/
+AVOption :: struct {
+    name:        *u8;
+
+    /**
+    * short English help text
+    * @todo What about other languages?
+    */
+    help:        *u8;
+
+    /**
+    * The offset relative to the context structure where the option
+    * value is stored. It should be 0 for named constants.
+    */
+    offset:      s32;
+    type:        AVOptionType;
+
+    default_val: union {
+        i64: s64;
+        dbl: float64;
+        str: *u8;
+
+        /* TODO those are unused now */
+        q:   AVRational;
+    };
+
+    min:         float64; ///< minimum valid value for the option
+    max:         float64; ///< maximum valid value for the option
+
+    flags:       s32;
+
+    /**
+    * The logical unit to which the option belongs. Non-constant
+    * options and corresponding named constants share the same
+    * unit. May be NULL.
+    */
+    unit:        *u8;
+}
+
+/**
+* A single allowed range of values, or a single allowed value.
+*/
+AVOptionRange :: struct {
+    str:           *u8;
+
+    /**
+    * Value range.
+    * For string ranges this represents the min/max length.
+    * For dimensions this represents the min/max pixel count or width/height in multi-component case.
+    */
+    value_min:     float64;
+    /**
+    * Value range.
+    * For string ranges this represents the min/max length.
+    * For dimensions this represents the min/max pixel count or width/height in multi-component case.
+    */
+    value_max:     float64;
+
+    /**
+    * Value's component range.
+    * For string this represents the unicode range for chars, 0-127 limits to ASCII.
+    */
+    component_min: float64;
+    /**
+    * Value's component range.
+    * For string this represents the unicode range for chars, 0-127 limits to ASCII.
+    */
+    component_max: float64;
+
+    /**
+    * Range flag.
+    * If set to 1 the struct encodes a range, if set to 0 a single value.
+    */
+    is_range:      s32;
+}
+
+/**
+* List of AVOptionRange structs.
+*/
+AVOptionRanges :: struct {
+    /**
+    * Array of option ranges.
+    *
+    * Most of option types use just one component.
+    * Following describes multi-component option types:
+    *
+    * AV_OPT_TYPE_IMAGE_SIZE:
+    * component index 0: range of pixel count (width * height).
+    * component index 1: range of width.
+    * component index 2: range of height.
+    *
+    * @note To obtain multi-component version of this structure, user must
+    *       provide AV_OPT_MULTI_COMPONENT_RANGE to av_opt_query_ranges or
+    *       av_opt_query_ranges_default function.
+    *
+    * Multi-component range can be read as in following example:
+    *
+    * @code
+    * int range_index, component_index;
+    * AVOptionRanges *ranges;
+    * AVOptionRange *range[3]; //may require more than 3 in the future.
+    * av_opt_query_ranges(&ranges, obj, key, AV_OPT_MULTI_COMPONENT_RANGE);
+    * for (range_index = 0; range_index < ranges->nb_ranges; range_index++) {
+    *     for (component_index = 0; component_index < ranges->nb_components; component_index++)
+    *         range[component_index] = ranges->range[ranges->nb_ranges * component_index + range_index];
+    *     //do something with range here.
+    * }
+    * av_opt_freep_ranges(&ranges);
+    * @endcode
+    */
+    range:         **AVOptionRange;
+
+    /**
+    * Number of ranges per component.
+    */
+    nb_ranges:     s32;
+
+    /**
+    * Number of componentes.
+    */
+    nb_components: s32;
+}
+
+/**
+* Show the obj options.
+*
+* @param req_flags requested flags for the options to show. Show only the
+* options for which it is opt->flags & req_flags.
+* @param rej_flags rejected flags for the options to show. Show only the
+* options for which it is !(opt->flags & req_flags).
+* @param av_log_obj log context to use for showing the options
+*/
+av_opt_show2 :: (obj: *void, av_log_obj: *void, req_flags: s32, rej_flags: s32) -> s32 #foreign libavutil;
+
+/**
+* Set the values of all AVOption fields to their default values.
+*
+* @param s an AVOption-enabled struct (its first member must be a pointer to AVClass)
+*/
+av_opt_set_defaults :: (s: *void) -> void #foreign libavutil;
+
+/**
+* Set the values of all AVOption fields to their default values. Only these
+* AVOption fields for which (opt->flags & mask) == flags will have their
+* default applied to s.
+*
+* @param s an AVOption-enabled struct (its first member must be a pointer to AVClass)
+* @param mask combination of AV_OPT_FLAG_*
+* @param flags combination of AV_OPT_FLAG_*
+*/
+av_opt_set_defaults2 :: (s: *void, mask: s32, flags: s32) -> void #foreign libavutil;
+
+/**
+* Parse the key/value pairs list in opts. For each key/value pair
+* found, stores the value in the field in ctx that is named like the
+* key. ctx must be an AVClass context, storing is done using
+* AVOptions.
+*
+* @param opts options string to parse, may be NULL
+* @param key_val_sep a 0-terminated list of characters used to
+* separate key from value
+* @param pairs_sep a 0-terminated list of characters used to separate
+* two pairs from each other
+* @return the number of successfully set key/value pairs, or a negative
+* value corresponding to an AVERROR code in case of error:
+* AVERROR(EINVAL) if opts cannot be parsed,
+* the error code issued by av_opt_set() if a key/value pair
+* cannot be set
+*/
+av_set_options_string :: (ctx: *void, opts: *u8, key_val_sep: *u8, pairs_sep: *u8) -> s32 #foreign libavutil;
+
+/**
+* Parse the key-value pairs list in opts. For each key=value pair found,
+* set the value of the corresponding option in ctx.
+*
+* @param ctx          the AVClass object to set options on
+* @param opts         the options string, key-value pairs separated by a
+*                     delimiter
+* @param shorthand    a NULL-terminated array of options names for shorthand
+*                     notation: if the first field in opts has no key part,
+*                     the key is taken from the first element of shorthand;
+*                     then again for the second, etc., until either opts is
+*                     finished, shorthand is finished or a named option is
+*                     found; after that, all options must be named
+* @param key_val_sep  a 0-terminated list of characters used to separate
+*                     key from value, for example '='
+* @param pairs_sep    a 0-terminated list of characters used to separate
+*                     two pairs from each other, for example ':' or ','
+* @return  the number of successfully set key=value pairs, or a negative
+*          value corresponding to an AVERROR code in case of error:
+*          AVERROR(EINVAL) if opts cannot be parsed,
+*          the error code issued by av_set_string3() if a key/value pair
+*          cannot be set
+*
+* Options names must use only the following characters: a-z A-Z 0-9 - . / _
+* Separators must use characters distinct from option names and from each
+* other.
+*/
+av_opt_set_from_string :: (ctx: *void, opts: *u8, shorthand: **u8, key_val_sep: *u8, pairs_sep: *u8) -> s32 #foreign libavutil;
+
+/**
+* Free all allocated objects in obj.
+*/
+av_opt_free :: (obj: *void) -> void #foreign libavutil;
+
+/**
+* Check whether a particular flag is set in a flags field.
+*
+* @param field_name the name of the flag field option
+* @param flag_name the name of the flag to check
+* @return non-zero if the flag is set, zero if the flag isn't set,
+*         isn't of the right type, or the flags field doesn't exist.
+*/
+av_opt_flag_is_set :: (obj: *void, field_name: *u8, flag_name: *u8) -> s32 #foreign libavutil;
+
+/**
+* Set all the options from a given dictionary on an object.
+*
+* @param obj a struct whose first element is a pointer to AVClass
+* @param options options to process. This dictionary will be freed and replaced
+*                by a new one containing all options not found in obj.
+*                Of course this new dictionary needs to be freed by caller
+*                with av_dict_free().
+*
+* @return 0 on success, a negative AVERROR if some option was found in obj,
+*         but could not be set.
+*
+* @see av_dict_copy()
+*/
+av_opt_set_dict :: (obj: *void, options: **AVDictionary) -> s32 #foreign libavutil;
+
+/**
+* Set all the options from a given dictionary on an object.
+*
+* @param obj a struct whose first element is a pointer to AVClass
+* @param options options to process. This dictionary will be freed and replaced
+*                by a new one containing all options not found in obj.
+*                Of course this new dictionary needs to be freed by caller
+*                with av_dict_free().
+* @param search_flags A combination of AV_OPT_SEARCH_*.
+*
+* @return 0 on success, a negative AVERROR if some option was found in obj,
+*         but could not be set.
+*
+* @see av_dict_copy()
+*/
+av_opt_set_dict2 :: (obj: *void, options: **AVDictionary, search_flags: s32) -> s32 #foreign libavutil;
+
+/**
+* Extract a key-value pair from the beginning of a string.
+*
+* @param ropts        pointer to the options string, will be updated to
+*                     point to the rest of the string (one of the pairs_sep
+*                     or the final NUL)
+* @param key_val_sep  a 0-terminated list of characters used to separate
+*                     key from value, for example '='
+* @param pairs_sep    a 0-terminated list of characters used to separate
+*                     two pairs from each other, for example ':' or ','
+* @param flags        flags; see the AV_OPT_FLAG_* values below
+* @param rkey         parsed key; must be freed using av_free()
+* @param rval         parsed value; must be freed using av_free()
+*
+* @return  >=0 for success, or a negative value corresponding to an
+*          AVERROR code in case of error; in particular:
+*          AVERROR(EINVAL) if no key is present
+*
+*/
+av_opt_get_key_value :: (ropts: **u8, key_val_sep: *u8, pairs_sep: *u8, flags: u32, rkey: **u8, rval: **u8) -> s32 #foreign libavutil;
+
+anon_enum_1 :: enum s32 {
+    AV_OPT_FLAG_IMPLICIT_KEY :: 1;
+}
+
+/**
+* @defgroup opt_eval_funcs Evaluating option strings
+* @{
+* This group of functions can be used to evaluate option strings
+* and get numbers out of them. They do the same thing as av_opt_set(),
+* except the result is written into the caller-supplied pointer.
+*
+* @param obj a struct whose first element is a pointer to AVClass.
+* @param o an option for which the string is to be evaluated.
+* @param val string to be evaluated.
+* @param *_out value of the string will be written here.
+*
+* @return 0 on success, a negative number on failure.
+*/
+av_opt_eval_flags :: (obj: *void, o: *AVOption, val: *u8, flags_out: *s32) -> s32 #foreign libavutil;
+av_opt_eval_int :: (obj: *void, o: *AVOption, val: *u8, int_out: *s32) -> s32 #foreign libavutil;
+av_opt_eval_int64 :: (obj: *void, o: *AVOption, val: *u8, int64_out: *s64) -> s32 #foreign libavutil;
+av_opt_eval_float :: (obj: *void, o: *AVOption, val: *u8, float_out: *float) -> s32 #foreign libavutil;
+av_opt_eval_double :: (obj: *void, o: *AVOption, val: *u8, double_out: *float64) -> s32 #foreign libavutil;
+av_opt_eval_q :: (obj: *void, o: *AVOption, val: *u8, q_out: *AVRational) -> s32 #foreign libavutil;
+
+/**
+* Look for an option in an object. Consider only options which
+* have all the specified flags set.
+*
+* @param[in] obj A pointer to a struct whose first element is a
+*                pointer to an AVClass.
+*                Alternatively a double pointer to an AVClass, if
+*                AV_OPT_SEARCH_FAKE_OBJ search flag is set.
+* @param[in] name The name of the option to look for.
+* @param[in] unit When searching for named constants, name of the unit
+*                 it belongs to.
+* @param opt_flags Find only options with all the specified flags set (AV_OPT_FLAG).
+* @param search_flags A combination of AV_OPT_SEARCH_*.
+*
+* @return A pointer to the option found, or NULL if no option
+*         was found.
+*
+* @note Options found with AV_OPT_SEARCH_CHILDREN flag may not be settable
+* directly with av_opt_set(). Use special calls which take an options
+* AVDictionary (e.g. avformat_open_input()) to set options found with this
+* flag.
+*/
+av_opt_find :: (obj: *void, name: *u8, unit: *u8, opt_flags: s32, search_flags: s32) -> *AVOption #foreign libavutil;
+
+/**
+* Look for an option in an object. Consider only options which
+* have all the specified flags set.
+*
+* @param[in] obj A pointer to a struct whose first element is a
+*                pointer to an AVClass.
+*                Alternatively a double pointer to an AVClass, if
+*                AV_OPT_SEARCH_FAKE_OBJ search flag is set.
+* @param[in] name The name of the option to look for.
+* @param[in] unit When searching for named constants, name of the unit
+*                 it belongs to.
+* @param opt_flags Find only options with all the specified flags set (AV_OPT_FLAG).
+* @param search_flags A combination of AV_OPT_SEARCH_*.
+* @param[out] target_obj if non-NULL, an object to which the option belongs will be
+* written here. It may be different from obj if AV_OPT_SEARCH_CHILDREN is present
+* in search_flags. This parameter is ignored if search_flags contain
+* AV_OPT_SEARCH_FAKE_OBJ.
+*
+* @return A pointer to the option found, or NULL if no option
+*         was found.
+*/
+av_opt_find2 :: (obj: *void, name: *u8, unit: *u8, opt_flags: s32, search_flags: s32, target_obj: **void) -> *AVOption #foreign libavutil;
+
+/**
+* Iterate over all AVOptions belonging to obj.
+*
+* @param obj an AVOptions-enabled struct or a double pointer to an
+*            AVClass describing it.
+* @param prev result of the previous call to av_opt_next() on this object
+*             or NULL
+* @return next AVOption or NULL
+*/
+av_opt_next :: (obj: *void, prev: *AVOption) -> *AVOption #foreign libavutil;
+
+/**
+* Iterate over AVOptions-enabled children of obj.
+*
+* @param prev result of a previous call to this function or NULL
+* @return next AVOptions-enabled child or NULL
+*/
+av_opt_child_next :: (obj: *void, prev: *void) -> *void #foreign libavutil;
+
+/**
+* Iterate over potential AVOptions-enabled children of parent.
+*
+* @param iter a pointer where iteration state is stored.
+* @return AVClass corresponding to next potential child or NULL
+*/
+av_opt_child_class_iterate :: (parent: *AVClass, iter: **void) -> *AVClass #foreign libavutil;
+
+/**
+* @defgroup opt_set_funcs Option setting functions
+* @{
+* Those functions set the field of obj with the given name to value.
+*
+* @param[in] obj A struct whose first element is a pointer to an AVClass.
+* @param[in] name the name of the field to set
+* @param[in] val The value to set. In case of av_opt_set() if the field is not
+* of a string type, then the given string is parsed.
+* SI postfixes and some named scalars are supported.
+* If the field is of a numeric type, it has to be a numeric or named
+* scalar. Behavior with more than one scalar and +- infix operators
+* is undefined.
+* If the field is of a flags type, it has to be a sequence of numeric
+* scalars or named flags separated by '+' or '-'. Prefixing a flag
+* with '+' causes it to be set without affecting the other flags;
+* similarly, '-' unsets a flag.
+* If the field is of a dictionary type, it has to be a ':' separated list of
+* key=value parameters. Values containing ':' special characters must be
+* escaped.
+* @param search_flags flags passed to av_opt_find2. I.e. if AV_OPT_SEARCH_CHILDREN
+* is passed here, then the option may be set on a child of obj.
+*
+* @return 0 if the value has been set, or an AVERROR code in case of
+* error:
+* AVERROR_OPTION_NOT_FOUND if no matching option exists
+* AVERROR(ERANGE) if the value is out of range
+* AVERROR(EINVAL) if the value is not valid
+*/
+av_opt_set :: (obj: *void, name: *u8, val: *u8, search_flags: s32) -> s32 #foreign libavutil;
+av_opt_set_int :: (obj: *void, name: *u8, val: s64, search_flags: s32) -> s32 #foreign libavutil;
+av_opt_set_double :: (obj: *void, name: *u8, val: float64, search_flags: s32) -> s32 #foreign libavutil;
+av_opt_set_q :: (obj: *void, name: *u8, val: AVRational, search_flags: s32) -> s32 #foreign libavutil;
+av_opt_set_bin :: (obj: *void, name: *u8, val: *u8, size: s32, search_flags: s32) -> s32 #foreign libavutil;
+av_opt_set_image_size :: (obj: *void, name: *u8, w: s32, h: s32, search_flags: s32) -> s32 #foreign libavutil;
+av_opt_set_pixel_fmt :: (obj: *void, name: *u8, fmt: AVPixelFormat, search_flags: s32) -> s32 #foreign libavutil;
+av_opt_set_sample_fmt :: (obj: *void, name: *u8, fmt: AVSampleFormat, search_flags: s32) -> s32 #foreign libavutil;
+av_opt_set_video_rate :: (obj: *void, name: *u8, val: AVRational, search_flags: s32) -> s32 #foreign libavutil;
+
+av_opt_set_channel_layout :: (obj: *void, name: *u8, ch_layout: s64, search_flags: s32) -> s32 #foreign libavutil;
+
+av_opt_set_chlayout :: (obj: *void, name: *u8, layout: *AVChannelLayout, search_flags: s32) -> s32 #foreign libavutil;
+
+/**
+* @note Any old dictionary present is discarded and replaced with a copy of the new one. The
+* caller still owns val is and responsible for freeing it.
+*/
+av_opt_set_dict_val :: (obj: *void, name: *u8, val: *AVDictionary, search_flags: s32) -> s32 #foreign libavutil;
+
+/**
+* @defgroup opt_get_funcs Option getting functions
+* @{
+* Those functions get a value of the option with the given name from an object.
+*
+* @param[in] obj a struct whose first element is a pointer to an AVClass.
+* @param[in] name name of the option to get.
+* @param[in] search_flags flags passed to av_opt_find2. I.e. if AV_OPT_SEARCH_CHILDREN
+* is passed here, then the option may be found in a child of obj.
+* @param[out] out_val value of the option will be written here
+* @return >=0 on success, a negative error code otherwise
+*/
+/**
+* @note the returned string will be av_malloc()ed and must be av_free()ed by the caller
+*
+* @note if AV_OPT_ALLOW_NULL is set in search_flags in av_opt_get, and the
+* option is of type AV_OPT_TYPE_STRING, AV_OPT_TYPE_BINARY or AV_OPT_TYPE_DICT
+* and is set to NULL, *out_val will be set to NULL instead of an allocated
+* empty string.
+*/
+av_opt_get :: (obj: *void, name: *u8, search_flags: s32, out_val: **u8) -> s32 #foreign libavutil;
+av_opt_get_int :: (obj: *void, name: *u8, search_flags: s32, out_val: *s64) -> s32 #foreign libavutil;
+av_opt_get_double :: (obj: *void, name: *u8, search_flags: s32, out_val: *float64) -> s32 #foreign libavutil;
+av_opt_get_q :: (obj: *void, name: *u8, search_flags: s32, out_val: *AVRational) -> s32 #foreign libavutil;
+av_opt_get_image_size :: (obj: *void, name: *u8, search_flags: s32, w_out: *s32, h_out: *s32) -> s32 #foreign libavutil;
+av_opt_get_pixel_fmt :: (obj: *void, name: *u8, search_flags: s32, out_fmt: *AVPixelFormat) -> s32 #foreign libavutil;
+av_opt_get_sample_fmt :: (obj: *void, name: *u8, search_flags: s32, out_fmt: *AVSampleFormat) -> s32 #foreign libavutil;
+av_opt_get_video_rate :: (obj: *void, name: *u8, search_flags: s32, out_val: *AVRational) -> s32 #foreign libavutil;
+
+av_opt_get_channel_layout :: (obj: *void, name: *u8, search_flags: s32, ch_layout: *s64) -> s32 #foreign libavutil;
+
+av_opt_get_chlayout :: (obj: *void, name: *u8, search_flags: s32, layout: *AVChannelLayout) -> s32 #foreign libavutil;
+
+/**
+* @param[out] out_val The returned dictionary is a copy of the actual value and must
+* be freed with av_dict_free() by the caller
+*/
+av_opt_get_dict_val :: (obj: *void, name: *u8, search_flags: s32, out_val: **AVDictionary) -> s32 #foreign libavutil;
+
+/**
+* @}
+*/
+/**
+* Gets a pointer to the requested field in a struct.
+* This function allows accessing a struct even when its fields are moved or
+* renamed since the application making the access has been compiled,
+*
+* @returns a pointer to the field, it can be cast to the correct type and read
+*          or written to.
+*/
+av_opt_ptr :: (avclass: *AVClass, obj: *void, name: *u8) -> *void #foreign libavutil;
+
+/**
+* Free an AVOptionRanges struct and set it to NULL.
+*/
+av_opt_freep_ranges :: (ranges: **AVOptionRanges) -> void #foreign libavutil;
+
+/**
+* Get a list of allowed ranges for the given option.
+*
+* The returned list may depend on other fields in obj like for example profile.
+*
+* @param flags is a bitmask of flags, undefined flags should not be set and should be ignored
+*              AV_OPT_SEARCH_FAKE_OBJ indicates that the obj is a double pointer to a AVClass instead of a full instance
+*              AV_OPT_MULTI_COMPONENT_RANGE indicates that function may return more than one component, @see AVOptionRanges
+*
+* The result must be freed with av_opt_freep_ranges.
+*
+* @return number of compontents returned on success, a negative errro code otherwise
+*/
+av_opt_query_ranges :: (unknown0: **AVOptionRanges, obj: *void, key: *u8, flags: s32) -> s32 #foreign libavutil;
+
+/**
+* Copy options from src object into dest object.
+*
+* The underlying AVClass of both src and dest must coincide. The guarantee
+* below does not apply if this is not fulfilled.
+*
+* Options that require memory allocation (e.g. string or binary) are malloc'ed in dest object.
+* Original memory allocated for such options is freed unless both src and dest options points to the same memory.
+*
+* Even on error it is guaranteed that allocated options from src and dest
+* no longer alias each other afterwards; in particular calling av_opt_free()
+* on both src and dest is safe afterwards if dest has been memdup'ed from src.
+*
+* @param dest Object to copy from
+* @param src  Object to copy into
+* @return 0 on success, negative on error
+*/
+av_opt_copy :: (dest: *void, src: *void) -> s32 #foreign libavutil;
+
+/**
+* Get a default list of allowed ranges for the given option.
+*
+* This list is constructed without using the AVClass.query_ranges() callback
+* and can be used as fallback from within the callback.
+*
+* @param flags is a bitmask of flags, undefined flags should not be set and should be ignored
+*              AV_OPT_SEARCH_FAKE_OBJ indicates that the obj is a double pointer to a AVClass instead of a full instance
+*              AV_OPT_MULTI_COMPONENT_RANGE indicates that function may return more than one component, @see AVOptionRanges
+*
+* The result must be freed with av_opt_free_ranges.
+*
+* @return number of compontents returned on success, a negative errro code otherwise
+*/
+av_opt_query_ranges_default :: (unknown0: **AVOptionRanges, obj: *void, key: *u8, flags: s32) -> s32 #foreign libavutil;
+
+/**
+* Check if given option is set to its default value.
+*
+* Options o must belong to the obj. This function must not be called to check child's options state.
+* @see av_opt_is_set_to_default_by_name().
+*
+* @param obj  AVClass object to check option on
+* @param o    option to be checked
+* @return     >0 when option is set to its default,
+*              0 when option is not set its default,
+*             <0 on error
+*/
+av_opt_is_set_to_default :: (obj: *void, o: *AVOption) -> s32 #foreign libavutil;
+
+/**
+* Check if given option is set to its default value.
+*
+* @param obj          AVClass object to check option on
+* @param name         option name
+* @param search_flags combination of AV_OPT_SEARCH_*
+* @return             >0 when option is set to its default,
+*                     0 when option is not set its default,
+*                     <0 on error
+*/
+av_opt_is_set_to_default_by_name :: (obj: *void, name: *u8, search_flags: s32) -> s32 #foreign libavutil;
+
+/**
+* Serialize object's options.
+*
+* Create a string containing object's serialized options.
+* Such string may be passed back to av_opt_set_from_string() in order to restore option values.
+* A key/value or pairs separator occurring in the serialized value or
+* name string are escaped through the av_escape() function.
+*
+* @param[in]  obj           AVClass object to serialize
+* @param[in]  opt_flags     serialize options with all the specified flags set (AV_OPT_FLAG)
+* @param[in]  flags         combination of AV_OPT_SERIALIZE_* flags
+* @param[out] buffer        Pointer to buffer that will be allocated with string containg serialized options.
+*                           Buffer must be freed by the caller when is no longer needed.
+* @param[in]  key_val_sep   character used to separate key from value
+* @param[in]  pairs_sep     character used to separate two pairs from each other
+* @return                   >= 0 on success, negative on error
+* @warning Separators cannot be neither '\\' nor '\0'. They also cannot be the same.
+*/
+av_opt_serialize :: (obj: *void, opt_flags: s32, flags: s32, buffer: **u8, key_val_sep: u8, pairs_sep: u8) -> s32 #foreign libavutil;
+
+/**
 * Callback for checking whether to abort blocking functions.
 * AVERROR_EXIT is returned in this case by the interrupted
 * function. During blocking operations, callback is called with
@@ -10504,8 +11367,6 @@ avio_accept :: (s: *AVIOContext, c: **AVIOContext) -> s32 #foreign libavformat;
 *           < 0 for an AVERROR code
 */
 avio_handshake :: (c: *AVIOContext) -> s32 #foreign libavformat;
-
-AVDeviceInfoList :: struct {}
 
 /**
 * Allocate and read the payload of a packet and initialize its
@@ -12592,6 +13453,1984 @@ avformat_transfer_internal_stream_timing_info :: (ofmt: *AVOutputFormat, ost: *A
 * @param st  input stream to extract the timebase from
 */
 av_stream_get_codec_timebase :: (st: *AVStream) -> AVRational #foreign libavformat;
+
+/**
+* Return the LIBAVDEVICE_VERSION_INT constant.
+*/
+avdevice_version :: () -> u32 #foreign libavdevice;
+
+/**
+* Return the libavdevice build-time configuration.
+*/
+avdevice_configuration :: () -> *u8 #foreign libavdevice;
+
+/**
+* Return the libavdevice license.
+*/
+avdevice_license :: () -> *u8 #foreign libavdevice;
+
+/**
+* Initialize libavdevice and register all the input and output devices.
+*/
+avdevice_register_all :: () -> void #foreign libavdevice;
+
+/**
+* Audio input devices iterator.
+*
+* If d is NULL, returns the first registered input audio/video device,
+* if d is non-NULL, returns the next registered input audio/video device after d
+* or NULL if d is the last one.
+*/
+av_input_audio_device_next :: (d: *AVInputFormat) -> *AVInputFormat #foreign libavdevice;
+
+/**
+* Video input devices iterator.
+*
+* If d is NULL, returns the first registered input audio/video device,
+* if d is non-NULL, returns the next registered input audio/video device after d
+* or NULL if d is the last one.
+*/
+av_input_video_device_next :: (d: *AVInputFormat) -> *AVInputFormat #foreign libavdevice;
+
+/**
+* Audio output devices iterator.
+*
+* If d is NULL, returns the first registered output audio/video device,
+* if d is non-NULL, returns the next registered output audio/video device after d
+* or NULL if d is the last one.
+*/
+av_output_audio_device_next :: (d: *AVOutputFormat) -> *AVOutputFormat #foreign libavdevice;
+
+/**
+* Video output devices iterator.
+*
+* If d is NULL, returns the first registered output audio/video device,
+* if d is non-NULL, returns the next registered output audio/video device after d
+* or NULL if d is the last one.
+*/
+av_output_video_device_next :: (d: *AVOutputFormat) -> *AVOutputFormat #foreign libavdevice;
+
+AVDeviceRect :: struct {
+    x:      s32; /**< x coordinate of top left corner */
+    y:      s32; /**< y coordinate of top left corner */
+    width:  s32; /**< width */
+    height: s32; /**< height */
+}
+
+/**
+* Message types used by avdevice_app_to_dev_control_message().
+*/
+AVAppToDevMessageType :: enum s32 {
+    NONE           :: 1313820229;
+
+    WINDOW_SIZE    :: 1195724621;
+
+    WINDOW_REPAINT :: 1380274241;
+
+    PAUSE          :: 1346458912;
+    PLAY           :: 1347174745;
+    TOGGLE_PAUSE   :: 1346458964;
+
+    SET_VOLUME     :: 1398165324;
+
+    MUTE           :: 541939028;
+    UNMUTE         :: 1431131476;
+    TOGGLE_MUTE    :: 1414354260;
+
+    GET_VOLUME     :: 1196838732;
+    GET_MUTE       :: 1196250452;
+
+    AV_APP_TO_DEV_NONE           :: NONE;
+
+    AV_APP_TO_DEV_WINDOW_SIZE    :: WINDOW_SIZE;
+
+    AV_APP_TO_DEV_WINDOW_REPAINT :: WINDOW_REPAINT;
+
+    AV_APP_TO_DEV_PAUSE          :: PAUSE;
+    AV_APP_TO_DEV_PLAY           :: PLAY;
+    AV_APP_TO_DEV_TOGGLE_PAUSE   :: TOGGLE_PAUSE;
+
+    AV_APP_TO_DEV_SET_VOLUME     :: SET_VOLUME;
+
+    AV_APP_TO_DEV_MUTE           :: MUTE;
+    AV_APP_TO_DEV_UNMUTE         :: UNMUTE;
+    AV_APP_TO_DEV_TOGGLE_MUTE    :: TOGGLE_MUTE;
+
+    AV_APP_TO_DEV_GET_VOLUME     :: GET_VOLUME;
+    AV_APP_TO_DEV_GET_MUTE       :: GET_MUTE;
+}
+
+/**
+* Message types used by avdevice_dev_to_app_control_message().
+*/
+AVDevToAppMessageType :: enum s32 {
+    NONE                  :: 1313820229;
+
+    CREATE_WINDOW_BUFFER  :: 1111708229;
+
+    PREPARE_WINDOW_BUFFER :: 1112560197;
+
+    DISPLAY_WINDOW_BUFFER :: 1111771475;
+
+    DESTROY_WINDOW_BUFFER :: 1111770451;
+
+    BUFFER_OVERFLOW       :: 1112491596;
+    BUFFER_UNDERFLOW      :: 1112884812;
+
+    BUFFER_READABLE       :: 1112687648;
+    BUFFER_WRITABLE       :: 1113018912;
+
+    MUTE_STATE_CHANGED    :: 1129141588;
+
+    VOLUME_LEVEL_CHANGED  :: 1129729868;
+
+    AV_DEV_TO_APP_NONE                  :: NONE;
+
+    AV_DEV_TO_APP_CREATE_WINDOW_BUFFER  :: CREATE_WINDOW_BUFFER;
+
+    AV_DEV_TO_APP_PREPARE_WINDOW_BUFFER :: PREPARE_WINDOW_BUFFER;
+
+    AV_DEV_TO_APP_DISPLAY_WINDOW_BUFFER :: DISPLAY_WINDOW_BUFFER;
+
+    AV_DEV_TO_APP_DESTROY_WINDOW_BUFFER :: DESTROY_WINDOW_BUFFER;
+
+    AV_DEV_TO_APP_BUFFER_OVERFLOW       :: BUFFER_OVERFLOW;
+    AV_DEV_TO_APP_BUFFER_UNDERFLOW      :: BUFFER_UNDERFLOW;
+
+    AV_DEV_TO_APP_BUFFER_READABLE       :: BUFFER_READABLE;
+    AV_DEV_TO_APP_BUFFER_WRITABLE       :: BUFFER_WRITABLE;
+
+    AV_DEV_TO_APP_MUTE_STATE_CHANGED    :: MUTE_STATE_CHANGED;
+
+    AV_DEV_TO_APP_VOLUME_LEVEL_CHANGED  :: VOLUME_LEVEL_CHANGED;
+}
+
+/**
+* Send control message from application to device.
+*
+* @param s         device context.
+* @param type      message type.
+* @param data      message data. Exact type depends on message type.
+* @param data_size size of message data.
+* @return >= 0 on success, negative on error.
+*         AVERROR(ENOSYS) when device doesn't implement handler of the message.
+*/
+avdevice_app_to_dev_control_message :: (s: *AVFormatContext, type: AVAppToDevMessageType, data: *void, data_size: u64) -> s32 #foreign libavdevice;
+
+/**
+* Send control message from device to application.
+*
+* @param s         device context.
+* @param type      message type.
+* @param data      message data. Can be NULL.
+* @param data_size size of message data.
+* @return >= 0 on success, negative on error.
+*         AVERROR(ENOSYS) when application doesn't implement handler of the message.
+*/
+avdevice_dev_to_app_control_message :: (s: *AVFormatContext, type: AVDevToAppMessageType, data: *void, data_size: u64) -> s32 #foreign libavdevice;
+
+/**
+* Structure describes basic parameters of the device.
+*/
+AVDeviceInfo :: struct {
+    device_name:        *u8; /**< device name, format depends on device */
+    device_description: *u8; /**< human friendly name */
+    media_types:        *AVMediaType; /**< array indicating what media types(s), if any, a device can provide. If null, cannot provide any */
+    nb_media_types:     s32; /**< length of media_types array, 0 if device cannot provide any media types */
+}
+
+/**
+* List of devices.
+*/
+AVDeviceInfoList :: struct {
+    devices:        **AVDeviceInfo; /**< list of autodetected devices */
+    nb_devices:     s32; /**< number of autodetected devices */
+    default_device: s32; /**< index of default device or -1 if no default */
+}
+
+/**
+* List devices.
+*
+* Returns available device names and their parameters.
+*
+* @note: Some devices may accept system-dependent device names that cannot be
+*        autodetected. The list returned by this function cannot be assumed to
+*        be always completed.
+*
+* @param s                device context.
+* @param[out] device_list list of autodetected devices.
+* @return count of autodetected devices, negative on error.
+*/
+avdevice_list_devices :: (s: *AVFormatContext, device_list: **AVDeviceInfoList) -> s32 #foreign libavdevice;
+
+/**
+* Convenient function to free result of avdevice_list_devices().
+*
+* @param device_list device list to be freed.
+*/
+avdevice_free_list_devices :: (device_list: **AVDeviceInfoList) -> void #foreign libavdevice;
+
+/**
+* List devices.
+*
+* Returns available device names and their parameters.
+* These are convinient wrappers for avdevice_list_devices().
+* Device context is allocated and deallocated internally.
+*
+* @param device           device format. May be NULL if device name is set.
+* @param device_name      device name. May be NULL if device format is set.
+* @param device_options   An AVDictionary filled with device-private options. May be NULL.
+*                         The same options must be passed later to avformat_write_header() for output
+*                         devices or avformat_open_input() for input devices, or at any other place
+*                         that affects device-private options.
+* @param[out] device_list list of autodetected devices
+* @return count of autodetected devices, negative on error.
+* @note device argument takes precedence over device_name when both are set.
+*/
+avdevice_list_input_sources :: (device: *AVInputFormat, device_name: *u8, device_options: *AVDictionary, device_list: **AVDeviceInfoList) -> s32 #foreign libavdevice;
+
+avdevice_list_output_sinks :: (device: *AVOutputFormat, device_name: *u8, device_options: *AVDictionary, device_list: **AVDeviceInfoList) -> s32 #foreign libavdevice;
+
+/**
+* Return the LIBAVFILTER_VERSION_INT constant.
+*/
+avfilter_version :: () -> u32 #foreign libavfilter;
+
+/**
+* Return the libavfilter build-time configuration.
+*/
+avfilter_configuration :: () -> *u8 #foreign libavfilter;
+
+/**
+* Return the libavfilter license.
+*/
+avfilter_license :: () -> *u8 #foreign libavfilter;
+
+AVFilterPad :: struct {}
+AVFilterFormats :: struct {}
+AVFilterChannelLayouts :: struct {}
+
+/**
+* Get the name of an AVFilterPad.
+*
+* @param pads an array of AVFilterPads
+* @param pad_idx index of the pad in the array; it is the caller's
+*                responsibility to ensure the index is valid
+*
+* @return name of the pad_idx'th pad in pads
+*/
+avfilter_pad_get_name :: (pads: *AVFilterPad, pad_idx: s32) -> *u8 #foreign libavfilter;
+
+/**
+* Get the type of an AVFilterPad.
+*
+* @param pads an array of AVFilterPads
+* @param pad_idx index of the pad in the array; it is the caller's
+*                responsibility to ensure the index is valid
+*
+* @return type of the pad_idx'th pad in pads
+*/
+avfilter_pad_get_type :: (pads: *AVFilterPad, pad_idx: s32) -> AVMediaType #foreign libavfilter;
+
+/**
+* Filter definition. This defines the pads a filter contains, and all the
+* callback functions used to interact with the filter.
+*/
+AVFilter :: struct {
+    /**
+    * Filter name. Must be non-NULL and unique among filters.
+    */
+    name:            *u8;
+
+    /**
+    * A description of the filter. May be NULL.
+    *
+    * You should use the NULL_IF_CONFIG_SMALL() macro to define it.
+    */
+    description:     *u8;
+
+    /**
+    * List of static inputs.
+    *
+    * NULL if there are no (static) inputs. Instances of filters with
+    * AVFILTER_FLAG_DYNAMIC_INPUTS set may have more inputs than present in
+    * this list.
+    */
+    inputs:          *AVFilterPad;
+
+    /**
+    * List of static outputs.
+    *
+    * NULL if there are no (static) outputs. Instances of filters with
+    * AVFILTER_FLAG_DYNAMIC_OUTPUTS set may have more outputs than present in
+    * this list.
+    */
+    outputs:         *AVFilterPad;
+
+    /**
+    * A class for the private data, used to declare filter private AVOptions.
+    * This field is NULL for filters that do not declare any options.
+    *
+    * If this field is non-NULL, the first member of the filter private data
+    * must be a pointer to AVClass, which will be set by libavfilter generic
+    * code to this class.
+    */
+    priv_class:      *AVClass;
+
+    /**
+    * A combination of AVFILTER_FLAG_*
+    */
+    flags:           s32;
+
+    /**
+    * The number of entries in the list of inputs.
+    */
+    nb_inputs:       u8;
+
+    /**
+    * The number of entries in the list of outputs.
+    */
+    nb_outputs:      u8;
+
+    /**
+    * This field determines the state of the formats union.
+    * It is an enum FilterFormatsState value.
+    */
+    formats_state:   u8;
+
+    /**
+    * Filter pre-initialization function
+    *
+    * This callback will be called immediately after the filter context is
+    * allocated, to allow allocating and initing sub-objects.
+    *
+    * If this callback is not NULL, the uninit callback will be called on
+    * allocation failure.
+    *
+    * @return 0 on success,
+    *         AVERROR code on failure (but the code will be
+    *           dropped and treated as ENOMEM by the calling code)
+    */
+    preinit:         #type (ctx: *AVFilterContext) -> s32 #c_call;
+
+    /**
+    * Filter initialization function.
+    *
+    * This callback will be called only once during the filter lifetime, after
+    * all the options have been set, but before links between filters are
+    * established and format negotiation is done.
+    *
+    * Basic filter initialization should be done here. Filters with dynamic
+    * inputs and/or outputs should create those inputs/outputs here based on
+    * provided options. No more changes to this filter's inputs/outputs can be
+    * done after this callback.
+    *
+    * This callback must not assume that the filter links exist or frame
+    * parameters are known.
+    *
+    * @ref AVFilter.uninit "uninit" is guaranteed to be called even if
+    * initialization fails, so this callback does not have to clean up on
+    * failure.
+    *
+    * @return 0 on success, a negative AVERROR on failure
+    */
+    init:            #type (ctx: *AVFilterContext) -> s32 #c_call;
+
+    /**
+    * Filter uninitialization function.
+    *
+    * Called only once right before the filter is freed. Should deallocate any
+    * memory held by the filter, release any buffer references, etc. It does
+    * not need to deallocate the AVFilterContext.priv memory itself.
+    *
+    * This callback may be called even if @ref AVFilter.init "init" was not
+    * called or failed, so it must be prepared to handle such a situation.
+    */
+    uninit:          #type (ctx: *AVFilterContext) -> void #c_call;
+
+    formats:         union {
+        /**
+        * Query formats supported by the filter on its inputs and outputs.
+        *
+        * This callback is called after the filter is initialized (so the inputs
+        * and outputs are fixed), shortly before the format negotiation. This
+        * callback may be called more than once.
+        *
+        * This callback must set ::AVFilterLink's
+        * @ref AVFilterFormatsConfig.formats "outcfg.formats"
+        * on every input link and
+        * @ref AVFilterFormatsConfig.formats "incfg.formats"
+        * on every output link to a list of pixel/sample formats that the filter
+        * supports on that link.
+        * For audio links, this filter must also set
+        * @ref AVFilterFormatsConfig.samplerates "incfg.samplerates"
+        *  /
+        * @ref AVFilterFormatsConfig.samplerates "outcfg.samplerates"
+        * and @ref AVFilterFormatsConfig.channel_layouts "incfg.channel_layouts"
+        *  /
+        * @ref AVFilterFormatsConfig.channel_layouts "outcfg.channel_layouts"
+        * analogously.
+        *
+        * This callback must never be NULL if the union is in this state.
+        *
+        * @return zero on success, a negative value corresponding to an
+        * AVERROR code otherwise
+        */
+        query_func:   #type (unknown0: *AVFilterContext) -> s32 #c_call;
+
+        /**
+        * A pointer to an array of admissible pixel formats delimited
+        * by AV_PIX_FMT_NONE. The generic code will use this list
+        * to indicate that this filter supports each of these pixel formats,
+        * provided that all inputs and outputs use the same pixel format.
+        *
+        * This list must never be NULL if the union is in this state.
+        * The type of all inputs and outputs of filters using this must
+        * be AVMEDIA_TYPE_VIDEO.
+        */
+        pixels_list:  *AVPixelFormat;
+
+        /**
+        * Analogous to pixels, but delimited by AV_SAMPLE_FMT_NONE
+        * and restricted to filters that only have AVMEDIA_TYPE_AUDIO
+        * inputs and outputs.
+        *
+        * In addition to that the generic code will mark all inputs
+        * and all outputs as supporting all sample rates and every
+        * channel count and channel layout, as long as all inputs
+        * and outputs use the same sample rate and channel count/layout.
+        */
+        samples_list: *AVSampleFormat;
+
+        /**
+        * Equivalent to { pix_fmt, AV_PIX_FMT_NONE } as pixels_list.
+        */
+        pix_fmt:      AVPixelFormat;
+
+        /**
+        * Equivalent to { sample_fmt, AV_SAMPLE_FMT_NONE } as samples_list.
+        */
+        sample_fmt:   AVSampleFormat;
+    };
+
+    priv_size:       s32; ///< size of private data to allocate for the filter
+
+    flags_internal:  s32; ///< Additional flags for avfilter internal use only.
+
+    /**
+    * Make the filter instance process a command.
+    *
+    * @param cmd    the command to process, for handling simplicity all commands must be alphanumeric only
+    * @param arg    the argument for the command
+    * @param res    a buffer with size res_size where the filter(s) can return a response. This must not change when the command is not supported.
+    * @param flags  if AVFILTER_CMD_FLAG_FAST is set and the command would be
+    *               time consuming then a filter should treat it like an unsupported command
+    *
+    * @returns >=0 on success otherwise an error code.
+    *          AVERROR(ENOSYS) on unsupported commands
+    */
+    process_command: #type (unknown0: *AVFilterContext, cmd: *u8, arg: *u8, res: *u8, res_len: s32, flags: s32) -> s32 #c_call;
+
+    /**
+    * Filter activation function.
+    *
+    * Called when any processing is needed from the filter, instead of any
+    * filter_frame and request_frame on pads.
+    *
+    * The function must examine inlinks and outlinks and perform a single
+    * step of processing. If there is nothing to do, the function must do
+    * nothing and not return an error. If more steps are or may be
+    * possible, it must use ff_filter_set_ready() to schedule another
+    * activation.
+    */
+    activate:        #type (ctx: *AVFilterContext) -> s32 #c_call;
+}
+
+/**
+* Get the number of elements in an AVFilter's inputs or outputs array.
+*/
+avfilter_filter_pad_count :: (filter: *AVFilter, is_output: s32) -> u32 #foreign libavfilter;
+
+AVFilterInternal :: struct {}
+
+/** An instance of a filter */
+AVFilterContext :: struct {
+    av_class:        *AVClass; ///< needed for av_log() and filters common options
+
+    filter:          *AVFilter; ///< the AVFilter of which this is an instance
+
+    name:            *u8; ///< name of this filter instance
+
+    input_pads:      *AVFilterPad; ///< array of input pads
+    inputs:          **AVFilterLink; ///< array of pointers to input links
+    nb_inputs:       u32; ///< number of input pads
+
+    output_pads:     *AVFilterPad; ///< array of output pads
+    outputs:         **AVFilterLink; ///< array of pointers to output links
+    nb_outputs:      u32; ///< number of output pads
+
+    priv:            *void; ///< private data for use by the filter
+
+    graph:           *AVFilterGraph; ///< filtergraph this filter belongs to
+
+    /**
+    * Type of multithreading being allowed/used. A combination of
+    * AVFILTER_THREAD_* flags.
+    *
+    * May be set by the caller before initializing the filter to forbid some
+    * or all kinds of multithreading for this filter. The default is allowing
+    * everything.
+    *
+    * When the filter is initialized, this field is combined using bit AND with
+    * AVFilterGraph.thread_type to get the final mask used for determining
+    * allowed threading types. I.e. a threading type needs to be set in both
+    * to be allowed.
+    *
+    * After the filter is initialized, libavfilter sets this field to the
+    * threading type that is actually used (0 for no multithreading).
+    */
+    thread_type:     s32;
+
+    /**
+    * An opaque struct for libavfilter internal use.
+    */
+    internal:        *AVFilterInternal;
+
+    AVFilterCommand :: struct {}
+    command_queue:   *AVFilterCommand;
+
+    enable_str:      *u8; ///< enable expression string
+    enable:          *void; ///< parsed expression (AVExpr*)
+    var_values:      *float64; ///< variable values for the enable expression
+    is_disabled:     s32; ///< the enabled state from the last expression evaluation
+
+    /**
+    * For filters which will create hardware frames, sets the device the
+    * filter should create them in.  All other filters will ignore this field:
+    * in particular, a filter which consumes or processes hardware frames will
+    * instead use the hw_frames_ctx field in AVFilterLink to carry the
+    * hardware context information.
+    */
+    hw_device_ctx:   *AVBufferRef;
+
+    /**
+    * Max number of threads allowed in this filter instance.
+    * If <= 0, its value is ignored.
+    * Overrides global number of threads set per filter graph.
+    */
+    nb_threads:      s32;
+
+    /**
+    * Ready status of the filter.
+    * A non-0 value means that the filter needs activating;
+    * a higher value suggests a more urgent activation.
+    */
+    ready:           u32;
+
+    /**
+    * Sets the number of extra hardware frames which the filter will
+    * allocate on its output links for use in following filters or by
+    * the caller.
+    *
+    * Some hardware filters require all frames that they will use for
+    * output to be defined in advance before filtering starts.  For such
+    * filters, any hardware frame pools used for output must therefore be
+    * of fixed size.  The extra frames set here are on top of any number
+    * that the filter needs internally in order to operate normally.
+    *
+    * This field must be set before the graph containing this filter is
+    * configured.
+    */
+    extra_hw_frames: s32;
+}
+
+/**
+* Lists of formats / etc. supported by an end of a link.
+*
+* This structure is directly part of AVFilterLink, in two copies:
+* one for the source filter, one for the destination filter.
+
+* These lists are used for negotiating the format to actually be used,
+* which will be loaded into the format and channel_layout members of
+* AVFilterLink, when chosen.
+*/
+AVFilterFormatsConfig :: struct {
+    /**
+    * List of supported formats (pixel or sample).
+    */
+    formats:         *AVFilterFormats;
+
+    /**
+    * Lists of supported sample rates, only for audio.
+    */
+    samplerates:     *AVFilterFormats;
+
+    /**
+    * Lists of supported channel layouts, only for audio.
+    */
+    channel_layouts: *AVFilterChannelLayouts;
+}
+
+/**
+* A link between two filters. This contains pointers to the source and
+* destination filters between which this link exists, and the indexes of
+* the pads involved. In addition, this link also contains the parameters
+* which have been negotiated and agreed upon between the filter, such as
+* image dimensions, format, etc.
+*
+* Applications must not normally access the link structure directly.
+* Use the buffersrc and buffersink API instead.
+* In the future, access to the header may be reserved for filters
+* implementation.
+*/
+AVFilterLink :: struct {
+    src:                 *AVFilterContext; ///< source filter
+    srcpad:              *AVFilterPad; ///< output pad on the source filter
+
+    dst:                 *AVFilterContext; ///< dest filter
+    dstpad:              *AVFilterPad; ///< input pad on the dest filter
+
+    type:                AVMediaType; ///< filter media type
+
+    w:                   s32; ///< agreed upon image width
+    h:                   s32; ///< agreed upon image height
+    sample_aspect_ratio: AVRational; ///< agreed upon sample aspect ratio
+
+    /**
+    * channel layout of current buffer (see libavutil/channel_layout.h)
+    * @deprecated use ch_layout
+    */
+    channel_layout:      u64;
+
+    sample_rate:         s32; ///< samples per second
+
+    format:              s32; ///< agreed upon media format
+
+    /**
+    * Define the time base used by the PTS of the frames/samples
+    * which will pass through this link.
+    * During the configuration stage, each filter is supposed to
+    * change only the output timebase, while the timebase of the
+    * input link is assumed to be an unchangeable property.
+    */
+    time_base:           AVRational;
+
+    ch_layout:           AVChannelLayout; ///< channel layout of current buffer (see libavutil/channel_layout.h)
+
+    /**
+    * Lists of supported formats / etc. supported by the input filter.
+    */
+    incfg:               AVFilterFormatsConfig;
+
+    /**
+    * Lists of supported formats / etc. supported by the output filter.
+    */
+    outcfg:              AVFilterFormatsConfig;
+
+    /** stage of the initialization of the link properties (dimensions, etc) */
+    AVLINK :: enum s32 {
+        UNINIT    :: 0;
+        STARTINIT :: 1;
+        INIT      :: 2;
+
+        AVLINK_UNINIT    :: UNINIT;
+        AVLINK_STARTINIT :: STARTINIT;
+        AVLINK_INIT      :: INIT;
+    }
+
+    init_state:          AVLINK;
+
+    /**
+    * Graph the filter belongs to.
+    */
+    graph:               *AVFilterGraph;
+
+    /**
+    * Current timestamp of the link, as defined by the most recent
+    * frame(s), in link time_base units.
+    */
+    current_pts:         s64;
+
+    /**
+    * Current timestamp of the link, as defined by the most recent
+    * frame(s), in AV_TIME_BASE units.
+    */
+    current_pts_us:      s64;
+
+    /**
+    * Index in the age array.
+    */
+    age_index:           s32;
+
+    /**
+    * Frame rate of the stream on the link, or 1/0 if unknown or variable;
+    * if left to 0/0, will be automatically copied from the first input
+    * of the source filter if it exists.
+    *
+    * Sources should set it to the best estimation of the real frame rate.
+    * If the source frame rate is unknown or variable, set this to 1/0.
+    * Filters should update it if necessary depending on their function.
+    * Sinks can use it to set a default output frame rate.
+    * It is similar to the r_frame_rate field in AVStream.
+    */
+    frame_rate:          AVRational;
+
+    /**
+    * Minimum number of samples to filter at once. If filter_frame() is
+    * called with fewer samples, it will accumulate them in fifo.
+    * This field and the related ones must not be changed after filtering
+    * has started.
+    * If 0, all related fields are ignored.
+    */
+    min_samples:         s32;
+
+    /**
+    * Maximum number of samples to filter at once. If filter_frame() is
+    * called with more samples, it will split them.
+    */
+    max_samples:         s32;
+
+    /**
+    * Number of past frames sent through the link.
+    */
+    frame_count_in:      s64;
+    /**
+    * Number of past frames sent through the link.
+    */
+    frame_count_out:     s64;
+
+    /**
+    * Number of past samples sent through the link.
+    */
+    sample_count_in:     s64;
+    /**
+    * Number of past samples sent through the link.
+    */
+    sample_count_out:    s64;
+
+    /**
+    * A pointer to a FFFramePool struct.
+    */
+    frame_pool:          *void;
+
+    /**
+    * True if a frame is currently wanted on the output of this filter.
+    * Set when ff_request_frame() is called by the output,
+    * cleared when a frame is filtered.
+    */
+    frame_wanted_out:    s32;
+
+    /**
+    * For hwaccel pixel formats, this should be a reference to the
+    * AVHWFramesContext describing the frames.
+    */
+    hw_frames_ctx:       *AVBufferRef;
+
+    /**
+    * Internal structure members.
+    * The fields below this limit are internal for libavfilter's use
+    * and must in no way be accessed by applications.
+    */
+    reserved:            [61440] u8;
+}
+
+/**
+* Link two filters together.
+*
+* @param src    the source filter
+* @param srcpad index of the output pad on the source filter
+* @param dst    the destination filter
+* @param dstpad index of the input pad on the destination filter
+* @return       zero on success
+*/
+avfilter_link :: (src: *AVFilterContext, srcpad: u32, dst: *AVFilterContext, dstpad: u32) -> s32 #foreign libavfilter;
+
+/**
+* Free the link in *link, and set its pointer to NULL.
+*/
+avfilter_link_free :: (link: **AVFilterLink) -> void #foreign libavfilter;
+
+/**
+* Negotiate the media format, dimensions, etc of all inputs to a filter.
+*
+* @param filter the filter to negotiate the properties for its inputs
+* @return       zero on successful negotiation
+*/
+avfilter_config_links :: (filter: *AVFilterContext) -> s32 #foreign libavfilter;
+
+/**
+* Make the filter instance process a command.
+* It is recommended to use avfilter_graph_send_command().
+*/
+avfilter_process_command :: (filter: *AVFilterContext, cmd: *u8, arg: *u8, res: *u8, res_len: s32, flags: s32) -> s32 #foreign libavfilter;
+
+/**
+* Iterate over all registered filters.
+*
+* @param opaque a pointer where libavfilter will store the iteration state. Must
+*               point to NULL to start the iteration.
+*
+* @return the next registered filter or NULL when the iteration is
+*         finished
+*/
+av_filter_iterate :: (opaque: **void) -> *AVFilter #foreign libavfilter;
+
+/**
+* Get a filter definition matching the given name.
+*
+* @param name the filter name to find
+* @return     the filter definition, if any matching one is registered.
+*             NULL if none found.
+*/
+avfilter_get_by_name :: (name: *u8) -> *AVFilter #foreign libavfilter;
+
+/**
+* Initialize a filter with the supplied parameters.
+*
+* @param ctx  uninitialized filter context to initialize
+* @param args Options to initialize the filter with. This must be a
+*             ':'-separated list of options in the 'key=value' form.
+*             May be NULL if the options have been set directly using the
+*             AVOptions API or there are no options that need to be set.
+* @return 0 on success, a negative AVERROR on failure
+*/
+avfilter_init_str :: (ctx: *AVFilterContext, args: *u8) -> s32 #foreign libavfilter;
+
+/**
+* Initialize a filter with the supplied dictionary of options.
+*
+* @param ctx     uninitialized filter context to initialize
+* @param options An AVDictionary filled with options for this filter. On
+*                return this parameter will be destroyed and replaced with
+*                a dict containing options that were not found. This dictionary
+*                must be freed by the caller.
+*                May be NULL, then this function is equivalent to
+*                avfilter_init_str() with the second parameter set to NULL.
+* @return 0 on success, a negative AVERROR on failure
+*
+* @note This function and avfilter_init_str() do essentially the same thing,
+* the difference is in manner in which the options are passed. It is up to the
+* calling code to choose whichever is more preferable. The two functions also
+* behave differently when some of the provided options are not declared as
+* supported by the filter. In such a case, avfilter_init_str() will fail, but
+* this function will leave those extra options in the options AVDictionary and
+* continue as usual.
+*/
+avfilter_init_dict :: (ctx: *AVFilterContext, options: **AVDictionary) -> s32 #foreign libavfilter;
+
+/**
+* Free a filter context. This will also remove the filter from its
+* filtergraph's list of filters.
+*
+* @param filter the filter to free
+*/
+avfilter_free :: (filter: *AVFilterContext) -> void #foreign libavfilter;
+
+/**
+* Insert a filter in the middle of an existing link.
+*
+* @param link the link into which the filter should be inserted
+* @param filt the filter to be inserted
+* @param filt_srcpad_idx the input pad on the filter to connect
+* @param filt_dstpad_idx the output pad on the filter to connect
+* @return     zero on success
+*/
+avfilter_insert_filter :: (link: *AVFilterLink, filt: *AVFilterContext, filt_srcpad_idx: u32, filt_dstpad_idx: u32) -> s32 #foreign libavfilter;
+
+/**
+* @return AVClass for AVFilterContext.
+*
+* @see av_opt_find().
+*/
+avfilter_get_class :: () -> *AVClass #foreign libavfilter;
+
+AVFilterGraphInternal :: struct {}
+
+/**
+* A function pointer passed to the @ref AVFilterGraph.execute callback to be
+* executed multiple times, possibly in parallel.
+*
+* @param ctx the filter context the job belongs to
+* @param arg an opaque parameter passed through from @ref
+*            AVFilterGraph.execute
+* @param jobnr the index of the job being executed
+* @param nb_jobs the total number of jobs
+*
+* @return 0 on success, a negative AVERROR on error
+*/
+avfilter_action_func :: #type (ctx: *AVFilterContext, arg: *void, jobnr: s32, nb_jobs: s32) -> s32 #c_call;
+
+/**
+* A function executing multiple jobs, possibly in parallel.
+*
+* @param ctx the filter context to which the jobs belong
+* @param func the function to be called multiple times
+* @param arg the argument to be passed to func
+* @param ret a nb_jobs-sized array to be filled with return values from each
+*            invocation of func
+* @param nb_jobs the number of jobs to execute
+*
+* @return 0 on success, a negative AVERROR on error
+*/
+avfilter_execute_func :: #type (ctx: *AVFilterContext, func: avfilter_action_func, arg: *void, ret: *s32, nb_jobs: s32) -> s32 #c_call;
+
+AVFilterGraph :: struct {
+    av_class:             *AVClass;
+    filters:              **AVFilterContext;
+    nb_filters:           u32;
+
+    scale_sws_opts:       *u8; ///< sws options to use for the auto-inserted scale filters
+
+    /**
+    * Type of multithreading allowed for filters in this graph. A combination
+    * of AVFILTER_THREAD_* flags.
+    *
+    * May be set by the caller at any point, the setting will apply to all
+    * filters initialized after that. The default is allowing everything.
+    *
+    * When a filter in this graph is initialized, this field is combined using
+    * bit AND with AVFilterContext.thread_type to get the final mask used for
+    * determining allowed threading types. I.e. a threading type needs to be
+    * set in both to be allowed.
+    */
+    thread_type:          s32;
+
+    /**
+    * Maximum number of threads used by filters in this graph. May be set by
+    * the caller before adding any filters to the filtergraph. Zero (the
+    * default) means that the number of threads is determined automatically.
+    */
+    nb_threads:           s32;
+
+    /**
+    * Opaque object for libavfilter internal use.
+    */
+    internal:             *AVFilterGraphInternal;
+
+    /**
+    * Opaque user data. May be set by the caller to an arbitrary value, e.g. to
+    * be used from callbacks like @ref AVFilterGraph.execute.
+    * Libavfilter will not touch this field in any way.
+    */
+    opaque:               *void;
+
+    /**
+    * This callback may be set by the caller immediately after allocating the
+    * graph and before adding any filters to it, to provide a custom
+    * multithreading implementation.
+    *
+    * If set, filters with slice threading capability will call this callback
+    * to execute multiple jobs in parallel.
+    *
+    * If this field is left unset, libavfilter will use its internal
+    * implementation, which may or may not be multithreaded depending on the
+    * platform and build options.
+    */
+    execute:              avfilter_execute_func;
+
+    aresample_swr_opts:   *u8; ///< swr options to use for the auto-inserted aresample filters, Access ONLY through AVOptions
+
+    /**
+    * Private fields
+    *
+    * The following fields are for internal use only.
+    * Their type, offset, number and semantic can change without notice.
+    */
+    sink_links:           **AVFilterLink;
+    sink_links_count:     s32;
+
+    disable_auto_convert: u32;
+}
+
+/**
+* Allocate a filter graph.
+*
+* @return the allocated filter graph on success or NULL.
+*/
+avfilter_graph_alloc :: () -> *AVFilterGraph #foreign libavfilter;
+
+/**
+* Create a new filter instance in a filter graph.
+*
+* @param graph graph in which the new filter will be used
+* @param filter the filter to create an instance of
+* @param name Name to give to the new instance (will be copied to
+*             AVFilterContext.name). This may be used by the caller to identify
+*             different filters, libavfilter itself assigns no semantics to
+*             this parameter. May be NULL.
+*
+* @return the context of the newly created filter instance (note that it is
+*         also retrievable directly through AVFilterGraph.filters or with
+*         avfilter_graph_get_filter()) on success or NULL on failure.
+*/
+avfilter_graph_alloc_filter :: (graph: *AVFilterGraph, filter: *AVFilter, name: *u8) -> *AVFilterContext #foreign libavfilter;
+
+/**
+* Get a filter instance identified by instance name from graph.
+*
+* @param graph filter graph to search through.
+* @param name filter instance name (should be unique in the graph).
+* @return the pointer to the found filter instance or NULL if it
+* cannot be found.
+*/
+avfilter_graph_get_filter :: (graph: *AVFilterGraph, name: *u8) -> *AVFilterContext #foreign libavfilter;
+
+/**
+* Create and add a filter instance into an existing graph.
+* The filter instance is created from the filter filt and inited
+* with the parameter args. opaque is currently ignored.
+*
+* In case of success put in *filt_ctx the pointer to the created
+* filter instance, otherwise set *filt_ctx to NULL.
+*
+* @param name the instance name to give to the created filter instance
+* @param graph_ctx the filter graph
+* @return a negative AVERROR error code in case of failure, a non
+* negative value otherwise
+*/
+avfilter_graph_create_filter :: (filt_ctx: **AVFilterContext, filt: *AVFilter, name: *u8, args: *u8, opaque: *void, graph_ctx: *AVFilterGraph) -> s32 #foreign libavfilter;
+
+/**
+* Enable or disable automatic format conversion inside the graph.
+*
+* Note that format conversion can still happen inside explicitly inserted
+* scale and aresample filters.
+*
+* @param flags  any of the AVFILTER_AUTO_CONVERT_* constants
+*/
+avfilter_graph_set_auto_convert :: (graph: *AVFilterGraph, flags: u32) -> void #foreign libavfilter;
+
+AVFILTER_AUTO_CONVERT :: enum s32 {
+    ALL  :: 0;
+    NONE :: -1;
+
+    AVFILTER_AUTO_CONVERT_ALL  :: ALL;
+    AVFILTER_AUTO_CONVERT_NONE :: NONE;
+}
+
+/**
+* Check validity and configure all the links and formats in the graph.
+*
+* @param graphctx the filter graph
+* @param log_ctx context used for logging
+* @return >= 0 in case of success, a negative AVERROR code otherwise
+*/
+avfilter_graph_config :: (graphctx: *AVFilterGraph, log_ctx: *void) -> s32 #foreign libavfilter;
+
+/**
+* Free a graph, destroy its links, and set *graph to NULL.
+* If *graph is NULL, do nothing.
+*/
+avfilter_graph_free :: (graph: **AVFilterGraph) -> void #foreign libavfilter;
+
+/**
+* A linked-list of the inputs/outputs of the filter chain.
+*
+* This is mainly useful for avfilter_graph_parse() / avfilter_graph_parse2(),
+* where it is used to communicate open (unlinked) inputs and outputs from and
+* to the caller.
+* This struct specifies, per each not connected pad contained in the graph, the
+* filter context and the pad index required for establishing a link.
+*/
+AVFilterInOut :: struct {
+    /** unique name for this input/output in the list */
+    name:       *u8;
+
+    /** filter context associated to this input/output */
+    filter_ctx: *AVFilterContext;
+
+    /** index of the filt_ctx pad to use for linking */
+    pad_idx:    s32;
+
+    /** next input/input in the list, NULL if this is the last */
+    next:       *AVFilterInOut;
+}
+
+/**
+* Allocate a single AVFilterInOut entry.
+* Must be freed with avfilter_inout_free().
+* @return allocated AVFilterInOut on success, NULL on failure.
+*/
+avfilter_inout_alloc :: () -> *AVFilterInOut #foreign libavfilter;
+
+/**
+* Free the supplied list of AVFilterInOut and set *inout to NULL.
+* If *inout is NULL, do nothing.
+*/
+avfilter_inout_free :: (inout: **AVFilterInOut) -> void #foreign libavfilter;
+
+/**
+* Add a graph described by a string to a graph.
+*
+* @note The caller must provide the lists of inputs and outputs,
+* which therefore must be known before calling the function.
+*
+* @note The inputs parameter describes inputs of the already existing
+* part of the graph; i.e. from the point of view of the newly created
+* part, they are outputs. Similarly the outputs parameter describes
+* outputs of the already existing filters, which are provided as
+* inputs to the parsed filters.
+*
+* @param graph   the filter graph where to link the parsed graph context
+* @param filters string to be parsed
+* @param inputs  linked list to the inputs of the graph
+* @param outputs linked list to the outputs of the graph
+* @return zero on success, a negative AVERROR code on error
+*/
+avfilter_graph_parse :: (graph: *AVFilterGraph, filters: *u8, inputs: *AVFilterInOut, outputs: *AVFilterInOut, log_ctx: *void) -> s32 #foreign libavfilter;
+
+/**
+* Add a graph described by a string to a graph.
+*
+* In the graph filters description, if the input label of the first
+* filter is not specified, "in" is assumed; if the output label of
+* the last filter is not specified, "out" is assumed.
+*
+* @param graph   the filter graph where to link the parsed graph context
+* @param filters string to be parsed
+* @param inputs  pointer to a linked list to the inputs of the graph, may be NULL.
+*                If non-NULL, *inputs is updated to contain the list of open inputs
+*                after the parsing, should be freed with avfilter_inout_free().
+* @param outputs pointer to a linked list to the outputs of the graph, may be NULL.
+*                If non-NULL, *outputs is updated to contain the list of open outputs
+*                after the parsing, should be freed with avfilter_inout_free().
+* @return non negative on success, a negative AVERROR code on error
+*/
+avfilter_graph_parse_ptr :: (graph: *AVFilterGraph, filters: *u8, inputs: **AVFilterInOut, outputs: **AVFilterInOut, log_ctx: *void) -> s32 #foreign libavfilter;
+
+/**
+* Add a graph described by a string to a graph.
+*
+* @param[in]  graph   the filter graph where to link the parsed graph context
+* @param[in]  filters string to be parsed
+* @param[out] inputs  a linked list of all free (unlinked) inputs of the
+*                     parsed graph will be returned here. It is to be freed
+*                     by the caller using avfilter_inout_free().
+* @param[out] outputs a linked list of all free (unlinked) outputs of the
+*                     parsed graph will be returned here. It is to be freed by the
+*                     caller using avfilter_inout_free().
+* @return zero on success, a negative AVERROR code on error
+*
+* @note This function returns the inputs and outputs that are left
+* unlinked after parsing the graph and the caller then deals with
+* them.
+* @note This function makes no reference whatsoever to already
+* existing parts of the graph and the inputs parameter will on return
+* contain inputs of the newly parsed part of the graph.  Analogously
+* the outputs parameter will contain outputs of the newly created
+* filters.
+*/
+avfilter_graph_parse2 :: (graph: *AVFilterGraph, filters: *u8, inputs: **AVFilterInOut, outputs: **AVFilterInOut) -> s32 #foreign libavfilter;
+
+/**
+* Parameters of a filter's input or output pad.
+*
+* Created as a child of AVFilterParams by avfilter_graph_segment_parse().
+* Freed in avfilter_graph_segment_free().
+*/
+AVFilterPadParams :: struct {
+    /**
+    * An av_malloc()'ed string containing the pad label.
+    *
+    * May be av_free()'d and set to NULL by the caller, in which case this pad
+    * will be treated as unlabeled for linking.
+    * May also be replaced by another av_malloc()'ed string.
+    */
+    label: *u8;
+}
+
+/**
+* Parameters describing a filter to be created in a filtergraph.
+*
+* Created as a child of AVFilterGraphSegment by avfilter_graph_segment_parse().
+* Freed in avfilter_graph_segment_free().
+*/
+AVFilterParams :: struct {
+    /**
+    * The filter context.
+    *
+    * Created by avfilter_graph_segment_create_filters() based on
+    * AVFilterParams.filter_name and instance_name.
+    *
+    * Callers may also create the filter context manually, then they should
+    * av_free() filter_name and set it to NULL. Such AVFilterParams instances
+    * are then skipped by avfilter_graph_segment_create_filters().
+    */
+    filter:        *AVFilterContext;
+
+    /**
+    * Name of the AVFilter to be used.
+    *
+    * An av_malloc()'ed string, set by avfilter_graph_segment_parse(). Will be
+    * passed to avfilter_get_by_name() by
+    * avfilter_graph_segment_create_filters().
+    *
+    * Callers may av_free() this string and replace it with another one or
+    * NULL. If the caller creates the filter instance manually, this string
+    * MUST be set to NULL.
+    *
+    * When both AVFilterParams.filter an AVFilterParams.filter_name are NULL,
+    * this AVFilterParams instance is skipped by avfilter_graph_segment_*()
+    * functions.
+    */
+    filter_name:   *u8;
+
+    /**
+    * Name to be used for this filter instance.
+    *
+    * An av_malloc()'ed string, may be set by avfilter_graph_segment_parse() or
+    * left NULL. The caller may av_free() this string and replace with another
+    * one or NULL.
+    *
+    * Will be used by avfilter_graph_segment_create_filters() - passed as the
+    * third argument to avfilter_graph_alloc_filter(), then freed and set to
+    * NULL.
+    */
+    instance_name: *u8;
+
+    /**
+    * Options to be apllied to the filter.
+    *
+    * Filled by avfilter_graph_segment_parse(). Afterwards may be freely
+    * modified by the caller.
+    *
+    * Will be applied to the filter by avfilter_graph_segment_apply_opts()
+    * with an equivalent of av_opt_set_dict2(filter, &opts, AV_OPT_SEARCH_CHILDREN),
+    * i.e. any unapplied options will be left in this dictionary.
+    */
+    opts:          *AVDictionary;
+
+    inputs:        **AVFilterPadParams;
+    nb_inputs:     u32;
+
+    outputs:       **AVFilterPadParams;
+    nb_outputs:    u32;
+}
+
+/**
+* A filterchain is a list of filter specifications.
+*
+* Created as a child of AVFilterGraphSegment by avfilter_graph_segment_parse().
+* Freed in avfilter_graph_segment_free().
+*/
+AVFilterChain :: struct {
+    filters:    **AVFilterParams;
+    nb_filters: u64;
+}
+
+/**
+* A parsed representation of a filtergraph segment.
+*
+* A filtergraph segment is conceptually a list of filterchains, with some
+* supplementary information (e.g. format conversion flags).
+*
+* Created by avfilter_graph_segment_parse(). Must be freed with
+* avfilter_graph_segment_free().
+*/
+AVFilterGraphSegment :: struct {
+    /**
+    * The filtergraph this segment is associated with.
+    * Set by avfilter_graph_segment_parse().
+    */
+    graph:          *AVFilterGraph;
+
+    /**
+    * A list of filter chain contained in this segment.
+    * Set in avfilter_graph_segment_parse().
+    */
+    chains:         **AVFilterChain;
+    nb_chains:      u64;
+
+    /**
+    * A string containing a colon-separated list of key=value options applied
+    * to all scale filters in this segment.
+    *
+    * May be set by avfilter_graph_segment_parse().
+    * The caller may free this string with av_free() and replace it with a
+    * different av_malloc()'ed string.
+    */
+    scale_sws_opts: *u8;
+}
+
+/**
+* Parse a textual filtergraph description into an intermediate form.
+*
+* This intermediate representation is intended to be modified by the caller as
+* described in the documentation of AVFilterGraphSegment and its children, and
+* then applied to the graph either manually or with other
+* avfilter_graph_segment_*() functions. See the documentation for
+* avfilter_graph_segment_apply() for the canonical way to apply
+* AVFilterGraphSegment.
+*
+* @param graph Filter graph the parsed segment is associated with. Will only be
+*              used for logging and similar auxiliary purposes. The graph will
+*              not be actually modified by this function - the parsing results
+*              are instead stored in seg for further processing.
+* @param graph_str a string describing the filtergraph segment
+* @param flags reserved for future use, caller must set to 0 for now
+* @param seg A pointer to the newly-created AVFilterGraphSegment is written
+*            here on success. The graph segment is owned by the caller and must
+*            be freed with avfilter_graph_segment_free() before graph itself is
+*            freed.
+*
+* @retval "non-negative number" success
+* @retval "negative error code" failure
+*/
+avfilter_graph_segment_parse :: (graph: *AVFilterGraph, graph_str: *u8, flags: s32, seg: **AVFilterGraphSegment) -> s32 #foreign libavfilter;
+
+/**
+* Create filters specified in a graph segment.
+*
+* Walk through the creation-pending AVFilterParams in the segment and create
+* new filter instances for them.
+* Creation-pending params are those where AVFilterParams.filter_name is
+* non-NULL (and hence AVFilterParams.filter is NULL). All other AVFilterParams
+* instances are ignored.
+*
+* For any filter created by this function, the corresponding
+* AVFilterParams.filter is set to the newly-created filter context,
+* AVFilterParams.filter_name and AVFilterParams.instance_name are freed and set
+* to NULL.
+*
+* @param seg the filtergraph segment to process
+* @param flags reserved for future use, caller must set to 0 for now
+*
+* @retval "non-negative number" Success, all creation-pending filters were
+*                               successfully created
+* @retval AVERROR_FILTER_NOT_FOUND some filter's name did not correspond to a
+*                                  known filter
+* @retval "another negative error code" other failures
+*
+* @note Calling this function multiple times is safe, as it is idempotent.
+*/
+avfilter_graph_segment_create_filters :: (seg: *AVFilterGraphSegment, flags: s32) -> s32 #foreign libavfilter;
+
+/**
+* Apply parsed options to filter instances in a graph segment.
+*
+* Walk through all filter instances in the graph segment that have option
+* dictionaries associated with them and apply those options with
+* av_opt_set_dict2(..., AV_OPT_SEARCH_CHILDREN). AVFilterParams.opts is
+* replaced by the dictionary output by av_opt_set_dict2(), which should be
+* empty (NULL) if all options were successfully applied.
+*
+* If any options could not be found, this function will continue processing all
+* other filters and finally return AVERROR_OPTION_NOT_FOUND (unless another
+* error happens). The calling program may then deal with unapplied options as
+* it wishes.
+*
+* Any creation-pending filters (see avfilter_graph_segment_create_filters())
+* present in the segment will cause this function to fail. AVFilterParams with
+* no associated filter context are simply skipped.
+*
+* @param seg the filtergraph segment to process
+* @param flags reserved for future use, caller must set to 0 for now
+*
+* @retval "non-negative number" Success, all options were successfully applied.
+* @retval AVERROR_OPTION_NOT_FOUND some options were not found in a filter
+* @retval "another negative error code" other failures
+*
+* @note Calling this function multiple times is safe, as it is idempotent.
+*/
+avfilter_graph_segment_apply_opts :: (seg: *AVFilterGraphSegment, flags: s32) -> s32 #foreign libavfilter;
+
+/**
+* Initialize all filter instances in a graph segment.
+*
+* Walk through all filter instances in the graph segment and call
+* avfilter_init_dict(..., NULL) on those that have not been initialized yet.
+*
+* Any creation-pending filters (see avfilter_graph_segment_create_filters())
+* present in the segment will cause this function to fail. AVFilterParams with
+* no associated filter context or whose filter context is already initialized,
+* are simply skipped.
+*
+* @param seg the filtergraph segment to process
+* @param flags reserved for future use, caller must set to 0 for now
+*
+* @retval "non-negative number" Success, all filter instances were successfully
+*                               initialized
+* @retval "negative error code" failure
+*
+* @note Calling this function multiple times is safe, as it is idempotent.
+*/
+avfilter_graph_segment_init :: (seg: *AVFilterGraphSegment, flags: s32) -> s32 #foreign libavfilter;
+
+/**
+* Link filters in a graph segment.
+*
+* Walk through all filter instances in the graph segment and try to link all
+* unlinked input and output pads. Any creation-pending filters (see
+* avfilter_graph_segment_create_filters()) present in the segment will cause
+* this function to fail. Disabled filters and already linked pads are skipped.
+*
+* Every filter output pad that has a corresponding AVFilterPadParams with a
+* non-NULL label is
+* - linked to the input with the matching label, if one exists;
+* - exported in the outputs linked list otherwise, with the label preserved.
+* Unlabeled outputs are
+* - linked to the first unlinked unlabeled input in the next non-disabled
+*   filter in the chain, if one exists
+* - exported in the ouputs linked list otherwise, with NULL label
+*
+* Similarly, unlinked input pads are exported in the inputs linked list.
+*
+* @param seg the filtergraph segment to process
+* @param flags reserved for future use, caller must set to 0 for now
+* @param[out] inputs  a linked list of all free (unlinked) inputs of the
+*                     filters in this graph segment will be returned here. It
+*                     is to be freed by the caller using avfilter_inout_free().
+* @param[out] outputs a linked list of all free (unlinked) outputs of the
+*                     filters in this graph segment will be returned here. It
+*                     is to be freed by the caller using avfilter_inout_free().
+*
+* @retval "non-negative number" success
+* @retval "negative error code" failure
+*
+* @note Calling this function multiple times is safe, as it is idempotent.
+*/
+avfilter_graph_segment_link :: (seg: *AVFilterGraphSegment, flags: s32, inputs: **AVFilterInOut, outputs: **AVFilterInOut) -> s32 #foreign libavfilter;
+
+/**
+* Apply all filter/link descriptions from a graph segment to the associated filtergraph.
+*
+* This functions is currently equivalent to calling the following in sequence:
+* - avfilter_graph_segment_create_filters();
+* - avfilter_graph_segment_apply_opts();
+* - avfilter_graph_segment_init();
+* - avfilter_graph_segment_link();
+* failing if any of them fails. This list may be extended in the future.
+*
+* Since the above functions are idempotent, the caller may call some of them
+* manually, then do some custom processing on the filtergraph, then call this
+* function to do the rest.
+*
+* @param seg the filtergraph segment to process
+* @param flags reserved for future use, caller must set to 0 for now
+* @param[out] inputs passed to avfilter_graph_segment_link()
+* @param[out] outputs passed to avfilter_graph_segment_link()
+*
+* @retval "non-negative number" success
+* @retval "negative error code" failure
+*
+* @note Calling this function multiple times is safe, as it is idempotent.
+*/
+avfilter_graph_segment_apply :: (seg: *AVFilterGraphSegment, flags: s32, inputs: **AVFilterInOut, outputs: **AVFilterInOut) -> s32 #foreign libavfilter;
+
+/**
+* Free the provided AVFilterGraphSegment and everything associated with it.
+*
+* @param seg double pointer to the AVFilterGraphSegment to be freed. NULL will
+* be written to this pointer on exit from this function.
+*
+* @note
+* The filter contexts (AVFilterParams.filter) are owned by AVFilterGraph rather
+* than AVFilterGraphSegment, so they are not freed.
+*/
+avfilter_graph_segment_free :: (seg: **AVFilterGraphSegment) -> void #foreign libavfilter;
+
+/**
+* Send a command to one or more filter instances.
+*
+* @param graph  the filter graph
+* @param target the filter(s) to which the command should be sent
+*               "all" sends to all filters
+*               otherwise it can be a filter or filter instance name
+*               which will send the command to all matching filters.
+* @param cmd    the command to send, for handling simplicity all commands must be alphanumeric only
+* @param arg    the argument for the command
+* @param res    a buffer with size res_size where the filter(s) can return a response.
+*
+* @returns >=0 on success otherwise an error code.
+*              AVERROR(ENOSYS) on unsupported commands
+*/
+avfilter_graph_send_command :: (graph: *AVFilterGraph, target: *u8, cmd: *u8, arg: *u8, res: *u8, res_len: s32, flags: s32) -> s32 #foreign libavfilter;
+
+/**
+* Queue a command for one or more filter instances.
+*
+* @param graph  the filter graph
+* @param target the filter(s) to which the command should be sent
+*               "all" sends to all filters
+*               otherwise it can be a filter or filter instance name
+*               which will send the command to all matching filters.
+* @param cmd    the command to sent, for handling simplicity all commands must be alphanumeric only
+* @param arg    the argument for the command
+* @param ts     time at which the command should be sent to the filter
+*
+* @note As this executes commands after this function returns, no return code
+*       from the filter is provided, also AVFILTER_CMD_FLAG_ONE is not supported.
+*/
+avfilter_graph_queue_command :: (graph: *AVFilterGraph, target: *u8, cmd: *u8, arg: *u8, flags: s32, ts: float64) -> s32 #foreign libavfilter;
+
+/**
+* Dump a graph into a human-readable string representation.
+*
+* @param graph    the graph to dump
+* @param options  formatting options; currently ignored
+* @return  a string, or NULL in case of memory allocation failure;
+*          the string must be freed using av_free
+*/
+avfilter_graph_dump :: (graph: *AVFilterGraph, options: *u8) -> *u8 #foreign libavfilter;
+
+/**
+* Request a frame on the oldest sink link.
+*
+* If the request returns AVERROR_EOF, try the next.
+*
+* Note that this function is not meant to be the sole scheduling mechanism
+* of a filtergraph, only a convenience function to help drain a filtergraph
+* in a balanced way under normal circumstances.
+*
+* Also note that AVERROR_EOF does not mean that frames did not arrive on
+* some of the sinks during the process.
+* When there are multiple sink links, in case the requested link
+* returns an EOF, this may cause a filter to flush pending frames
+* which are sent to another sink link, although unrequested.
+*
+* @return  the return value of ff_request_frame(),
+*          or AVERROR_EOF if all links returned AVERROR_EOF
+*/
+avfilter_graph_request_oldest :: (graph: *AVFilterGraph) -> s32 #foreign libavfilter;
+
+/** Dithering algorithms */
+SwrDitherType :: enum s32 {
+    NONE                   :: 0;
+    RECTANGULAR            :: 1;
+    TRIANGULAR             :: 2;
+    TRIANGULAR_HIGHPASS    :: 3;
+
+    NS                     :: 64;
+    NS_LIPSHITZ            :: 65;
+    NS_F_WEIGHTED          :: 66;
+    NS_MODIFIED_E_WEIGHTED :: 67;
+    NS_IMPROVED_E_WEIGHTED :: 68;
+    NS_SHIBATA             :: 69;
+    NS_LOW_SHIBATA         :: 70;
+    NS_HIGH_SHIBATA        :: 71;
+    NB                     :: 72;
+
+    SWR_DITHER_NONE                   :: NONE;
+    SWR_DITHER_RECTANGULAR            :: RECTANGULAR;
+    SWR_DITHER_TRIANGULAR             :: TRIANGULAR;
+    SWR_DITHER_TRIANGULAR_HIGHPASS    :: TRIANGULAR_HIGHPASS;
+
+    SWR_DITHER_NS                     :: NS;
+    SWR_DITHER_NS_LIPSHITZ            :: NS_LIPSHITZ;
+    SWR_DITHER_NS_F_WEIGHTED          :: NS_F_WEIGHTED;
+    SWR_DITHER_NS_MODIFIED_E_WEIGHTED :: NS_MODIFIED_E_WEIGHTED;
+    SWR_DITHER_NS_IMPROVED_E_WEIGHTED :: NS_IMPROVED_E_WEIGHTED;
+    SWR_DITHER_NS_SHIBATA             :: NS_SHIBATA;
+    SWR_DITHER_NS_LOW_SHIBATA         :: NS_LOW_SHIBATA;
+    SWR_DITHER_NS_HIGH_SHIBATA        :: NS_HIGH_SHIBATA;
+    SWR_DITHER_NB                     :: NB;
+}
+
+/** Resampling Engines */
+SwrEngine :: enum s32 {
+    SWR  :: 0;
+    SOXR :: 1;
+    NB   :: 2;
+
+    SWR_ENGINE_SWR  :: SWR;
+    SWR_ENGINE_SOXR :: SOXR;
+    SWR_ENGINE_NB   :: NB;
+}
+
+/** Resampling Filter Types */
+SwrFilterType :: enum s32 {
+    CUBIC            :: 0;
+    BLACKMAN_NUTTALL :: 1;
+    KAISER           :: 2;
+
+    SWR_FILTER_TYPE_CUBIC            :: CUBIC;
+    SWR_FILTER_TYPE_BLACKMAN_NUTTALL :: BLACKMAN_NUTTALL;
+    SWR_FILTER_TYPE_KAISER           :: KAISER;
+}
+
+SwrContext :: struct {}
+
+/**
+* Get the AVClass for SwrContext. It can be used in combination with
+* AV_OPT_SEARCH_FAKE_OBJ for examining options.
+*
+* @see av_opt_find().
+* @return the AVClass of SwrContext
+*/
+swr_get_class :: () -> *AVClass #foreign libswresample;
+
+/**
+* Allocate SwrContext.
+*
+* If you use this function you will need to set the parameters (manually or
+* with swr_alloc_set_opts2()) before calling swr_init().
+*
+* @see swr_alloc_set_opts2(), swr_init(), swr_free()
+* @return NULL on error, allocated context otherwise
+*/
+swr_alloc :: () -> *SwrContext #foreign libswresample;
+
+/**
+* Initialize context after user parameters have been set.
+* @note The context must be configured using the AVOption API.
+*
+* @see av_opt_set_int()
+* @see av_opt_set_dict()
+*
+* @param[in,out]   s Swr context to initialize
+* @return AVERROR error code in case of failure.
+*/
+swr_init :: (s: *SwrContext) -> s32 #foreign libswresample;
+
+/**
+* Check whether an swr context has been initialized or not.
+*
+* @param[in]       s Swr context to check
+* @see swr_init()
+* @return positive if it has been initialized, 0 if not initialized
+*/
+swr_is_initialized :: (s: *SwrContext) -> s32 #foreign libswresample;
+
+/**
+* Allocate SwrContext if needed and set/reset common parameters.
+*
+* This function does not require s to be allocated with swr_alloc(). On the
+* other hand, swr_alloc() can use swr_alloc_set_opts() to set the parameters
+* on the allocated context.
+*
+* @param s               existing Swr context if available, or NULL if not
+* @param out_ch_layout   output channel layout (AV_CH_LAYOUT_*)
+* @param out_sample_fmt  output sample format (AV_SAMPLE_FMT_*).
+* @param out_sample_rate output sample rate (frequency in Hz)
+* @param in_ch_layout    input channel layout (AV_CH_LAYOUT_*)
+* @param in_sample_fmt   input sample format (AV_SAMPLE_FMT_*).
+* @param in_sample_rate  input sample rate (frequency in Hz)
+* @param log_offset      logging level offset
+* @param log_ctx         parent logging context, can be NULL
+*
+* @see swr_init(), swr_free()
+* @return NULL on error, allocated context otherwise
+* @deprecated use @ref swr_alloc_set_opts2()
+*/
+swr_alloc_set_opts :: (s: *SwrContext, out_ch_layout: s64, out_sample_fmt: AVSampleFormat, out_sample_rate: s32, in_ch_layout: s64, in_sample_fmt: AVSampleFormat, in_sample_rate: s32, log_offset: s32, log_ctx: *void) -> *SwrContext #foreign libswresample;
+
+/**
+* Allocate SwrContext if needed and set/reset common parameters.
+*
+* This function does not require *ps to be allocated with swr_alloc(). On the
+* other hand, swr_alloc() can use swr_alloc_set_opts2() to set the parameters
+* on the allocated context.
+*
+* @param ps              Pointer to an existing Swr context if available, or to NULL if not.
+*                        On success, *ps will be set to the allocated context.
+* @param out_ch_layout   output channel layout (e.g. AV_CHANNEL_LAYOUT_*)
+* @param out_sample_fmt  output sample format (AV_SAMPLE_FMT_*).
+* @param out_sample_rate output sample rate (frequency in Hz)
+* @param in_ch_layout    input channel layout (e.g. AV_CHANNEL_LAYOUT_*)
+* @param in_sample_fmt   input sample format (AV_SAMPLE_FMT_*).
+* @param in_sample_rate  input sample rate (frequency in Hz)
+* @param log_offset      logging level offset
+* @param log_ctx         parent logging context, can be NULL
+*
+* @see swr_init(), swr_free()
+* @return 0 on success, a negative AVERROR code on error.
+*         On error, the Swr context is freed and *ps set to NULL.
+*/
+swr_alloc_set_opts2 :: (ps: **SwrContext, out_ch_layout: *AVChannelLayout, out_sample_fmt: AVSampleFormat, out_sample_rate: s32, in_ch_layout: *AVChannelLayout, in_sample_fmt: AVSampleFormat, in_sample_rate: s32, log_offset: s32, log_ctx: *void) -> s32 #foreign libswresample;
+
+/**
+* Free the given SwrContext and set the pointer to NULL.
+*
+* @param[in] s a pointer to a pointer to Swr context
+*/
+swr_free :: (s: **SwrContext) -> void #foreign libswresample;
+
+/**
+* Closes the context so that swr_is_initialized() returns 0.
+*
+* The context can be brought back to life by running swr_init(),
+* swr_init() can also be used without swr_close().
+* This function is mainly provided for simplifying the usecase
+* where one tries to support libavresample and libswresample.
+*
+* @param[in,out] s Swr context to be closed
+*/
+swr_close :: (s: *SwrContext) -> void #foreign libswresample;
+
+/** Convert audio.
+*
+* in and in_count can be set to 0 to flush the last few samples out at the
+* end.
+*
+* If more input is provided than output space, then the input will be buffered.
+* You can avoid this buffering by using swr_get_out_samples() to retrieve an
+* upper bound on the required number of output samples for the given number of
+* input samples. Conversion will run directly without copying whenever possible.
+*
+* @param s         allocated Swr context, with parameters set
+* @param out       output buffers, only the first one need be set in case of packed audio
+* @param out_count amount of space available for output in samples per channel
+* @param in        input buffers, only the first one need to be set in case of packed audio
+* @param in_count  number of input samples available in one channel
+*
+* @return number of samples output per channel, negative value on error
+*/
+swr_convert :: (s: *SwrContext, out: **u8, out_count: s32, in: **u8, in_count: s32) -> s32 #foreign libswresample;
+
+/**
+* Convert the next timestamp from input to output
+* timestamps are in 1/(in_sample_rate * out_sample_rate) units.
+*
+* @note There are 2 slightly differently behaving modes.
+*       @li When automatic timestamp compensation is not used, (min_compensation >= FLT_MAX)
+*              in this case timestamps will be passed through with delays compensated
+*       @li When automatic timestamp compensation is used, (min_compensation < FLT_MAX)
+*              in this case the output timestamps will match output sample numbers.
+*              See ffmpeg-resampler(1) for the two modes of compensation.
+*
+* @param[in] s     initialized Swr context
+* @param[in] pts   timestamp for the next input sample, INT64_MIN if unknown
+* @see swr_set_compensation(), swr_drop_output(), and swr_inject_silence() are
+*      function used internally for timestamp compensation.
+* @return the output timestamp for the next output sample
+*/
+swr_next_pts :: (s: *SwrContext, pts: s64) -> s64 #foreign libswresample;
+
+/**
+* Activate resampling compensation ("soft" compensation). This function is
+* internally called when needed in swr_next_pts().
+*
+* @param[in,out] s             allocated Swr context. If it is not initialized,
+*                              or SWR_FLAG_RESAMPLE is not set, swr_init() is
+*                              called with the flag set.
+* @param[in]     sample_delta  delta in PTS per sample
+* @param[in]     compensation_distance number of samples to compensate for
+* @return    >= 0 on success, AVERROR error codes if:
+*            @li @c s is NULL,
+*            @li @c compensation_distance is less than 0,
+*            @li @c compensation_distance is 0 but sample_delta is not,
+*            @li compensation unsupported by resampler, or
+*            @li swr_init() fails when called.
+*/
+swr_set_compensation :: (s: *SwrContext, sample_delta: s32, compensation_distance: s32) -> s32 #foreign libswresample;
+
+/**
+* Set a customized input channel mapping.
+*
+* @param[in,out] s           allocated Swr context, not yet initialized
+* @param[in]     channel_map customized input channel mapping (array of channel
+*                            indexes, -1 for a muted channel)
+* @return >= 0 on success, or AVERROR error code in case of failure.
+*/
+swr_set_channel_mapping :: (s: *SwrContext, channel_map: *s32) -> s32 #foreign libswresample;
+
+/**
+* Generate a channel mixing matrix.
+*
+* This function is the one used internally by libswresample for building the
+* default mixing matrix. It is made public just as a utility function for
+* building custom matrices.
+*
+* @param in_layout           input channel layout
+* @param out_layout          output channel layout
+* @param center_mix_level    mix level for the center channel
+* @param surround_mix_level  mix level for the surround channel(s)
+* @param lfe_mix_level       mix level for the low-frequency effects channel
+* @param rematrix_maxval     if 1.0, coefficients will be normalized to prevent
+*                            overflow. if INT_MAX, coefficients will not be
+*                            normalized.
+* @param[out] matrix         mixing coefficients; matrix[i + stride * o] is
+*                            the weight of input channel i in output channel o.
+* @param stride              distance between adjacent input channels in the
+*                            matrix array
+* @param matrix_encoding     matrixed stereo downmix mode (e.g. dplii)
+* @param log_ctx             parent logging context, can be NULL
+* @return                    0 on success, negative AVERROR code on failure
+* @deprecated                use @ref swr_build_matrix2()
+*/
+swr_build_matrix :: (in_layout: u64, out_layout: u64, center_mix_level: float64, surround_mix_level: float64, lfe_mix_level: float64, rematrix_maxval: float64, rematrix_volume: float64, matrix: *float64, stride: s32, matrix_encoding: AVMatrixEncoding, log_ctx: *void) -> s32 #foreign libswresample;
+
+/**
+* Generate a channel mixing matrix.
+*
+* This function is the one used internally by libswresample for building the
+* default mixing matrix. It is made public just as a utility function for
+* building custom matrices.
+*
+* @param in_layout           input channel layout
+* @param out_layout          output channel layout
+* @param center_mix_level    mix level for the center channel
+* @param surround_mix_level  mix level for the surround channel(s)
+* @param lfe_mix_level       mix level for the low-frequency effects channel
+* @param rematrix_maxval     if 1.0, coefficients will be normalized to prevent
+*                            overflow. if INT_MAX, coefficients will not be
+*                            normalized.
+* @param[out] matrix         mixing coefficients; matrix[i + stride * o] is
+*                            the weight of input channel i in output channel o.
+* @param stride              distance between adjacent input channels in the
+*                            matrix array
+* @param matrix_encoding     matrixed stereo downmix mode (e.g. dplii)
+* @param log_ctx             parent logging context, can be NULL
+* @return                    0 on success, negative AVERROR code on failure
+*/
+swr_build_matrix2 :: (in_layout: *AVChannelLayout, out_layout: *AVChannelLayout, center_mix_level: float64, surround_mix_level: float64, lfe_mix_level: float64, maxval: float64, rematrix_volume: float64, matrix: *float64, stride: ptrdiff_t, matrix_encoding: AVMatrixEncoding, log_context: *void) -> s32 #foreign libswresample;
+
+/**
+* Set a customized remix matrix.
+*
+* @param s       allocated Swr context, not yet initialized
+* @param matrix  remix coefficients; matrix[i + stride * o] is
+*                the weight of input channel i in output channel o
+* @param stride  offset between lines of the matrix
+* @return  >= 0 on success, or AVERROR error code in case of failure.
+*/
+swr_set_matrix :: (s: *SwrContext, matrix: *float64, stride: s32) -> s32 #foreign libswresample;
+
+/**
+* Drops the specified number of output samples.
+*
+* This function, along with swr_inject_silence(), is called by swr_next_pts()
+* if needed for "hard" compensation.
+*
+* @param s     allocated Swr context
+* @param count number of samples to be dropped
+*
+* @return >= 0 on success, or a negative AVERROR code on failure
+*/
+swr_drop_output :: (s: *SwrContext, count: s32) -> s32 #foreign libswresample;
+
+/**
+* Injects the specified number of silence samples.
+*
+* This function, along with swr_drop_output(), is called by swr_next_pts()
+* if needed for "hard" compensation.
+*
+* @param s     allocated Swr context
+* @param count number of samples to be dropped
+*
+* @return >= 0 on success, or a negative AVERROR code on failure
+*/
+swr_inject_silence :: (s: *SwrContext, count: s32) -> s32 #foreign libswresample;
+
+/**
+* Gets the delay the next input sample will experience relative to the next output sample.
+*
+* Swresample can buffer data if more input has been provided than available
+* output space, also converting between sample rates needs a delay.
+* This function returns the sum of all such delays.
+* The exact delay is not necessarily an integer value in either input or
+* output sample rate. Especially when downsampling by a large value, the
+* output sample rate may be a poor choice to represent the delay, similarly
+* for upsampling and the input sample rate.
+*
+* @param s     swr context
+* @param base  timebase in which the returned delay will be:
+*              @li if it's set to 1 the returned delay is in seconds
+*              @li if it's set to 1000 the returned delay is in milliseconds
+*              @li if it's set to the input sample rate then the returned
+*                  delay is in input samples
+*              @li if it's set to the output sample rate then the returned
+*                  delay is in output samples
+*              @li if it's the least common multiple of in_sample_rate and
+*                  out_sample_rate then an exact rounding-free delay will be
+*                  returned
+* @returns     the delay in 1 / @c base units.
+*/
+swr_get_delay :: (s: *SwrContext, base: s64) -> s64 #foreign libswresample;
+
+/**
+* Find an upper bound on the number of samples that the next swr_convert
+* call will output, if called with in_samples of input samples. This
+* depends on the internal state, and anything changing the internal state
+* (like further swr_convert() calls) will may change the number of samples
+* swr_get_out_samples() returns for the same number of input samples.
+*
+* @param in_samples    number of input samples.
+* @note any call to swr_inject_silence(), swr_convert(), swr_next_pts()
+*       or swr_set_compensation() invalidates this limit
+* @note it is recommended to pass the correct available buffer size
+*       to all functions like swr_convert() even if swr_get_out_samples()
+*       indicates that less would be used.
+* @returns an upper bound on the number of samples that the next swr_convert
+*          will output or a negative value to indicate an error
+*/
+swr_get_out_samples :: (s: *SwrContext, in_samples: s32) -> s32 #foreign libswresample;
+
+/**
+* Return the @ref LIBSWRESAMPLE_VERSION_INT constant.
+*
+* This is useful to check if the build-time libswresample has the same version
+* as the run-time one.
+*
+* @returns     the unsigned int-typed version
+*/
+swresample_version :: () -> u32 #foreign libswresample;
+
+/**
+* Return the swr build-time configuration.
+*
+* @returns     the build-time @c ./configure flags
+*/
+swresample_configuration :: () -> *u8 #foreign libswresample;
+
+/**
+* Return the swr license.
+*
+* @returns     the license of libswresample, determined at build-time
+*/
+swresample_license :: () -> *u8 #foreign libswresample;
+
+/**
+* Convert the samples in the input AVFrame and write them to the output AVFrame.
+*
+* Input and output AVFrames must have channel_layout, sample_rate and format set.
+*
+* If the output AVFrame does not have the data pointers allocated the nb_samples
+* field will be set using av_frame_get_buffer()
+* is called to allocate the frame.
+*
+* The output AVFrame can be NULL or have fewer allocated samples than required.
+* In this case, any remaining samples not written to the output will be added
+* to an internal FIFO buffer, to be returned at the next call to this function
+* or to swr_convert().
+*
+* If converting sample rate, there may be data remaining in the internal
+* resampling delay buffer. swr_get_delay() tells the number of
+* remaining samples. To get this data as output, call this function or
+* swr_convert() with NULL input.
+*
+* If the SwrContext configuration does not match the output and
+* input AVFrame settings the conversion does not take place and depending on
+* which AVFrame is not matching AVERROR_OUTPUT_CHANGED, AVERROR_INPUT_CHANGED
+* or the result of a bitwise-OR of them is returned.
+*
+* @see swr_delay()
+* @see swr_convert()
+* @see swr_get_delay()
+*
+* @param swr             audio resample context
+* @param output          output AVFrame
+* @param input           input AVFrame
+* @return                0 on success, AVERROR on failure or nonmatching
+*                        configuration.
+*/
+swr_convert_frame :: (swr: *SwrContext, output: *AVFrame, input: *AVFrame) -> s32 #foreign libswresample;
+
+/**
+* Configure or reconfigure the SwrContext using the information
+* provided by the AVFrames.
+*
+* The original resampling context is reset even on failure.
+* The function calls swr_close() internally if the context is open.
+*
+* @see swr_close();
+*
+* @param swr             audio resample context
+* @param out             output AVFrame
+* @param in              input AVFrame
+* @return                0 on success, AVERROR on failure.
+*/
+swr_config_frame :: (swr: *SwrContext, out: *AVFrame, in: *AVFrame) -> s32 #foreign libswresample;
 
 /**
 * @defgroup libsws libswscale

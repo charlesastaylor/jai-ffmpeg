@@ -75,14 +75,15 @@ generate_bindings :: () -> bool {
         include_path := tprint("%/include", SOURCE_PATH);
         array_add(*include_paths, include_path);
 
+        // Atm we generate everything. It might be worth separating out the bindings into separate files and have module
+        // parameters control what is included? (Doing the already_generated thing done for POSIX bindings).
         array_add(*source_files, tprint("%/libavcodec/avcodec.h", include_path));
+        array_add(*source_files, tprint("%/libavdevice/avdevice.h", include_path));
+        array_add(*source_files, tprint("%/libavfilter/avfilter.h", include_path));
         array_add(*source_files, tprint("%/libavformat/avformat.h", include_path));
+        array_add(*source_files, tprint("%/libavutil/avutil.h", include_path));
+        array_add(*source_files, tprint("%/libswresample/swresample.h", include_path));
         array_add(*source_files, tprint("%/libswscale/swscale.h", include_path));
-
-        // array_add(*source_files, tprint("%/libavutil/avutil.h", include_path));
-        // array_add(*source_files, tprint("%/libswresample/swresample.h", include_path));
-        // array_add(*source_files, tprint("%/libavfilter/avfilter.h", include_path));
-        // array_add(*source_files, tprint("%/libavdevice/avdevice.h", include_path));
 
         builder: String_Builder;
         append(*builder, HEADER);
