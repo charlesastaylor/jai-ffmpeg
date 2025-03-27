@@ -8,8 +8,13 @@
 
 // NOTE(Charles): It would be nice to be able to compile from source instead of relying on binary distributions. I am not
 // pursuing it for now, but if we did then we could:
-// - Compile for Android
+// - Compile for Android (I use the android MediaNdk apis instead, which maybe are better to use anyway as they can use hardware acceleration)
 // - Maybe remove the version suffixes on dlls (would probably require modifying the build process which maybe not worth...)
+// 
+// Some reasonable looking resources for getting compiling working:
+// - https://yesimroy.gitbooks.io/android-note/content/compile_ffmpeg_for_android.html
+// - https://trac.ffmpeg.org/wiki/CompilationGuide/Generic
+// - https://trac.ffmpeg.org/wiki/CompilationGuide/CrossCompilingForWindows
 
 // NOTE(Charles): The version of ffmpeg binaries I downloaded seem to have an issue where swresample-4 depends upon
 // avutil-57.dll instead of avutil-58.dll like all the other dlls do. I just hackily worked around this by copying
