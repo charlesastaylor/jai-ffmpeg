@@ -1,5 +1,8 @@
+//
 // Bindings for ffmpeg.
 //
+
+// @Incomplete: Linux. With option to "use system libraries" so dont even require finding some prebuild binaries.
 
 #scope_module
 

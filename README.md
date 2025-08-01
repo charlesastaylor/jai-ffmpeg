@@ -1,6 +1,6 @@
 # FFmpeg module for jai
 
-FFmpeg bindings for jai and some examples decoding and play videos. Last tested with beta 0.2.010.
+FFmpeg bindings for jai and some examples decoding and play videos. Last tested with beta 0.2.016.
 
 Currently only tested on Windows. Linux and Macos should be a fairly straightforward case of finding some precompilied binaries (various links on ffmpeg.org) and hooking things up. Android will probably require compiling from source so I may just have to bite the bullet and do that at some point...
 

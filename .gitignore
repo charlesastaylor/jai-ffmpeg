@@ -3,4 +3,5 @@
 examples/test_image.png
 examples/*.exe
 examples/*.pdb
+examples/*.rdi
 examples/*.dll
